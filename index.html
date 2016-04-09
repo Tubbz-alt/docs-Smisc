@@ -1,0 +1,1154 @@
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc" />
+
+    <meta name="author" content="Landon Sego" />
+  
+  
+  <title>Smisc</title>
+
+    <script src="assets/jquery-1.11.0/jquery.min.js"></script>
+  <link href="assets/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="assets/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+  <script src="assets/bootstrap-3.3.2/shim/html5shiv.min.js"></script>
+  <script src="assets/bootstrap-3.3.2/shim/respond.min.js"></script>
+  <link href="assets/highlight-8.4/tomorrow.css" rel="stylesheet" />
+  <script src="assets/highlight-8.4/highlight.pack.js"></script>
+  <link href="assets/fontawesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script src="assets/stickykit-1.1.1/sticky-kit.min.js"></script>
+  <script src="assets/jqueryeasing-1.3/jquery.easing.min.js"></script>
+  <link href="assets/packagedocs-0.0.1/pd.css" rel="stylesheet" />
+  <script src="assets/packagedocs-0.0.1/pd.js"></script>
+  <script src="assets/packagedocs-0.0.1/pd-collapse-toc.js"></script>
+  
+  
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+
+  
+  <header class="navbar navbar-white navbar-fixed-top" role="banner" id="header">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <span class="navbar-brand">
+<a href="http://pnnl.github.io"> <img src='figures/icon.png' alt='PNNL icon' width='30px' height='30px' style='margin-top: -3px;'> </a>
+        </span>
+                <a href="index.html" class="navbar-brand page-scroll">
+        Smisc - Sego Miscellaneous
+        </a>
+      </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav nav-pills pull-right">
+<li class="active">
+<a href='index.html'>Docs</a>
+</li>
+<li>
+<a href='rd.html'>Package Ref</a>
+</li>
+<li>
+<a href='https://github.com/pnnl/Smisc'>Github <i class='fa fa-github'></i></a>
+</li>
+        </ul>
+      </nav>
+          </div>
+  </header>
+
+  <!-- Begin Body -->
+  <div class="container">
+    <div class="row">
+            <div class="col-md-3" id="sidebar-col">
+        <div id="toc">
+          <ul>
+          <li><a href="#introduction">Introduction</a><ul>
+          <li><a href="#package-installation">Package installation</a></li>
+          </ul></li>
+          <li><a href="#data-ingestion">Data ingestion</a><ul>
+          <li><a href="#load-objects-to-a-name-of-choice">Load objects to a name of choice</a></li>
+          <li><a href="#flexibly-ingest-data">Flexibly ingest data</a></li>
+          </ul></li>
+          <li><a href="#operations-on-dataframes-and-matrices">Operations on dataframes and matrices</a><ul>
+          <li><a href="#identify-missing-columns-or-rows">Identify missing columns or rows</a></li>
+          <li><a href="#compare-two-data-frames">Compare two data frames</a></li>
+          <li><a href="#rapidly-combine-or-bind-numerous-objects">Rapidly combine or bind numerous objects</a></li>
+          <li><a href="#row-bind-heterogenous-matrices">Row bind heterogenous matrices</a></li>
+          <li><a href="#consistently-select-rows-or-columns">Consistently select rows or columns</a></li>
+          <li><a href="#sort-a-dataframe">Sort a dataframe</a></li>
+          </ul></li>
+          <li><a href="#conversion-to-and-from-lists">Conversion to and from lists</a><ul>
+          <li><a href="#row-wise-conversion-of-a-dataframe-to-a-list">Row-wise conversion of a dataframe to a list</a></li>
+          <li><a href="#convert-a-list-to-a-dataframe">Convert a list to a dataframe</a></li>
+          <li><a href="#separate-a-list-into-separate-objects">Separate a list into separate objects</a></li>
+          </ul></li>
+          <li><a href="#converting-factors">Converting factors</a><ul>
+          <li><a href="#convert-factors-to-character-variables-in-a-dataframe">Convert factors to character variables in a dataframe</a></li>
+          <li><a href="#convert-factor-to-numeric">Convert factor to numeric</a></li>
+          <li><a href="#convert-to-numeric-if-possible">Convert to numeric, if possible</a></li>
+          </ul></li>
+          <li><a href="#filename-manipulation">Filename manipulation</a><ul>
+          <li><a href="#get-a-filename-extension">Get a filename extension</a></li>
+          <li><a href="#get-the-path-of-a-filename">Get the path of a filename</a></li>
+          <li><a href="#strip-a-the-extension-from-a-filename">Strip a the extension from a filename</a></li>
+          <li><a href="#strip-the-path-from-a-filename">Strip the path from a filename</a></li>
+          <li><a href="#get-the-last-set-of-characters-after-a-delimiter">Get the last set of characters after a delimiter</a></li>
+          <li><a href="#embed-a-timestamp-in-a-filename">Embed a timestamp in a filename</a></li>
+          <li><a href="#pad-a-numeric-value-with-zeros">Pad a numeric value with zeros</a></li>
+          </ul></li>
+          <li><a href="#programming-tools">Programming tools</a><ul>
+          <li><a href="#generate-a-hard-coded-vector">Generate a hard-coded vector</a></li>
+          <li><a href="#display-the-contents-of-a-text-file">Display the contents of a text file</a></li>
+          <li><a href="#print-the-object-name-and-its-value">Print the object name and its value</a></li>
+          <li><a href="#flexibly-select-valid-elements-from-a-character-vector">Flexibly select valid elements from a character vector</a></li>
+          <li><a href="#source-all-r-files-in-a-directory">Source all R files in a directory</a></li>
+          <li><a href="#customized-error-message-for-stopifnot">Customized error message for stopifnot()</a></li>
+          <li><a href="#time-the-execution-of-an-expression">Time the execution of an expression</a></li>
+          <li><a href="#remove-all-objects">Remove all objects</a></li>
+          </ul></li>
+          <li><a href="#parallelization">Parallelization</a><ul>
+          <li><a href="#parallelize-lapply-a-wrapper-for-parlapply">Parallelize lapply(), a wrapper for parLapply()</a></li>
+          <li><a href="#parallelize-lapply-with-convenient-debugging-and-more">Parallelize lapply() with convenient debugging and more</a></li>
+          <li><a href="#process-rows-of-a-dataframe-in-parallel-with-convenient-debugging">Process rows of a dataframe in parallel with convenient debugging</a></li>
+          <li><a href="#convenient-wrapper-for-parallelization-of-ddply">Convenient wrapper for parallelization of ddply()</a></li>
+          <li><a href="#call-an-expensive-function-in-parallel">Call an expensive function in parallel</a></li>
+          <li><a href="#parse-job-tasks-into-groups">Parse job tasks into groups</a></li>
+          </ul></li>
+          <li><a href="#plotting-tools">Plotting tools</a><ul>
+          <li><a href="#open-a-graphics-device-based-on-the-filename-extension">Open a graphics device based on the filename extension</a></li>
+          <li><a href="#quickly-plot-one-or-more-functions">Quickly plot one or more functions</a></li>
+          <li><a href="#create-naturally-spaced-time-axes">Create naturally spaced time axes</a></li>
+          <li><a href="#draw-a-vertical-error-bar">Draw a vertical error bar</a></li>
+          <li><a href="#interaction-plot-with-vertical-error-bars">Interaction plot with vertical error bars</a></li>
+          </ul></li>
+          <li><a href="#statistical-functions">Statistical functions</a><ul>
+          <li><a href="#beta-binomial-distribution-functions">Beta-binomial distribution functions</a></li>
+          <li><a href="#distribution-of-the-sum-of-binomials-with-unequal-p">Distribution of the sum of binomials with unequal <em>p</em></a></li>
+          <li><a href="#a-continuous-version-of-the-binomial-cdf">A continuous version of the binomial cdf</a></li>
+          <li><a href="#highest-posterior-density-credible-interval">Highest posterior density credible interval</a></li>
+          <li><a href="#umvues-of-lognormal-parameters">UMVUEs of lognormal parameters</a></li>
+          </ul></li>
+          <li><a href="#time-series">Time series</a><ul>
+          <li><a href="#format-dates-or-datetimes">Format dates or datetimes</a></li>
+          <li><a href="#calculate-a-moving-window-dot-product">Calculate a moving window dot product</a></li>
+          <li><a href="#moving-average-with-various-kernels">Moving average with various kernels</a></li>
+          <li><a href="#align-two-time-series">Align two time series</a></li>
+          <li><a href="#integration-over-time">Integration over time</a></li>
+          </ul></li>
+          <li><a href="#mathematical-operations">Mathematical operations</a><ul>
+          <li><a href="#generate-all-possible-combinations">Generate all possible combinations</a></li>
+          <li><a href="#calculate-the-maximum-up-to-the-current-index">Calculate the maximum up to the current index</a></li>
+          <li><a href="#calculate-cumulative-sum-without-propagating-nas">Calculate cumulative sum without propagating NA’s</a></li>
+          <li><a href="#identify-linearly-dependent-rows-or-columns">Identify linearly dependent rows or columns</a></li>
+          <li><a href="#numerical-integration-using-simpson-or-trapezoid-rule">Numerical integration using Simpson or Trapezoid rule</a></li>
+          <li><a href="#linear-mapping-from-a-b-to-c-d">Linear mapping from [a, b] to [c, d]</a></li>
+          </ul></li>
+          <li><a href="#datasets">Datasets</a></li>
+          <li><a href="#citation">Citation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9" id="content-col">
+      
+<div id="content-top"></div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The <code>Smisc</code> package is a collection of functions for statistical computing and data manipulation that I created to facilitate my day-to-day work in R. Each function operates (more or less) on its own, designed for a specific task. As such, there are very few classes or methods in the package.</p>
+<p>I have organized the documentation into 11 groups of functions that have similar themes. I provide below a brief synopsis of the motivation for each of the functions in the package, leaving the details to the standard help files, which you can find by following the <code><a target='_blank' href='rd.html#bold blue links'>bold blue links</a></code>.</p>
+<p>—Landon Sego</p>
+<div id="package-installation" class="section level2">
+<h2>Package installation</h2>
+<p>Before you get started, the source code of the <code>Smisc</code> package contains C code that requires compilation:</p>
+<ul>
+<li>Mac: you’ll need <a href="https://developer.apple.com/xcode/">Xcode</a></li>
+<li>Windows: you’ll need to install <a href="http://cran.r-project.org/bin/windows/Rtools/">R tools</a></li>
+<li>Linux/Unix: compilation should take place automatically</li>
+</ul>
+<p>Then, installation is made easy with <a href="https://cran.r-project.org/web/packages/devtools/index.html">devtools</a>:</p>
+<pre class="r"><code># If devtools is not already installed
+install.packages(&quot;devtools&quot;) 
+
+devtools::install_github(&quot;pnnl/Smisc&quot;)</code></pre>
+<p>Now load the package as usual:</p>
+<pre class="r"><code>library(Smisc)</code></pre>
+</div>
+</div>
+<div id="data-ingestion" class="section level1">
+<h1>Data ingestion</h1>
+<div id="load-objects-to-a-name-of-choice" class="section level2">
+<h2>Load objects to a name of choice</h2>
+<p>I always found it a bit annoying how <code>load()</code> places the object(s) in the <code>.Rdata</code> file into <code>.GlobalEnv</code> without immediately telling you what the name(s) of the object is (are). <code><a target='_blank' href='rd.html#loadobject'>loadObject()</a></code> makes it easy to assign the contents of the <code>.Rdata</code> file to an object of my choice, like this:</p>
+<pre class="r"><code>myName &lt;- loadObject(&quot;~/aDir/aFile.Rdata&quot;)</code></pre>
+</div>
+<div id="flexibly-ingest-data" class="section level2">
+<h2>Flexibly ingest data</h2>
+<p><code><a target='_blank' href='rd.html#datain'>dataIn()</a></code> provides a flexible way to ingest data into R. It takes a single argument that can be the filename of an <code>.Rdata</code> or <code>.csv</code> file, a package dataset, or an existing data frame. It returns a data frame. Each of these, in principle, would achieve the same result, regardless of the format of the input data:</p>
+<pre class="r"><code># Read a csv file
+d &lt;- dataIn(&quot;someData.csv&quot;)
+
+# Load a .Rdata file
+d &lt;- dataIn(&quot;someData.Rdata&quot;)
+
+# If the dataframe already exists as &quot;someData&quot;
+d &lt;- dataIn(someData)
+
+# If &quot;someData&quot; is in the package &quot;somePackage&quot;
+d &lt;- dataIn(&quot;somePackage::someData&quot;)</code></pre>
+</div>
+</div>
+<div id="operations-on-dataframes-and-matrices" class="section level1">
+<h1>Operations on dataframes and matrices</h1>
+<div id="identify-missing-columns-or-rows" class="section level2">
+<h2>Identify missing columns or rows</h2>
+<p>Sometimes it’s handy to know whether all the elements in a given row (or column) of a matrix or data frame are missing. <code><a target='_blank' href='rd.html#allmissing'>allMissing()</a></code> returns a logical vector indicating whether all the elements in a row (or column) are missing. It’s a nice compliment to <a href="http://www.inside-r.org/r-doc/stats/complete.cases">complete.cases()</a>.</p>
+<pre class="r"><code># A dataframe with a missing column
+m &lt;- data.frame(A = rnorm(3), B = NA, C = letters[3])
+m</code></pre>
+<pre><code>           A  B C
+1 -1.2070657 NA c
+2  0.2774292 NA c
+3  1.0844412 NA c</code></pre>
+<pre class="r"><code>allMissing(m, byRow = FALSE)</code></pre>
+<pre><code>    A     B     C 
+FALSE  TRUE FALSE </code></pre>
+</div>
+<div id="compare-two-data-frames" class="section level2">
+<h2>Compare two data frames</h2>
+<p><code><a target='_blank' href='rd.html#dframeequiv'>dframeEquiv()</a></code> compares two data frames (or two matrices) and determines whether they are equivalent or how they differ.</p>
+<pre class="r"><code># Create two slightly different data frames
+d1 &lt;- data.frame(A = 1:2, B = c(&quot;a&quot;, &quot;b&quot;))
+d2 &lt;- data.frame(A = 1:2, B = c(&quot;a&quot;, &quot;c&quot;))
+
+# Compare the dataframes
+compare &lt;- dframeEquiv(d1, d2)</code></pre>
+<pre><code>75% of the elements of &#39;d1&#39; and &#39;d2&#39; are equivalent.</code></pre>
+<p>We can see the locations by index where the dataframes differ:</p>
+<pre class="r"><code>compare$loc.inequiv</code></pre>
+<pre><code>  row.loc col.loc
+1       2       2</code></pre>
+<p>And we can see a logical matrix indicating where they differ:</p>
+<pre class="r"><code>compare$equiv.matrix</code></pre>
+<pre><code>     [,1]  [,2]
+[1,] TRUE  TRUE
+[2,] TRUE FALSE</code></pre>
+</div>
+<div id="rapidly-combine-or-bind-numerous-objects" class="section level2">
+<h2>Rapidly combine or bind numerous objects</h2>
+<p>Have you ever needed to row bind, <a href="http://www.inside-r.org/r-doc/base/rbind">rbind()</a>, or column bind, <a href="http://www.inside-r.org/r-doc/base/cbind">cbind()</a>, or combine/concatenate, <a href="http://www.inside-r.org/r-doc/base/c">c()</a>, <em>numerous</em> objects, usually of the same type? If you do it iteratively, you’ll slow your machine to a crawl:</p>
+<pre class="r"><code># The names of the 100 matrices, m1, m2, ..., m100
+mNames &lt;- paste(&quot;m&quot;, 1:100, sep = &quot;&quot;)
+
+# Initialize the combined object
+combined &lt;- NULL
+
+# Now wait forever
+for (m in mNames) {
+  combined &lt;- rbind(combined, get(m))
+}</code></pre>
+<p><code><a target='_blank' href='rd.html#qbind'>qbind()</a></code> provides a syntactically simple and fast solution:</p>
+<pre class="r"><code># The names of the 100 matrices, m1, m2, ..., m100
+mNames &lt;- paste(&quot;m&quot;, 1:100)
+
+# Now combined using `rbind()`
+combined &lt;- qbind(mNames, type = &quot;row&quot;)</code></pre>
+</div>
+<div id="row-bind-heterogenous-matrices" class="section level2">
+<h2>Row bind heterogenous matrices</h2>
+<p>Have you ever needed to row bind multiple matrices together that didn’t all have the same column names? <code><a target='_blank' href='rd.html#smartrbindmat'>smartRbindMat()</a></code> function rapidly row binds them together by creating a final matrix with the union of the columns of the source matrices.</p>
+<pre class="r"><code>x &lt;- as.matrix(data.frame(a = 1:2, b = 3:4))
+y &lt;- as.matrix(data.frame(a = 1:2, c = 5:6))
+z &lt;- as.matrix(data.frame(b = 7:8, d = 9:10))
+smartRbindMat(x, y, z)</code></pre>
+<pre><code>      a  b  c  d
+[1,]  1  3 NA NA
+[2,]  2  4 NA NA
+[3,]  1 NA  5 NA
+[4,]  2 NA  6 NA
+[5,] NA  7 NA  9
+[6,] NA  8 NA 10</code></pre>
+</div>
+<div id="consistently-select-rows-or-columns" class="section level2">
+<h2>Consistently select rows or columns</h2>
+<p>Have you ever selected a single row or column from a dataframe or matrix only to have R return an object structured in a way you weren’t expecting? <code><a target='_blank' href='rd.html#select'>select()</a></code> makes R’s behavior consistent, always returning a matrix or dataframe with a single row or column, if necessary. It is especially useful in the situation where the number of rows or columns to be selected is variable and not necessarily known before hand.</p>
+<pre class="r"><code># A simple dataframe
+x &lt;- data.frame(a = 1:2, b = 3:4)
+
+# If we select a single column the usual way, we get a vector:
+x[,1]</code></pre>
+<pre><code>[1] 1 2</code></pre>
+<pre class="r"><code># But if we use select(), we get a single column dataframe
+select(x, 1)</code></pre>
+<pre><code>  a
+1 1
+2 2</code></pre>
+</div>
+<div id="sort-a-dataframe" class="section level2">
+<h2>Sort a dataframe</h2>
+<p><code><a target='_blank' href='rd.html#sortdf'>sortDF()</a></code> provides a simple interface for sorting a dataframe by as many variables as you like, using a formula-style argument to indicate whether the variables are sorted in increasing or decreasing order.</p>
+<pre class="r"><code>d1 &lt;- data.frame(A = 2:1, B = c(&quot;a&quot;, &quot;b&quot;))
+
+# Sort by A
+sortDF(d1, ~ A)</code></pre>
+<pre><code>  A B
+2 1 b
+1 2 a</code></pre>
+<pre class="r"><code># Sort by descending B
+sortDF(d1, ~ -B)</code></pre>
+<pre><code>  A B
+2 1 b
+1 2 a</code></pre>
+<pre class="r"><code># Sort by A and B
+sortDF(d1, ~ A + B)</code></pre>
+<pre><code>  A B
+2 1 b
+1 2 a</code></pre>
+</div>
+</div>
+<div id="conversion-to-and-from-lists" class="section level1">
+<h1>Conversion to and from lists</h1>
+<p>The longer I program in R, the more I use lists–especially for parallelized computations. This often requires converting lists to dataframes, dataframes to lists, or breaking a list apart and storing the elements as separate objects.</p>
+<div id="row-wise-conversion-of-a-dataframe-to-a-list" class="section level2">
+<h2>Row-wise conversion of a dataframe to a list</h2>
+<p><code><a target='_blank' href='rd.html#df2list'>df2list()</a></code> converts a dataframe to a list, in a row-wise fashion (as opposed to <a href="http://www.inside-r.org/r-doc/base/as.list">as.list()</a>, which converts in a column-wise fashion):</p>
+<pre class="r"><code>d &lt;- data.frame(a = 1:2, b = letters[1:2])
+d</code></pre>
+<pre><code>  a b
+1 1 a
+2 2 b</code></pre>
+<pre class="r"><code>df2list(d)</code></pre>
+<pre><code>$`1`
+$`1`$a
+[1] 1
+
+$`1`$b
+[1] a
+Levels: a b
+
+
+$`2`
+$`2`$a
+[1] 2
+
+$`2`$b
+[1] b
+Levels: a b</code></pre>
+</div>
+<div id="convert-a-list-to-a-dataframe" class="section level2">
+<h2>Convert a list to a dataframe</h2>
+<p>I use <code><a target='_blank' href='rd.html#list2df'>list2df()</a></code> probably more than any other <code>Smisc</code> function. It converts a list of suitable object types (vectors, dataframes, or lists) into a single dataframe. It’s especially useful for collecting the output from <a href="http://www.inside-r.org/r-doc/base/strsplit">strsplit()</a>, or the results from <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a>.</p>
+<pre class="r"><code>z &lt;- list(a = c(first = 10, second = 12), b = c(first = 15, second = 17))
+z</code></pre>
+<pre><code>$a
+ first second 
+    10     12 
+
+$b
+ first second 
+    15     17 </code></pre>
+<pre class="r"><code>list2df(z)</code></pre>
+<pre><code>  first second
+a    10     12
+b    15     17</code></pre>
+</div>
+<div id="separate-a-list-into-separate-objects" class="section level2">
+<h2>Separate a list into separate objects</h2>
+<p>On occasion, it is useful to break a list into its separate elements and not have to refer to them using the list name. <code><a target='_blank' href='rd.html#seplist'>sepList()</a></code> makes it easy:</p>
+<pre class="r"><code># A simple list that we&#39;ll separate
+aList &lt;- list(x1 = 10, x2 = &quot;a&quot;) 
+sepList(aList)
+
+# &#39;x1&#39; is now in the Global environment:
+x1</code></pre>
+<pre><code>[1] 10</code></pre>
+<pre class="r"><code># And so is &#39;x2&#39;
+x2</code></pre>
+<pre><code>[1] &quot;a&quot;</code></pre>
+</div>
+</div>
+<div id="converting-factors" class="section level1">
+<h1>Converting factors</h1>
+<p>Managing factors in R is a regular chore. <code><a target='_blank' href='rd.html#factor2character'>factor2character()</a></code> and <code><a target='_blank' href='rd.html#factor2numeric'>factor2numeric()</a></code> make that easier. I also added a somewhat related function to this group, <code><a target='_blank' href='rd.html#as_numericsilent'>as.numericSilent()</a></code>, because I wasn’t sure where else to put it.</p>
+<div id="convert-factors-to-character-variables-in-a-dataframe" class="section level2">
+<h2>Convert factors to character variables in a dataframe</h2>
+<p>When creating a dataframe, the default behavior of R is to render all character variables as factors—which you may not want. <code><a target='_blank' href='rd.html#factor2character'>factor2character()</a></code> will convert all the factor variables in a dataframe to character.</p>
+<pre class="r"><code>myData &lt;- data.frame(x = 10, y = &quot;a&quot;, z = &quot;b&quot;)
+str(myData)</code></pre>
+<pre><code>&#39;data.frame&#39;:   1 obs. of  3 variables:
+ $ x: num 10
+ $ y: Factor w/ 1 level &quot;a&quot;: 1
+ $ z: Factor w/ 1 level &quot;b&quot;: 1</code></pre>
+<pre class="r"><code>myData1 &lt;- factor2character(myData)
+str(myData1)</code></pre>
+<pre><code>&#39;data.frame&#39;:   1 obs. of  3 variables:
+ $ x: num 10
+ $ y: chr &quot;a&quot;
+ $ z: chr &quot;b&quot;</code></pre>
+</div>
+<div id="convert-factor-to-numeric" class="section level2">
+<h2>Convert factor to numeric</h2>
+<p>Naively attempting to convert a factor to a numeric vector can easily go wrong. For example, <a href="http://www.inside-r.org/r-doc/base/as.numeric">as.numeric()</a> probably won’t give you what you’re looking for. <code><a target='_blank' href='rd.html#factor2numeric'>factor2numeric()</a></code> correctly converts a factor to a numeric vector.</p>
+<pre class="r"><code>x &lt;- factor(c(4, 7))
+x</code></pre>
+<pre><code>[1] 4 7
+Levels: 4 7</code></pre>
+<pre class="r"><code># Wrong
+as.numeric(x)</code></pre>
+<pre><code>[1] 1 2</code></pre>
+<pre class="r"><code># Right
+factor2numeric(x)</code></pre>
+<pre><code>[1] 4 7</code></pre>
+</div>
+<div id="convert-to-numeric-if-possible" class="section level2">
+<h2>Convert to numeric, if possible</h2>
+<p><code><a target='_blank' href='rd.html#as_numericsilent'>as.numericSilent()</a></code> is used by <code><a target='_blank' href='rd.html#list2df'>list2df()</a></code> to create numeric variables if possible in the resulting dataframe. It can also be used to attempt the conversion of any vector to a numeric vector. If any warnings or errors are produced in the attempt, conversion to numeric does not take place, and the original vector is returned.</p>
+<pre class="r"><code># A character vector of numbers
+x &lt;- c(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;)
+
+# Conversion takes place
+as.numericSilent(x)</code></pre>
+<pre><code>[1] 1 2 3</code></pre>
+<pre class="r"><code># A character vector of letters
+y &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code></pre>
+<pre class="r"><code># Conversion is not possible, so the original character vector is returned 
+# with no complaints
+as.numericSilent(y)</code></pre>
+<!-- No clue why we get strange output from as.numericSilent(y) when it builds. It works fine in the console -->
+<pre><code>[1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+</div>
+</div>
+<div id="filename-manipulation" class="section level1">
+<h1>Filename manipulation</h1>
+<p>Early on in my R career I noticed that dealing with filenames was a regular activity. This set of functions makes it easier to manipulate filenames by removing extensions or paths, or by grabbing the extension or path from files. A simple function for embedding a time stamp in a filename is included, along with a function to pad numeric strings with 0’s, which can also be useful in managing filenames.</p>
+<div id="get-a-filename-extension" class="section level2">
+<h2>Get a filename extension</h2>
+<p><code><a target='_blank' href='rd.html#getextension'>getExtension()</a></code> grabs the characters that make up the extensions of a vector of filenames.</p>
+<pre class="r"><code>getExtension(c(&quot;~/aDir/aFile.txt&quot;, &quot;anotherFile.R&quot;))</code></pre>
+<pre><code>[1] &quot;txt&quot; &quot;R&quot;  </code></pre>
+</div>
+<div id="get-the-path-of-a-filename" class="section level2">
+<h2>Get the path of a filename</h2>
+<p><code><a target='_blank' href='rd.html#getpath'>getPath()</a></code> grabs the characters that make up the pathname of a vector of filenames.</p>
+<pre class="r"><code>getPath(c(&quot;~/aDir/aFile.txt&quot;, &quot;anotherFile.R&quot;))</code></pre>
+<pre><code>[1] &quot;~/aDir&quot; &quot;.&quot;     </code></pre>
+</div>
+<div id="strip-a-the-extension-from-a-filename" class="section level2">
+<h2>Strip a the extension from a filename</h2>
+<p><code><a target='_blank' href='rd.html#stripextension'>stripExtension()</a></code> removes the characters that make up the extensions of a vector of filenames.</p>
+<pre class="r"><code>stripExtension(c(&quot;~/aDir/aFile.txt&quot;, &quot;anotherFile.R&quot;))</code></pre>
+<pre><code>[1] &quot;~/aDir/aFile&quot; &quot;anotherFile&quot; </code></pre>
+</div>
+<div id="strip-the-path-from-a-filename" class="section level2">
+<h2>Strip the path from a filename</h2>
+<p><code><a target='_blank' href='rd.html#strippath'>stripPath()</a></code> removes the characters that make up the pathname of a vector of filenames.</p>
+<pre class="r"><code>stripPath(c(&quot;~/aDir/aFile.txt&quot;, &quot;anotherFile.R&quot;))</code></pre>
+<pre><code>[1] &quot;aFile.txt&quot;     &quot;anotherFile.R&quot;</code></pre>
+</div>
+<div id="get-the-last-set-of-characters-after-a-delimiter" class="section level2">
+<h2>Get the last set of characters after a delimiter</h2>
+<p><code><a target='_blank' href='rd.html#grablast'>grabLast()</a></code> is a more general function that is very similar to <code><a target='_blank' href='rd.html#getextension'>getExtension()</a></code>: it selects the final set of characters that appear after a single-character delimiter. It is used by <code><a target='_blank' href='rd.html#getextension'>getExtension()</a></code> and <code><a target='_blank' href='rd.html#strippath'>stripPath()</a></code>.</p>
+<pre class="r"><code>grabLast(&quot;some_new_stuff&quot;, &quot;_&quot;)</code></pre>
+<pre><code>[1] &quot;stuff&quot;</code></pre>
+</div>
+<div id="embed-a-timestamp-in-a-filename" class="section level2">
+<h2>Embed a timestamp in a filename</h2>
+<p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
+<pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
+<pre><code>[1] &quot;thisFile_2016-04-09_165201.txt&quot;</code></pre>
+</div>
+<div id="pad-a-numeric-value-with-zeros" class="section level2">
+<h2>Pad a numeric value with zeros</h2>
+<p><code><a target='_blank' href='rd.html#padzero'>padZero()</a></code> pads a numeric vector with zeros so that each element in the vector either has the same number of characters or the same number of trailing decimal places. This can be helpful in managing multiple files where files are sorted alpha-numerically.</p>
+<pre class="r"><code># These files will sort in numeric order with the padded zeros
+paste(&quot;fileNumber_&quot;, padZero(c(1, 10, 100)), &quot;.txt&quot;, sep = &quot;&quot;)</code></pre>
+<pre><code>[1] &quot;fileNumber_001.txt&quot; &quot;fileNumber_010.txt&quot; &quot;fileNumber_100.txt&quot;</code></pre>
+<pre class="r"><code># An example of adding 0&#39;s to the right side
+padZero(c(1.2, 1.34, 1.399), side = &quot;r&quot;)</code></pre>
+<pre><code>[1] &quot;1.200&quot; &quot;1.340&quot; &quot;1.399&quot;</code></pre>
+</div>
+</div>
+<div id="programming-tools" class="section level1">
+<h1>Programming tools</h1>
+<p>The following functions are designed to make writing code in R a little easier, whether you’re writing scripts, functions, or developing packages.</p>
+<div id="generate-a-hard-coded-vector" class="section level2">
+<h2>Generate a hard-coded vector</h2>
+<p>When writing a script for analysis, have you ever wanted to select a bunch of columns (by name) in a dataframe, and had to extensively edit the output of <a href="http://www.inside-r.org/r-doc/base/colnames">colnames(myData)</a> in order to have some tidy code in your script? <code><a target='_blank' href='rd.html#hardcode'>hardCode()</a></code> makes it easy to do this:</p>
+<pre class="r"><code>myData &lt;- data.frame(a = 1:4, 
+                     b = letters[1:4], 
+                     c = rep(c(TRUE, FALSE), each = 2), 
+                     d = rnorm(4))</code></pre>
+<pre class="r"><code>hardCode(colnames(myData)[-1], vname = &quot;myNewCols&quot;, vert = FALSE)</code></pre>
+<p>Pay close attention: what you see below <em>is the output</em> from the call to <code><a target='_blank' href='rd.html#hardcode'>hardCode()</a></code> that appears in the R console:</p>
+<pre><code>myNewCols &lt;- c(&quot;b&quot;, &quot;c&quot;, &quot;d&quot;)   </code></pre>
+<p>Then you can copy and paste the code snippet above into your script and use it to select a subset of the data:</p>
+<pre class="r"><code>myNewCols &lt;- c(&quot;b&quot;, &quot;c&quot;, &quot;d&quot;)
+myData[,myNewCols]</code></pre>
+<pre><code>  b     c          d
+1 a  TRUE -2.3456977
+2 b  TRUE  0.4291247
+3 c FALSE  0.5060559
+4 d FALSE -0.5747400</code></pre>
+<p>Granted, this is a trivial example, but when you have dozens of columns, this can make life a little easier. <code><a target='_blank' href='rd.html#hardcode'>hardCode()</a></code> can be used for more than just selecting column names: it can be used to hard code any type of vector that you might want to copy into a script.</p>
+</div>
+<div id="display-the-contents-of-a-text-file" class="section level2">
+<h2>Display the contents of a text file</h2>
+<p><code><a target='_blank' href='rd.html#more'>more()</a></code> prints the contents of a text file (stored on disk) in the R console, just like the <a href="https://en.wikipedia.org/wiki/More_(command)">more</a> command in Unix—making it easy to see what’s in a file without having to leave the R console.</p>
+<pre class="r"><code># Write a simple text file
+cat(&quot;Here&#39;s a simple\n&quot;, &quot;text file\n&quot;, 
+    file = &quot;simpleFile.txt&quot;, sep = &quot;&quot;)
+
+# Display using more()
+more(&quot;simpleFile.txt&quot;)</code></pre>
+<pre><code>Here&#39;s a simple
+text file </code></pre>
+</div>
+<div id="print-the-object-name-and-its-value" class="section level2">
+<h2>Print the object name and its value</h2>
+<p><code><a target='_blank' href='rd.html#pvar'>pvar()</a></code> stands for <em>print variable</em>, which makes it easy to see both the name and the value of an R object. <code><a target='_blank' href='rd.html#pvar'>pvar()</a></code> is particularly useful for displaying the value of objects that are atomic (i.e. of length 1).</p>
+<pre class="r"><code>x &lt;- &quot;gratican&quot;
+y &lt;- 3.14
+pvar(x, y)</code></pre>
+<pre><code>x = gratican; y = 3.14 </code></pre>
+<p>I often use it to troubleshoot loops, where I’d like to see the value of variables as the code progresses through the loop:</p>
+<pre class="r"><code>for (i in 1:2) {
+  for (j in c(&quot;a&quot;, &quot;b&quot;)) {
+    pvar(i, j)
+  }
+}</code></pre>
+<pre><code>i = 1; j = a 
+i = 1; j = b 
+i = 2; j = a 
+i = 2; j = b </code></pre>
+</div>
+<div id="flexibly-select-valid-elements-from-a-character-vector" class="section level2">
+<h2>Flexibly select valid elements from a character vector</h2>
+<p>I often write functions where one or more of the arguments are a vector of column names (or numbers) that will be selected from a dataframe. <code><a target='_blank' href='rd.html#selectelements'>selectElements</a></code> provides a mechanism for selecting the columns using three different methods (a character vector of column names, a numeric vector of column numbers, or a logical vector) and it checks that the selection provided by the user is correct.</p>
+<pre class="r"><code># Define a dataframe
+myData &lt;- data.frame(a = 1:2, b = letters[1:2], c = c(TRUE, FALSE), d = rnorm(2))
+
+# Simple function that will subset the dataframe
+makeSelection &lt;- function(data, sel) {
+  myData[,selectElements(sel, colnames(data))]
+}
+
+# Select columns using a 3 equivalent approaches
+makeSelection(myData, c(&quot;a&quot;,&quot;d&quot;))</code></pre>
+<pre><code>  a          d
+1 1 -0.5466319
+2 2 -0.5644520</code></pre>
+<pre class="r"><code>makeSelection(myData, c(1, 4))</code></pre>
+<pre><code>  a          d
+1 1 -0.5466319
+2 2 -0.5644520</code></pre>
+<pre class="r"><code>makeSelection(myData, c(TRUE, FALSE, FALSE, TRUE))</code></pre>
+<pre><code>  a          d
+1 1 -0.5466319
+2 2 -0.5644520</code></pre>
+<pre class="r"><code># And if we choose an incorrect column, it lets us know
+makeSelection(myData, c(&quot;a&quot;, &quot;e&quot;))</code></pre>
+<pre><code>Error in selectElements(sel, colnames(data)) :
+  An invalid value was chosen in &#39;elements&#39;: &#39;e&#39; is not in &#39;cVec&#39;</code></pre>
+<p>While this example focuses on column names, <code><a target='_blank' href='rd.html#selectelements'>selectElements</a></code> can be used to select the elements from any character vector.</p>
+</div>
+<div id="source-all-r-files-in-a-directory" class="section level2">
+<h2>Source all R files in a directory</h2>
+<p><code><a target='_blank' href='rd.html#sourcedir'>sourceDir()</a></code> sources all the files with <code>.R</code> or <code>.r</code> extensions in a directory. If a file fails to source correctly, an informative error message is printed–but it doesn’t prevent the remainder of the files from being sourced. This is especially useful in package development, allowing you to quickly check that all the R code sources correctly prior to building the package:</p>
+<pre class="r"><code>sourceDir(&quot;~/R-packages/myPackage/R&quot;)</code></pre>
+</div>
+<div id="customized-error-message-for-stopifnot" class="section level2">
+<h2>Customized error message for stopifnot()</h2>
+<p>The <a href="http://www.inside-r.org/r-doc/base/stopifnot">stopifnot()</a> function is super useful for basic sanity checks of functional arguments, ensuring that the arguments supplied by a user have the correct type, length, class, etc. <code><a target='_blank' href='rd.html#stopifnotmsg'>stopifnotMsg()</a></code> extends <a href="http://www.inside-r.org/r-doc/base/stopifnot">stopifnot()</a> by making it easy to throw a customized error message for each condition that is checked.</p>
+<pre class="r"><code># A simple function
+aFunction &lt;- function(x, a = &quot;text&quot;) {
+     
+  # Check the arguments of the function
+  stopifnotMsg(is.numeric(x),   &quot;&#39;x&#39; must be numeric&quot;,
+               x &gt; 0,           &quot;&#39;x&#39; must be positive&quot;,
+               is.character(a), &quot;&#39;a&#39; must be character&quot;)
+
+  return(&quot;You nailed it&quot;)
+
+}
+
+# This runs without error
+aFunction(12, a = &quot;new&quot;)</code></pre>
+<pre><code>[1] &quot;You nailed it&quot;</code></pre>
+<pre class="r"><code># This produces an error with 2 messages:
+aFunction(-1, a = 7)</code></pre>
+<pre><code>Error: aFunction(-1, a = 7)
+&#39;x&#39; must be positive
+&#39;a&#39; must be character</code></pre>
+</div>
+<div id="time-the-execution-of-an-expression" class="section level2">
+<h2>Time the execution of an expression</h2>
+<p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
+<pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
+<pre><code>1.01 seconds </code></pre>
+<pre class="r"><code>y</code></pre>
+<pre><code>[1] 2.524102e-05</code></pre>
+</div>
+<div id="remove-all-objects" class="section level2">
+<h2>Remove all objects</h2>
+<p>A call to <code><a target='_blank' href='rd.html#rma'>rma()</a></code> removes all the objects in the Global Environment.</p>
+</div>
+</div>
+<div id="parallelization" class="section level1">
+<h1>Parallelization</h1>
+<p>There are a number of packages out there that enable parallelization of R. The parallelization functions in the <code>Smisc</code> package are not meant to replace them, but rather, make them easier to use—especially for Windows users. For the most part, I rely on the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf">parallel</a> package for parallelization. These functions are designed to run on a single, multi-core workstation (as opposed to a cluster with multiple nodes).</p>
+<div id="parallelize-lapply-a-wrapper-for-parlapply" class="section level2">
+<h2>Parallelize lapply(), a wrapper for parLapply()</h2>
+<p><code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> parallelizes <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a>, and is a wrapper for <a href="http://www.inside-r.org/r-doc/parallel/parLapply">parLapply()</a>. <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> makes makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, running the <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> in parallel, and then shutting down the cluster—all in one function call. If the job fails, the cluster is shut down without consequence.</p>
+<p>Let’s look at two workflows that produce the same result, one using the individual functions of the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf">parallel</a> package, and the second using <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>. Here are some preliminary objects that both workflows will need:</p>
+<pre class="r"><code># A vector we&#39;ll process using f1
+x1 &lt;- rnorm(4)
+
+# An object that f1 needs
+b &lt;- 7
+
+# The function we&#39;ll apply to x1
+f1 &lt;- function(x1) {
+  x1 + b + 5
+}</code></pre>
+<p>Here’s the first workflow, not using <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> <!-- This code block fails for some reason--it can't find the object "b".  But it runs fine in the console --></p>
+<pre class="r"><code># Start the cluster
+cl &lt;- parallel::makeCluster(2)
+
+# Export the &#39;b&#39; object to the nodes
+parallel::clusterExport(cl, &quot;b&quot;)
+
+## Call parLapplyW()
+res1 &lt;- parallel::parLapply(cl, x1, f1)
+
+# Shut down the cluster
+parallel::stopCluster(cl)</code></pre>
+<p>And here’s the second workflow, accomplished with a single call to <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>:</p>
+<pre class="r"><code>res2 &lt;- parLapplyW(x1, f1, njobs = 2, varlist = &quot;b&quot;)</code></pre>
+<p>Last of all, the results are the same:</p>
+<pre class="r"><code>identical(res1, res2)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div id="parallelize-lapply-with-convenient-debugging-and-more" class="section level2">
+<h2>Parallelize lapply() with convenient debugging and more</h2>
+<p>Like <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>, <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> is also a parallelization of <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> for a single workstation. <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> differs from other parallelized implementations of <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own <code>.Rout</code> file that can be investigated for errors and warnings. While <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:</p>
+<ul>
+<li>The <code>.Rout</code> files produced by each R instance are easily accessible for convenient debugging of errors or warnings. The <code>.Rout</code> files can also serve as an explicit record of the work that was performed by the workers</li>
+<li>Three options are available for the ordering of the processing of the list elements: the original list order, randomized, or collated (first-in-first-out)</li>
+<li>In each R instance, pre-processing or post-processing steps can be performed before and after the call to <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a>. These pre-processing and post-processing steps can depend on the instance of R, such that each instance can be treated differently, if desired</li>
+</ul>
+<p>These features give greater control over the computing process, which can be especially useful for large jobs.</p>
+<p>The call to <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> is straightforward. Here’s what it looks like for the same example discussed above for <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>:</p>
+<pre class="r"><code>res3 &lt;- plapply(x1, f1, njobs = 2, needed.objects = &quot;b&quot;)</code></pre>
+<p>The result is the same as that produced by <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> and <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a>:</p>
+<pre class="r"><code># Same as parLapplyW()
+identical(res2, res3)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code># Same as lapply()
+identical(res3, lapply(x1, f1))</code></pre>
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div id="process-rows-of-a-dataframe-in-parallel-with-convenient-debugging" class="section level2">
+<h2>Process rows of a dataframe in parallel with convenient debugging</h2>
+<p><code><a target='_blank' href='rd.html#dfplapply'>dfplapply()</a></code> applies a function to each row of a data frame in a parallelized fashion (by submitting multiple batch R jobs). It is a convenient wrapper for <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code>, modified especially for parallel, single-row processing of data frames.</p>
+<pre class="r"><code># A dataframe
+x &lt;- data.frame(a = 1:2, b = 3:4)
+
+# A function that operates on a single row of the dataframe
+f &lt;- function(x) {
+  x$c &lt;- x$a + x$b
+  return(x)
+}
+
+# Process the dataframe in parallel
+dfplapply(x, f, njobs = 2, output.df = TRUE)</code></pre>
+<pre><code>  a b c
+1 1 3 4
+2 2 4 6</code></pre>
+</div>
+<div id="convenient-wrapper-for-parallelization-of-ddply" class="section level2">
+<h2>Convenient wrapper for parallelization of ddply()</h2>
+<p><code><a target='_blank' href='rd.html#pddply'>pddply()</a></code> is a wrapper for <a href="http://www.inside-r.org/packages/cran/plyr/docs/ddply">plyr::ddply()</a> that makes it easier to use in parallel and supresses a spurious warning along the way. Here are two workflows that produce identical results using <a href="http://www.inside-r.org/packages/cran/plyr/docs/ddply">plyr::ddply()</a> in parallel and <code><a target='_blank' href='rd.html#pddply'>pddply()</a></code>. First, some preliminaries:</p>
+<pre class="r"><code># Load necessary packages
+loadNamespace(&quot;plyr&quot;)
+loadNamespace(&quot;foreach&quot;)
+
+# Load some baseball data from the plyr package
+data(baseball, package = &quot;plyr&quot;)</code></pre>
+<p>Here’s the workflow with <a href="http://www.inside-r.org/packages/cran/plyr/docs/ddply">plyr::ddply</a>:</p>
+<pre class="r"><code># Set up the cluster
+cl &lt;- parallel::makeCluster(2)
+doParallel::registerDoParallel(cl)
+
+# Call plyr::ddply()
+res1 &lt;- plyr::ddply(baseball, ~ year, nrow, .parallel = TRUE)</code></pre>
+<pre><code>Warning: &lt;anonymous&gt;: ... may be used in an incorrect context: &#39;.fun(piece, ...)&#39;</code></pre>
+<pre><code>Warning: &lt;anonymous&gt;: ... may be used in an incorrect context: &#39;.fun(piece, ...)&#39;</code></pre>
+<pre class="r"><code># Shut down the cluster
+parallel::stopCluster(cl)</code></pre>
+<p>The same result can be accomplished with a single call to <code><a target='_blank' href='rd.html#pddply'>pddply()</a></code>, without the spurious warning:</p>
+<pre class="r"><code>res2 &lt;- pddply(baseball, ~ year, nrow, njobs = 2)</code></pre>
+<p>And the results are the same:</p>
+<pre class="r"><code>identical(res1, res2)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div id="call-an-expensive-function-in-parallel" class="section level2">
+<h2>Call an expensive function in parallel</h2>
+<p>Have you ever constructed a mathematical function that is expensive to compute? If you need to evaluate that function at multiple real-valued points (e.g. for a plot), you might be waiting awhile. <code><a target='_blank' href='rd.html#docallparallel'>doCallParallel()</a></code> will let you easily make parallel calls to the function, provided the function accepts a vector for its first argument. Parallelization is accomplished using <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>. Here’s a trivial example to illustrate its simplicity:</p>
+<pre class="r"><code># Get a vector of normal data
+x &lt;- rnorm(4)
+     
+# Calculate the cummulative probability using 2 cores
+doCallParallel(pnorm, x, njobs = 2)</code></pre>
+<pre><code>[1] 0.6261153 0.8974142 0.1532596 0.6741026</code></pre>
+</div>
+<div id="parse-job-tasks-into-groups" class="section level2">
+<h2>Parse job tasks into groups</h2>
+<p><code><a target='_blank' href='rd.html#parsejob'>parseJob()</a></code> is used by <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> and <code><a target='_blank' href='rd.html#docallparallel'>doCallParallel()</a></code> to split up a job into (almost) equal-sized groups for parallelization. It can be used more generally however, to create equal-sized groups for any purpose.</p>
+<pre class="r"><code># Make 2 groups out of seven elements
+parseJob(7, 2)</code></pre>
+<pre><code>[[1]]
+[1] 1 2 3 4
+
+[[2]]
+[1] 5 6 7</code></pre>
+<pre class="r"><code># This time with randomly allocated elements
+parseJob(7, 2, random.seed = 1)</code></pre>
+<pre><code>[[1]]
+[1] 2 3 6 4
+
+[[2]]
+[1] 1 7 5</code></pre>
+</div>
+</div>
+<div id="plotting-tools" class="section level1">
+<h1>Plotting tools</h1>
+<div id="open-a-graphics-device-based-on-the-filename-extension" class="section level2">
+<h2>Open a graphics device based on the filename extension</h2>
+<p><code><a target='_blank' href='rd.html#opendevice'>openDevice()</a></code> opens the appropriate graphics device based on the filename extension of the first argument. This can be useful in creating packages that produce graphic files because allows the user to specify the type of output with minimal effort.</p>
+<pre class="r"><code>openDevice(&quot;out.pdf&quot;)
+plot(1:10, rnorm(10), type = &quot;b&quot;)
+dev.off()</code></pre>
+</div>
+<div id="quickly-plot-one-or-more-functions" class="section level2">
+<h2>Quickly plot one or more functions</h2>
+<p><code><a target='_blank' href='rd.html#plotfun'>plotFun()</a></code> makes it easy to plot one or more functions on a single plot. This is especially useful for plotting existing mathematical or statistical functions in R. If the function(s) is/are expensive to calculate, parallel processing is available by simply setting <code>njobs &gt; 1</code>. Here’s a simple example:</p>
+<pre class="r"><code># A handful of beta density functions, note how they take a single argument
+fList &lt;- list(function(x) dbeta(x, 10, 10),
+              function(x) dbeta(x, 3, 3),
+              function(x) dbeta(x, 0.5, 0.50))
+
+# Plot all 3 beta densities on the same plot
+plotFun(fList, 
+        xlim = c(0.0001, 0.9999), 
+        ylim = c(0, 3.5),
+        col = c(&quot;Red&quot;, &quot;Black&quot;, &quot;Blue&quot;), 
+        xlab = &quot;x&quot;, ylab = expression(f(x)),
+        main = &quot;Beta Densities&quot;)</code></pre>
+<p><img src="index_files/figure-html/plotFun-1.png" title="" alt="" width="624" /></p>
+</div>
+<div id="create-naturally-spaced-time-axes" class="section level2">
+<h2>Create naturally spaced time axes</h2>
+<p>Ever created a plot involving time and been dismayed at the rendering of the time axis? <code><a target='_blank' href='rd.html#smarttimeaxis'>smartTimeAxis()</a></code> attempts to give you more control to create the time axis with interval spacings that are aesthetic and intuitive. It is intended to be applied to periods of time that do not exceed 24 hours (i.e. it does not produce a date stamp in the time axis). It spaces the ticks using intuitive intervals like 1 second, 5 seconds, 15 seconds, etc., or 1 minute, 2 minutes, 5 minutes, etc.</p>
+<p>Here’s a plot using R’s default time axis:</p>
+<pre class="r"><code>data(timeData)
+
+par(las = 2, mar = c(4, 4, 1, 0.5))
+
+plot(timeData, xlab = &quot;&quot;, col = &quot;Blue&quot;)</code></pre>
+<p><img src="index_files/figure-html/smartTimeAxis1-1.png" title="" alt="" width="624" /></p>
+<p>And here’s the same plot using <code><a target='_blank' href='rd.html#smarttimeaxis'>smartTimeAxis()</a></code>. Notice the intervals are 5 minutes apart, in a natural sequence (i.e., 0, 5, 10, …) as opposed to something less natural (e.g., 2, 7, 12, …):</p>
+<pre class="r"><code>par(las = 2, mar = c(4, 4, 1, 0.5))
+
+plot(timeData, axes = FALSE, frame.plot = TRUE, xlab = &quot;&quot;, col = &quot;Blue&quot;)
+
+# Add the y-axis
+axis(2)
+
+# Add the time axis
+smartTimeAxis(timeData$time, nticks = 20, time.format = &quot;hh:mm&quot;)</code></pre>
+<p><img src="index_files/figure-html/smartTimeAxis2-1.png" title="" alt="" width="624" /></p>
+</div>
+<div id="draw-a-vertical-error-bar" class="section level2">
+<h2>Draw a vertical error bar</h2>
+<p><code><a target='_blank' href='rd.html#verterrorbar'>vertErrorBar()</a></code> draws a vertical error bar on a plot, like so:</p>
+<pre class="r"><code># Make a plot of some standard normal observations
+x &lt;- 1:9
+y &lt;- rnorm(9)
+plot(x, y, pch = as.character(1:9), ylim = c(-2, 2) + range(y),
+     ylab = &quot;Z&quot;, xlab = &quot;Indexes&quot;)
+     
+# Draw the error bars
+vertErrorBar(x, 0.3, center = y, barLength = 2 * 1.96, blankMiddle = 0.75)</code></pre>
+<p><img src="index_files/figure-html/vertErrorBar2-1.png" title="" alt="" width="624" /></p>
+</div>
+<div id="interaction-plot-with-vertical-error-bars" class="section level2">
+<h2>Interaction plot with vertical error bars</h2>
+<p><code><a target='_blank' href='rd.html#interactionplot'>interactionPlot()</a></code> plots the mean (or other summary) of the response for two-way combinations of factors, thereby illustrating possible interactions. It modifies <a href="http://www.inside-r.org/r-doc/stats/interaction.plot">interaction.plot()</a> by making it possible to include error bars of the same length on the plot.</p>
+<pre class="r"><code># Generate some data with 2 factors and a response
+d &lt;- data.frame(Factor_1 = c(rep(&quot;A&quot;, 10), rep(&quot;B&quot;, 10)),
+                Factor_2 = rep(c(&quot;C&quot;, &quot;D&quot;), each = 5),
+                Response = c(rnorm(5, mean = 5),
+                             rnorm(5, mean = 8),
+                             rnorm(5, mean = 7),
+                             rnorm(5, mean = 5.5)))
+
+# Get the MSE
+MSE &lt;- summary(lm(Response ~ Factor_1 * Factor_2, data = d))$sigma^2
+
+# Calculate the total vertical length of the bars, based on Fisher&#39;s LSD
+LSD &lt;- qt(0.05 / 2, 16, lower.tail = FALSE) * sqrt(2 * MSE / 5)
+
+# Plot Interation plot with LSD bars.  If the bars overlap, the two groups
+# are not significantly different per the LSD criterion
+with(d, interactionPlot(Factor_1, Factor_2, Response, las = 1,
+                        errorBar = list(barLength = LSD, width = 0.05),
+                        jitterErrorBars = list(factor = 0.2)))</code></pre>
+<p><img src="index_files/figure-html/interactionPlot2-1.png" title="" alt="" width="624" /></p>
+</div>
+</div>
+<div id="statistical-functions" class="section level1">
+<h1>Statistical functions</h1>
+<div id="beta-binomial-distribution-functions" class="section level2">
+<h2>Beta-binomial distribution functions</h2>
+<p>The Beta-binomial distribution is the probability distribution of the number of successes in a fixed number of independent trials when the probability of success follows a Beta distribution. Following the usual convention in R, <code><a target='_blank' href='rd.html#dbb'>dbb()</a></code> gives the mass function, <code><a target='_blank' href='rd.html#dbb'>pbb()</a></code> is the cdf, <code><a target='_blank' href='rd.html#dbb'>qbb()</a></code> provides quantiles for a given probability, and <code><a target='_blank' href='rd.html#dbb'>rbb()</a></code> generates random draws. Here’s an example Beta-binomial mass function, with a U-shaped beta distribution:</p>
+<pre class="r"><code>x &lt;- 0:10
+fx &lt;- dbb(x, 10, 0.95, 0.95)
+plot(x, fx, xlab = &quot;x&quot;, ylab = &quot;P(X = x)&quot;, type = &quot;h&quot;, 
+     main = c(&quot;N = 10, u = 0.95, v = 0.95&quot;), font.main = 1)
+points(x, fx, pch = 19, col = &quot;Blue&quot;) </code></pre>
+<p><img src="index_files/figure-html/dbb-1.png" title="" alt="" width="624" /></p>
+</div>
+<div id="distribution-of-the-sum-of-binomials-with-unequal-p" class="section level2">
+<h2>Distribution of the sum of binomials with unequal <em>p</em></h2>
+<p>The distribution of the sum of binomial random variates with constant probability of success is well-known. When the probability of sucess varies, things are more complicated. <code><a target='_blank' href='rd.html#dkbinom'>dkbinom()</a></code> and <code><a target='_blank' href='rd.html#dkbinom'>pkbinom()</a></code> provide the mass and distribution functions for the sum of an arbitrary number of binomial variates with different success probabilities. Suppose <em>X ~ Bin(5, 0.7)</em> and <em>Y ~ Bin(7, 0.3)</em>. Then <em>P(X + Y = 5)</em> is given by:</p>
+<pre class="r"><code>dkbinom(5, size = c(5, 7), prob = c(0.7, 0.3))</code></pre>
+<pre><code>[1] 0.2337159</code></pre>
+</div>
+<div id="a-continuous-version-of-the-binomial-cdf" class="section level2">
+<h2>A continuous version of the binomial cdf</h2>
+<p>There are circumstances when a continuous version of the discrete binomial cdf can be useful, especially in root finding or optimization. <code><a target='_blank' href='rd.html#pcbinom'>pcbinom()</a></code> is equivalent to <a href="http://www.inside-r.org/r-doc/stats/pbinom">pbinom()</a> when the first argument is an integer.</p>
+<pre class="r"><code># These are the same
+pcbinom(7, 10, 0.5)</code></pre>
+<pre><code>[1] 0.9453125</code></pre>
+<pre class="r"><code>pbinom(7, 10, 0.5)</code></pre>
+<pre><code>[1] 0.9453125</code></pre>
+<pre class="r"><code># But these are different
+pcbinom(7.5, 10, 0.5)</code></pre>
+<pre><code>[1] 0.9739634</code></pre>
+<pre class="r"><code>pbinom(7.5, 10, 0.5)</code></pre>
+<pre><code>[1] 0.9453125</code></pre>
+<p>The plot shows how the two functions intersect at the integers</p>
+<pre class="r"><code>x &lt;- seq(0, 10, length = 500)
+y1 &lt;- pbinom(x, 10, 0.5)
+y2 &lt;- pcbinom(x, 10, 0.5)
+plot(x, y1, type = &quot;s&quot;, col = &quot;Blue&quot;, xlab = &quot;x&quot;, ylab = &quot;F(x)&quot;)
+lines(x, y2, col = &quot;Red&quot;)
+legend(&quot;topleft&quot;, c(&quot;pbinom()&quot;, &quot;pcbinom()&quot;), lty = 1, col = c(&quot;Blue&quot;, &quot;Red&quot;))</code></pre>
+<p><img src="index_files/figure-html/pcbinom2-1.png" title="" alt="" width="624" /></p>
+</div>
+<div id="highest-posterior-density-credible-interval" class="section level2">
+<h2>Highest posterior density credible interval</h2>
+<p><code><a target='_blank' href='rd.html#hpd'>hpd()</a></code> calculates the highest posterior density (HPD) credible interval for a unimodal density. It requires that we provide a density function, and, if possible, a cdf for the distribution of interest. If the density is expensive to calculate, parallel support is available by simply setting <code>njobs &gt; 1</code>.</p>
+<p>Suppose we were interested in making inference about a success probability whose posterior distribution is <em>Beta(7, 20)</em>. We could calculate a 95% HPD credible interval as follows:</p>
+<pre class="r"><code># The beta pdf and cdf, expressed as functions with a single argument
+pdf &lt;- function(x) dbeta(x, 7, 20)
+cdf &lt;- function(x) pbeta(x, 7, 20)
+
+# The hpd interval object
+hpdInt &lt;- hpd(pdf, c(0, 1), prob = 0.95, cdf = cdf)
+
+# Print the interval
+print(hpdInt)</code></pre>
+<pre><code>$lower
+[1] 0.1056695
+
+$upper
+[1] 0.4228501
+
+$prob
+[1] 0.9500001</code></pre>
+<pre class="r"><code># Plot the interval with the density
+plot(hpdInt)</code></pre>
+<p><img src="index_files/figure-html/hpd1-1.png" title="" alt="" width="624" /></p>
+</div>
+<div id="umvues-of-lognormal-parameters" class="section level2">
+<h2>UMVUEs of lognormal parameters</h2>
+<p>The uniformly minimum variance unbiased estimator (UMVUE) of a lognormal mean is a handful to calculate. <code><a target='_blank' href='rd.html#umvueln'>umvueLN()</a></code> calculates the UMVUE of the mean, the standard error of the mean, and the standard deviation of lognormal data, using the formulae presented in Gilbert’s <em>Statistical Methods for Environmental Pollution Monitoring</em> (1987). Here’s a simple example:</p>
+<pre class="r"><code># Some lognormal data
+x &lt;- exp(rnorm(50, mean = 0.1, sd = 0.5))
+
+# The UMVUE&#39;s of the lognormal parameters
+umvueLN(x)</code></pre>
+<pre><code>        mu      se.mu      sigma 
+1.22257845 0.09136714 0.64872945 </code></pre>
+</div>
+</div>
+<div id="time-series" class="section level1">
+<h1>Time series</h1>
+<div id="format-dates-or-datetimes" class="section level2">
+<h2>Format dates or datetimes</h2>
+<p><code><a target='_blank' href='rd.html#formatdt'>formatDT()</a></code> makes it easy to convert a vector of dates or datetimes (expressed as character strings) into a variety of formats. A couple of examples:</p>
+<pre class="r"><code>formatDT(&quot;03/12/2004&quot;, date.outformat = &quot;dd-mon-yyyy&quot;)</code></pre>
+<pre><code>$date
+[1] &quot;12-Mar-2004&quot;
+
+$time
+[1] &quot;&quot;
+
+$dt
+[1] &quot;12-Mar-2004&quot;
+
+$date.posix
+[1] &quot;2004-03-12 MST&quot;</code></pre>
+<pre class="r"><code>formatDT(&quot;17-Sep-1782 4:31pm&quot;, date.outformat = &quot;yyyy-mm-dd&quot;, time.outformat = &quot;hh:mm&quot;)</code></pre>
+<pre><code>$date
+[1] &quot;1782-09-17&quot;
+
+$time
+[1] &quot;16:31&quot;
+
+$dt
+[1] &quot;1782-09-17 16:31&quot;
+
+$dt.posix
+[1] &quot;1782-09-17 16:31:00 LMT&quot;
+
+$date.posix
+[1] &quot;1782-09-17 LMT&quot;</code></pre>
+</div>
+<div id="calculate-a-moving-window-dot-product" class="section level2">
+<h2>Calculate a moving window dot product</h2>
+<p>Have you ever been frustrated by the behavior of <a href="http://www.inside-r.org/r-doc/stats/filter">filter()</a> near the edges of a time series—or miffed by how it handles NA’s? <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code> gracefully handles the beginning and end of a time series, as well as NA’s, by re-normalizing the filter weights as needed. Let’s apply <a href="http://www.inside-r.org/r-doc/stats/filter">filter()</a> to calculate a moving average consisting of 3 data points:</p>
+<pre class="r"><code># A vector
+x &lt;- 2^(0:8)
+x[4] &lt;- NA
+x</code></pre>
+<pre><code>[1]   1   2   4  NA  16  32  64 128 256</code></pre>
+<pre class="r"><code># The weights
+wts &lt;- rep(1, 3) / 3
+wts</code></pre>
+<pre><code>[1] 0.3333333 0.3333333 0.3333333</code></pre>
+<pre class="r"><code># Call filter()
+filter(x, wts)</code></pre>
+<pre><code>Time Series:
+Start = 1 
+End = 9 
+Frequency = 1 
+[1]         NA   2.333333         NA         NA         NA  37.333333
+[7]  74.666667 149.333333         NA</code></pre>
+<p>And <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code> applied to the same data:</p>
+<pre class="r"><code>smartFilter(x, wts)</code></pre>
+<pre><code>[1]   1.500000   2.333333   3.000000  10.000000  24.000000  37.333333
+[7]  74.666667 149.333333 192.000000</code></pre>
+</div>
+<div id="moving-average-with-various-kernels" class="section level2">
+<h2>Moving average with various kernels</h2>
+<p><code><a target='_blank' href='rd.html#movavg2'>movAvg2()</a></code> will calculate the moving average using a 2-sided, symmetric window. Just like <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code>, it gracefully handles the edges of time series and NA’s by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.</p>
+<pre class="r"><code># Some Gaussian noise
+x &lt;- rnorm(50)
+
+# Calculate the moving average using 11 points (bandwidth of 5) 
+# and an Gaussian decay kernel:
+smooth_x &lt;- movAvg2(x, bw = 5, type = &quot;g&quot;)
+
+# Overlay smoothed series on the original data
+plot(1:50, x, type = &quot;b&quot;, col = &quot;Black&quot;, xlab = &quot;Index&quot;, ylab = &quot;x&quot;)
+lines(1:50, smooth_x, col = &quot;Blue&quot;, lwd = 3)</code></pre>
+<p><img src="index_files/figure-html/movAvg2_1-1.png" title="" alt="" width="624" /></p>
+<p>And let’s look at a plot of the weights that we used above:</p>
+<pre class="r"><code>movAvg2(bw = 5, type = &quot;g&quot;, plot = TRUE)</code></pre>
+<p><img src="index_files/figure-html/movAvg2_2-1.png" title="" alt="" width="624" /></p>
+</div>
+<div id="align-two-time-series" class="section level2">
+<h2>Align two time series</h2>
+<p>Ever needed to take the difference between two time series that didn’t have matching time indexes? Or have you ever needed to align two time series? <code><a target='_blank' href='rd.html#timediff'>timeDiff()</a></code> can perform both of these functions, even if the series have different lengths or frequencies.</p>
+<p>Here are some data. Notice how the two series have different, but roughly similar time stamps:</p>
+<pre class="r"><code>data(timeDiff.eg)
+timeDiff.eg[1:2]</code></pre>
+<pre><code>$x1
+2009-07-09 10:10:07 2009-07-09 10:10:17 2009-07-09 10:10:27 
+              64.88               65.18               65.11 
+2009-07-09 10:10:37 2009-07-09 10:10:47 2009-07-09 10:10:57 
+              65.07               65.14               65.12 
+2009-07-09 10:11:07 2009-07-09 10:11:17 2009-07-09 10:11:27 
+              64.92               64.95               64.97 
+2009-07-09 10:11:37 
+              64.95 
+
+$x2
+2009-07-09 10:10:07 2009-07-09 10:10:17 2009-07-09 10:10:27 
+              67.59               67.59               67.63 
+2009-07-09 10:10:37 2009-07-09 10:10:49 2009-07-09 10:10:57 
+              67.59               67.65               67.76 
+2009-07-09 10:11:13 2009-07-09 10:11:20 
+              67.67               67.74 </code></pre>
+<p>We can align them so they have a common set of time stamps:</p>
+<pre class="r"><code>with(timeDiff.eg, timeDiff(x1, x2, full = TRUE))</code></pre>
+<pre><code>        x2.timestamps    original.x1.time original.x1.index    x2    x1
+1 2009-07-09 10:10:07 2009-07-09 10:10:07                 1 67.59 64.88
+2 2009-07-09 10:10:17 2009-07-09 10:10:17                 2 67.59 65.18
+3 2009-07-09 10:10:27 2009-07-09 10:10:27                 3 67.63 65.11
+4 2009-07-09 10:10:37 2009-07-09 10:10:37                 4 67.59 65.07
+5 2009-07-09 10:10:49 2009-07-09 10:10:47                 5 67.65 65.14
+6 2009-07-09 10:10:57 2009-07-09 10:10:57                 6 67.76 65.12
+7 2009-07-09 10:11:13 2009-07-09 10:11:17                 8 67.67 64.95
+8 2009-07-09 10:11:20 2009-07-09 10:11:17                 8 67.74 64.95
+  diff.x1.x2
+1      -2.71
+2      -2.41
+3      -2.52
+4      -2.52
+5      -2.51
+6      -2.64
+7      -2.72
+8      -2.79</code></pre>
+<p>I know the ouput looks a bit bewildering, but the best way to understand how the function aligns the time series is by studying the output of the examples (which are not shown here):</p>
+<pre><code>example(timeDiff)</code></pre>
+</div>
+<div id="integration-over-time" class="section level2">
+<h2>Integration over time</h2>
+<p>So you have a time series of instantaneous power consumption (in kilowatts) and you need to calculate kilowatt-hours? <code><a target='_blank' href='rd.html#timeintegration'>timeIntegration()</a></code> will do that quickly for you, illustrating visually how the integral was calculated:</p>
+<pre class="r"><code>data(PowerData)
+timeIntegration(PowerData,
+                lower = &quot;5/6/2008 17:00:09&quot;,
+                upper = &quot;5/6/2008 17:01:36&quot;,
+                units = &quot;hours&quot;,
+                check.plot = TRUE)</code></pre>
+<p><img src="index_files/figure-html/timeInt1-1.png" title="" alt="" width="624" /></p>
+<pre><code>[1] 0.1247488</code></pre>
+<p>More generally, <code><a target='_blank' href='rd.html#timeintegration'>timeIntegration()</a></code> will approximate the area under any “curve” defined by the linear interpolation of data points, where the units of the domain is time.</p>
+</div>
+</div>
+<div id="mathematical-operations" class="section level1">
+<h1>Mathematical operations</h1>
+<div id="generate-all-possible-combinations" class="section level2">
+<h2>Generate all possible combinations</h2>
+<p><code><a target='_blank' href='rd.html#combolist'>comboList()</a></code> produces a list that contains all possible combinations of a set of <code>n</code> objects indexed by <code>1:n</code>. As this can be computationally expensive, it can be easily parallelized with <code>njobs &gt; 1</code>. This extends <a href="http://www.inside-r.org/r-doc/utils/combn">combn()</a>, which produces all the possible combinations of a specific size. For example, here are all the possible combinations of 3 items, taken 1, 2, and 3 at a time:</p>
+<pre class="r"><code>out &lt;- comboList(3)
+out$pList</code></pre>
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 3
+
+[[4]]
+[1] 1 2
+
+[[5]]
+[1] 1 3
+
+[[6]]
+[1] 2 3
+
+[[7]]
+[1] 1 2 3</code></pre>
+</div>
+<div id="calculate-the-maximum-up-to-the-current-index" class="section level2">
+<h2>Calculate the maximum up to the current index</h2>
+<p>For each element of a vector, <code><a target='_blank' href='rd.html#cummax'>cumMax()</a></code> calculates the maximum from the beginning of the vector up to that element.</p>
+<pre class="r"><code>cumMax(c(1, 2, 3, 0, 2, 4, 1))</code></pre>
+<pre><code>[1] 1 2 3 3 3 4 4</code></pre>
+</div>
+<div id="calculate-cumulative-sum-without-propagating-nas" class="section level2">
+<h2>Calculate cumulative sum without propagating NA’s</h2>
+<p>If you need to calculate the cumulative sum of a vector that has missing values, <code><a target='_blank' href='rd.html#cumsumna'>cumsumNA()</a></code> is your friend. Essentially the same as <a href="http://www.inside-r.org/r-doc/base/cumsum">cumsum()</a>, except it doesn’t propagate NA’s.</p>
+<pre class="r"><code>x &lt;- c(3, 4, NA, 7, -2)
+
+# cumsum() propagates the NA&#39;s
+cumsum(x)</code></pre>
+<pre><code>[1]  3  7 NA NA NA</code></pre>
+<pre class="r"><code># cumsumNA() handles the NA&#39;s gracefully
+cumsumNA(x)</code></pre>
+<pre><code>[1]  3  7 NA 14 12</code></pre>
+</div>
+<div id="identify-linearly-dependent-rows-or-columns" class="section level2">
+<h2>Identify linearly dependent rows or columns</h2>
+<p><code><a target='_blank' href='rd.html#finddepmat'>findDepMat()</a></code> identifies rows or columns in a numeric matrix that are linearly dependent.</p>
+<pre class="r"><code># A matrix
+Y &lt;- matrix(c(1, 3, 4, 2, 6, 8, 7, 2, 9, 4, 1, 7, 3.5, 1, 4.5), 
+            byrow = TRUE, ncol = 3)
+
+# Note how row 2 is multiple of row 1 and row 5 is a multiple of row 3
+print(Y)</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]  1.0    3  4.0
+[2,]  2.0    6  8.0
+[3,]  7.0    2  9.0
+[4,]  4.0    1  7.0
+[5,]  3.5    1  4.5</code></pre>
+<pre class="r"><code># Identify rows that are linearly dependent
+findDepMat(Y)</code></pre>
+<pre><code>[1] FALSE  TRUE FALSE FALSE  TRUE</code></pre>
+</div>
+<div id="numerical-integration-using-simpson-or-trapezoid-rule" class="section level2">
+<h2>Numerical integration using Simpson or Trapezoid rule</h2>
+<p><code><a target='_blank' href='rd.html#integ'>integ()</a></code> estimates the integral of a real-valued function using Simpson’s or the Trapezoid approximation. Why might you want something other than <a href="http://www.inside-r.org/r-doc/stats/integrate">integrate()</a>? Because there are occasions when the adaptive quadrature method of <a href="http://www.inside-r.org/r-doc/stats/integrate">integrate()</a> doesn’t behave well—especially if the function is constant over a large portion of the domain.</p>
+<p>As a simple example, let’s look at the pdf of a Beta distribution:</p>
+<pre class="r"><code>f &lt;- function(x) dbeta(x, 5, 5)
+plotFun(f, c(0, 1), col = &quot;Blue&quot;)</code></pre>
+<p><img src="index_files/figure-html/integ1-1.png" title="" alt="" width="624" /></p>
+<p>Integration using Simpson’s approximation:</p>
+<pre class="r"><code>integ(f(seq(0, 0.3, length = 5001)), a = 0, b = 0.3)</code></pre>
+<pre><code>[1] 0.09880866</code></pre>
+<p>Compare to <a href="http://www.inside-r.org/r-doc/stats/pbeta">pbeta()</a>:</p>
+<pre class="r"><code>pbeta(0.3, 5, 5)</code></pre>
+<pre><code>[1] 0.09880866</code></pre>
+</div>
+<div id="linear-mapping-from-a-b-to-c-d" class="section level2">
+<h2>Linear mapping from [a, b] to [c, d]</h2>
+<p><code><a target='_blank' href='rd.html#linearmap'>linearMap()</a></code> maps a numeric vector or scalar from one contiguous interval to another. This is especially useful in situations where you want to put multiple variables in the same scale.</p>
+<pre class="r"><code># A short sequence in [0, 1]
+x &lt;- seq(0, 1, length = 5)
+x</code></pre>
+<pre><code>[1] 0.00 0.25 0.50 0.75 1.00</code></pre>
+<pre class="r"><code># An increasing linear map
+linearMap(x, R = c(4, 7))</code></pre>
+<pre><code>[1] 4.00 4.75 5.50 6.25 7.00</code></pre>
+<pre class="r"><code># A decreasing map
+linearMap(x, R = c(7, 4))</code></pre>
+<pre><code>[1] 7.00 6.25 5.50 4.75 4.00</code></pre>
+<pre class="r"><code># A shift
+linearMap(x, R = c(-1, 0))</code></pre>
+<pre><code>[1] -1.00 -0.75 -0.50 -0.25  0.00</code></pre>
+</div>
+</div>
+<div id="datasets" class="section level1">
+<h1>Datasets</h1>
+<p>The <code>Smisc</code> package contains three datasets, <code><a target='_blank' href='rd.html#powerdata'>PowerData</a></code>, <code><a target='_blank' href='rd.html#timedata'>timeData</a></code>, and <code><a target='_blank' href='rd.html#timediff_eg'>timeDiff.eg</a></code>, that are used to in some of the examples in the documentation.</p>
+</div>
+<div id="citation" class="section level1">
+<h1>Citation</h1>
+<p>Please cite the <code>Smisc</code> package using the following reference:</p>
+<p>Sego LH. 2016. Smisc: Sego Miscellaneous. A collection of functions for statistical computing and data manipulation in R. Pacific Northwest National Laboratory. <a href="https://pnnl.github.io/Smisc" class="uri">https://pnnl.github.io/Smisc</a>.</p>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <div class="col-md-6">
+                <p>&copy; Battelle Memorial Institute, 2016</p>
+              </div>
+      <div class="col-md-6">
+        <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a></p>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+</html>

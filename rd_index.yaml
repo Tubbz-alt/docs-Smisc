@@ -1,0 +1,107 @@
+-
+  section_name: Data ingestion
+  description:
+  topics:
+    - loadObject
+    - dataIn
+-
+  section_name: Operations on dataframes and matrices
+  description:
+  topics:
+    - allMissing
+    - dframeEquiv
+    - qbind
+    - smartRbindMat
+    - select
+    - sortDF
+-
+  section_name: Conversion to and from lists
+  description:
+  topics:
+    - df2list
+    - list2df
+    - sepList
+-
+  section_name: Converting factors
+  description:
+  topics:
+    - factor2character
+    - factor2numeric
+    - as.numericSilent
+-
+  section_name: Filename manipulation
+  description:
+  topics:
+    - getExtension
+    - getPath
+    - stripExtension
+    - stripPath
+    - grabLast
+    - timeStamp
+    - padZero
+-
+  section_name: Programming tools
+  description:
+  topics:
+    - hardCode
+    - more
+    - pvar
+    - selectElements
+    - sourceDir
+    - stopifnotMsg
+    - timeIt
+    - rma
+-
+  section_name: Parallelization
+  description:
+  topics:
+    - parLapplyW
+    - plapply
+    - dfplapply
+    - pddply
+    - doCallParallel
+    - parseJob
+-
+  section_name: Plotting tools
+  description:
+  topics:
+    - openDevice
+    - plotFun
+    - smartTimeAxis
+    - vertErrorBar
+    - interactionPlot
+-
+  section_name: Statistical functions
+  description:
+  topics:
+    - dbb
+    - dkbinom
+    - pcbinom
+    - hpd
+    - umvueLN
+-
+  section_name: Time series
+  description:
+  topics:
+    - formatDT
+    - smartFilter
+    - movAvg2
+    - timeDiff
+    - timeIntegration
+-
+  section_name: Mathematical operations
+  description:
+  topics:
+    - comboList
+    - cumMax
+    - cumsumNA
+    - findDepMat
+    - integ
+    - linearMap
+-
+  section_name: Datasets
+  description:
+  topics:
+    - PowerData
+    - timeData
+    - timeDiff.eg

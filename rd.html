@@ -1,0 +1,5420 @@
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc" />
+
+    <meta name="author" content="Landon Sego" />
+  
+  
+  <title>Smisc</title>
+
+    <script src="assets/jquery-1.11.0/jquery.min.js"></script>
+  <link href="assets/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="assets/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+  <script src="assets/bootstrap-3.3.2/shim/html5shiv.min.js"></script>
+  <script src="assets/bootstrap-3.3.2/shim/respond.min.js"></script>
+  <link href="assets/highlight-8.4/tomorrow.css" rel="stylesheet" />
+  <script src="assets/highlight-8.4/highlight.pack.js"></script>
+  <link href="assets/fontawesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script src="assets/stickykit-1.1.1/sticky-kit.min.js"></script>
+  <script src="assets/jqueryeasing-1.3/jquery.easing.min.js"></script>
+  <link href="assets/packagedocs-0.0.1/pd.css" rel="stylesheet" />
+  <script src="assets/packagedocs-0.0.1/pd.js"></script>
+  <script src="assets/packagedocs-0.0.1/pd-collapse-toc.js"></script>
+  
+  
+  
+    <style type="text/css">
+  .section h1 {
+    margin-top: 50px;
+    margin-bottom: 70px;
+    text-align: center;
+    border-bottom: 0px;
+    font-size: 35px;
+    font-weight: 400;
+    font-family: "PT Mono","Georgia",Arial,sans-serif;
+  }
+
+  .section h2 {
+    margin-left: -10px !important;
+    border-bottom: 3px solid #5d9fea;
+  }
+
+  </style>
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+
+  
+  <header class="navbar navbar-white navbar-fixed-top" role="banner" id="header">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+                <span class="navbar-brand">
+<a href="http://pnnl.github.io"> <img src='figures/icon.png' alt='PNNL icon' width='30px' height='30px' style='margin-top: -3px;'> </a>
+        </span>
+                <a href="index.html" class="navbar-brand page-scroll">
+        Smisc - Package Reference
+        </a>
+      </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav nav-pills pull-right">
+<li>
+<a href='index.html'>Docs</a>
+</li>
+<li class="active">
+<a href='rd.html'>Package Ref</a>
+</li>
+<li>
+<a href='https://github.com/pnnl/Smisc'>Github <i class='fa fa-github'></i></a>
+</li>
+        </ul>
+      </nav>
+          </div>
+  </header>
+
+  <!-- Begin Body -->
+  <div class="container">
+    <div class="row">
+            <div class="col-md-3" id="sidebar-col">
+        <div id="toc">
+          <ul>
+          <li><a href="#data-ingestion">Data ingestion</a><ul>
+          <li><a href="#loadobject">loadObject</a></li>
+          <li><a href="#datain">dataIn</a></li>
+          </ul></li>
+          <li><a href="#operations-on-dataframes-and-matrices">Operations on dataframes and matrices</a><ul>
+          <li><a href="#allmissing">allMissing</a></li>
+          <li><a href="#dframeequiv">dframeEquiv</a></li>
+          <li><a href="#qbind">qbind</a></li>
+          <li><a href="#smartrbindmat">smartRbindMat</a></li>
+          <li><a href="#select">select</a></li>
+          <li><a href="#sortdf">sortDF</a></li>
+          </ul></li>
+          <li><a href="#conversion-to-and-from-lists">Conversion to and from lists</a><ul>
+          <li><a href="#df2list">df2list</a></li>
+          <li><a href="#list2df">list2df</a></li>
+          <li><a href="#seplist">sepList</a></li>
+          </ul></li>
+          <li><a href="#converting-factors">Converting factors</a><ul>
+          <li><a href="#factor2character">factor2character</a></li>
+          <li><a href="#factor2numeric">factor2numeric</a></li>
+          <li><a href="#as.numericsilent">as.numericSilent</a></li>
+          </ul></li>
+          <li><a href="#filename-manipulation">Filename manipulation</a><ul>
+          <li><a href="#getextension">getExtension</a></li>
+          <li><a href="#getpath">getPath</a></li>
+          <li><a href="#stripextension">stripExtension</a></li>
+          <li><a href="#strippath">stripPath</a></li>
+          <li><a href="#grablast">grabLast</a></li>
+          <li><a href="#timestamp">timeStamp</a></li>
+          <li><a href="#padzero">padZero</a></li>
+          </ul></li>
+          <li><a href="#programming-tools">Programming tools</a><ul>
+          <li><a href="#hardcode">hardCode</a></li>
+          <li><a href="#more">more</a></li>
+          <li><a href="#pvar">pvar</a></li>
+          <li><a href="#selectelements">selectElements</a></li>
+          <li><a href="#sourcedir">sourceDir</a></li>
+          <li><a href="#stopifnotmsg">stopifnotMsg</a></li>
+          <li><a href="#timeit">timeIt</a></li>
+          <li><a href="#rma">rma</a></li>
+          </ul></li>
+          <li><a href="#parallelization">Parallelization</a><ul>
+          <li><a href="#parlapplyw">parLapplyW</a></li>
+          <li><a href="#plapply">plapply</a></li>
+          <li><a href="#dfplapply">dfplapply</a></li>
+          <li><a href="#pddply">pddply</a></li>
+          <li><a href="#docallparallel">doCallParallel</a></li>
+          <li><a href="#parsejob">parseJob</a></li>
+          </ul></li>
+          <li><a href="#plotting-tools">Plotting tools</a><ul>
+          <li><a href="#opendevice">openDevice</a></li>
+          <li><a href="#plotfun">plotFun</a></li>
+          <li><a href="#smarttimeaxis">smartTimeAxis</a></li>
+          <li><a href="#verterrorbar">vertErrorBar</a></li>
+          <li><a href="#interactionplot">interactionPlot</a></li>
+          </ul></li>
+          <li><a href="#statistical-functions">Statistical functions</a><ul>
+          <li><a href="#dbb">dbb, pbb, qbb, rbb</a></li>
+          <li><a href="#dkbinom">dkbinom, pkbinom</a></li>
+          <li><a href="#pcbinom">pcbinom</a></li>
+          <li><a href="#hpd">hpd</a></li>
+          <li><a href="#umvueln">umvueLN</a></li>
+          </ul></li>
+          <li><a href="#time-series">Time series</a><ul>
+          <li><a href="#formatdt">formatDT</a></li>
+          <li><a href="#smartfilter">smartFilter</a></li>
+          <li><a href="#movavg2">movAvg2</a></li>
+          <li><a href="#timediff">timeDiff</a></li>
+          <li><a href="#timeintegration">timeIntegration</a></li>
+          </ul></li>
+          <li><a href="#mathematical-operations">Mathematical operations</a><ul>
+          <li><a href="#combolist">comboList</a></li>
+          <li><a href="#cummax">cumMax</a></li>
+          <li><a href="#cumsumna">cumsumNA</a></li>
+          <li><a href="#finddepmat">findDepMat</a></li>
+          <li><a href="#integ">integ</a></li>
+          <li><a href="#linearmap">linearMap</a></li>
+          </ul></li>
+          <li><a href="#datasets">Datasets</a><ul>
+          <li><a href="#powerdata">PowerData</a></li>
+          <li><a href="#timedata">timeData</a></li>
+          <li><a href="#timediff.eg">timeDiff.eg</a></li>
+          </ul></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9" id="content-col">
+      
+<div id="content-top"></div>
+<h1>
+Sego Miscellaneous
+</h1>
+<p>
+<strong>Author:</strong> Landon Sego
+</p>
+<p>
+<strong>Version:</strong> 0.3.0
+</p>
+<p>
+<strong>License:</strong> file LICENSE
+</p>
+<h4>
+Description
+</h4>
+<p>
+Sego Miscellaneous: A collection of functions for statistical computing and data manipulation in R.
+</p>
+<h4>
+Depends
+</h4>
+<p>
+(none)
+</p>
+<h4>
+Imports
+</h4>
+<p>
+parallel, utils, plyr, doParallel
+</p>
+<h4>
+Suggests
+</h4>
+<p>
+testthat, foreach
+</p>
+<h4>
+Enhances
+</h4>
+<p>
+(none)
+</p>
+<div id="data-ingestion" class="section level1">
+<h1>Data ingestion</h1>
+<div id="loadobject" class="section level2">
+<h2>loadObject</h2>
+<h3>
+Loads and returns the object(s) in one or more “.Rdata” files
+</h3>
+<p class="rd-p">
+Loads and returns the object(s) in the “.Rdata” file. This is useful for naming the object(s) in the “.Rdata” file something other than the name it was saved as.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>loadObject(RdataFiles)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+RdataFiles
+</dt>
+<dd class="rd-dd">
+A character vector containing the .Rdata filenames
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The object(s) contained in <code>RdataFiles</code>, organized into lists and named as required to distinguish them completely. See Examples.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Create some filenames we'll use in this example
+fileName1 <- "demo_load_object_1.Rdata"
+fileName2 <- "demo_load_object_2.Rdata"
+
+# Make an example object
+x <- data.frame(a = 1:10, b = rnorm(10))
+
+# Save and reload the file
+save(x, file = fileName1)
+rm(x)
+y <- loadObject(fileName1)
+
+# Note how 'x' is not in the global environment
+ls()
+
+# This is the object that was in 'fileName'
+print(y)
+
+# Here's an example with two objects saved in a single file
+a <- rnorm(10)
+b <- rnorm(20)
+save(a, b, file = fileName2)
+
+# Load the results and show them
+z <- loadObject(fileName2)
+print(z)
+
+# And here's an example with more than one file
+both <- loadObject(c(fileName1, fileName2))
+both
+
+# Delete the files
+unlink(c(fileName1, fileName2))</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="datain" class="section level2">
+<h2>dataIn</h2>
+<h3>
+A flexible way to import data into R.
+</h3>
+<p class="rd-p">
+Imports .Rdata, .csv, package data sets, and regular data frames This is expecially useful when a function requires data as an argument–and in some cases the data frame already exists as an object, ready to be passed into the function, but in other cases it may be more convenient to read the data from a file.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>dataIn(data)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+Can be a data frame or a list of data frames (in which case, the same data frame or list is simply returned), or one of the following types of single text strings: (1) the name of a .csv file, (2) the name of a .Rdata file, or (3) a data set in a particular package, using the syntax “packageName::dataSetName”.
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A data frame (or list of data frames) containing the requested data.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Write a simple data set
+some.data <-data.frame(a=rnorm(10), b=rpois(10, 5))
+write.csv(some.data, file="tmp.file.csv", row.names=FALSE)
+save(some.data, file="tmp.file.Rdata")
+
+A <- dataIn("tmp.file.csv")
+B <- dataIn("tmp.file.Rdata")
+C <- dataIn(some.data)
+
+# We expect these to be equivalent (this should be TRUE)
+all(c(dframeEquiv(A, B, verbose=FALSE)$equiv,
+      dframeEquiv(B, C, verbose=FALSE)$equiv,
+      dframeEquiv(A, C, verbose=FALSE)$equiv))
+
+# Delete the files
+unlink(c("tmp.file.csv", "tmp.file.Rdata"))
+
+# Loading data from a package
+more.data <- dataIn("datasets::AirPassengers")
+print(more.data)
+
+# remove example objects
+rm(A, B, C, more.data, some.data)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/utils/data>data</a></code>,<code><a href=#loadobject>loadObject</a></code>,<code><a href=http://www.inside-r.org/r-doc/utils/read.table>read.csv</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="operations-on-dataframes-and-matrices" class="section level1">
+<h1>Operations on dataframes and matrices</h1>
+<div id="allmissing" class="section level2">
+<h2>allMissing</h2>
+<h3>
+Identifies missing rows or columns in a data frame or matrix
+</h3>
+<p class="rd-p">
+Indicates which rows or columns in a data frame or matrix are completely missing (all values are NA’s).
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>allMissing(dframe, byRow = TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+dframe
+</dt>
+<dd class="rd-dd">
+A data frame or a matrix
+</dd>
+<dt>
+byRow
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> will identify rows that have all missing values. <code>= FALSE</code> identifies entire missing columns
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A logical vector that is true if all the elements in the corresponding row (or column) are NAs.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Start off with a simple data frame that has a few missing values
+d1 <- data.frame(x=c(3,4,NA,1,10,NA), y=c(NA,"b","c","d","e",NA))
+d1
+
+# Identify rows were the entire row is missing
+allMissing(d1)
+
+# Only removes rows where all the values are missing
+d1[!allMissing(d1),]
+
+# All missing can also be used to identify if any of the
+# columns are 'all missing'
+d2 <- data.frame(x=c(rnorm(3), NA, rnorm(6)), y=rep(NA,10), z=letters[1:10])
+d2
+
+# Look for columns that are all missing
+allMissing(d2, byRow=FALSE)
+
+# Remove columns where all the values are missing
+d2[,!allMissing(d2, byRow = FALSE)]</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/stats/complete.cases>complete.cases</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="dframeequiv" class="section level2">
+<h2>dframeEquiv</h2>
+<h3>
+Examines the equivalence of two dataframes or matrices
+</h3>
+<p class="rd-p">
+Checks whether two data objects (data frames and/or matrices) are equivalent and returns a descriptive message describing the result.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>dframeEquiv(d1, d2, maxAbsError = 1e-12, maxRelError = 1e-14,
+  verbose = TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+d1
+</dt>
+<dd class="rd-dd">
+The first dataframe or matrix
+</dd>
+<dt>
+d2
+</dt>
+<dd class="rd-dd">
+The dataframe or matrix that will be compared to <code>d1</code>
+</dd>
+<dt>
+maxAbsError
+</dt>
+<dd class="rd-dd">
+Numeric values whose absolute difference is less than <code>maxAbsError</code> will be declared equivalent
+</dd>
+<dt>
+maxRelError
+</dt>
+<dd class="rd-dd">
+Numeric values whose relative difference is within <code>maxRelError</code> will be declared equivalent
+</dd>
+<dt>
+verbose
+</dt>
+<dd class="rd-dd">
+<code>=TRUE</code> prints the result of the comparison
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+<code>d1</code> and <code>d2</code> do not both have to be of the same mode; i.e. <code>d1</code> could be a dataframe and <code>d2</code> could be a matrix. If the number of rows or the number of columns differ, then no further comparisons are made. If the colnames or rownames differ, then those differences are noted and comparison continues. If two corresponding elements are both <code>NA</code>, then they are considered equivalent. Likewise, <code>Inf</code> is considered equivalent to <code>Inf</code> and <code>-Inf</code> is considered equivalent to <code>-Inf</code>. Factors in dataframes are converted to character strings prior to comparison. Comparisons are made one column at a time.
+</p>
+<p class="rd-p">
+If a particular column from both objects are numeric, then for two corresponding values, say, <code>a</code> and <code>b</code>, equivalence is declared if one or more of the following occurs: 1) <code>a == b</code>, 2) <code>abs(a - b) &lt; maxAbsError</code>, 3) <code>abs((a - b) / b) &lt; maxRelError</code> if <code>abs(b) &gt; abs(a)</code>, or <code>abs((a - b) / a) &lt; maxRelError</code> if <code>abs(b) &gt;= abs(a)</code>.
+</p>
+<p class="rd-p">
+If both columns are not numeric, they are coerced (if need be) to character and then compared directly.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Invisibly returns a list with the following components. (If the matrices do not have the same dimensions or the same colnames and rownames, then <code>frac.equiv</code>, <code>loc.equiv</code>, and <code>equiv.matrix</code> are all <code>NULL</code>).
+<dt>
+equiv
+</dt>
+<dd>
+<code>=TRUE</code> if <code>d1</code> is equivalent to <code>d2</code>
+</dd>
+<dt>
+msg
+</dt>
+<dd>
+Messages that describe the comparison. (These are printed when <code>verbose=TRUE</code>.)
+</dd>
+<dt>
+frac.equiv
+</dt>
+<dd>
+The fraction of matrix elements that are equivalent
+</dd>
+<dt>
+loc.inequiv
+</dt>
+<dd>
+A data frame indicating the row and column coordinate locations of the elements that are not equivalent
+</dd>
+<dt>
+eqiv.matrix
+</dt>
+<dd>
+A boolean matrix with the same dimension as <code>d1</code> and <code>d2</code>, indicating the equivalent elements
+</dd>
+</p>
+<p class="rd-p">
+</dl>
+</p>
+<h4>
+References
+</h4>
+<p class="rd-p">
+<a href = http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm>http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm</a>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Number of rows different
+dframeEquiv(matrix(rnorm(20), nrow = 4),
+            matrix(rnorm(25), nrow = 5))
+
+# Number of columns different
+dframeEquiv(matrix(rnorm(16), nrow = 4),
+            matrix(rnorm(20), nrow = 4))
+
+# Rownames differ
+dframeEquiv(matrix(rnorm(9), nrow = 3, dimnames = list(1:3, NULL)),
+            matrix(rnorm(9), nrow = 3, dimnames = list(letters[1:3], NULL)))
+
+# Colnames differ
+dframeEquiv(matrix(rnorm(9), nrow = 3, dimnames = list(NULL, 1:3)),
+            matrix(rnorm(9), nrow = 3, dimnames = list(NULL, letters[1:3])))
+
+# Not equivalent
+x <- data.frame(x = factor(c(1,1,2,2,3,3)), y = rnorm(6))
+y <- data.frame(x = factor(c(1,2,2,2,3,3)), y = c(x$y[-6],rnorm(1)))
+dframeEquiv(x, y)
+
+# Look at discrepancies
+out <- dframeEquiv(x, y)
+out
+
+# Equivalent
+x <- data.frame(x = letters[1:6], y = 0:5)
+y <- x
+dframeEquiv(x, y)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/base/all.equal>all.equal</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/identical>identical</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="qbind" class="section level2">
+<h2>qbind</h2>
+<h3>
+Quickly row and column bind many objects together at once
+</h3>
+<p class="rd-p">
+A wrapper for <code><a href='http://www.inside-r.org/r-doc/base/cbind'>rbind</a></code> and <code><a href='http://www.inside-r.org/r-doc/base/cbind'>cbind</a></code> to quickly bind numerous objects together at once using a single call to <code><a href='http://www.inside-r.org/r-doc/base/cbind'>rbind</a></code> or <code><a href='http://www.inside-r.org/r-doc/base/cbind'>cbind</a></code>. This function is most helpful when there are many objects to bind and the object names are easily represented in text.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>qbind(objects, type = c("row", "col", "c"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+objects
+</dt>
+<dd class="rd-dd">
+A character vector with the names of the objects to be bound together
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+The type of binding, “row” for <code><a href=http://www.inside-r.org/r-doc/base/cbind>rbind</a></code> or “col” for <code><a href=http://www.inside-r.org/r-doc/base/cbind>cbind</a></code>, and “c” for concatenating using <code><a href=http://www.inside-r.org/r-doc/base/c>c</a></code>. Defaults to “row”.
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The bound object
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Row binding
+a1 <- data.frame(a = 1:3, b = rnorm(3), c = runif(3))
+a2 <- data.frame(a = 4:6, b = rnorm(3), c = runif(3))
+a3 <- data.frame(a = 7:9, b = rnorm(3), c = runif(3))
+
+qbind(paste("a", 1:3, sep = ""))
+
+# Column binding
+b1 <- matrix(1:9, nrow = 3, dimnames = list(1:3, letters[1:3]))
+b2 <- matrix(10:18, nrow = 3, dimnames = list(4:6, letters[4:6]))
+b3 <- matrix(19:27, nrow = 3, dimnames = list(7:9, letters[7:9]))
+
+qbind(paste("b", 1:3, sep = ""), type = "col")
+
+# Concatenating a vector
+a1 <- c(x = 1, y = 2)
+a2 <- c(z = 3, w = 4)
+
+qbind(c("a1", "a2"), type = "c")</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="smartrbindmat" class="section level2">
+<h2>smartRbindMat</h2>
+<h3>
+Row bind matrices whose column names may not be the same
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>smartRbindMat(..., distinguish = FALSE, filler = NA)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+distinguish
+</dt>
+<dd class="rd-dd">
+if <code>TRUE</code>, then rownames of the returned matrix are assigned a name consisting of the source object name as a prefix, followed by the row name, separated by a “:”. Otherwise, the original rownames are used.
+</dd>
+<dt>
+filler
+</dt>
+<dd class="rd-dd">
+The character to insert into the final matrix for those empty elements which occur when not all the matrices have the same column names.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+matrix objects (separated by commas), a list of matrices, or a character vector containing the names of matrix objects
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Produces a matrix with a union of the column names. Empty elements resulting from different column names are set to the value of <code>filler</code>.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>x <- matrix(rnorm(6), ncol = 2, dimnames = list(letters[1:3],letters[4:5]))
+y <- matrix(rnorm(6), ncol = 3, dimnames = list(letters[7:8],letters[4:6]))
+z <- matrix(rnorm(2), nrow = 1, dimnames = list("c",letters[3:4]))
+
+x
+y
+z
+
+smartRbindMat(x,y,z)
+smartRbindMat(list(x, y, z), distinguish = TRUE)
+smartRbindMat(y,z,x, distinguish = TRUE)
+smartRbindMat(c("y","x","z"), filler = -20, distinguish = TRUE)
+
+w1 <- matrix(sample(letters[1:26], 6), ncol = 2,
+             dimnames = list(c("3", "", "4"), c("w", "v")))
+x1 <- matrix(sample(letters[1:26], 6), ncol = 2,
+             dimnames = list(NULL, letters[4:5]))
+y1 <- matrix(sample(letters[1:26], 6), ncol = 3,
+             dimnames = list(NULL, letters[4:6]))
+z1 <- matrix(sample(letters[1:26], 2), nrow = 1,
+             dimnames = list(NULL, letters[3:4]))
+
+w1
+x1
+y1
+z1
+
+smartRbindMat(w1,x1,y1,z1)
+smartRbindMat(list(w1 = w1, x1 = x1, y1 = y1, z1 = z1), distinguish = TRUE)
+
+smartRbindMat(w1,x1,y,z1,z)
+smartRbindMat(w1,x1,y,z1,z, distinguish = TRUE)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/base/cbind>rbind</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="select" class="section level2">
+<h2>select</h2>
+<h3>
+Select rows or columns from data frames or matrices
+</h3>
+<p class="rd-p">
+Select rows or columns from data frames or matrices while always returning a data frame or a matrix
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>select(data, selection, cols = TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+A matrix or dataframe from whence data will be selected
+</dd>
+<dt>
+selection
+</dt>
+<dd class="rd-dd">
+A character vector with column (or row) names, or, a numeric vector with column (or row) indexes.
+</dd>
+<dt>
+cols
+</dt>
+<dd class="rd-dd">
+A logical, that when <code>TRUE</code>, indicates that columns will be selected. If <code>FALSE</code>, rows will be selected.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+The primary contribution of this function is that if a single row or column is selected, the object that is returned will be a matrix or a dataframe—and it will not be collapsed into a single vector, as is the usual behavior in R.
+</p>
+<p class="rd-p">
+Selecting no rows or no columns is possible if <code>selection = 0</code> or if <code>length(selection) == 0</code>. In this case, a data frame or matrix with either 0 columns or 0 rows is returned.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The matrix or data frame is returned with the selected columns or rows.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Consider this data frame
+d <- data.frame(a = 1:5, b = rnorm(5), c = letters[1:5], d = factor(6:10),
+                row.names = LETTERS[1:5], stringsAsFactors = FALSE)
+
+# We get identical behavior when selecting more than one column
+d1 <- d[, c("d", "c")]
+d1c <- select(d, c("d", "c"))
+d1
+d1c
+identical(d1, d1c)
+
+# Different behavior when selecting a single column
+d[,"a"]
+select(d, "a")
+
+# We can also select using numeric indexes
+select(d, 1)
+
+# Selecting a single row from a data frame produces results identical to default R behavior
+d2 <- d[2,]
+d2c <- select(d, "B", cols = FALSE)
+identical(d2, d2c)
+
+# Now consider a matrix
+m <- matrix(rnorm(20), nrow = 4, dimnames = list(LETTERS[1:4], letters[1:5]))
+
+# Column selection with two or more or more columns is equivalent to default R behavior
+m1 <- m[,c(4, 3)]
+m1c <- select(m, c("d", "c"))
+m1
+m1c
+identical(m1, m1c)
+
+# Selecting a single column returns a matrix of 1 column instead of a vector
+m[,2]
+select(m, 2)
+
+# Selecting a single row returns a matrix of 1 row instead of a vector
+m2 <- m["C",]
+m2c <- select(m, "C", cols = FALSE)
+m2
+m2c
+is.matrix(m2)
+is.matrix(m2c)
+
+# Selecting no rows or no columns occurs if 0 or an object of length 0
+# is passed to 'selection'
+select(d, 0)
+select(d, which("bizarre" %in% colnames(d)))
+select(d, 0, cols = FALSE)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="sortdf" class="section level2">
+<h2>sortDF</h2>
+<h3>
+Sort a dataframe
+</h3>
+<p class="rd-p">
+Sort a dataframe by one or more ascending or descening variables
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>sortDF(form, dat)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+form
+</dt>
+<dd class="rd-dd">
+A formula with the variable names to use for sorting
+</dd>
+<dt>
+dat
+</dt>
+<dd class="rd-dd">
+The dataframe to sort
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+The order of the arguments <code>form</code> and <code>dat</code> is interchangeable. In the formula, use + for ascending, - for decending. Sorting is left to right in the formula. For example, to sort the dataframe <code>Oats</code> with sorting variables <code>Block</code> and <code>Variety</code>, useage is either of the following: <code>sortDF(~ Block - Variety, Oats)</code> or <code>sortDF(Oats, ~ - Variety + Block)</code>
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The sorted dataframe
+</dl>
+</p>
+<h4>
+References
+</h4>
+<p class="rd-p">
+<a href = https://stat.ethz.ch/pipermail/r-help/2004-September/057954.html>https://stat.ethz.ch/pipermail/r-help/2004-September/057954.html</a>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>d <- data.frame(b = factor(c("Hi","Med","Hi","Low"), levels = c("Low","Med","Hi"), 
+                           ordered = TRUE),
+                x = c("A", "D", "A", "C"),
+                y = c(8, 3, 9, 9),
+                z = c(1, 1, 1, 2))
+
+# Sort by descending z, descending b
+sortDF(~ -z - b, d)
+
+# Sort by ascending x, ascending y, and ascending z
+sortDF(~x + y + z, d)
+
+# Sort by descending x, ascending y, ascending z
+sortDF(~ -x + y + z, d)
+
+# Sort by ascending x, descending y, ascending z
+sortDF(d, ~x - y + z) </code></pre>
+<h4>
+Author
+</h4>
+<p>Kevin Wright with ideas from Any Liaw and small edits by Landon Sego</p>
+</div>
+</div>
+<div id="conversion-to-and-from-lists" class="section level1">
+<h1>Conversion to and from lists</h1>
+<div id="df2list" class="section level2">
+<h2>df2list</h2>
+<h3>
+Row-wise conversion of a data frame to a list
+</h3>
+<p class="rd-p">
+Convert a data frame to a list, where each element of the output list consists of a named list (or a named vector) containing a single row of the data frame.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>df2list(df, out.type = c("list", "data.frame", "vector"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+df
+</dt>
+<dd class="rd-dd">
+A data frame
+</dd>
+<dt>
+out.type
+</dt>
+<dd class="rd-dd">
+Character string uniquely identifying list, data.frame, or vector. If list, then each row of the data frame is output as a list. If data.frame, then each row of the data frame is output as a 1-row data frame. If vector, then each row of the data frame is output as a named vector. However, for vector, each column of the data set must be the same type. Defaults to list.
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A list where each element consists of a named list, single-row data frame, or a named vector, containing a single row of the original data frame.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>d <- data.frame(a = 1:3, b = letters[1:3])
+df2list(d)
+
+d1 <- data.frame(a = 1:3, b = 7:9)
+df2list(d1, out.type = "v")</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=#list2df>list2df</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/list>as.list</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="list2df" class="section level2">
+<h2>list2df</h2>
+<h3>
+Convert a list to a data frame
+</h3>
+<p class="rd-p">
+Convert a list of vectors (or data frames) with same numbered lengths (or number of columns) into a data frame.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>list2df(vList, col.names = NULL, row.names = NULL, convert.numeric = TRUE,
+  strings.as.factors = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+vList
+</dt>
+<dd class="rd-dd">
+List of vectors, data frames, or lists. See Details.
+</dd>
+<dt>
+col.names
+</dt>
+<dd class="rd-dd">
+Optional character vector of length <code>n</code> with column names that will be given to the output data frame. If <code>col.names = NULL</code>, column names are extracted if possible from the column names (or names) of the data frames (or vectors).
+</dd>
+<dt>
+row.names
+</dt>
+<dd class="rd-dd">
+Optional character vector with length equivalent to the length of <code>vList</code> containing the row names of the output data frame. If <code>row.names = NULL</code>, row names from the data frames (or names of the <code>vList</code> elements) if possible.
+</dd>
+<dt>
+convert.numeric
+</dt>
+<dd class="rd-dd">
+If <code>vList</code> is list of vectors, <code>= TRUE</code> attempts to convert each column to numeric if possible using <code><a href=#as.numericsilent>as.numericSilent</a></code>
+</dd>
+<dt>
+strings.as.factors
+</dt>
+<dd class="rd-dd">
+If <code>vList</code> is a list of vectors or lists, <code>= FALSE</code> converts factors into characters using <code><a href=#factor2character>factor2character</a></code>.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+If the elements of <code>vList</code> are vectors, each vector must have the same length, <code>n</code>, and the resulting data frame will have <code>n</code> columns. If the elements of <code>vList</code> are data frames, each data frame must have the same structure (though they may have differing numbers of rows). If the elements of <code>vList</code> are lists, each list is first converted to a data frame via <code><a href=http://www.inside-r.org/r-doc/base/as.data.frame>as.data.frame</a></code> and the resulting data frames must have the same structure (though they may have differing numbers of rows).
+</p>
+<p class="rd-p">
+It is permissible for <code>vList</code> to contain <code>NULL</code> elements. <code>list2df</code> performs numerous consistency checks to ensure that contents of <code>vList</code> which are combined into the resulting data frame are conformable, labeled consistently, of the equivalent class when necessary, etc.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+If <code>vList</code> is list of data frames, a data frame resulting from efficiently row binding the data frames in <code>vList</code> is returned. If <code>vList</code> is a list of vectors, a data frame is returned where the first column contains the first elements of the list vectors, the second column contains the second elements of the list vectors, etc.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># For a list of vectors
+x <- c("r1c1 1", "r2c1 2", "r3c1 3", "r4c4 4")
+y <- strsplit(x, "\ ")
+y
+list2df(y)
+list2df(y, col.names = LETTERS[1:2])
+
+# Here's another list of vectors
+z <- list(NULL, a = c(first = 10, second = 12), NULL, b = c(first = 15, second = 17))
+z
+list2df(z)
+
+# For a list of data frames
+z <- list(d1 = data.frame(a = 1:4, b = letters[1:4]),
+          d2 = data.frame(a = 5:6, b = letters[5:6]))
+z
+list2df(z)
+
+# A list of lists
+z <- list(list(a = 10, b = TRUE, c = "hi"), list(a = 12, b = FALSE, c = c("there", "bye")))
+z
+list2df(z)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="seplist" class="section level2">
+<h2>sepList</h2>
+<h3>
+Separate a list into distinct objects
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>sepList(X, envir = parent.frame(), objNames = names(X), verbose = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+X
+</dt>
+<dd class="rd-dd">
+a list to be separated
+</dd>
+<dt>
+envir
+</dt>
+<dd class="rd-dd">
+The environment where the objects in the list are assigned, defaults to <code>parent.frame()</code>, the environment where <code>sepList</code> was called.
+</dd>
+<dt>
+objNames
+</dt>
+<dd class="rd-dd">
+Character vector indicating the names of the objects that will be created. The length of <code>names</code> must match the length of the list, <code>X</code>.
+</dd>
+<dt>
+verbose
+</dt>
+<dd class="rd-dd">
+Logical indicating whether to print the names of the objects that have been created by splitting the list
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+The names of the objects are determined by the names in the list. If names in the list are not present, the objects are named o1, o2, o3, etc.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Invisibly returns a character vector of the names of the objects that were created, and assigns the objects to the environment specified by <code>envir</code>
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Simplest way to use sepList()
+aList <- list(a = 1:10,  b = letters[1:5], d = TRUE)
+sepList(aList)
+ls()
+a
+b
+d
+
+# Keeping the object names, and listing them via "verbose"
+objs <- sepList(list(1:5, c("bits", "bytes"), c(TRUE, FALSE)), verbose = TRUE)
+objs
+o1
+o2
+o3
+
+# Note that it doesn't recurse into sublists, only the top level object
+# a and b are created
+sepList(list(a = 1:2, b = list(b1 = 5, b2 = FALSE)), verbose = TRUE)
+
+# Separate the original list inside a function, notice where the objects are written
+sepTest <- function(x) {
+
+ # Keep objects inside the local environment
+ cat("Objects in the local environment before separating the list:\n")
+ print(ls())
+
+ sepList(x)
+
+ cat("Objects in the local environment after separating the list:\n")
+ print(ls())
+
+ # Place objects in the global environment instead
+ cat("Objects in the global environment before separating the list:\n")
+ print(ls(.GlobalEnv))
+
+ sepList(x, envir = .GlobalEnv)
+
+ cat("Objects in the local environment after separating the list:\n")
+ print(ls(.GlobalEnv))
+
+
+} # sepTest
+
+sepTest(list(z1 = 10, z2 = "that"))
+
+# Clean up example objects
+rm(aList, a, b, d, objs, o1, o2, o3, sepTest, z1, z2)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="converting-factors" class="section level1">
+<h1>Converting factors</h1>
+<div id="factor2character" class="section level2">
+<h2>factor2character</h2>
+<h3>
+Converts all factor variables in a dataframe to character variables
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>factor2character(dframe)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+dframe
+</dt>
+<dd class="rd-dd">
+A dataframe
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The same dataframe with the factor variables converted to character variables.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>x <- data.frame(a=factor(c(rep(1,4),rep(2,4),rep(3,4))), y=rnorm(12))
+str(x)
+x <- factor2character(x)
+str(x)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="factor2numeric" class="section level2">
+<h2>factor2numeric</h2>
+<h3>
+A simple function for converting factors to numeric values
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>factor2numeric(x)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+A vector of type <code>factor</code>
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+<code>x</code> converted to a numeric vector
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Define a factor object
+y <- factor(5:7)
+y
+
+# incorrectly convert to numeric
+as.numeric(y)
+
+# correctly convert
+factor2numeric(y)</code></pre>
+</div>
+<div id="as.numericsilent" class="section level2">
+<h2>as.numericSilent</h2>
+<h3>
+Silent wrapper for coercing a vector to numeric
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>as.numericSilent(x)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+vector of any type
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+If <code>as.numeric(x)</code> produces an error or warning, <code>x</code> is returned unchanged. Otherwise, <code>as.numeric(x)</code> is returned.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>as.numericSilent(c("this","that"))
+as.numericSilent(c("2893.9","9423.48"))
+as.numericSilent(c("392.1", "that"))</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/base/numeric>as.numeric</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="filename-manipulation" class="section level1">
+<h1>Filename manipulation</h1>
+<div id="getextension" class="section level2">
+<h2>getExtension</h2>
+<h3>
+Get the extension of a vector of filenames
+</h3>
+<p class="rd-p">
+Get the extension of a vector of filenames, assuming that the extension is the set of characters that follows the last <code>.</code>. A wrapper for <code><a href='grabLast.html'>grabLast</a></code>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>getExtension(vec, split.char = ".")</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+vec
+</dt>
+<dd class="rd-dd">
+Character vector (usually containing filenames)
+</dd>
+<dt>
+split.char
+</dt>
+<dd class="rd-dd">
+A single character used to split the character strings
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>“”</code> is returned.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Character vector of filename extensions
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>getExtension(c(a = "this old file.doc",
+               b = "that young file.rtf",
+               c = "this.good.file.doc",
+               d = "this_bad_file",
+               e = "thisfile.",
+               f = NA,
+               g = "that.this.pdf",
+               h = ".", i = ""))
+
+# An example with 'real' files
+files <- dir(file.path(path.package(package = "Smisc"), "data"), full.names = TRUE)
+print(files)
+getExtension(files)</code></pre>
+<h4>
+See also
+</h4>
+<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>basename</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>dirname</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="getpath" class="section level2">
+<h2>getPath</h2>
+<h3>
+Get the path of a vector of filenames
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>getPath(vec)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+vec
+</dt>
+<dd class="rd-dd">
+Character vector (usually containing filenames)
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>“”</code> is returned.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Character vector with pathnames only, the filename removed
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>getPath(c(a="this.good.path/filename.R", b="nopath.R", c="/", d=NA,
+          e="path1/path2/", ""))
+
+# An example with 'real' files
+files <- dir(file.path(path.package(package = "Smisc"), "data"), full.names = TRUE)
+print(files)
+getPath(files)</code></pre>
+<h4>
+See also
+</h4>
+<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>basename</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>dirname</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="stripextension" class="section level2">
+<h2>stripExtension</h2>
+<h3>
+Remove the extension of a vector of filenames
+</h3>
+<p class="rd-p">
+Remove the extension of a vector of filenames, assuming that the extension is the set of characters that follows the last “.”
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>stripExtension(vec, split.char = ".")</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+vec
+</dt>
+<dd class="rd-dd">
+Character vector (usually containing filenames)
+</dd>
+<dt>
+split.char
+</dt>
+<dd class="rd-dd">
+A single character used to split the character strings
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>“”</code> is returned.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Character vector with the last “.” and the filename extension removed. Alternatively, another split character could be used.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>stripExtension(c("this old file.doc", "that young file.rtf",
+                 "this.good.file.doc", "this_bad_file"))
+
+stripExtension(c("this old file*doc", "that young file*rtf",
+                 "this*good*file*doc", "this_bad_file"), split.char = "*")
+
+
+# Named vectors are not required, but are included here to make the
+# output easier to read.  This example demonstrates a number of
+# pathological cases.
+stripExtension(c(a = NA, b = ".doc", c = "this.pdf", d = "this.file.", e = ".",
+                 f= "noExtension", g = "direc.name/filename.txt", h = ""))
+
+# An example with 'real' files
+files <- dir(file.path(path.package(package = "Smisc"), "data"), full.names = TRUE)
+print(files)
+stripExtension(files)
+stripExtension(stripPath(files))</code></pre>
+<h4>
+See also
+</h4>
+<p>Additional functions for filename manipulations: <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>basename</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>dirname</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="strippath" class="section level2">
+<h2>stripPath</h2>
+<h3>
+Remove the path from a vector of filenames
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>stripPath(vec)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+vec
+</dt>
+<dd class="rd-dd">
+Character vector (usually containing filenames)
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>“”</code> is returned.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Character vector with leading path removed from the filenames
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>stripPath(c(a = "this.good.path/filename.R", b = "nopath.R", c = "/", d = NA,
+            e = "only.paths.1/only.paths.2/", ""))
+
+# An example with 'real' files
+files <- dir(file.path(path.package(package = "Smisc"), "data"), full.names = TRUE)
+print(files)
+stripPath(files)
+stripPath(stripExtension(files))</code></pre>
+<h4>
+See also
+</h4>
+<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>basename</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>dirname</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="grablast" class="section level2">
+<h2>grabLast</h2>
+<h3>
+Get the final set of characters after a single-character delimeter
+</h3>
+<p class="rd-p">
+Get the final set of characters from a vector after a single-character delimeter. This can be useful in filename manipulations, among other things.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>grabLast(vec, split.char)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+vec
+</dt>
+<dd class="rd-dd">
+Character vector (usually containing filenames)
+</dd>
+<dt>
+split.char
+</dt>
+<dd class="rd-dd">
+A single character used to split the character strings
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Character vector of the strings that appear after the last instance of <code>split.char</code>
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>grabLast(c(a="email@nowhere.com", "this.has.no.at.sign", "@",
+             "bad.email@weird.com@", NA, "2at's@email@good.net"), "@")</code></pre>
+<h4>
+See also
+</h4>
+<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>basename</a></code>, <code><a href=http://www.inside-r.org/r-doc/base/basename>dirname</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="timestamp" class="section level2">
+<h2>timeStamp</h2>
+<h3>
+Imbeds the present datetime into a file name
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>timeStamp(description, extension)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+description
+</dt>
+<dd class="rd-dd">
+Character string giving the base name of the file
+</dd>
+<dt>
+extension
+</dt>
+<dd class="rd-dd">
+Character string giving the extension of the file (excluding the period)
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Character string of the form <code>description_YYYY-MM-DD_HHMMSS.extension</code>
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>timeStamp("aFilename", "txt")</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="padzero" class="section level2">
+<h2>padZero</h2>
+<h3>
+Pad a vector of numbers with zeros
+</h3>
+<p class="rd-p">
+Pad a numeric vector with zeros so that each element in the vector either has 1) the same number of characters or 2) the same number of trailing decimal places.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>padZero(vec, num = NULL, side = c("left", "right"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+vec
+</dt>
+<dd class="rd-dd">
+The numeric vector to be padded
+</dd>
+<dt>
+num
+</dt>
+<dd class="rd-dd">
+The number of zeros that will be padded. If <code>NULL</code>, the value is chosen based on the longest string in the vector.
+</dd>
+<dt>
+side
+</dt>
+<dd class="rd-dd">
+The side to which the zeros are added.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+For <code>side = left</code>, <code>num</code> is the number of characters that each element of the padded, output vector should have. If <code>num = NULL</code>, the largest number of characters that appears in the vector is chosen for <code>num</code>.
+</p>
+<p class="rd-p">
+For <code>side = right</code>, <code>num</code> is the number of decimal places to be displayed. If <code>num = NULL</code>, the number of decimals in the element with the largest number of decimal places is used.
+</p>
+<p class="rd-p">
+Note that <code>vec</code> must be numeric when <code>side = right</code>. However, <code>vec</code> may be character when <code>side = left</code>.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Character vector with the leading (or trailing) elements padded with zeros.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Examples with 0's on the left
+padZero(c(1,10,100))
+padZero(c(1,10,100), num = 4)
+
+# Examples with 0's on the right
+padZero(c(1.2, 1.34, 1.399), side = "r")
+padZero(c(1.2, 1.34, 1.399), num = 5, side = "r")</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="programming-tools" class="section level1">
+<h1>Programming tools</h1>
+<div id="hardcode" class="section level2">
+<h2>hardCode</h2>
+<h3>
+Facilitate hard coding constants into R
+</h3>
+<p class="rd-p">
+Hard coding isn’t the best practice, but sometimes it’s useful, especially in one-off scripts for analyses. An typical example would be to select a large number of columns in a dataset by their names. This function facilitate hard coding constants into R by printing the code from a vector that would be needed to create that vector.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>hardCode(x, vname = "x", vert = TRUE, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+A vector (numeric, character, or logical)
+</dd>
+<dt>
+vname
+</dt>
+<dd class="rd-dd">
+A string indicating the name of the vector that will be “created” in the code
+</dd>
+<dt>
+vert
+</dt>
+<dd class="rd-dd">
+A logical indicating whether the vector should be coded vertically (<code>TRUE</code>) or horizontally (<code>FALSE</code>)
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Additional arguments to <code><a href=http://www.inside-r.org/r-doc/base/cat>cat</a></code>
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Prints code (via <code><a href=http://www.inside-r.org/r-doc/base/cat>cat</a></code>) that will create the vector. This code can then be copied into other source code. Returns nothing.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># With characters
+hardCode(letters[1])
+hardCode(letters[1:3], vname = "new")
+hardCode(letters[1], vert = FALSE)
+hardCode(letters[1:3], vert = FALSE, vname = "new")
+
+# With numbers
+hardCode(3:5)
+hardCode(3:5, vert = FALSE, vname = "num")
+
+# With logicals
+hardCode(TRUE)
+hardCode(c(FALSE, TRUE), vert = FALSE)
+hardCode(c(TRUE, FALSE, TRUE), vname = "newLogical")</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="more" class="section level2">
+<h2>more</h2>
+<h3>
+Display the contents of a file to the R terminal
+</h3>
+<p class="rd-p">
+Display the contents of a file to the R terminal, like the <code>more</code> command in Unix
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>more(file, n = -1L, display = c("all", "head", "tail"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+file
+</dt>
+<dd class="rd-dd">
+Text string giving the file name
+</dd>
+<dt>
+n
+</dt>
+<dd class="rd-dd">
+Integer specifying the maximum number of lines to read from the file. This is passed to the <code>n</code> argument of <code><a href=http://www.inside-r.org/r-doc/base/readLines>readLines</a></code>. The default is <code>as.integer(-1)</code>, which will read all the lines in the file.
+</dd>
+<dt>
+display
+</dt>
+<dd class="rd-dd">
+Text string that uniquely identifies one of <code>“all”</code>, <code>“head”</code>, or <code>“tail”</code>. Defaults to <code>“all”</code>, which causes all lines read from the file to be displayed, <code>“head”</code> shows the first 6 lines that were read, and <code>“tail”</code> shows the last 6 lines that were read.
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Returns nothing, but it does display the contents of the file on the R console.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>cat("Here's a file\n", "with a few lines\n",
+    "to read.\n", sep = "", file = "tmpFile.txt")
+more("tmpFile.txt")
+unlink("tmpFile.txt")</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/base/readLines>readLines</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="pvar" class="section level2">
+<h2>pvar</h2>
+<h3>
+Prints the name and value of one or more objects
+</h3>
+<p class="rd-p">
+A convenience function for writing the names and values of objects to the session window (and/or to another object). Especially useful to keep track of variables within loops.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>pvar(..., digits = NULL, abbrev = NULL, sep = ";", verbose = TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+digits
+</dt>
+<dd class="rd-dd">
+Number of digits to display for numeric objects. Defaults to <code>NULL</code>, which corresponds to no restriction on the number of digits. This is passed to the <code>digits</code> argument of <code><a href=http://www.inside-r.org/r-doc/base/Round>round</a></code>.
+</dd>
+<dt>
+abbrev
+</dt>
+<dd class="rd-dd">
+Number of characters to display for character objects. Defaults to <code>NULL</code>, which corresonds to no restriction on the number of characters.
+</dd>
+<dt>
+sep
+</dt>
+<dd class="rd-dd">
+Character string that separates the objects that are printed
+</dd>
+<dt>
+verbose
+</dt>
+<dd class="rd-dd">
+<code>=TRUE</code> writes the value of the object(s) to the session window
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Objects whose names and values are to be printed, separated by commas. Can also be a simple list.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Input objects can be numeric, character, and/or logical. They can also be atomic or vectors. It will accept data frames and matrices without error, but the results wont be easily readable.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Invisibly returns a character string containing the names of the objects and their values
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>x <- 10
+y <- 20.728923
+z <- "This.long.string"
+
+pvar(x,y,z)
+pvar(x,y,z, digits = 2)
+pvar(x,y,z, abbrev = 4)
+pvar(x,y,z, digits = 2, abbrev = 4)
+pvar(x,y,z, sep = ",")
+
+# values can be vectors too
+x <- 10:12
+y <- c("This","That")
+v2 <- pvar(x, y, verbose = FALSE)
+v2
+
+# Or a simple list
+pvar(list(x = 1:2, y = "this", z = TRUE))
+
+# Can be useful for keeping track of iterations in loops
+for (i in 1:3) {
+  for (j in letters[1:2]) {
+    for (k in c("this","that")) {
+      pvar(i, j, k)
+    }
+  }
+}</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="selectelements" class="section level2">
+<h2>selectElements</h2>
+<h3>
+Validate selected elements from a character vector
+</h3>
+<p class="rd-p">
+Validate selected elements from a character vector using a variety of selection mechanisms: logical, names, or numerical indexes
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>selectElements(elements, cVec)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+elements
+</dt>
+<dd class="rd-dd">
+elements to select from <code>cVec</code>. Can be a logical vector, a vector of numeric indexes, or a character vector of element names. Note that logical vectors are not recycled as usual: they must be the same length as <code>cVec</code>. If <code>elements == NULL</code>, <code>NULL</code> is returned.
+</dd>
+<dt>
+cVec
+</dt>
+<dd class="rd-dd">
+A character vector from which to select elements (such as row names or column names)
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+This function is especially useful for selecting rows or columns from data frames, while providing informative error messages if the <code>elements</code> for selection are specified incorrectly.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A character vector with elements that were selected from <code>cVec</code> using <code>elements</code>
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Define some "column names"
+cnames <- letters[1:5]
+cnames
+
+# Select the 1st and 3rd column names using a variety of approaches
+selectElements(c("a", "c"), cnames)
+selectElements(c(1, 3), cnames)
+selectElements(c(TRUE, FALSE, TRUE, FALSE, FALSE), cnames)
+
+# Select the 1st, 3rd, and 1st columns
+selectElements(c("a", "c", "a"), cnames)
+selectElements(c(1, 3, 1), cnames)
+
+# If you don't want to select any of them
+selectElements(NULL, cnames)</code></pre>
+</div>
+<div id="sourcedir" class="section level2">
+<h2>sourceDir</h2>
+<h3>
+Sources all files with ‘.R’ or ‘.r’ extensions in a directory
+</h3>
+<p class="rd-p">
+Sources all files with ‘.R’ or ‘.r’ extensions in a directory using a try-catch for each file
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>sourceDir(directory, recursive = FALSE, tryCatch = TRUE, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+directory
+</dt>
+<dd class="rd-dd">
+Character string indicating the path of the directory containing the R files to be sourced.
+</dd>
+<dt>
+recursive
+</dt>
+<dd class="rd-dd">
+<code>=TRUE</code> descends into subdirectories of <code>directory</code>
+</dd>
+<dt>
+tryCatch
+</dt>
+<dd class="rd-dd">
+if <code>TRUE</code>, sourcing is protected in a try catch, i.e., if there is an error, <code>sourceDir</code> will continue to the next file. If <code>FALSE</code>, <code>sourceDir</code> will stop if a file sources with an error.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Additional arguments to <code><a href=http://www.inside-r.org/r-doc/base/source>source</a></code>
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+In addition to sourcing files for general use, this function is also useful in package development to verify there are no syntax errors prior to building and compliation.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Invisibly returns a character vector containing the files that were identified for sourcing. Also prints a message indicating whether each file was sourced correctly or not.
+</dl>
+</p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="stopifnotmsg" class="section level2">
+<h2>stopifnotMsg</h2>
+<h3>
+Check multiple conditions and return coresponding error messages
+</h3>
+<p class="rd-p">
+A more flexible version of <code><a href='http://www.inside-r.org/r-doc/base/stopifnot'>stopifnot</a></code> that allows you to control the error message returned by each condition that doesn’t test true
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>stopifnotMsg(...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Pairs of logical conditions and error messages. See Examples.
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A call to <code><a href=http://www.inside-r.org/r-doc/base/stop>stop</a></code> with the error messages from each condition that was <code>FALSE</code>. If all conditions are <code>TRUE</code>, returns <code>NULL</code>.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># A simple function
+aFunction <- function(x, a = 10, b = "text") {
+
+  # Check the arguments of the function
+  stopifnotMsg(is.numeric(x),   "'x' must be numeric",
+               is.numeric(a),   "'a' must be numeric",
+               a > 9,           "'a' must be 10 or more",
+               is.character(b), "'b' must be character")
+
+  return(paste(x, a, b, sep = " -- "))
+
+}
+
+# This should run without error
+aFunction(12, a = 13, b = "new")
+
+
+# This should produce an error with 3 messages:
+aFunction("new", a = 7, b = 5)
+
+# And this should produce an error with 1 message:
+aFunction(33, a = "bad")</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="timeit" class="section level2">
+<h2>timeIt</h2>
+<h3>
+Times the execution of an expression.
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>timeIt(expr, units = c("automatic", "seconds", "minutes", "hours", "days"),
+  return.time = FALSE, verbose = TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+expr
+</dt>
+<dd class="rd-dd">
+Any R expression
+</dd>
+<dt>
+units
+</dt>
+<dd class="rd-dd">
+A character expression long enough to uniquely identify one of “automatic”, “seconds”, “minutes”, or “hours”. Defaults to “automatic”.
+</dd>
+<dt>
+return.time
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> returns the elapsed time as one of the elements in a list. See “Value” below.
+</dd>
+<dt>
+verbose
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> prints the elapsed time in the requested units
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+If <code>units = “automatic”</code>, then the units are choosen according to the following rule: If the duration is &lt; 2 min, use seconds. Else if duration &lt; 2 hours, use minutes. Else if &lt; 2 days, use hours. Otherwise, use days.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+If <code>return.time = FALSE</code>, invisibly returns the evaluation of <code>expr</code>. If <code>return.time = TRUE</code>, invisibly returns a list with the following components:
+</p>
+<p class="rd-p">
+<dt>
+out
+</dt>
+<dd>
+The evaluation of <code>expr</code>
+</dd>
+<dt>
+elapsed
+</dt>
+<dd>
+The elapsed time to evaluate <code>expr</code>
+</dd>
+<dt>
+units
+</dt>
+<dd>
+The time units of the elapsed time
+</dd>
+</p>
+<p class="rd-p">
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># We can assign the object within the call to timeIt():
+timeIt(x1 <- rnorm(10^7))
+str(x1)
+
+# We can just run the expression without assigning it to anything
+timeIt(rnorm(10^7), units = "m")
+
+# Or we can assign the result externally
+x2 <- timeIt(rnorm(10^7))
+str(x2)
+
+# To store the elapsed time:
+x3 <- timeIt(rnorm(10^7), verbose = FALSE, return.time = TRUE)
+x3[c("elapsed","units")]</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="rma" class="section level2">
+<h2>rma</h2>
+<h3>
+Remove all objects from the global environment
+</h3>
+<p class="rd-p">
+An alias for <code>rm(list = ls())</code>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>rma()</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="parallelization" class="section level1">
+<h1>Parallelization</h1>
+<div id="parlapplyw" class="section level2">
+<h2>parLapplyW</h2>
+<h3>
+A wrapper for parLapply
+</h3>
+<p class="rd-p">
+A wrapper to make calls to <code><a href='http://www.inside-r.org/r-doc/parallel/clusterApply'>parLapply</a></code> easier by initializing the cluster, exporting objects and expressions to the worker nodes, and shutting down the cluster.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>parLapplyW(X, FUN, ..., njobs = parallel::detectCores() - 1, expr = NULL,
+  varlist = NULL, envir = parent.frame())</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+X
+</dt>
+<dd class="rd-dd">
+A vector (atomic or list)
+</dd>
+<dt>
+FUN
+</dt>
+<dd class="rd-dd">
+A function or character string naming a function whose first argument will be passed the elements of <code>X</code>
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+The number of jobs (cores) to use
+</dd>
+<dt>
+expr
+</dt>
+<dd class="rd-dd">
+An expression that will be evaluated on each worker node via a call to <code><a href=http://www.inside-r.org/r-doc/parallel/clusterApply>clusterEvalQ</a></code>
+</dd>
+<dt>
+varlist
+</dt>
+<dd class="rd-dd">
+Character vector of names of objects to export to each worker node via <code><a href=http://www.inside-r.org/r-doc/parallel/clusterApply>clusterExport</a></code>
+</dd>
+<dt>
+envir
+</dt>
+<dd class="rd-dd">
+The environment containing the variables in <code>varlist</code> that will be exported
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Additional named arguments to <code>FUN</code>
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+The expression in <code>expr</code> is evaluated before the variables in <code>varlist</code> are exported.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The same result given by <code>lapply(X, FUN, …)</code>
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Create a simple list
+a <- list(a = rnorm(10), b = rnorm(20), c = rnorm(15))
+
+# Some objects that will be needed by f1:
+b1 <- rexp(20)
+b2 <- rpois(10, 20)
+
+# The function, which will depend on the Smisc package
+f1 <- function(x, someText = "this.stuff") {
+ textJunk <- stripExtension(someText)
+ result <- mean(x) + max(b1) - min(b2)
+ return(list(textJunk, result))
+}
+
+# Call parLapplyW(), loading the Smisc package and passing in the "b1" and "b2" objects
+res.1 <- parLapplyW(a, f1, someText = "that.stuff", njobs = 2,
+                   expr = expression(library(Smisc)),
+                   varlist = c("b1", "b2"))
+
+print(res.1)
+
+# Call parLapplyW(), note that we're sending a different value for "b2" into the worker nodes
+# via the 'expr' argument
+res.2 <- parLapplyW(a, f1, someText = "that.stuff", njobs = 2,
+                   expr = expression({library(Smisc); b2 <- rnorm(10)}),
+                   varlist = c("b1"))
+
+# These should not be equivalent
+identical(res.1, res.2)
+
+# Call lapply
+res.3 <- lapply(a, f1, someText = "that.stuff")
+
+# Compare results, these should be equivalent
+identical(res.1, res.3)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/base/lapply>lapply</a></code>, <code><a href=http://www.inside-r.org/r-doc/parallel/clusterApply>parLapply</a></code>, <code><a href=#plapply>plapply</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="plapply" class="section level2">
+<h2>plapply</h2>
+<h3>
+Simple parallelization of lapply
+</h3>
+<p class="rd-p">
+Parses a large list into subsets and submits a separate batch R job that calls <code><a href='http://www.inside-r.org/r-doc/base/lapply'>lapply</a></code> on the subset. <code>plapply</code> has some features that may not be readily available in other parallelization functions like <code><a href='http://www.inside-r.org/r-doc/parallel/mclapply'>mclapply</a></code> and <code><a href='http://www.inside-r.org/r-doc/parallel/clusterApply'>parLapply</a></code>:
+<ul>
+<li>
+The <code>.Rout</code> files produced by each R instance are easily accessible for convenient debugging of errors or warnings. The <code>.Rout</code> files can also serve as an explicit record of the work that was performed by the workers
+</li>
+<li>
+Three options are available for the ordering of the processing of the list elements: the original list order, randomized, or collated (first-in-first-out).
+</li>
+<li>
+In each R instance, pre-processing or post-processing steps can be performed before and after the call to <code><a href='http://www.inside-r.org/r-doc/base/lapply'>lapply</a></code>
+</li>
+</ul>
+These pre-processing and post-processing steps can depend on instance of R, such that each instance can be treated differently, if desired. These features give greater control over the computing process, which can be especially useful for large jobs.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>plapply(X, FUN, ..., njobs = parallel::detectCores() - 1, packages = NULL,
+  header.file = NULL, needed.objects = NULL,
+  needed.objects.env = parent.frame(), workDir = "plapply",
+  clobber = TRUE, max.hours = 24, check.interval.sec = 1,
+  collate = FALSE, random.seed = NULL, rout = NULL, clean.up = TRUE,
+  verbose = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+X
+</dt>
+<dd class="rd-dd">
+A list or vector, each element of which will be the input to <code>FUN</code>
+</dd>
+<dt>
+FUN
+</dt>
+<dd class="rd-dd">
+A function whose first argument is an element of <code>X</code>
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+The number of jobs (subsets). Defaults to one less than the number of cores on the machine.
+</dd>
+<dt>
+packages
+</dt>
+<dd class="rd-dd">
+Character vector giving the names of packages that will be loaded in each new instance of R, using <code><a href=http://www.inside-r.org/r-doc/base/library>library</a></code>.
+</dd>
+<dt>
+header.file
+</dt>
+<dd class="rd-dd">
+Text string indicating a file that will be initially sourced prior calling <code><a href=http://www.inside-r.org/r-doc/base/lapply>lapply</a></code> in order to create an environment that will satisfy all potential dependencies for <code>FUN</code>. If <code>NULL</code>, no file is sourced.
+</dd>
+<dt>
+needed.objects
+</dt>
+<dd class="rd-dd">
+Character vector giving the names of objects which reside in the evironment specified by <code>needed.objects.env</code> that may be needed by <code>FUN</code> which are loaded into the global environment of each new instance of R that is launched. If <code>NULL</code>, no additional objects are passed.
+</dd>
+<dt>
+needed.objects.env
+</dt>
+<dd class="rd-dd">
+Environment where <code>needed.objects</code> reside. This defaults to the environment in which <code>plapply</code> is called.
+</dd>
+<dt>
+workDir
+</dt>
+<dd class="rd-dd">
+Character string giving the name of the working directory that will be used for for the files needed to launch the separate instances of R.
+</dd>
+<dt>
+clobber
+</dt>
+<dd class="rd-dd">
+Logical indicating whether the directory designated by <code>workDir</code> will be overwritten if it exists and contains files. If <code>clobber = FALSE</code>, and <code>workDir</code> contains files, <code>plapply</code> throws an error.
+</dd>
+<dt>
+max.hours
+</dt>
+<dd class="rd-dd">
+The maximum number of hours to wait for the <code>njobs</code> to complete.
+</dd>
+<dt>
+check.interval.sec
+</dt>
+<dd class="rd-dd">
+The number of seconds to wait between checking to see whether all <code>njobs</code> have completed.
+</dd>
+<dt>
+collate
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> creates a first-in-first-out processing order of the elements of the input list <code>X</code>. This logical is passed to the <code>collate</code> argument of <code><a href=#parsejob>parseJob</a></code>.
+</dd>
+<dt>
+random.seed
+</dt>
+<dd class="rd-dd">
+An integer setting the random seed, which will result in randomizing the elements of the list assigned to each job. This is useful when the computing time for each element varies significantly because it helps to even out the run times of the parallel jobs. If <code>random.seed = NULL</code>, no randomization is performed and the elements of the input list are subdivided sequentially among the jobs. This variable is passed to the <code>random.seed</code> argument of <code><a href=#parsejob>parseJob</a></code>. If <code>collate = TRUE</code>, no randomization is performed and <code>random.seed</code> is ignored.
+</dd>
+<dt>
+rout
+</dt>
+<dd class="rd-dd">
+A character string giving the name of the file to where all of the <code>.Rout</code> files will be gathered. If <code>rout = NULL</code>, the <code>.Rout</code> files are not gathered, but left alone in <code>workDir</code>.
+</dd>
+<dt>
+clean.up
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> will delete the working directory.
+</dd>
+<dt>
+verbose
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> prints messages which show the progress of the jobs.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Additional named arguments to <code>FUN</code>
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+<code>plapply</code> applies <code>FUN</code> to each element of the list <code>X</code> by parsing the list into <code>njobs</code> lists of equal (or almost equal) size and then applies <code>FUN</code> to each sublist using <code><a href=http://www.inside-r.org/r-doc/base/lapply>lapply</a></code>.
+</p>
+<p class="rd-p">
+A separate batch instance of R is launched for each sublist, thus utilizing another core of the machine. After the jobs complete, the <code>njobs</code> output lists are reassembled. The global environments for each batch instance of R are created by writing/reading data to/from disc.
+</p>
+<p class="rd-p">
+If <code>collate = TRUE</code> or <code>random.seed = Integer value</code>, the output list returned by <code>plapply</code> is reordered to reflect the original ordering of the input list, <code>X</code>.
+</p>
+<p class="rd-p">
+An object called <code>process.id</code> (consisting of an integer indicating the process number) is available in the global environment of each instance of R.
+</p>
+<p class="rd-p">
+Each instance of R runs a script that performs the following steps:
+</p>
+<p class="rd-p">
+<ol>
+<li>
+Any other packages indicated in the <code>packages</code> argument are loaded via calls to <code>library()</code>
+</p>
+<p class="rd-p">
+</li>
+<li>
+The <code>process.id</code> global variable is assigned to the global environment of the R instance (having been passed in via a command line argument)
+</p>
+<p class="rd-p">
+</li>
+<li>
+The header file (if there is one) is sourced
+</p>
+<p class="rd-p">
+</li>
+<li>
+The expression <code>pre.process.expression</code> is evaluated if an object of that name is present in the global environment. The object <code>pre.process.expression</code> may be passed in via the header file or via <code>needed.objects</code>
+</p>
+<p class="rd-p">
+</li>
+<li>
+<code><a href=http://www.inside-r.org/r-doc/base/lapply>lapply</a></code> is called on the sublist, the sublist is called <code>X.i</code>
+</p>
+<p class="rd-p">
+</li>
+<li>
+The expression <code>post.process.expression</code> is evaluated if an object of that name is present in the global environment. The object <code>post.process.expression</code> may be passed in via the header file or via <code>needed.objects</code>
+</p>
+<p class="rd-p">
+</li>
+<li>
+The output returned by <code>lapply</code> is assigned to the object <code>X.i.out</code>, and is saved to a temporary file where it will be collected after all jobs have completed
+</p>
+<p class="rd-p">
+</li>
+<li>
+Warnings are printed
+</li>
+</ol>
+</p>
+<p class="rd-p">
+If <code>njobs = 1</code>, none of the previous steps are executed, only this call is made: <code>lapply(X, FUN, …)</code>
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A list equivalent to that returned by <code>lapply(X, FUN, …)</code>.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Create a simple list
+a <- list(a = rnorm(10), b = rnorm(20), c = rnorm(15), d = rnorm(13),
+          e = rnorm(15), f = rnorm(22))
+
+# Some objects that will be needed by f1:
+b1 <- rexp(20)
+b2 <- rpois(10, 20)
+
+# The function
+f1 <- function(x) mean(x) + max(b1) - min(b2)
+
+# Call plapply
+res1 <- plapply(a, f1, njobs = 2, needed.objects = c("b1", "b2"),
+                check.interval.sec = 0.5, max.hours = 1/120,
+                workDir = "example1", rout = "example1.Rout",
+                clean.up = FALSE)
+
+print(res1)
+
+# Look at the collated 'Rout' file
+more("example1.Rout")
+
+# Look at the contents of the working directory
+dir("example1")
+
+# Remove working directory and Rout file
+unlink("example1", recursive = TRUE, force = TRUE)
+unlink("example1.Rout")
+ 
+# Verify the result with lapply
+res2 <- lapply(a, f1)
+
+# Compare results
+identical(res1, res2)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=#parlapplyw>parLapplyW</a></code>, <code><a href=#dfplapply>dfplapply</a></code>, <code><a href=http://www.inside-r.org/r-doc/parallel/clusterApply>parLapply</a></code>, <code><a href=http://www.inside-r.org/r-doc/parallel/mclapply>mclapply</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="dfplapply" class="section level2">
+<h2>dfplapply</h2>
+<h3>
+Parallelized single row processing of a data frame
+</h3>
+<p class="rd-p">
+Applies a function to each row of a data frame in a parallelized fashion (by submitting multiple batch R jobs). It is a convenient wrapper for <code>plapply</code>, modified especially for parallel, single-row processing of data frames.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>dfplapply(X, FUN, ..., output.df = FALSE, njobs = parallel::detectCores() -
+  1, packages = NULL, header.file = NULL, needed.objects = NULL,
+  needed.objects.env = parent.frame(), workDir = "plapply",
+  clobber = TRUE, max.hours = 24, check.interval.sec = 1,
+  collate = FALSE, random.seed = NULL, rout = NULL, clean.up = TRUE,
+  verbose = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+X
+</dt>
+<dd class="rd-dd">
+The data frame, each row of which will be processed using <code>FUN</code>
+</dd>
+<dt>
+FUN
+</dt>
+<dd class="rd-dd">
+A function whose first argument is a single-row data frame, i.e. a single row of <code>X</code>. The value returned by <code>FUN</code> can be any object
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Additional named arguments to <code>FUN</code>
+</dd>
+<dt>
+output.df
+</dt>
+<dd class="rd-dd">
+logical indicating whether the value returned by <code>dfplapply</code> should be a data frame. If <code>output.df = TRUE</code>, then the value returned by <code>FUN</code> should be a data frame. If <code>output.df = FALSE</code>, a list is returned by <code>dfplapply</code>.
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+The number of jobs (subsets). Defaults to one less than the number of cores on the machine.
+</dd>
+<dt>
+packages
+</dt>
+<dd class="rd-dd">
+Character vector giving the names of packages that will be loaded in each new instance of R, using <code><a href=http://www.inside-r.org/r-doc/base/library>library</a></code>.
+</dd>
+<dt>
+header.file
+</dt>
+<dd class="rd-dd">
+Text string indicating a file that will be initially sourced prior calling <code><a href=http://www.inside-r.org/r-doc/base/lapply>lapply</a></code> in order to create an environment that will satisfy all potential dependencies for <code>FUN</code>. If <code>NULL</code>, no file is sourced.
+</dd>
+<dt>
+needed.objects
+</dt>
+<dd class="rd-dd">
+Character vector giving the names of objects which reside in the evironment specified by <code>needed.objects.env</code> that may be needed by <code>FUN</code> which are loaded into the global environment of each new instance of R that is launched. If <code>NULL</code>, no additional objects are passed.
+</dd>
+<dt>
+needed.objects.env
+</dt>
+<dd class="rd-dd">
+Environment where <code>needed.objects</code> reside. This defaults to the environment in which <code>plapply</code> is called.
+</dd>
+<dt>
+workDir
+</dt>
+<dd class="rd-dd">
+Character string giving the name of the working directory that will be used for for the files needed to launch the separate instances of R.
+</dd>
+<dt>
+clobber
+</dt>
+<dd class="rd-dd">
+Logical indicating whether the directory designated by <code>workDir</code> will be overwritten if it exists and contains files. If <code>clobber = FALSE</code>, and <code>workDir</code> contains files, <code>plapply</code> throws an error.
+</dd>
+<dt>
+max.hours
+</dt>
+<dd class="rd-dd">
+The maximum number of hours to wait for the <code>njobs</code> to complete.
+</dd>
+<dt>
+check.interval.sec
+</dt>
+<dd class="rd-dd">
+The number of seconds to wait between checking to see whether all <code>njobs</code> have completed.
+</dd>
+<dt>
+collate
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> creates a first-in-first-out processing order of the elements of the input list <code>X</code>. This logical is passed to the <code>collate</code> argument of <code><a href=#parsejob>parseJob</a></code>.
+</dd>
+<dt>
+random.seed
+</dt>
+<dd class="rd-dd">
+An integer setting the random seed, which will result in randomizing the elements of the list assigned to each job. This is useful when the computing time for each element varies significantly because it helps to even out the run times of the parallel jobs. If <code>random.seed = NULL</code>, no randomization is performed and the elements of the input list are subdivided sequentially among the jobs. This variable is passed to the <code>random.seed</code> argument of <code><a href=#parsejob>parseJob</a></code>. If <code>collate = TRUE</code>, no randomization is performed and <code>random.seed</code> is ignored.
+</dd>
+<dt>
+rout
+</dt>
+<dd class="rd-dd">
+A character string giving the name of the file to where all of the <code>.Rout</code> files will be gathered. If <code>rout = NULL</code>, the <code>.Rout</code> files are not gathered, but left alone in <code>workDir</code>.
+</dd>
+<dt>
+clean.up
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> will delete the working directory.
+</dd>
+<dt>
+verbose
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> prints messages which show the progress of the jobs.
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A list or data frame containing the results of processing each row of <code>X</code> with <code>FUN</code>.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>X <- data.frame(a = 1:3, b = letters[1:3])
+
+# Function that will operate on each of x, producing a simple list
+test.1 <- function(x) {
+  list(ab = paste(x$a, x$b, sep = "-"), a2 = x$a^2, bnew = paste(x$b, "new", sep = "."))
+}
+
+# Data frame output
+dfplapply(X, test.1, output.df = TRUE, njobs = 2)
+
+# List output
+dfplapply(X, test.1, njobs = 2)
+
+# Function with 2 rows of output
+test.2 <- function(x) {
+  data.frame(ab = rep(paste(x$a, x$b, sep = "-"), 2), a2 = rep(x$a^2, 2))
+}
+
+dfplapply(X, test.2, output.df = TRUE, njobs = 2, verbose = TRUE)
+
+# Passing in other objects needed by FUN
+a.out <- 10
+test.3 <- function(x) {
+  data.frame(a = x$a + a.out, b = paste(x$b, a.out, sep="-"))
+}
+
+dfplapply(X, test.3, output.df = TRUE, needed.objects = "a.out", njobs = 2)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=#plapply>plapply</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="pddply" class="section level2">
+<h2>pddply</h2>
+<h3>
+Parallel wrapper for plyr::ddply
+</h3>
+<p class="rd-p">
+Parallel implementation of <code><a href='http://www.inside-r.org/packages/cran/plyr/docs/ddply'>plyr::ddply</a></code> that suppresses a spurious warning when <code><a href='http://www.inside-r.org/packages/cran/plyr/docs/ddply'>plyr::ddply</a></code> is called in parallel. All of the arguments except <code>njobs</code> are passed directly to arguments of the same name in <code><a href='http://www.inside-r.org/packages/cran/plyr/docs/ddply'>plyr::ddply</a></code>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>pddply(.data, .variables, .fun = NULL, ..., njobs = parallel::detectCores()
+  - 1, .progress = "none", .inform = FALSE, .drop = TRUE,
+  .paropts = NULL)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+.data
+</dt>
+<dd class="rd-dd">
+data frame to be processed
+</dd>
+<dt>
+.variables
+</dt>
+<dd class="rd-dd">
+character vector of variables in <code>.data</code> that will define how to split the data
+</dd>
+<dt>
+.fun
+</dt>
+<dd class="rd-dd">
+function to apply to each piece
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+the number of parallel jobs to launch, defaulting to one less than the number of available cores on the machine
+</dd>
+<dt>
+.progress
+</dt>
+<dd class="rd-dd">
+name of the progress bar to use, see <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/create_progress_bar>plyr::create_progress_bar</a></code>
+</dd>
+<dt>
+.inform
+</dt>
+<dd class="rd-dd">
+produce informative error messages? This is turned off by default because it substantially slows processing speed, but is very useful for debugging
+</dd>
+<dt>
+.drop
+</dt>
+<dd class="rd-dd">
+should combinations of variables that do not appear in the input data be preserved (FALSE) or dropped (TRUE, default)
+</dd>
+<dt>
+.paropts
+</dt>
+<dd class="rd-dd">
+a list of additional options passed into the <code><a href=http://www.inside-r.org/packages/cran/foreach/docs/foreach>foreach::foreach</a></code> function when parallel computation is enabled. This is important if (for example) your code relies on external data or packages. Use the <code>.export</code> and <code>.packages</code> arguments to supply them so that all cluster nodes have the correct environment set up for computing.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+other arguments passed on to .fun
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+An innocuous warning is thrown when <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code> is called in parallel: <a href = https://github.com/hadley/plyr/issues/203>https://github.com/hadley/plyr/issues/203</a>. This function catches and hides that warning, which looks like this: <code>
+</p>
+<p class="rd-p">
+Warning messages: 1: <anonymous>: … may be used in an incorrect context: .fun(piece, …) </code>
+</p>
+<p class="rd-p">
+If <code>njobs = 1</code>, a call to <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code> is made without parallelization, and anything supplied to <code>.paropts</code> is ignored. See the documentation for <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code> for additional details.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The object data frame returned by <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code>
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>data(baseball, package = "plyr")
+
+# Summarize the number of entries for each year in the baseball dataset with 2 jobs
+o1 <- pddply(baseball, ~ year, nrow, njobs = 2)
+head(o1)
+
+#  Verify it's the same as the non-parallel version of plyr::ddply()
+o2 <- plyr::ddply(baseball, ~ year, nrow)
+identical(o1, o2)
+
+# Another possibility
+o3 <- pddply(baseball, "lg", c("nrow", "ncol"), njobs = 2)
+o3
+o4 <- plyr::ddply(baseball, "lg", c("nrow", "ncol"))
+identical(o3, o4)
+
+# A nonsense example where we need to pass objects and packages into the cluster
+number1 <- 7
+
+f <- function(x, number2 = 10) {
+ paste(x$id[1], padZero(number1, num = 2), number2, sep = "-")
+}
+
+# In parallel
+o5 <- pddply(baseball[1:100,], "year", f, number2 = 13, njobs = 2,
+            .paropts = list(.packages = "Smisc", .export = "number1"))
+o5
+
+# Non parallel
+o6 <- plyr::ddply(baseball[1:100,], "year", f, number2 = 13)
+
+identical(o5, o6)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code></p>
+</div>
+<div id="docallparallel" class="section level2">
+<h2>doCallParallel</h2>
+<h3>
+Call a function with a vectorized input in parallel
+</h3>
+<p class="rd-p">
+Call a function with a vectorized input in parallel, where the function is computationally intensive.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>doCallParallel(fun, x, ..., njobs = parallel::detectCores() - 1,
+  random.seed = NULL)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fun
+</dt>
+<dd class="rd-dd">
+A function, or a text string with the name of the function, whose first argument is a vector and returns a corresponding vector
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+A vector of values that is the first argument to <code>fun</code>
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+The number of parallel jobs to spawn using <code><a href=#parlapplyw>parLapplyW</a></code>.
+</dd>
+<dt>
+random.seed
+</dt>
+<dd class="rd-dd">
+If a numeric value is provided, <code>x</code> is randomized to better distribute the work among the jobs if some values of <code>x</code> take longer to evaluate than others. The original ordering is restored before <code>fun(x, …)</code> is returned. If <code>NULL</code>, no randomization is performed.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Additional named arguments for <code>fun</code>
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+This function is a parallelized wrapper for <code><a href=http://www.inside-r.org/r-doc/base/do.call>do.call</a></code> designed for the case where <code>fun</code> is computationally intensive. Each element of <code>x</code> is evaluated independently of the other elements of <code>x</code>. Thus, <code>fun(c(x1,x2))</code> must be equivalent to <code>c(fun(x1), fun(x2))</code> in order for <code>doCallParallel</code> to work properly.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The same result that would be had by calling <code>fun(x, …)</code>, except calculated in parallel
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Get a vector of x's
+x <- rnorm(18, mean = 2, sd = 2)
+
+# 2 cores
+y1 <- doCallParallel("pnorm", x, mean = 2, sd = 2, njobs = 2)
+
+# 2 cores and randomization
+y2 <- doCallParallel(pnorm, x, mean = 2, sd = 2, njobs = 2, random.seed = 1)
+
+# Without using doCallParallel()
+y3 <- pnorm(x, mean = 2, sd = 2)
+
+# Comparisons
+identical(y1, y2)
+identical(y1, y3)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="parsejob" class="section level2">
+<h2>parseJob</h2>
+<h3>
+Parses a collection of elements into (almost) equal-sized groups
+</h3>
+<p class="rd-p">
+Parses a collection of elements into (almost) equal-sized groups. Useful for splitting up an R job that operates over a large dataframe or list into multiple jobs.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>parseJob(n, njobs, collate = FALSE, random.seed = NULL,
+  text.to.eval = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+n
+</dt>
+<dd class="rd-dd">
+The number elements to be parsed
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+The number of groups
+</dd>
+<dt>
+collate
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> alternative ordering of the grouping. See example below.
+</dd>
+<dt>
+random.seed
+</dt>
+<dd class="rd-dd">
+An integer setting the random seed, which will result in randomizing the elements among the jobs. If <code>NULL</code>, no randomization is performed. Randomization cannot be performed if <code>collate = TRUE</code> or if <code>text.to.eval = TRUE</code>. Randomization is useful when the computing time for each element varies significantly because it helps to even out the run times of parallel jobs.
+</dd>
+<dt>
+text.to.eval
+</dt>
+<dd class="rd-dd">
+If <code>= TRUE</code>, a text expression is returned, that when evaluated, will produce the sequence of elements for that group. This is especially useful when <code>n</code> is very large. (See <code>Value</code> section below).
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+When <code>text.to.eval = FALSE</code>, a list with <code>njobs</code> elements is returned, each element containing a numeric vector of the element numbers which correspond to that group. When <code>text.to.eval = TRUE</code>, a list with <code>njobs</code> elements is returned, each element containing text (lets call it <code>val</code>), that when evaluated using <code>eval(parse(text = val))</code>, will produce the sequence of numbers corresponding to the group.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>x <- parseJob(29, 6)
+print(x)
+
+# To see the range of each group
+lapply(x, range)
+
+# To see the length of each group
+lengths(x)
+
+# Randomize the outcome
+parseJob(32, 5, random.seed = 231)
+
+# Example of 'text.to.eval = TRUE'
+out <- parseJob(11, 3, text.to.eval = TRUE)
+out
+lapply(out, function(x) eval(parse(text = x)))
+
+# Example of 'collate = TRUE' and 'text.to.eval = TRUE'
+parseJob(11, 3, collate = TRUE)
+parseJob(11, 3, collate = TRUE, text.to.eval = TRUE)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="plotting-tools" class="section level1">
+<h1>Plotting tools</h1>
+<div id="opendevice" class="section level2">
+<h2>openDevice</h2>
+<h3>
+Opens a graphics device based on the filename extension
+</h3>
+<p class="rd-p">
+Based on the filename extension, will open plotting device using one of the following graphics functions: <code><a href='http://www.inside-r.org/r-doc/grDevices/postscript'>postscript</a></code>, <code><a href='http://www.inside-r.org/r-doc/grDevices/pdf'>pdf</a></code>, <code><a href='http://www.inside-r.org/r-doc/grDevices/png'>jpeg</a></code>, <code><a href='http://www.inside-r.org/r-doc/grDevices/png'>tiff</a></code>, <code><a href='http://www.inside-r.org/r-doc/grDevices/png'>png</a></code>, or <code><a href='http://www.inside-r.org/r-doc/grDevices/png'>bmp</a></code>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>openDevice(fileName, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fileName
+</dt>
+<dd class="rd-dd">
+Character string giving the filename for the graphics output. The following are acceptable filename extensions: <code>ps</code>, <code>pdf</code>, <code>jpg</code>, <code>jpeg</code>, <code>tif</code>, <code>png</code>, or <code>bmp</code>.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Named arguments to the device functions listed above. Arguments that do not match are silently ignored.
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The graphics device is opened and the filename is invisibly returned.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Open 3 example devices
+openDevice("ex1.pdf", height=6, width=12)
+plot(1:10, 1:10)
+
+openDevice("ex1.jpg")
+plot(1:10, 1:10)
+
+openDevice("ex1.png")
+plot(1:10, 1:10)
+
+# List the devices and their filenames
+dev.list()
+dir(pattern = "ex1")
+
+# Turn each of the 3 devices off
+for (i in 1:3) {
+  dev.off(dev.list()[length(dev.list())])
+}
+
+# Delete the created files
+unlink(c("ex1.pdf","ex1.png","ex1.jpg"))
+
+# List the current devices
+dev.list()</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="plotfun" class="section level2">
+<h2>plotFun</h2>
+<h3>
+Plot one or more functions on a single plot
+</h3>
+<p class="rd-p">
+A convenient wrapper function for plotting one or more functions on a single plot. If the function(s) is/are expensive to calculate, function values can be calculated in parallel.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>plotFun(fun, xlim, col = rainbow(length(fun)), lty = 1:length(fun),
+  type = "l", legendLabels = NULL, relX = 0.7, relY = 0.9,
+  nPoints = 1000, njobs = 1, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+fun
+</dt>
+<dd class="rd-dd">
+A function or a list of functions to be plotted. These functions should take a single, numeric vector argument and return a corresponding vector of outputs.
+</dd>
+<dt>
+xlim
+</dt>
+<dd class="rd-dd">
+A numeric vector with two elements that define the domain over which the function(s) will be evaluated and plotted, just as in <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code> in the <span class="pkg">graphics</span> package.
+</dd>
+<dt>
+col
+</dt>
+<dd class="rd-dd">
+A vector of colors to use in the plotting. Its length should match the length of <code>fun</code>. See <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> for more info about the <code>col</code> graphics parameter.
+</dd>
+<dt>
+lty
+</dt>
+<dd class="rd-dd">
+A vector of line types to use in the plotting. Its length should match the length of <code>fun</code>. See <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a></code> for more info about the <code>lty</code> graphics parameter.
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+A single character indicating the type of plotting. This is passed to the <code>type</code> argument of <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>.
+</dd>
+<dt>
+legendLabels
+</dt>
+<dd class="rd-dd">
+A character vector with descriptive names that will appear in the legend, corresponding to each function If <code>NULL</code>, no legend is drawn. This character vector is passed to the <code>legend</code> argument in <code><a href=http://www.inside-r.org/r-doc/graphics/legend>legend</a></code> from the <span class="pkg">graphics</span> package.
+</dd>
+<dt>
+relX
+</dt>
+<dd class="rd-dd">
+A numeric value in [0, 1] designating the relative horizontal (x) position of the legend in the plot.
+</dd>
+<dt>
+relY
+</dt>
+<dd class="rd-dd">
+A numeric value in [0, 1] designating the relative vertical (y) position of the legend in the plot.
+</dd>
+<dt>
+nPoints
+</dt>
+<dd class="rd-dd">
+The number of points that are evaluated and plotted for each function over the interval given by <code>xlim</code>.
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+The number of parallel jobs to spawn using <code><a href=#docallparallel>doCallParallel</a></code>.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Additional graphical arguments passed to <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>, <code><a href=http://www.inside-r.org/r-doc/graphics/lines>lines</a></code>, and <code><a href=http://www.inside-r.org/r-doc/graphics/legend>legend</a></code>. If an argument name specified in <code>…</code> matches an argument name in any of these three functions, the argument is passed to that function. For example, the line width, <code>lwd</code>, would be passed to all three (<code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>, <code><a href=http://www.inside-r.org/r-doc/graphics/lines>lines</a></code>, and <code><a href=http://www.inside-r.org/r-doc/graphics/legend>legend</a></code>).
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The plot of the function(s)
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># A single function with a single argument
+f <- function(x) x^2
+plotFun(f, c(-2, 3), col = "Black", lty = 2, las = 1)
+
+# A handful of beta density functions, note how they take a single argument
+fList <- list(function(x) dbeta(x, 10, 10),
+              function(y) dbeta(y, 3, 3),
+              function(z) dbeta(z, 0.5, 0.50))
+
+# Plot them all on the same plot
+plotFun(fList, c(0.0001, 0.9999), ylim = c(0, 3.5),
+        col = c("Red", "Black", "Blue"), lty = rep(1, 3),
+        xlab = "x", ylab = expression(f(x)),
+        legendLabels = c("a = 10, b = 10", "a = 3, b = 3", "a = 0.5, b = 0.5"),
+        relX = 0.6, relY = 1, lwd = 3, main = "Gamma Densities")</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="smarttimeaxis" class="section level2">
+<h2>smartTimeAxis</h2>
+<h3>
+Produces a time axis with smart spacing
+</h3>
+<p class="rd-p">
+Produces a time axis on a plot with interval spacing units that are intuitive. It is intended to be applied to periods of time that do not exceed 24 hours (i.e. it does not produce a date stamp in the time axis).
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>smartTimeAxis(time.vec, nticks = 15, side = 1, time.format = c("hh:mm",
+  "hh:mm:sspm", "hh:mm:ss pm", "hh:mm:ss", "hh:mmpm", "hh:mm pm"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+time.vec
+</dt>
+<dd class="rd-dd">
+A time object (vector) that was used to construct the plot, presumed to be ordered chronologically
+</dd>
+<dt>
+nticks
+</dt>
+<dd class="rd-dd">
+The target number of ticks to use in the axis
+</dd>
+<dt>
+side
+</dt>
+<dd class="rd-dd">
+Same as the <code>side</code> argument in <code><a href=http://www.inside-r.org/r-doc/graphics/axis>axis</a></code>
+</dd>
+<dt>
+time.format
+</dt>
+<dd class="rd-dd">
+Character string indicting the time format to display on the axis. The choices are displayed in the Usage. Defaults to <code>hh:mm</code>.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+<code>smartTimeAxis</code> attempts to choose a “natural” spacing for the time axis ticks that results in the number of ticks being as close as possible to <code>nticks</code>. Possibilities for natural spacings include 1, 5, 10, 15 seconds, etc., or 1, 2, 5, 10, minutes etc., or 0.5, 1, 1.5 hours, etc.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Places the axis on the plot.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Get data and set the options to the horizontal axis labels will be
+# oriented vertically
+data(timeData)
+op <- par(las = 2, mfrow = c(3, 1), mar = c(4, 4, 2, 0.5))
+
+# Make the default plot
+plot(timeData, xlab = "", main = "Default intervals")
+
+# Make the plot with specialized time axis
+plot(timeData, axes = FALSE, frame.plot = TRUE, xlab = "", main = "10 minute intervals")
+
+# Add y-axis
+axis(2)
+
+# Add the time axis
+smartTimeAxis(timeData$time, nticks = 10)
+
+# Only look at a small portion of the data with a different time format
+par(mar = c(7, 4, 2, 0.5))
+
+plot(timeData[200:237,], type = "b", axes = FALSE, frame.plot = TRUE,
+     xlab = "", main = "15 second intervals")
+
+axis(2)
+
+smartTimeAxis(timeData[200:237,"time"], nticks = 20, time.format = "hh:mm:ss pm")
+
+# Restore the original par settings
+par(op)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/graphics/axis.POSIXct>axis.POSIXct</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="verterrorbar" class="section level2">
+<h2>vertErrorBar</h2>
+<h3>
+Draw vertical error bar(s) on a plot
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>vertErrorBar(x, width, center = NULL, barLength = NULL, min.y = NULL,
+  max.y = NULL, blankMiddle = NULL, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+Vector of x value on the plot around which the vertical error bar will be drawn
+</dd>
+<dt>
+width
+</dt>
+<dd class="rd-dd">
+The total width of the cross hatches on top and bottom of the bars, can be a vector or a single value
+</dd>
+<dt>
+center
+</dt>
+<dd class="rd-dd">
+Vector of values designating the vertical center of the error bars, can be a vector or a single value
+</dd>
+<dt>
+barLength
+</dt>
+<dd class="rd-dd">
+The total vertical length of the bars, can be a vector or a single value
+</dd>
+<dt>
+min.y
+</dt>
+<dd class="rd-dd">
+Vector of values indicating the vertical bottoms of the bars
+</dd>
+<dt>
+max.y
+</dt>
+<dd class="rd-dd">
+Vector of values indicating the vertical tops of the bars
+</dd>
+<dt>
+blankMiddle
+</dt>
+<dd class="rd-dd">
+the vertical length of a blank spot that will be produced in the middle of the error bar. This is useful when the bar is placed around symbols (so as not to overwrite them). Defaults to <code>NULL</code>, in which case a solid error bar is drawn. Can also be a vector or a single value.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional arguments to <code><a href=http://www.inside-r.org/r-doc/graphics/lines>lines</a></code>.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Buyer beware! Its up to the user to determine what the statistically correct length of the error bar should be.
+</p>
+<p class="rd-p">
+Either <code>center</code> and <code>barLength</code> must be specified, or <code>min.y</code> and <code>max.y</code> must be specifed.
+</p>
+<p class="rd-p">
+Note that <code>width</code>, <code>center</code>, <code>barLength</code>, <code>min.y</code>, <code>max.y</code>, and <code>blankMiddle</code> should be <code>NULL</code>, numeric values of length 1, or numeric values with the same length as <code>x</code>. If they have the same length of <code>x</code>, the bars can have different vertical lengths, widths, and <code>blankMiddle</code> values if desired.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Nothing is returned, the error bar(s) is/are drawn on the plot
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>set.seed(343)
+
+# Make a plot of some standard normal observations
+x <- 1:9
+y <- rnorm(9)
+
+plot(x, y, pch = as.character(1:9), ylim = c(-2, 2) + range(y),
+     ylab = "Z", xlab = "Indexes")
+
+# Draw the error bars
+vertErrorBar(x, 0.3, center = y, barLength = 2 * 1.96, blankMiddle = 0.25)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="interactionplot" class="section level2">
+<h2>interactionPlot</h2>
+<h3>
+Two-way Interaction Plot with Error Bar
+</h3>
+<p class="rd-p">
+Plots the mean (or other summary) of the response for two-way combinations of factors, thereby illustrating possible interactions. This modifies <code><a href='http://www.inside-r.org/r-doc/stats/interaction.plot'>interaction.plot</a></code> by adding the <code>errorBar</code> and <code>jitterErrorBars</code> arguments, making it possible to add error bars of the same length to the plot.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>interactionPlot(x.factor, trace.factor, response, fun = mean,
+  errorBar = NULL, jitterErrorBars = NULL, type = c("l", "p", "b", "o",
+  "c"), legend = TRUE, trace.label = deparse(substitute(trace.factor)),
+  fixed = FALSE, xlab = deparse(substitute(x.factor)), ylab = ylabel,
+  ylim = range(cells, na.rm = TRUE), lty = nc:1, col = 1, pch = c(1L:9,
+  0, letters), xpd = NULL, leg.bg = par("bg"), leg.bty = "n",
+  xtick = FALSE, xaxt = par("xaxt"), axes = TRUE, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x.factor
+</dt>
+<dd class="rd-dd">
+a factor whose levels will form the x axis.
+</dd>
+<dt>
+trace.factor
+</dt>
+<dd class="rd-dd">
+another factor whose levels will form the traces.
+</dd>
+<dt>
+response
+</dt>
+<dd class="rd-dd">
+a numeric variable giving the response.
+</dd>
+<dt>
+fun
+</dt>
+<dd class="rd-dd">
+the function to compute the summary. Should return a single real value.
+</dd>
+<dt>
+errorBar
+</dt>
+<dd class="rd-dd">
+A list with required elements <code>barLength</code> and <code>width</code>, and optional element <code>blankMiddle</code>. These correspond to the arguments of <code><a href=#verterrorbar>vertErrorBar</a></code>. Defaults to <code>NULL</code>, in which case no error bars are drawn. Currently, error bars must all be the same length and have the same width. Thus, elements in the list should be atomic (of length 1).
+</dd>
+<dt>
+jitterErrorBars
+</dt>
+<dd class="rd-dd">
+A list with the <code>factor</code> and/or <code>amount</code> arguments that will be passed to <code><a href=http://www.inside-r.org/r-doc/base/jitter>jitter</a></code>, indicating the amount (and/or factor) by which the x-values of the points (and the error bars) should be jittered for easier readibility. No jittering is performed if <code>jitterErrorBars = NULL</code>. This argument is ignored if <code>errorBar = NULL</code>.
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+the type of plot (see <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>): lines or points or both.
+</dd>
+<dt>
+legend
+</dt>
+<dd class="rd-dd">
+logical. Should a legend be included?
+</dd>
+<dt>
+trace.label
+</dt>
+<dd class="rd-dd">
+overall label for the legend.
+</dd>
+<dt>
+fixed
+</dt>
+<dd class="rd-dd">
+logical. Should the legend be in the order of the levels of <code>trace.factor</code> or in the order of the traces at their right-hand ends?
+</dd>
+<dt>
+xlab, ylab
+</dt>
+<dd class="rd-dd">
+the x and y label of the plot each with a sensible default.
+</dd>
+<dt>
+ylim
+</dt>
+<dd class="rd-dd">
+numeric of length 2 giving the y limits for the plot.
+</dd>
+<dt>
+lty
+</dt>
+<dd class="rd-dd">
+line type for the lines drawn, with sensible default.
+</dd>
+<dt>
+col
+</dt>
+<dd class="rd-dd">
+the color to be used for plotting.
+</dd>
+<dt>
+pch
+</dt>
+<dd class="rd-dd">
+a vector of plotting symbols or characters, with sensible default.
+</dd>
+<dt>
+xpd
+</dt>
+<dd class="rd-dd">
+determines clipping behaviour for the <code><a href=http://www.inside-r.org/r-doc/graphics/legend>legend</a></code> used, see <code><a href=http://www.inside-r.org/r-doc/graphics/par>par</a>(xpd)</code>. Per default, the legend is <em>not</em> clipped at the figure border.
+</dd>
+<dt>
+leg.bg, leg.bty
+</dt>
+<dd class="rd-dd">
+arguments passed to <code><a href=http://www.inside-r.org/r-doc/graphics/legend>legend</a>()</code>.
+</dd>
+<dt>
+xtick
+</dt>
+<dd class="rd-dd">
+logical. Should tick marks be used on the x axis?
+</dd>
+<dt>
+xaxt, axes
+</dt>
+<dd class="rd-dd">
+graphics parameters to be passed to the plotting routines.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+graphics parameters to be passed to the plotting routines.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+By default the levels of <code>x.factor</code> are plotted on the x axis in their given order, with extra space left at the right for the legend (if specified). If <code>x.factor</code> is an ordered factor and the levels are numeric, these numeric values are used for the x axis.
+</p>
+<p class="rd-p">
+The response and hence its summary can contain missing values. If so, the missing values and the line segments joining them are omitted from the plot (and this can be somewhat disconcerting).
+</p>
+<p class="rd-p">
+The graphics parameters <code>xlab</code>, <code>ylab</code>, <code>ylim</code>, <code>lty</code>, <code>col</code> and <code>pch</code> are given suitable defaults (and <code>xlim</code> and <code>xaxs</code> are set and cannot be overridden). The defaults are to cycle through the line types, use the foreground colour, and to use the symbols 1:9, 0, and the capital letters to plot the traces.
+</p>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+Some of the argument names and the precise behaviour are chosen for S-compatibility.
+</p>
+<h4>
+References
+</h4>
+<p class="rd-p">
+Chambers, J. M., Freeny, A and Heiberger, R. M. (1992) <em>Analysis of variance; designed experiments.</em> Chapter 5 of <em>Statistical Models in S</em> eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>with(ToothGrowth, {
+
+# Basic interaction plot
+interactionPlot(dose, supp, len, fixed = TRUE)
+
+# Ordered dose
+dose <- ordered(dose)
+interactionPlot(dose, supp, len, fixed = TRUE, col  =  2:3, leg.bty = "o")
+
+# Add error bars
+interactionPlot(dose, supp, len, fixed = TRUE, col  =  2:3, type = "p",
+                errorBar = list(barLength = 3, width = 0.05, blankMiddle = 1),
+                jitterErrorBars = list(factor = 1.5),
+                main = "Error bars have no meaning: just for illustration")
+})</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/stats/interaction.plot>interaction.plot</a></code></p>
+<h4>
+Author
+</h4>
+<p>Originates in the <code>stats</code> package in the R distribution, modifications by Landon Sego</p>
+</div>
+</div>
+<div id="statistical-functions" class="section level1">
+<h1>Statistical functions</h1>
+<div id="dbb" class="section level2">
+<h2>dbb, pbb, qbb, rbb</h2>
+<h3>
+The Beta-Binomial Distribution
+</h3>
+<p class="rd-p">
+Density, distribution function, quantile function, and random generation for the beta-binomial distribution. A beta-binomial variate follows the binomial distribution with parameters <code>N</code> and <code>p</code>, where the probability <code>p</code> of success itself has a beta distribution with parameters <code>u</code> and <code>v</code>.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>dbb(x, N, u, v)
+pbb(q, N, u, v)
+qbb(p, N, u, v)
+rbb(n, N, u, v)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+vector of qauntiles
+</dd>
+<dt>
+N
+</dt>
+<dd class="rd-dd">
+number of trials (a positive integer)
+</dd>
+<dt>
+u
+</dt>
+<dd class="rd-dd">
+first positive parameter of the beta distribution
+</dd>
+<dt>
+v
+</dt>
+<dd class="rd-dd">
+second positive parameter of the beta distribution
+</dd>
+<dt>
+q
+</dt>
+<dd class="rd-dd">
+vector of quantiles
+</dd>
+<dt>
+p
+</dt>
+<dd class="rd-dd">
+vector of probabilities
+</dd>
+<dt>
+n
+</dt>
+<dd class="rd-dd">
+number of observations
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+The beta-binomial distribution with parameters <em>N</em>, <em>u</em>, and <em>v</em> has mass function given by <em>choose(N, x) * Beta(x + u, N - x + v) / Beta(u, v)</em> for <em>u &gt; 0</em>, <em>v &gt; 0</em>, a positive integer <em>N</em>, and any nonnegative integer <em>x</em>. Although one can express the integral in closed form using generalized hypergeometric functions, the implementation of distribution function used here simply relies on the cumulative sum of the mass function.
+</p>
+<p class="rd-p">
+The mean, <em>mu</em>, and variance, <em>sigma^2</em>, of the beta-binomial distribution can be computed explicitly as <em>mu = N * u / (u + v)</em> and <em>sigma^2 = (N * u * v * (N + u + v)) / ((u + v)^2 * (1 + u + v))</em>.
+</p>
+<p class="rd-p">
+<code>dbb</code> and <code>qbb</code> do not recycle vector-valued arguments in the usual fashion in R. Arguments to these functions must have length 1 and/or one other common length. See example of <code><a href=#pcbinom>pcbinom</a></code> for more information.
+</p>
+<p class="rd-p">
+Non-integer values of <code>x</code> and <code>N</code> are rounded to the nearest integer with a warning.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+<code>dbb</code> gives the density, <code>pbb</code> gives the distribution function, <code>qbb</code> gives the quantile function, and <code>rbb</code> generates random deviates.
+</dl>
+</p>
+<h4>
+Warning
+</h4>
+<p class="rd-p">
+<code>dbb</code>, <code>pbb</code>, and <code>qbb</code> can be imprecise when the probabilities for tail values are small. This can result in unusual behavior for <code>pbb</code> and <code>qbb</code>.
+</p>
+<h4>
+References
+</h4>
+<p class="rd-p">
+<a href = http://bioinformatics.mdanderson.org/Software/OOMPA/Current/TailRank-manual.pdf>http://bioinformatics.mdanderson.org/Software/OOMPA/Current/TailRank-manual.pdf</a>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># set up parameters
+w <- 10
+u <- 0.3 *w
+v <- 0.7 * w
+N <- 12
+
+# generate random values from the beta-binomial
+x <- rbb(1000, N, u, v)
+
+# check that the empirical summary matches the theoretical one
+summary(x)
+qbb(c(0.25, 0.50, 0.75), N, u, v)
+
+# check that the empirical histogram matches the theoretical density
+hist(x, breaks=seq(-0.5, N + 0.55), prob = TRUE)
+lines(0:N, dbb(0:N, N, u,v), type = "b")
+
+# An example of the imprecision in pbb and qbb:  we would expect
+# this to return 0:29
+qbb(pbb(0:29, 29, 1, 33), 29, 1, 33)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/stats/Beta>dbeta</a></code> for the beta distribution and <code><a href=http://www.inside-r.org/r-doc/stats/Binomial>dbinom</a></code> for the binomial distribution.</p>
+<h4>
+Author
+</h4>
+<p>Kevin R. Coombes, modified by Landon Sego</p>
+</div>
+<div id="dkbinom" class="section level2">
+<h2>dkbinom, pkbinom</h2>
+<h3>
+Probability functions for the sum of k independent binomials
+</h3>
+<p class="rd-p">
+The mass and distribution functions of the sum of k independent binomial random variables, with possibly different probabilities.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>dkbinom(x, size, prob, log = FALSE, verbose = FALSE,
+        method = c("butler", "fft"), checkArgs = TRUE)
+pkbinom(q, size, prob, log.p = FALSE, verbose = FALSE,
+        method = c("butler", "naive", "fft"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+Vector of values at which to evaluate the mass function of the sum of the k binomial variates
+</dd>
+<dt>
+size
+</dt>
+<dd class="rd-dd">
+Vector of the number of trials
+</dd>
+<dt>
+prob
+</dt>
+<dd class="rd-dd">
+Vector of the probabilities of success
+</dd>
+<dt>
+log, log.p
+</dt>
+<dd class="rd-dd">
+logical; if TRUE, probabilities p are given as log(p). (See NOTE in details).
+</dd>
+<dt>
+verbose
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> produces output that shows the iterations of the convolutions and 3 arrays, A, B, and C that are used to convolve and reconvolve the distributions. Array C is the final result. See the source code in <code>dkbinom.c</code> for more details.
+</dd>
+<dt>
+method
+</dt>
+<dd class="rd-dd">
+The <code>butler</code> (default) method is the algorithm given by Butler, et al. The <code>naive</code> method is an alternative approach that can be much slower that can handle no more the sum of five binomials, but is useful for validating the other methods. The <code>naive</code> method only works for a single value of <code>q</code>. The <code>fft</code> method uses the fast Fourier transform to compute the convolution of k binomial random variates.
+</dd>
+<dt>
+checkArgs
+</dt>
+<dd class="rd-dd">
+<code>=TRUE</code> checks the incoming arguments <code>x</code>, <code>size</code>, <code>prob</code> for correct structure and consistency.
+</dd>
+<dt>
+q
+</dt>
+<dd class="rd-dd">
+Vector of quantiles (value at which to evaluate the distribution function) of the sum of the k binomial variates
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+<code>size[1]</code> and <code>prob[1]</code> are the size and probability of the first binomial variate, <code>size[2]</code> and <code>prob[2]</code> are the size and probability of the second binomial variate, etc.
+</p>
+<p class="rd-p">
+If the elements of <code>prob</code> are all the same, then <code>pbinom</code> or <code>dbinom</code> is used. Otherwise, repeating convolutions of the k binomials are used to calculate the mass or the distribution functions.
+</p>
+<p class="rd-p">
+NOTE: When <code>log.p</code> or <code>log</code> is <code>TRUE</code>, these functions do not have the same precision as <code>dbinom</code> or <code>pbinom</code> when the probabilities are very small, i.e, the values tend to go to <code>-Inf</code> more quickly.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+<code>dkbinom</code> gives the mass function, <code>pkbinom</code> gives the distribution function. Produces errors for invalid inputs of <code>size</code>, <code>prob</code>, <code>x</code>, and <code>q</code>.
+</dl>
+</p>
+<h4>
+References
+</h4>
+<p class="rd-p">
+The Butler method is based on the exact algorithm discussed by: Butler, Ken and Stephens, Michael. (1993) The Distribution of a Sum of Binomial Random Variables. Technical Report No. 467, Department of Statistics, Stanford University. <a href = http://www.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf>http://www.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf</a>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># A sum of 3 binomials...
+dkbinom(c(0, 4, 7), c(3, 4, 2), c(0.3, 0.5, 0.8))
+dkbinom(c(0, 4, 7), c(3, 4, 2), c(0.3, 0.5, 0.8), method = "b")
+pkbinom(c(0, 4, 7), c(3, 4, 2), c(0.3, 0.5, 0.8))
+pkbinom(c(0, 4, 7), c(3, 4, 2), c(0.3, 0.5, 0.8), method = "b")
+
+# Compare the output of the 3 methods
+pkbinom(4, c(3, 4, 2), c(0.3, 0.5, 0.8), method = "fft")
+pkbinom(4, c(3, 4, 2), c(0.3, 0.5, 0.8), method = "butler")
+pkbinom(4, c(3, 4, 2), c(0.3, 0.5, 0.8), method = "naive")
+
+# Some inputs
+n <- c(30000, 40000, 20000)
+p <- c(0.02, 0.01, 0.005)
+
+# Compare timings
+x1 <- timeIt(pkbinom(1100, n, p, method = "butler"))
+x2 <- timeIt(pkbinom(1100, n, p, method = "naive"))
+x3 <- timeIt(pkbinom(1100, n, p, method = "fft"))
+pvar(x1, x1 - x2, x2 - x3, x1 - x3, digits = 12)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/stats/Binomial>dbinom</a></code>, <code><a href=http://www.inside-r.org/r-doc/stats/Binomial>pbinom</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego and Alex Venzin</p>
+</div>
+<div id="pcbinom" class="section level2">
+<h2>pcbinom</h2>
+<h3>
+A continuous version of the binomial cdf
+</h3>
+<p class="rd-p">
+Uses the incomplete beta function to calculate a continuous version of the binomial cumulative distribution function.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>pcbinom(x, n, p, lower.tail = TRUE, log.p = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+Real valued vector of the number of successes.
+</dd>
+<dt>
+n
+</dt>
+<dd class="rd-dd">
+Real valued vector, all elements in <code>[0, Inf)</code>, of the number of trials.
+</dd>
+<dt>
+p
+</dt>
+<dd class="rd-dd">
+Real valued vector, all elements in <code>[0,1]</code>, of the probability of success.
+</dd>
+<dt>
+lower.tail
+</dt>
+<dd class="rd-dd">
+logical; if <code>TRUE</code>, the probabilities are <code>P[X &lt;= x]</code>, otherwise, <code>P[X &gt; x]</code>.
+</dd>
+<dt>
+log.p
+</dt>
+<dd class="rd-dd">
+logical; if <code>TRUE</code>, probabilities <code>p</code> are returned as <code>log(p)</code>.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+<code>pcbinom</code> is equivalent to <code><a href=http://www.inside-r.org/r-doc/stats/Binomial>pbinom</a></code> for integer values of <code>n</code> and <code>x</code>.
+</p>
+<p class="rd-p">
+Note that <code>pcbinom</code> does not recycle vectors in the usual fashion. Each of the arguments <code>x</code>, <code>n</code>, and <code>p</code> should have the same length, or, one or more of them can have the same length, so long as the other arguments have length 1. See examples below.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Returns a continuous version of the binomial distribution function.
+</dl>
+</p>
+<h4>
+Note
+</h4>
+<p class="rd-p">
+This function was based on <code>binom.c</code> in the R source code.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>x <- c(  2,   3,   5, 5.2,   5)
+n <- c(  4,   5,   7,   7, 7.2)
+p <- c(0.2, 0.1, 0.8, 0.8, 0.7)
+
+pcbinom(x, n, p)
+pbinom(x, n, p)
+
+# These will work
+pcbinom(c(7.3, 7.8), 12, 0.7)
+pcbinom(c(7.3, 7.8), c(12,13), 0.7)
+pcbinom(12.1, c(14.2,14.3), 0.6)
+
+# But these won't
+try(pcbinom(c(7.3, 7.8), c(12, 14, 16), 0.7))
+try(pcbinom(c(7.3, 7.8), c(12, 14, 16), c(0.7, 0.8)))</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/stats/Binomial>pbinom</a></code>, <code><a href=http://www.inside-r.org/r-doc/stats/Beta>pbeta</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="hpd" class="section level2">
+<h2>hpd</h2>
+<h3>
+Calculate the highest posterior density credible interval for a unimodal density
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>hpd(pdf, support, prob = 0.95, cdf = NULL, njobs = 1, checkUnimodal = 0)
+
+print(x, ...)
+
+plot(x, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+pdf
+</dt>
+<dd class="rd-dd">
+Function that takes a single numeric vector argument that returns a vector of probability density values
+</dd>
+<dt>
+support
+</dt>
+<dd class="rd-dd">
+A numeric vector of length 2 giving the interval over which the random variable has support (i.e. for which the pdf is positive). For now, this must be a finite interval. Intervals for random variables within infinite support can still be calculated by setting the values of support to be suitably large and/or small. See examples.
+</dd>
+<dt>
+prob
+</dt>
+<dd class="rd-dd">
+A numeric value in (0, 1] indicating the size of the desired probability for the credible interval.
+</dd>
+<dt>
+cdf
+</dt>
+<dd class="rd-dd">
+A function that takes a single (not necessarily vector) argument and returns the cumulative probability. If <code>NULL</code>, the pdf is integrated as needed to calculate probabilities as needed. However, providing the <code>cdf</code> will speed up calculations.
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+The number of parallel jobs to spawn (where possible) using <code><a href=#docallparallel>doCallParallel</a></code>. This is helpful if <code>pdf</code> is expensive.
+</dd>
+<dt>
+checkUnimodal
+</dt>
+<dd class="rd-dd">
+An integer that, when greater than 0, indicates the number of points in <code>support</code> for which <code>pdf</code> is evaluated to determine whether the function appears unimodal. This is done in parallel if <code>njobs &gt; 1</code>. If <code>checkUnimodal</code> is not 0, it should be a large number (like 1000 or more).
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+object of class <code>hpd</code>, returned by <code>hpd</code>
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+For the <code>plot</code> method, these are additional arguments that may be passed to <code><a href=#plotfun>plotFun</a></code>, <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>, or <code><a href=http://www.inside-r.org/r-doc/graphics/abline>abline</a></code>
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Parallel processing (via <code>njobs &gt; 1</code>) may be advantageous if 1) <code>pdf</code> is a function that is computationally expensive, 2) the <code>cdf</code> is not provided, in which case <code>pdf</code> is integrated, and/or 3) when <code>checkUnimodal</code> is large.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A list of class <code>hpd</code> that contains the following elements:
+<dl>
+<dt>
+lower
+</dt>
+<dd>
+The lower endpoint of the highest posterior density interval
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+upper
+</dt>
+<dd>
+The lower endpoint of the highest posterior density interval
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+prob
+</dt>
+<dd>
+The acheived probability of the interval
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+cut
+</dt>
+<dd>
+The horizontal cut point that gave rise to the interval
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+mode
+</dt>
+<dd>
+The mode of the density
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+pdf
+</dt>
+<dd>
+The probability density function
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+support
+</dt>
+<dd>
+The support of the pdf
+</dd>
+</p>
+<p class="rd-p">
+</dl>
+</p>
+<p class="rd-p">
+</dl>
+</p>
+<h4>
+Methods (by generic)
+</h4>
+<p class="rd-p">
+<ul>
+<li>
+<code>print</code>: Prints the lower and upper limits of the credible interval, along with the achieved probabilty of that interval.
+</p>
+<p class="rd-p">
+</li>
+<li>
+<code>plot</code>: Plots the density, overlaying the lower and upper limits of the credible interval
+</li>
+</ul>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># A credible interval using the standard normal
+int <- hpd(dnorm, c(-5,5), prob = 0.90, njobs = 2)
+print(int)
+plot(int)
+
+# A credible interval with the gamma density
+int <- hpd(function(x) dgamma(x, shape = 2, rate = 0.5), c(0, 20),
+           cdf = function(x) pgamma(x, shape = 2, rate = 0.5), prob = 0.8)
+print(int)
+plot(int)
+
+# A credible interval using the Beta density
+dens <- function(x) dbeta(x, 7, 12)
+dist <- function(x) pbeta(x, 7, 12)
+int <- hpd(dens, c(0, 1), cdf = dist)
+print(int)
+plot(int)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="umvueln" class="section level2">
+<h2>umvueLN</h2>
+<h3>
+Computes UMVUEs of lognormal parameters
+</h3>
+<p class="rd-p">
+Computes uniformly minimum variance unbiased (UMVU) estimates of the mean, the standard error of the mean, and the standard deviation of lognormally distributed data.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>umvueLN(x, tol = 1e-15, verbose = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+Vector of lognormal data
+</dd>
+<dt>
+tol
+</dt>
+<dd class="rd-dd">
+Tolerence level for convengence of the infinite series, <em>Psi</em>. Convergence occurs when the absolute value of the current term in the series is less than <code>tol</code>.
+</dd>
+<dt>
+verbose
+</dt>
+<dd class="rd-dd">
+Logical indicating whether iteration steps for convergence of <em>Psi</em> are printed.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Calculates equations 13.3, 13.5, and 13.6 of Gilbert (1987).
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Returns a named vector with the following components
+<dt>
+mu
+</dt>
+<dd>
+The UMVUE of the mean
+</dd>
+<dt>
+se.mu
+</dt>
+<dd>
+The UMVUE standard error of the mean
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+sigma
+</dt>
+<dd>
+The UMVUE of the standard deviation
+</dd>
+</p>
+<p class="rd-p">
+</dl>
+</p>
+<h4>
+References
+</h4>
+<p class="rd-p">
+Gilbert, Richard O. (1987) Statistical Methods for Environmental Pollution Monitoring, John Wiley &amp; Sons, Inc. New York, pp 164-167.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Test from Gilbert 1987, Example 13.1, p 166
+x <- c(3.161, 4.151, 3.756, 2.202, 1.535, 20.76, 8.42, 7.81, 2.72, 4.43)
+y <- umvueLN(x)
+print(y, digits = 8)
+
+# Compare to results from PRO-UCL 4.00.02:
+
+# MVU Estimate of Mean                     5.6544289
+# MVU Estimate of Standard Error of Mean   1.3944504
+# MVU Estimate of SD                       4.4486438
+
+# Compare these to Gilbert's printed results (which have rounding error)
+Gilbert <- c(5.66, sqrt(1.97), sqrt(19.8))
+print(round(abs(y - Gilbert), 2))</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="time-series" class="section level1">
+<h1>Time series</h1>
+<div id="formatdt" class="section level2">
+<h2>formatDT</h2>
+<h3>
+Converts date or datetime strings into alternate formats
+</h3>
+<p class="rd-p">
+Can be used to convert date-time character vectors into other types of date-time formats. It is designed to automatically find the appropriate date and time informats without the user having to specify them.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>formatDT(dt, date.outformat = NULL, time.outformat = NULL, posix = TRUE,
+  weekday = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+dt
+</dt>
+<dd class="rd-dd">
+A character vector of date values or datetime values
+</dd>
+<dt>
+date.outformat
+</dt>
+<dd class="rd-dd">
+A character string requesting the date format to be returned. The following date outformats are supported: “mm/dd/yyyy”, “mm-dd-yyyy”, “yyyy-mm-dd”, “yyyymmdd”, “ddmonyyyy”, and “dd-mon-yyyy”. If <code>date.outformat = NULL</code>, then “mm/dd/yyyy” is used.
+</dd>
+<dt>
+time.outformat
+</dt>
+<dd class="rd-dd">
+A character string requesting the time format to be returned. The following time outformats are supported: “hh:mm:sspm”, “hh:mm:ss pm”, “hh:mm:ss”, “hh:mmpm”, “hh:mm pm”, and “hh:mm”. If <code>time.outformat = NULL</code>, then “hh:mm:ss pm” is used.
+</dd>
+<dt>
+posix
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> returns date and datetime vectors of class POSIXct that can be used for time calculations.
+</dd>
+<dt>
+weekday
+</dt>
+<dd class="rd-dd">
+<code>= TRUE</code> returns a character vector denoting the day of the week.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+If the input vector contains times, <code>formatDT</code> assumes that the dates and times are separated by at least one space. The date format and the time format of the input vector must be the same for all cells in the vector. The input format is determined by the first non-missing entry of the <code>dt</code> vector. Missing values (<code>NA</code> or <code>“”</code>) are carried through to the output vectors without error.
+</p>
+<p class="rd-p">
+In chosing the informat, <code>formatDT</code> first checks if the datetime string has a format of “dd/mm/yyyy hh:mm:ss pm”. If so, it moves directly to the datetime conversions. Otherwise, it searches through the date and time informats listed below for a suitable match.
+</p>
+<p class="rd-p">
+Acceptable date informats for <code>dt</code>: <code>mm/dd/yyyy</code>, <code>mm-dd-yyyy</code>, <code>yyyy-mm-dd</code>, <code>yyyymmdd</code>, <code>ddmonyyyy</code>, <code>dd-mon-yyyy</code>
+</p>
+<p class="rd-p">
+Acceptable time informats for <code>dt</code>: <code>hh:mm:sspm</code>, <code>hh:mm:ss pm</code>, <code>hh:mm:ss</code> (24 hour time), <code>hh:mmpm</code>, <code>hh:mm pm</code>, <code>hh:mm</code> (24 hour time), <code>hhmm</code> (24 hour time), <code>hhmmss</code> (24 hour time)
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A list with these components:
+<dt>
+date
+</dt>
+<dd>
+A character vector of the form requested by <code>date.outformat</code>.
+</dd>
+<dt>
+time
+</dt>
+<dd>
+A character vector of the form requested by <code>time.outformat</code> or an empty character vector of the form “” if the time is not present in the input vector <code>dt</code>.
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+dt
+</dt>
+<dd>
+A character vector containing the combined datetime using the requested formats. If time is not present in the input vector <code>dt</code>, then simply the date is returned.
+</dd>
+<dt>
+date.posix
+</dt>
+<dd>
+A vector of class “POSIXt POSIXct” containing the date. This is only returned if <code>posix = TRUE</code>.
+</dd>
+<dt>
+dt.posix
+</dt>
+<dd>
+A vector of class “POSIXt POSIXct” containing the datetime. This is only returned if <code>posix = TRUE</code> and time values are present in the argument <code>dt</code>.
+</dd>
+<dt>
+weekday
+</dt>
+<dd>
+A character vector indicating the days of the week. This is only returned if <code>weekday = TRUE</code>.
+</dd>
+</p>
+<p class="rd-p">
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Demonstrates conversion of different datetime informats
+formatDT("03/12/2004 04:31:17pm", posix = FALSE)
+formatDT("12Mar2004 04:31pm", posix = FALSE)
+formatDT("2004-3-12 16:31:17", posix = FALSE)
+formatDT("7-5-1998 22:13")
+
+# Specifying different types of outformats
+formatDT("03/12/2004", date.outformat = "dd-mon-yyyy", posix = FALSE)
+formatDT("17-Sep-1782 12:31am", date.outformat = "yyyy-mm-dd",
+         time.outformat = "hh:mm", posix = FALSE)
+
+# Processing datetime vectors
+formatDT(c("03/12/2004 04:31pm","03/12/2005 04:32:18pm"), posix = FALSE)
+formatDT(c("03/12/2004 04:31:17pm","03/12/2005 04:32:18pm"))
+formatDT(c("03/12/2004 04:31:17pm","03/12/2005 04:32:18pm"), weekday = TRUE)
+
+# An incorrect date (will produce an error)
+try(formatDT("29-Feb-2001"))
+
+# An incorrect time will also produce an error
+try(formatDT("28-Feb-2001 00:00:00 AM"))
+formatDT("28-Feb-2001 12:00:00 AM")
+
+# Illustrate the handling of missing values
+formatDT(c(NA,"","2010-10-23 3:47PM"), weekday = TRUE)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="smartfilter" class="section level2">
+<h2>smartFilter</h2>
+<h3>
+Calculate a moving dot product (or filter) over a numeric vector
+</h3>
+<p class="rd-p">
+Calculate a moving dot product over a vector (typically a time series). It dynamically accounts for the incomplete windows which are caused by missing values and which occur at the beginning and end of the series. It does not propogate NAs.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>smartFilter(y, weights, min.window = 1, start = 1, skip = 1,
+  balance = TRUE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+A numeric vector (can be labeled)
+</dd>
+<dt>
+weights
+</dt>
+<dd class="rd-dd">
+Vector of weights that will be used to calculate the moving dot product. Should be odd in length and should sum to unity.
+</dd>
+<dt>
+min.window
+</dt>
+<dd class="rd-dd">
+The minimum number of non-missing data points in a window that are required to calculate the dot product
+</dd>
+<dt>
+start
+</dt>
+<dd class="rd-dd">
+The index of the center of the first window
+</dd>
+<dt>
+skip
+</dt>
+<dd class="rd-dd">
+The number of indexes to advance the center of the moving window each time the dot product is calculated.
+</dd>
+<dt>
+balance
+</dt>
+<dd class="rd-dd">
+<code> = TRUE</code> requires that the first non-missing value in a window occur on or before the center point of the window, and that the last non-missing value occur on or after the center point of the window.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+<code>smartFilter</code> has very similar behavior to <code><a href=http://www.inside-r.org/r-doc/stats/filter>filter</a></code>, except it calculates at the edge of a series and it does not propogate NAs which may be imbedded within the series.
+</p>
+<p class="rd-p">
+When the window contains missing values, either due to being at the edge of the series or due to NAs imbedded within the series, the weights corresponding to the non-missing data points are re-normalized and the dotproduct is calculated using the available data. If the number of non-missing data points in the window is less than <code>min.window</code>, an <code>NA</code> is produced for the corresponding index. Likewise, if <code>balance = TRUE</code>, and the required conditions (described above in the argument description of <code>balance</code>) are not met, an <code>NA</code> is returned for the corresponding index.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+Returns the moving dot product
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code> # Define a simple vector
+ x <- 2^(0:8)
+ names(x) <- letters[1:9]
+
+ # Define weights for a simple moving average of 3 points
+ # (1 point in the past, the present point, and 1 point in the future)
+ wts <- rep(1, 3) / 3
+
+ # Note how they are the same, except at the edges of the series.
+ smartFilter(x, wts)
+ filter(x, wts)
+
+ # filter() and smartFilter() apply the weights in reverse order of each other,
+ # which makes a difference if the weights are not symmetric. Note how these
+ # two statements produce the same result (with the exception of the first and
+ # last elements)
+ filter(x, 1:3 / 6)
+ smartFilter(x, 3:1 / 6)
+
+ # Notice how filter() propogates missing values
+ y <- 3^(0:8)
+ y[5] <- NA
+ smartFilter(y, wts)
+ filter(y, wts)
+
+ # Compare starting on the second value and skip every other point
+ smartFilter(x, wts)
+ smartFilter(x, wts, start = 2, skip = 2)
+
+ # Demonstrate how the 'min.window' and 'balance' work
+ y <- round(rnorm(1:20),2)
+ names(y) <- letters[1:20]
+ y[7:9] <- NA
+ y
+ smartFilter(y, rep(1,5)/5, min.window = 2, balance = TRUE)
+ smartFilter(y, rep(1,5)/5, min.window = 2, balance = FALSE)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=#movavg2>movAvg2</a></code>, <code><a href=http://www.inside-r.org/r-doc/stats/filter>filter</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="movavg2" class="section level2">
+<h2>movAvg2</h2>
+<h3>
+Calculate the moving average using a 2-sided, symmetric window
+</h3>
+<p class="rd-p">
+Wrapper for <code>smartFilter</code> that creates a set of symmetric weights for the 2-sided window based on the Gaussian kernel, exponetial decay, linear decay, or simple uniform weights, and then calculates the moving average using those weights.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>movAvg2(y = NULL, bw = 30, type = c("gaussian", "exponential", "linear",
+  "uniform"), furthest.weight = 0.01, center.weight = 1, plot = FALSE,
+  ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+The numerical vector for which the moving averages will be calculated. If <code>NULL</code>, the moving averages are not calculated–but this can be useful for visualizing the weights. See the <code>plot</code> argument.
+</dd>
+<dt>
+bw
+</dt>
+<dd class="rd-dd">
+bandwidth, which is roughly half the width of the moving window. The total width of the window is <code>2 * bw + 1</code>.
+</dd>
+<dt>
+type
+</dt>
+<dd class="rd-dd">
+Character string which uniquely indentifies the type of weights to use, corresponding to the Gaussian kernel, exponential decay, linear decay, or uniform weights. Defaults to gaussian.
+</dd>
+<dt>
+furthest.weight
+</dt>
+<dd class="rd-dd">
+The unormalized value of the weights at the left and right edges of the window
+</dd>
+<dt>
+center.weight
+</dt>
+<dd class="rd-dd">
+The unnormalized value of the weights at the center of the window
+</dd>
+<dt>
+plot
+</dt>
+<dd class="rd-dd">
+<code> = TRUE</code> produces a plot which shows the weights.
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+additional arguments to <code><a href=#smartfilter>smartFilter</a></code>
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+All the weights are normalized (so that they sum to 1) prior to calculating the moving average.
+</p>
+<p class="rd-p">
+Since it uses <code><a href=#smartfilter>smartFilter</a></code> to calculate the moving average, the moving average for points near the edge of the series or in the neighborhood of missing values are calculated using as much of the window weights as possible.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+If <code>y</code> is not <code>NULL</code>, returns the moving average of the series. Also produces a plot of the weights if <code>plot = TRUE</code>.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>x <- rnorm(25)
+movAvg2(x, bw = 10, type = "e", center.weight = 2)
+
+# Note how it produces the same values as filter (except at the edge
+# of the series
+x <- rnorm(10)
+movAvg2(x, bw = 2, type = "u")
+filter(x, rep(1,5)/5)
+
+# These are also the same, except at the edge.
+movAvg2(x, bw = 1, type = "l", furthest.weight = 0.5, center.weight = 1)
+filter(x, c(0.5, 1, 0.5)/2)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=#smartfilter>smartFilter</a></code>, <code><a href=http://www.inside-r.org/r-doc/stats/filter>filter</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="timediff" class="section level2">
+<h2>timeDiff</h2>
+<h3>
+Subtracts two time series by matching irregular time indexes
+</h3>
+<p class="rd-p">
+Subtracts two time series by matching irregular time indexes. Can also be used to align the indexes of a time series to a set of standard time indexes.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>timeDiff(v1, v2, n.ind = 1, full = FALSE)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+v1
+</dt>
+<dd class="rd-dd">
+A time series vector: vector with dates or datetimes for names which are non repeating and in chronological order
+</dd>
+<dt>
+v2
+</dt>
+<dd class="rd-dd">
+Another time series vector
+</dd>
+<dt>
+n.ind
+</dt>
+<dd class="rd-dd">
+An integer &gt;= 1 that indicates how many elements of the longer of the two vectors will be averaged and matched to the closest timestamp of the shorter vector. See details below.
+</dd>
+<dt>
+full
+</dt>
+<dd class="rd-dd">
+<code>=TRUE</code> returns a data frame that shows in detail how the two vectors were matched and the difference calculated
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+The format for the timestamps (in the vector names) can be virtually any reasonable format, which will be converted to POSIXct by <code><a href=#formatdt>formatDT</a></code>.
+</p>
+<p class="rd-p">
+Suppose that <code>v1</code> is shorter than <code>v2</code>. For each index of the <code>v1</code>, the <code>n.ind</code> indices of <code>v2</code> that are closest in time to the <code>v1</code> index are identified and “matched” (by averaging them) to the <code>v1</code> index. In the case of ties, for example, the nearest <code>v2</code> indexes are both 5 seconds before and 5 seconds after the <code>v1</code> index of interest, then the closest <code>v2</code> index in the past (5 seconds before) is matched to the <code>v1</code> index.
+</p>
+<p class="rd-p">
+Hence, the average of the <code>n.ind</code> elements of <code>v2</code> that best “match” (are closest in time to) the element of <code>v1</code> are subtracted from <code>v1</code>, which creates a series of differences with the same length (and timestamps) as <code>v1</code>.
+</p>
+<p class="rd-p">
+If instead, <code>v2</code> is shorter than <code>v1</code>, then the time stamps of <code>v2</code> become the standard to which the times of <code>v1</code> are matched.
+</p>
+<p class="rd-p">
+If <code>v1</code> and <code>v2</code> are the same length, then the timestamps of <code>v2</code> are matched to <code>v1</code> and the resulting vector of differences has the same timestamps as <code>v1</code>.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+if <code>full = FALSE</code> then the difference (after matching) of <code>(v1 - v2)</code> is returned. Otherwise, a data frame is returned that shows how the vectors were matched and the resulting difference vector.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>data(timeDiff.eg)
+
+# Show the objects
+print(timeDiff.eg)
+
+# Extract the objects from the list for easier use in the example
+sepList(timeDiff.eg)
+
+# Print warnings as they occur
+op <- options(warn = 1)
+
+# Show various differences
+timeDiff(x1, x2, full = TRUE)
+timeDiff(x2.d, x1.d, full = TRUE)
+timeDiff(x1, x1)
+
+options(op)
+
+### If we need to average a time-series at 30 second invervals:
+
+# Create the vector that will be averaged, with time stamps occuring
+# about every 10 seconds
+v1.names <- seq(formatDT("2009-09-12 3:20:31")$dt.posix,
+                formatDT("2009-09-12 3:29:15")$dt.posix, by = 10)
+
+# Now jitter the times a bit and look at the time spacing
+v1.names <- v1.names + round(rnorm(length(v1.names), sd = 1.5))
+diff(v1.names)
+
+# Create the vector
+v1 <- abs(rnorm(length(v1.names), mean = 7, sd = 3))
+names(v1) <- v1.names
+
+# Now create a standard vector with values of 0 with time stamps every 30 seconds
+standard.names <- seq(formatDT("2009-09-12 3:21:30")$dt.posix,
+                      formatDT("2009-09-12 3:28:30")$dt.posix, by = 30)
+standard <- double(length(standard.names))
+names(standard) <- standard.names
+
+# Now average the v1 values by matching the 3 closest values to each standard time:
+timeDiff(v1, standard, n.ind = 3, full = TRUE)
+v1.avg <- timeDiff(v1, standard, n.ind = 3)
+
+# Check that every 3 obs were averaged
+v1.avg.check <- tapply(v1[6:50], rep(1:15, each = 3), mean)
+max(abs(v1.avg.check - v1.avg))</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="timeintegration" class="section level2">
+<h2>timeIntegration</h2>
+<h3>
+Approximate the integral of a vector of data over time
+</h3>
+<p class="rd-p">
+Integrate a series over time by calculating the area under the “curve” of the linear interpolation of the series (akin to the Trapezoid rule). This is especially useful in calculating energy usage: kilowatt-hours, watt-seconds, etc.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>timeIntegration(data, time = names(data), lower = time[1],
+  upper = time[length(time)], check.plot = FALSE, units = c("hours",
+  "minutes", "seconds"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+data
+</dt>
+<dd class="rd-dd">
+Vector of numerical data
+</dd>
+<dt>
+time
+</dt>
+<dd class="rd-dd">
+Vector of timestamps which correspond to <code>data</code>. These can either character or POSIXct.
+</dd>
+<dt>
+lower
+</dt>
+<dd class="rd-dd">
+The time (character or POSIXct) of the lower bound of the integration
+</dd>
+<dt>
+upper
+</dt>
+<dd class="rd-dd">
+The time (character or POSIXct) of the upper bound of the integration
+</dd>
+<dt>
+check.plot
+</dt>
+<dd class="rd-dd">
+<code>=TRUE</code> makes a plot which illustrates the integration.
+</dd>
+<dt>
+units
+</dt>
+<dd class="rd-dd">
+The units of integration, defaults to hours. It is only required to supply enough characters to uniquely complete the name.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+If <code>upper</code> or <code>lower</code> does not correspond to a data point, a linear interpolation is made between the two neighboring time points to predict the resulting data value.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The approximation of the integral by joining the points in the series in a linear fashion and calculating the area under this “curve”.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Some example power data
+data(PowerData)
+
+par(mfrow = c(2, 1))
+
+# Calculate the kilowatt-minutes, display graph which shows how the
+# integration is done.  This example calculates the integral using
+# a contiguous subset of the data
+int1 <- timeIntegration(PowerData,
+                       # Convert to POSIXct in order to subtract time
+                       lower = "5/6/2008 17:00:09",
+                       upper = "5/6/2008 17:01:36",
+                       check.plot = TRUE, units = "m")
+
+# This example calculates the integral for all the data in 'powerData'
+int2 <- timeIntegration(PowerData, check.plot = TRUE, units = "m")
+
+# Print the outcome
+pvar(int1, int2)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="mathematical-operations" class="section level1">
+<h1>Mathematical operations</h1>
+<div id="combolist" class="section level2">
+<h2>comboList</h2>
+<h3>
+Produces all possible combinations of a set of linear model predictors
+</h3>
+<p class="rd-p">
+Produces a list representing all possible combinations of linear model predictors
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>comboList(n.pred, outFile = NULL, njobs = 1)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+n.pred
+</dt>
+<dd class="rd-dd">
+integer indicating the number of predictors
+</dd>
+<dt>
+outFile
+</dt>
+<dd class="rd-dd">
+text string indicating the .Rdata file to which the returned list of predictor combinations will be saved. If NULL, then no file is saved.
+</dd>
+<dt>
+njobs
+</dt>
+<dd class="rd-dd">
+Integer indicating the number of parallel jobs to be used in calculating the combinations, using <code><a href=http://www.inside-r.org/r-doc/parallel/clusterApply>parLapply</a></code>
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Uses <code><a href=http://www.inside-r.org/r-doc/utils/combn>combn</a></code> to identify the combinations.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A list of class <code>combolist</code> is invisibly returned with the two components shown below. If <code>outFile</code> is not <code>NULL</code>, this same list is saved to <code>outFile</code>:
+<dt>
+len
+</dt>
+<dd>
+The total number of combinations
+</dd>
+<dt>
+pList
+</dt>
+<dd>
+A list where each element contains an integer representation of one combination of the predictors
+</dd>
+</p>
+<p class="rd-p">
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>x <- comboList(4)
+print(x)
+
+# A parallel job
+y <- comboList(4, njobs = 2)
+
+# Should be equal
+identical(x, y)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="cummax" class="section level2">
+<h2>cumMax</h2>
+<h3>
+Computes the maximum of the vector up to the current index
+</h3>
+<p class="rd-p">
+For each index in a vector, computes the maximum of the vector from the beginning of the vector up to the current index
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>cumMax(x)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+A numeric or integer vector
+</dd>
+</dl>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+In the sequence <code>x[1], x[2], …, x[n]</code>, <code>cumMax</code> returns the vector <code>y</code> such that for each <code>i = 1,…,n</code>, <code>y[i] = max(x[j]; j = 1,…,i)</code>
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>cumMax(1:10)
+cumMax(c(1,3,4,5,3,2,5,1,7,8,8,6))
+cumMax(c(1,3,4,5,3,2,5,1,7,8,8,6) + runif(12))</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="cumsumna" class="section level2">
+<h2>cumsumNA</h2>
+<h3>
+Computes the cummulative sum of a vector without propogating NAs
+</h3>
+<p class="rd-p">
+Computes the cummulative sum of a vector without propogating NA’s.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>cumsumNA(x)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+An integer or double vector
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+If <code>x</code> is integer, then integer addition is used. Otherwise, floating point (double) addition is used.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The vector of cumulative sums.
+</p>
+<p class="rd-p">
+Elements in <code>x</code> that were <code>NA</code> will continue to be <code>NA</code>, but the <code>NA</code> will not be propogated.
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># Compare to cumsum()
+x <- as.integer(c(5, 2, 7, 9, 0, -1))
+cumsum(x)
+cumsumNA(x)
+
+# Now with missing values
+x[c(2,4)] <- NA
+print(x)
+cumsum(x)
+cumsumNA(x)</code></pre>
+<h4>
+See also
+</h4>
+<p><code><a href=http://www.inside-r.org/r-doc/base/cumsum>cumsum</a></code></p>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="finddepmat" class="section level2">
+<h2>findDepMat</h2>
+<h3>
+Identify linearly dependent rows or columns in a matrix
+</h3>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>findDepMat(X, rows = TRUE, tol = 1e-10)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+X
+</dt>
+<dd class="rd-dd">
+A numeric matrix
+</dd>
+<dt>
+rows
+</dt>
+<dd class="rd-dd">
+Set <code>rows = TRUE</code> to identify which rows are linearly dependent. Set <code>rows = FALSE</code> to identify columns that are linearly dependent.
+</dd>
+<dt>
+tol
+</dt>
+<dd class="rd-dd">
+The tolerance used to determine whether one row (or column) is a linear combination of another.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+A row (or column) is considered to be a linear combination of another if the maximum of the absolute succesive differences of the ratios of the two rows (columns) exceeds the tolerance, <code>tol</code>. This is a fairly crude criterion and may need improvement–but it at least will identify the almost exact linear dependencies.
+</p>
+<p class="rd-p">
+<code>findDepMat</code> identifies linearly dependent rows (columns) similar to the way <code><a href=http://www.inside-r.org/r-doc/base/duplicated>duplicated</a></code> identifies duplicates. As such, the first instance (row or column) of a set of linearly dependent rows (or columns) is not flagged as being dependent.
+</p>
+<p class="rd-p">
+The sum of the negated output of <code>findDepMat</code> should be the number of linearly independent rows (columns). This quanity is compared to the rank produced by <code><a href=http://www.inside-r.org/r-doc/base/qr>qr</a></code>, and if not equal, a warning is issued. The value of <code>tol</code> is passed to <code><a href=http://www.inside-r.org/r-doc/base/qr>qr</a></code>, but the criteria of convergence for <code><a href=http://www.inside-r.org/r-doc/base/qr>qr</a></code> is assuredly different from that used here to identify the linearly dependent rows (columns).
+</p>
+<p class="rd-p">
+Currently this uses nested for loops within R (not C). Consequently, <code>findDepMat</code> is likely to be slow for large matrices.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A logical vector, equal in length to the number of rows (columns) of <code>X</code>, with <code>TRUE</code> indicating that the row (column) is linearly dependent on a previous row (column).
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># A matrix
+Y <- matrix(c(1, 3, 4,
+              2, 6, 8,
+              7, 2, 9,
+              4, 1, 7,
+              3.5, 1, 4.5), byrow = TRUE, ncol = 3)
+
+# Note how row 2 is multiple of row 1, row 5 is a multiple of row 3
+print(Y)
+
+findDepMat(Y)
+findDepMat(t(Y), rows = FALSE)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="integ" class="section level2">
+<h2>integ</h2>
+<h3>
+Simple numerical integration routine
+</h3>
+<p class="rd-p">
+Estimates the integral of a real-valued function using Simpson’s or the Trapezoid approximation
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>integ(y, x = NULL, a = NULL, b = NULL, method = c("simpson",
+  "trapezoid"))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+y
+</dt>
+<dd class="rd-dd">
+Vector of f(x) values
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+Numeric vector of sorted x values, each element of <code>x</code> should have a corresponding element in <code>y</code>. Only required for the trapezoid method. Not required for the Simpson method.
+</dd>
+<dt>
+a
+</dt>
+<dd class="rd-dd">
+The lower limit of integration, only required for the Simpson method.
+</dd>
+<dt>
+b
+</dt>
+<dd class="rd-dd">
+The upper limit of integration, only required for the Simpson method.
+</dd>
+<dt>
+method
+</dt>
+<dd class="rd-dd">
+The method of integration (can use just the first letter). Defaults to <code>simpson</code>.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+For the Simpson method, <code>y</code> is a numeric vector of f(x), evaluated at an odd number of evenly spaced xs in the interval [a,b].
+</p>
+<p class="rd-p">
+For the trapezoid method, the elements of <code>x</code> and <code>y</code> should correspond to one another, and <code>x</code> must be sorted in ascending order. The lengths or <code>x</code> and <code>y</code> should be the same, and they may be odd or even. The elements of <code>x</code> may be irregularly spaced.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A single numeric estimate of the integral of f(x) over [a, b] (Simpson) or over the range of <code>x</code> (trapezoid).
+</dl>
+</p>
+<h4>
+References
+</h4>
+<p class="rd-p">
+Ellis R, Gulick D. “Calculus: One and Several Variables,” Harcourt Brace Jovanovich, Publishers: New York, 1991; 479-482.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code># The Beta density from 0 to 0.7
+integ(dbeta(seq(0, 0.7, length = 401), 2, 5), a = 0, b = 0.7)
+
+# Checking result with the cdf
+pbeta(0.7, 2, 5)
+
+# f(x) = x^2 from 0 to 3
+integ(seq(0, 3, length=21)^2, a = 0, b = 3)
+
+# A quadratic function with both methods
+x <- seq(0, 3, length = 51)
+integ(x^2, x = x, method = "t")
+integ(x^2, a = 0, b = 3, method = "s")
+
+# Now a linear function
+x <- seq(0, 2, length = 3)
+y <- 2 * x + 3
+integ(y, x = x, method = "t")
+integ(y, a = 0, b = 2)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+<div id="linearmap" class="section level2">
+<h2>linearMap</h2>
+<h3>
+Linear mapping of a numeric vector or scalar
+</h3>
+<p class="rd-p">
+Linear mapping of a numeric vector or scalar from one contiguous interval to another
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>linearMap(x, D = range(x), R = c(0, 1))</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+a numeric vector
+</dd>
+<dt>
+D
+</dt>
+<dd class="rd-dd">
+a vector with 2 elements, the first being the lower endpoint of the domain, the upper being the upper endpoint of the domain. Note <code>R[1]</code> must be less than <code>R[2]</code>.
+</dd>
+<dt>
+R
+</dt>
+<dd class="rd-dd">
+a vector with 2 elements indicating the range of the linear mapping. <code>R[1]</code> is mapped to <code>D[1]</code>, and <code>R[2]</code> is mapped to <code>D[2]</code>.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+The mapping is <span class="math inline"><em>f</em> : <em>D</em> → <em>R</em></span>, where <span class="math inline"><em>f</em>(<em>D</em>[1]) = <em>R</em>[1]</span> and <span class="math inline"><em>f</em>(<em>D</em>[2]) = <em>R</em>[2]</span>.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+The linear mapping of <code>x</code> from <code>D</code> to <code>R</code>
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>x <- seq(0, 1, length = 5)
+
+# An increasing linear map
+linearMap(x, R = c(4, 7))
+
+# A decreasing map
+linearMap(x, R = c(7, 4))
+
+# A shift
+linearMap(x, R = c(-1, 0))
+
+# The identity map:
+y <- linearMap(x, D = c(0, 1), R = c(0, 1))
+identical(y, x)</code></pre>
+<h4>
+Author
+</h4>
+<p>Landon Sego</p>
+</div>
+</div>
+<div id="datasets" class="section level1">
+<h1>Datasets</h1>
+<div id="powerdata" class="section level2">
+<h2>PowerData</h2>
+<h3>
+An example of power data
+</h3>
+<p class="rd-p">
+A small, altered, subset of total rack power for one of the racks in a data center, to be used for illustration.
+</p>
+<h4>
+Format
+</h4>
+<p class="rd-p">
+The format is: Named num [1:12] 5.15 5.15 5.15 5.16 5.16 … - attr(*, “names”)= chr [1:12] “2008-05-06 17:00:01” “2008-05-06 17:00:17” “2008-05-06 17:00:21” “2008-05-06 17:00:32” …
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>data(PowerData)
+print(PowerData)
+rm(PowerData, envir=.GlobalEnv)</code></pre>
+</div>
+<div id="timedata" class="section level2">
+<h2>timeData</h2>
+<h3>
+Generic data frame with a time variable
+</h3>
+<p class="rd-p">
+Generic data frame with a time variable to support the example in <code><a href='smartTimeAxis.html'>smartTimeAxis</a></code>.
+</p>
+<h4>
+Format
+</h4>
+<p class="rd-p">
+A data frame with 414 observations on the following 2 variables.
+<dl>
+<dt>
+time
+</dt>
+<dd>
+a POSIXt time variable
+</dd>
+</p>
+<p class="rd-p">
+<dt>
+x
+</dt>
+<dd>
+a numeric vector
+</dd>
+</p>
+<p class="rd-p">
+</dl>
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>data(timeData)</code></pre>
+</div>
+<div id="timediff.eg" class="section level2">
+<h2>timeDiff.eg</h2>
+<h3>
+Four short time series
+</h3>
+<p class="rd-p">
+Four short times series, stored in a list, for use in the <code><a href='timeDiff.html'>timeDiff</a></code> example.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>data(timeDiff.eg)</code></pre>
+</div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <div class="col-md-6">
+                <p>&copy; Battelle Memorial Institute, 2016</p>
+              </div>
+      <div class="col-md-6">
+        <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a></p>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+</html>
