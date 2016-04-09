@@ -1,7 +1,8 @@
 docs-Smisc
 ===========
 
-Tutorial and package reference for Smisc.
+This repository contains the [tutorial and package reference](https://pnnl.github.io/docs-Smisc) for 
+the [Smisc](https://github.com/pnnl/Smisc) package.
 
 ## How to contribute
 
@@ -33,3 +34,4 @@ Each time you want to sync with the live version of the docs:
 git fetch upstream
 git merge upstream/gh-pages
 ```
+
