@@ -989,7 +989,7 @@ factor2numeric(y)</code></pre>
 
 ## as.numericSilent
 
-<h3>Silent wrapper for coercing a vector to numeric</h3>
+<h3>Convert any vector to numeric, if possible</h3>
 
 
 <h4>Usage</h4>
@@ -1306,7 +1306,7 @@ Landon Sego
 
 ## timeStamp
 
-<h3>Imbeds the present datetime into a file name</h3>
+<h3>Embeds the present datetime into a file name</h3>
 
 
 <h4>Usage</h4>
@@ -1315,9 +1315,9 @@ Landon Sego
 <h4>Arguments</h4>
 <dl class="rd-dl">
   <dt>description</dt>
-  <dd class="rd-dd">Character string giving the base name of the file</dd>
+  <dd class="rd-dd">Character vector giving the base name(s) of the file(s)</dd>
   <dt>extension</dt>
-  <dd class="rd-dd">Character string giving the extension of the file
+  <dd class="rd-dd">Character vector giving the extension(s) of the file(s)
 (excluding the period)</dd>
 </dl>
 
@@ -4090,9 +4090,8 @@ Landon Sego
 
 ## cumsumNA
 
-<h3>Computes the cummulative sum of a vector without propogating NAs</h3>
+<h3>Computes the cummulative sum of a vector without propagating NAs</h3>
 
-<p class="rd-p">Computes the cummulative sum of a vector without propogating NA's.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>cumsumNA(x)</code></pre>
@@ -4106,16 +4105,14 @@ Landon Sego
   <h4>Details</h4>
 
   <p class="rd-p">If <code>x</code> is integer, then integer addition is used.  Otherwise, floating
-point (double) addition is used.</p>
+point (double) addition is used. Elements in <code>x</code> that were <code>NA</code> will continue
+to be <code>NA</code>, but the <code>NA</code> will not be propagated.</p>
 
 
   <h4>Value</h4>
 
   <p class="rd-p"><dl>
-The vector of cumulative sums.</p>
-
-  <p class="rd-p">Elements in <code>x</code> that were <code>NA</code> will continue to be <code>NA</code>, but
-the <code>NA</code> will not be propogated.
+The vector of cumulative sums.
 </dl></p>
 
 
@@ -4284,7 +4281,7 @@ integ(dbeta(seq(0, 0.7, length = 401), 2, 5), a = 0, b = 0.7)
 pbeta(0.7, 2, 5)
 
 # f(x) = x^2 from 0 to 3
-integ(seq(0, 3, length=21)^2, a = 0, b = 3)
+integ(seq(0, 3, length = 21)^2, a = 0, b = 3)
 
 # A quadratic function with both methods
 x <- seq(0, 3, length = 51)

@@ -462,7 +462,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2016-04-09_165201.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2016-04-09_204801.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -591,7 +591,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>1.01 seconds </code></pre>
+<pre><code>0.96 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>
@@ -605,7 +605,7 @@ aFunction(-1, a = 7)</code></pre>
 <p>There are a number of packages out there that enable parallelization of R. The parallelization functions in the <code>Smisc</code> package are not meant to replace them, but rather, make them easier to use—especially for Windows users. For the most part, I rely on the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf">parallel</a> package for parallelization. These functions are designed to run on a single, multi-core workstation (as opposed to a cluster with multiple nodes).</p>
 <div id="parallelize-lapply-a-wrapper-for-parlapply" class="section level2">
 <h2>Parallelize lapply(), a wrapper for parLapply()</h2>
-<p><code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> parallelizes <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a>, and is a wrapper for <a href="http://www.inside-r.org/r-doc/parallel/parLapply">parLapply()</a>. <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> makes makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, running the <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> in parallel, and then shutting down the cluster—all in one function call. If the job fails, the cluster is shut down without consequence.</p>
+<p><code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> parallelizes <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a>, and is a wrapper for <a href="http://www.inside-r.org/r-doc/parallel/parLapply">parLapply()</a>. <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> makes makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, run the <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> in parallel, and then shut down the cluster—all in one function call. If the job fails, the cluster is shut down without consequence.</p>
 <p>Let’s look at two workflows that produce the same result, one using the individual functions of the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf">parallel</a> package, and the second using <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>. Here are some preliminary objects that both workflows will need:</p>
 <pre class="r"><code># A vector we&#39;ll process using f1
 x1 &lt;- rnorm(4)
@@ -637,7 +637,7 @@ parallel::stopCluster(cl)</code></pre>
 </div>
 <div id="parallelize-lapply-with-convenient-debugging-and-more" class="section level2">
 <h2>Parallelize lapply() with convenient debugging and more</h2>
-<p>Like <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>, <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> is also a parallelization of <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> for a single workstation. <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> differs from other parallelized implementations of <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own <code>.Rout</code> file that can be investigated for errors and warnings. While <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:</p>
+<p><code><a target='_blank' href='rd.html#plapply'>plapply()</a></code>, like <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>, is also a parallelization of <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> for a single workstation. <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> differs from other parallelized implementations of <a href="http://www.inside-r.org/r-doc/base/lapply">lapply()</a> in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own <code>.Rout</code> file that can be investigated for errors and warnings. While <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:</p>
 <ul>
 <li>The <code>.Rout</code> files produced by each R instance are easily accessible for convenient debugging of errors or warnings. The <code>.Rout</code> files can also serve as an explicit record of the work that was performed by the workers</li>
 <li>Three options are available for the ordering of the processing of the list elements: the original list order, randomized, or collated (first-in-first-out)</li>
@@ -1099,7 +1099,7 @@ findDepMat(Y)</code></pre>
 plotFun(f, c(0, 1), col = &quot;Blue&quot;)</code></pre>
 <p><img src="index_files/figure-html/integ1-1.png" title="" alt="" width="624" /></p>
 <p>Integration using Simpson’s approximation:</p>
-<pre class="r"><code>integ(f(seq(0, 0.3, length = 5001)), a = 0, b = 0.3)</code></pre>
+<pre class="r"><code>integ(f(seq(0, 0.3, length = 1001)), a = 0, b = 0.3)</code></pre>
 <pre><code>[1] 0.09880866</code></pre>
 <p>Compare to <a href="http://www.inside-r.org/r-doc/stats/pbeta">pbeta()</a>:</p>
 <pre class="r"><code>pbeta(0.3, 5, 5)</code></pre>
