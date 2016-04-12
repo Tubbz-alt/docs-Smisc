@@ -339,7 +339,7 @@ for (i in 1:2) {
 
 ## Flexibly select valid elements from a character vector
 
-I often write functions where one or more of the arguments are a vector of column names (or numbers) that will be selected from a dataframe.  `r rdl("selectElements")` provides a mechanism for selecting the columns using three different methods (a character vector of column names, a numeric vector of column numbers, or a logical vector) and it checks that the selection provided by the user is correct.
+I often write functions where one or more of the arguments are a vector of column names (or numbers) that will be selected from a dataframe.  `r rdl("selectElements()")` provides a mechanism for selecting the columns using three different methods (a character vector of column names, a numeric vector of column numbers, or a logical vector) and it checks that the selection provided by the user is correct.
 ```{r selectElements1, eval = TRUE, echo = TRUE}
 # Define a dataframe
 myData <- data.frame(a = 1:2, b = letters[1:2], c = c(TRUE, FALSE), d = rnorm(2))
@@ -361,7 +361,7 @@ makeSelection(myData, c("a", "e"))
     Error in selectElements(sel, colnames(data)) :
       An invalid value was chosen in 'elements': 'e' is not in 'cVec'
 
-While this example focuses on column names, `r rdl("selectElements")` can be used to select the elements from any character vector.
+While this example focuses on column names, `r rdl("selectElements()")` can be used to select the elements from any character vector.
 
 ## Source all R files in a directory
 `r rdl("sourceDir()")` sources all the files with `.R` or `.r` extensions in a directory. If a file fails to source correctly, an informative error message is printed--but it doesn't prevent the remainder of the files from being sourced.  This is especially useful in package development, allowing you to quickly check that all the R code sources correctly prior to building the package:

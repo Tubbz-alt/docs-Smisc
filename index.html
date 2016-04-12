@@ -462,7 +462,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2016-04-09_204801.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2016-04-11_203303.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -530,7 +530,7 @@ i = 2; j = b </code></pre>
 </div>
 <div id="flexibly-select-valid-elements-from-a-character-vector" class="section level2">
 <h2>Flexibly select valid elements from a character vector</h2>
-<p>I often write functions where one or more of the arguments are a vector of column names (or numbers) that will be selected from a dataframe. <code><a target='_blank' href='rd.html#selectelements'>selectElements</a></code> provides a mechanism for selecting the columns using three different methods (a character vector of column names, a numeric vector of column numbers, or a logical vector) and it checks that the selection provided by the user is correct.</p>
+<p>I often write functions where one or more of the arguments are a vector of column names (or numbers) that will be selected from a dataframe. <code><a target='_blank' href='rd.html#selectelements'>selectElements()</a></code> provides a mechanism for selecting the columns using three different methods (a character vector of column names, a numeric vector of column numbers, or a logical vector) and it checks that the selection provided by the user is correct.</p>
 <pre class="r"><code># Define a dataframe
 myData &lt;- data.frame(a = 1:2, b = letters[1:2], c = c(TRUE, FALSE), d = rnorm(2))
 
@@ -556,7 +556,7 @@ makeSelection(myData, c(&quot;a&quot;,&quot;d&quot;))</code></pre>
 makeSelection(myData, c(&quot;a&quot;, &quot;e&quot;))</code></pre>
 <pre><code>Error in selectElements(sel, colnames(data)) :
   An invalid value was chosen in &#39;elements&#39;: &#39;e&#39; is not in &#39;cVec&#39;</code></pre>
-<p>While this example focuses on column names, <code><a target='_blank' href='rd.html#selectelements'>selectElements</a></code> can be used to select the elements from any character vector.</p>
+<p>While this example focuses on column names, <code><a target='_blank' href='rd.html#selectelements'>selectElements()</a></code> can be used to select the elements from any character vector.</p>
 </div>
 <div id="source-all-r-files-in-a-directory" class="section level2">
 <h2>Source all R files in a directory</h2>
@@ -591,7 +591,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>0.96 seconds </code></pre>
+<pre><code>0.97 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>

@@ -19,7 +19,7 @@ brand: |-
 <h1>Sego Miscellaneous</h1>
 
 <p><strong>Authors:</strong> (none)</p>
-<p><strong>Version:</strong> 0.3.0</p>
+<p><strong>Version:</strong> 0.3.1</p>
 <p><strong>License:</strong> file LICENSE</p>
 
 <h4>Description</h4>
@@ -62,7 +62,7 @@ something other than the name it was saved as.</p>
 <h4>Arguments</h4>
 <dl class="rd-dl">
   <dt>RdataFiles</dt>
-  <dd class="rd-dd">A character vector containing the .Rdata filenames</dd>
+  <dd class="rd-dd">A character vector containing the .Rdata filename(s)</dd>
 </dl>
 
   <h4>Value</h4>
@@ -508,9 +508,11 @@ Landon Sego
 
 ## select
 
-<h3>Select rows or columns from data frames or matrices</h3>
+<h3>Select rows or columns from data frames or matrices while always returning a data frame or a matrix</h3>
 
-<p class="rd-p">Select rows or columns from data frames or matrices while always returning a data frame or a matrix</p>
+<p class="rd-p">The primary contribution of this function is that if a single row or column is selected, the
+object that is returned will be a matrix or a dataframe---and it will not be collapsed into a
+single vector, as is the usual behavior in R.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>select(data, selection, cols = TRUE)</code></pre>
@@ -528,10 +530,6 @@ If <code>FALSE</code>, rows will be selected.</dd>
 </dl>
 
   <h4>Details</h4>
-
-  <p class="rd-p">The primary contribution of this function is that if a single row or column is selected, the
-object that is returned will be a matrix or a dataframe---and it will not be collapsed into a
-single vector, as is the usual behavior in R.</p>
 
   <p class="rd-p">Selecting no rows or no columns is possible if <code>selection = 0</code> or if <code>length(selection) == 0</code>.
 In this case, a data frame or matrix with either 0 columns or 0 rows is returned.</p>
@@ -1033,8 +1031,8 @@ Landon Sego
 
 <h3>Get the extension of a vector of filenames</h3>
 
-<p class="rd-p">Get the extension of a vector of filenames, assuming that the extension is the set of characters that follows the last
-<code>.</code>.  A wrapper for <code><a href='grabLast.html'>grabLast</a></code>.</p>
+<p class="rd-p">Get the extension of a vector of filenames, assuming that the extension is the set of characters that
+follows the last <code>"."</code>.  A wrapper for <code><a href='grabLast.html'>grabLast</a></code>.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>getExtension(vec, split.char = ".")</code></pre>
@@ -1145,8 +1143,8 @@ Landon Sego
 
 <h3>Remove the extension of a vector of filenames</h3>
 
-<p class="rd-p">Remove the extension of a vector of filenames, assuming that the extension is the set of characters that follows the last
-"."</p>
+<p class="rd-p">Remove the extension of a vector of filenames, assuming that the extension is the set of characters
+that follows the last <code>"."</code></p>
 
 <h4>Usage</h4>
 <pre class="r"><code>stripExtension(vec, split.char = ".")</code></pre>
@@ -1563,11 +1561,11 @@ objects and their values
 y <- 20.728923
 z <- "This.long.string"
 
-pvar(x,y,z)
-pvar(x,y,z, digits = 2)
-pvar(x,y,z, abbrev = 4)
-pvar(x,y,z, digits = 2, abbrev = 4)
-pvar(x,y,z, sep = ",")
+pvar(x, y, z)
+pvar(x, y, z, digits = 2)
+pvar(x, y, z, abbrev = 4)
+pvar(x, y, z, digits = 2, abbrev = 4)
+pvar(x, y, z, sep = ",")
 
 # values can be vectors too
 x <- 10:12
@@ -1579,7 +1577,7 @@ v2
 pvar(list(x = 1:2, y = "this", z = TRUE))
 
 # Can be useful for keeping track of iterations in loops
-for (i in 1:3) {
+for (i in 1:2) {
   for (j in letters[1:2]) {
     for (k in c("this","that")) {
       pvar(i, j, k)
@@ -1704,10 +1702,14 @@ Landon Sego
 each condition that doesn't test true</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>stopifnotMsg(...)</code></pre>
+<pre class="r"><code>stopifnotMsg(..., level = 1)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
+  <dt>level</dt>
+  <dd class="rd-dd">Whole number indicating how far back in the call stack the error should be attributed to.
+<code>level = 1</code> goes back to the calling function, <code>level = 2</code> goes back 2 levels, etc.
+See examples.</dd>
   <dt>...</dt>
   <dd class="rd-dd">Pairs of logical conditions and error messages. See Examples.</dd>
 </dl>
@@ -1743,7 +1745,28 @@ aFunction(12, a = 13, b = "new")
 aFunction("new", a = 7, b = 5)
 
 # And this should produce an error with 1 message:
-aFunction(33, a = "bad")</code></pre>
+aFunction(33, a = "bad")
+
+
+### This illustrates how the 'level' argument works
+
+# A check function that will be called within another
+check <- function(a, lev) {
+  stopifnotMsg(is.numeric(a), "a must be numeric", level = lev)
+}
+
+# A function that uses the check.
+f <- function(a, lev = 1) {
+  check(a, lev)
+  return(a + 10)
+}
+
+
+# Note how the error is attributed to 'check'
+f("a")
+
+# But if we change the level to 2, the error will be attributed to 'f'
+f("a", lev = 2)</code></pre>
 
 <h4>Author</h4>
 
@@ -2152,7 +2175,7 @@ Landon Sego
 <h3>Parallelized single row processing of a data frame</h3>
 
 <p class="rd-p">Applies a function to each row of a data frame in a parallelized fashion
-(by submitting multiple batch R jobs).  It is a convenient wrapper for <code>plapply</code>, modified
+(by submitting multiple batch R jobs).  It is a convenient wrapper for <code><a href='plapply.html'>plapply</a></code>, modified
 especially for parallel, single-row processing of data frames.</p>
 
 <h4>Usage</h4>
@@ -3109,7 +3132,7 @@ random variables, with possibly different probabilities.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>dkbinom(x, size, prob, log = FALSE, verbose = FALSE,
-        method = c("butler", "fft"), checkArgs = TRUE)
+        method = c("butler", "fft"))
 pkbinom(q, size, prob, log.p = FALSE, verbose = FALSE,
         method = c("butler", "naive", "fft"))</code></pre>
 
@@ -3123,23 +3146,21 @@ of the k binomial variates</dd>
   <dt>prob</dt>
   <dd class="rd-dd">Vector of the probabilities of success</dd>
   <dt>log, log.p</dt>
-  <dd class="rd-dd">logical; if TRUE, probabilities p are given as log(p).
-(See NOTE in details).</dd>
+  <dd class="rd-dd">logical; if TRUE, probabilities <em>p</em> are given as <em>log(p)</em> (see Note).</dd>
   <dt>verbose</dt>
   <dd class="rd-dd"><code>= TRUE</code> produces output that shows the iterations of
 the convolutions and 3 arrays, A, B, and C that are used to convolve and
 reconvolve the distributions.  Array C is the final result.  See the source
 code in <code>dkbinom.c</code> for more details.</dd>
   <dt>method</dt>
-  <dd class="rd-dd">The <code>butler</code> (default) method is the
+  <dd class="rd-dd">A character string that uniquely indicates the method. <code>butler</code> is the
+preferred (and default) method, which uses the
 algorithm given by Butler, et al. The <code>naive</code> method is an alternative approach
 that can be  much slower that can handle no more the sum of five binomials, but
 is useful for validating the other methods. The <code>naive</code> method only works
 for a single value of <code>q</code>. The <code>fft</code> method uses the fast Fourier
-transform to compute the convolution of k binomial random variates.</dd>
-  <dt>checkArgs</dt>
-  <dd class="rd-dd"><code>=TRUE</code> checks the incoming arguments <code>x</code>, <code>size</code>,
-<code>prob</code> for correct structure and consistency.</dd>
+transform to compute the convolution of k binomial random variates, and is also useful for
+checking the other methods.</dd>
   <dt>q</dt>
   <dd class="rd-dd">Vector of quantiles (value at which to evaluate the distribution
 function) of the sum of the k binomial variates</dd>
@@ -3155,19 +3176,21 @@ probability of the second binomial variate, etc.</p>
 <code>dbinom</code> is used.  Otherwise, repeating convolutions of the k
 binomials are used to calculate the mass or the distribution functions.</p>
 
-  <p class="rd-p">NOTE: When <code>log.p</code> or <code>log</code> is <code>TRUE</code>, these functions do
-not have the same precision as <code>dbinom</code> or <code>pbinom</code> when the
-probabilities are very small, i.e, the values tend to go to <code>-Inf</code>
-more quickly.</p>
-
 
   <h4>Value</h4>
 
   <p class="rd-p"><dl>
 <code>dkbinom</code> gives the mass function, <code>pkbinom</code> gives the
-distribution function.  Produces errors for invalid inputs of <code>size</code>,
-<code>prob</code>, <code>x</code>, and <code>q</code>.
+distribution function.
 </dl></p>
+
+
+  <h4>Note</h4>
+
+  <p class="rd-p">When <code>log.p</code> or <code>log</code> is <code>TRUE</code>, these functions do
+not have the same precision as <code>dbinom</code> or <code>pbinom</code> when the
+probabilities are very small, i.e, the values tend to go to <code>-Inf</code>
+more quickly.</p>
 
 
   <h4>References</h4>
@@ -3709,7 +3732,7 @@ Landon Sego
 
 <h3>Calculate the moving average using a 2-sided, symmetric window</h3>
 
-<p class="rd-p">Wrapper for <code>smartFilter</code> that creates a set of symmetric weights for
+<p class="rd-p">Wrapper for <code><a href='smartFilter.html'>smartFilter</a></code> that creates a set of symmetric weights for
 the 2-sided window based on the Gaussian kernel, exponetial decay, linear
 decay, or simple uniform weights, and then calculates the moving average
 using those weights.</p>
@@ -4369,7 +4392,7 @@ Landon Sego
 <h3>An example of power data</h3>
 
 <p class="rd-p">A small, altered, subset of total rack power for one of the racks in a data
-center, to be used for illustration.</p>
+center.  Used for illustration of <code><a href='timeIntegration.html'>timeIntegration</a></code></p>
 
   <h4>Format</h4>
 
