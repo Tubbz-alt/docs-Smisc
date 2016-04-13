@@ -20,7 +20,7 @@ packagedocs::render_docs(
   rd_index = "./rd_index.yaml" # optional path to rd layout yaml
 )
 
-# Ensure the 'rsed' package is loaded
+# Ensure the 'rsed' package is installed
 if(!require("rsed")) {
   devtools::install_github("pnnl/rsed")
 }
@@ -65,6 +65,36 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
                       # Fix the methods for hpd
                       s = list(pattern = "printhpd(x", replacement = "print(x", fixed = TRUE),
                       s = list(pattern = "plothpd(x", replacement = "plot(x", fixed = TRUE),
+
+                      # Fix the link for grabLast in getExtension
+                      s = list(pattern = "<code><a href='grabLast.html'>",
+                               replacement = "<code><a href='#grablast'>",
+                               fixed = TRUE),
+                      
+                      # Fix the link for plapply in dfplapply
+                      s = list(pattern = "<code><a href='plapply.html'>",
+                               replacement = "<code><a href='#plapply'>",
+                               fixed = TRUE),
+                      
+                      # Fix the link for smartFilter in movAvg2
+                      s = list(pattern = "<code><a href='smartFilter.html'>",
+                               replacement = "<code><a href='#smartfilter'>",
+                               fixed = TRUE),
+                      
+                      # Fix the link for smartTimeAxis in timeDiff.eg
+                      s = list(pattern = "<code><a href='smartTimeAxis.html'>",
+                               replacement = "<code><a href='#smarttimeaxis'>",
+                               fixed = TRUE),
+                      
+                      # Fix the link for timeIntegration in PowerData
+                      s = list(pattern = "<code><a href='timeIntegration.html'>",
+                               replacement = "<code><a href='#timeintegration'>",
+                               fixed = TRUE),
+                      
+                      # Fix the link for timeDiff in timeData
+                      s = list(pattern = "<code><a href='timeDiff.html'>",
+                               replacement = "<code><a href='#timediff'>",
+                               fixed = TRUE),
                  
                       # Fix the author field
                       r = list(at = "<strong>Authors:</strong> (none)",

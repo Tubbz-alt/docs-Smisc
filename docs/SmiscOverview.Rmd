@@ -30,10 +30,11 @@ library(Smisc)
 # Data ingestion
 
 ## Load objects to a name of choice
-I always found it a bit annoying how `load()` places the object(s) in the `.Rdata` file into `.GlobalEnv` without immediately telling you what the name(s) of the object is (are).  `r rdl("loadObject()")` makes it easy to assign the contents of the `.Rdata` file to an object of my choice, like this:
+I always found it a bit annoying how [load()](http://www.inside-r.org/r-doc/base/load) places the object(s) in the `.Rdata` file into `.GlobalEnv` without immediately telling you what the name(s) of the object is (are).  `r rdl("loadObject()")` makes it easy to assign the contents of the `.Rdata` file to an object of my choice, like this:
 ```{r loadObject, eval = FALSE, echo = TRUE}
 myName <- loadObject("~/aDir/aFile.Rdata")
 ```
+And thus `myName` contains the contents `aFile.Rdata`.
 
 ## Flexibly ingest data
 `r rdl("dataIn()")` provides a flexible way to ingest data into R. It takes a single argument that can be the filename of an `.Rdata` or `.csv` file, a package dataset, or an existing data frame. It returns a data frame.  Each of these, in principle, would achieve the same result, regardless of the format of the input data:
@@ -339,7 +340,7 @@ for (i in 1:2) {
 
 ## Flexibly select valid elements from a character vector
 
-I often write functions where one or more of the arguments are a vector of column names (or numbers) that will be selected from a dataframe.  `r rdl("selectElements")` provides a mechanism for selecting the columns using three different methods (a character vector of column names, a numeric vector of column numbers, or a logical vector) and it checks that the selection provided by the user is correct.
+I often write functions where one or more of the arguments are a vector of column names (or numbers) that will be selected from a dataframe.  `r rdl("selectElements()")` provides a mechanism for selecting the columns using three different methods (a character vector of column names, a numeric vector of column numbers, or a logical vector) and it checks that the selection provided by the user is correct.
 ```{r selectElements1, eval = TRUE, echo = TRUE}
 # Define a dataframe
 myData <- data.frame(a = 1:2, b = letters[1:2], c = c(TRUE, FALSE), d = rnorm(2))
@@ -361,7 +362,7 @@ makeSelection(myData, c("a", "e"))
     Error in selectElements(sel, colnames(data)) :
       An invalid value was chosen in 'elements': 'e' is not in 'cVec'
 
-While this example focuses on column names, `r rdl("selectElements")` can be used to select the elements from any character vector.
+While this example focuses on column names, `r rdl("selectElements()")` can be used to select the elements from any character vector.
 
 ## Source all R files in a directory
 `r rdl("sourceDir()")` sources all the files with `.R` or `.r` extensions in a directory. If a file fails to source correctly, an informative error message is printed--but it doesn't prevent the remainder of the files from being sourced.  This is especially useful in package development, allowing you to quickly check that all the R code sources correctly prior to building the package:
@@ -411,7 +412,7 @@ A call to `r rdl("rma()")` removes all the objects in the Global Environment.
 There are a number of packages out there that enable parallelization of R.  The parallelization functions in the `Smisc` package are not meant to replace them, but rather, make them easier to use---especially for Windows users. For the most part, I rely on the [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf) package for parallelization.  These functions are designed to run on a single, multi-core workstation (as opposed to a cluster with multiple nodes).
 
 ## Parallelize lapply(), a wrapper for parLapply()
-`r rdl("parLapplyW()")` parallelizes [lapply()](http://www.inside-r.org/r-doc/base/lapply), and is a wrapper for [parLapply()](http://www.inside-r.org/r-doc/parallel/parLapply). `r rdl("parLapplyW()")` makes makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, running the [lapply()](http://www.inside-r.org/r-doc/base/lapply) in parallel, and then shutting down the cluster---all in one function call.  If the job fails, the cluster is shut down without consequence.  
+`r rdl("parLapplyW()")` parallelizes [lapply()](http://www.inside-r.org/r-doc/base/lapply), and is a wrapper for [parLapply()](http://www.inside-r.org/r-doc/parallel/parLapply). `r rdl("parLapplyW()")` makes makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, run the [lapply()](http://www.inside-r.org/r-doc/base/lapply) in parallel, and then shut down the cluster---all in one function call.  If the job fails, the cluster is shut down without consequence.  
 
 Let's look at two workflows that produce the same result, one using the individual functions of the [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf) package, and the second using `r rdl("parLapplyW()")`.  Here are some preliminary objects that both workflows will need:
 ```{r parLapplyW1, eval = TRUE, echo = TRUE}
@@ -455,7 +456,7 @@ identical(res1, res2)
 ```
 
 ## Parallelize lapply() with convenient debugging and more
-Like `r rdl("parLapplyW()")`, `r rdl("plapply()")` is also a parallelization of [lapply()](http://www.inside-r.org/r-doc/base/lapply) for a single workstation. `r rdl("plapply()")` differs from other parallelized implementations of [lapply()](http://www.inside-r.org/r-doc/base/lapply) in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own `.Rout` file that can be investigated for errors and warnings. While `r rdl("plapply()")` will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:
+`r rdl("plapply()")`, like `r rdl("parLapplyW()")`, is also a parallelization of [lapply()](http://www.inside-r.org/r-doc/base/lapply) for a single workstation. `r rdl("plapply()")` differs from other parallelized implementations of [lapply()](http://www.inside-r.org/r-doc/base/lapply) in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own `.Rout` file that can be investigated for errors and warnings. While `r rdl("plapply()")` will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:
 
 -  The `.Rout` files produced by each R instance are easily accessible for convenient debugging of errors or warnings. The `.Rout` files can also serve as an explicit record of the work that was performed by the workers
 - Three options are available for the ordering of the processing of the list elements: the original list order, randomized, or collated (first-in-first-out)
