@@ -62,9 +62,15 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
                                replacement = "<h2>dkbinom, pkbinom</h2>",
                                fixed = TRUE),
                       
-                      # Fix the methods for hpd
-                      s = list(pattern = "printhpd(x", replacement = "print(x", fixed = TRUE),
-                      s = list(pattern = "plothpd(x", replacement = "plot(x", fixed = TRUE),
+                      # Fix the print method for hpd
+                      r = list(at = "printhpd(x",
+                              replacement = "## S3 method for class 'hpd'\nprint(x, ...)",
+                              fixed = TRUE),
+
+                      # Fix the plot method for hpd                      
+                      r = list(at = "plothpd(x",
+                               replacement = "## S3 method for class 'hpd'\nplot(x, ...)</code></pre>",
+                               fixed = TRUE),
 
                       # Fix the link for grabLast in getExtension
                       s = list(pattern = "<code><a href='grabLast.html'>",
