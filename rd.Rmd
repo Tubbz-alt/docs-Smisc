@@ -897,7 +897,6 @@ sepTest <- function(x) {
  cat("Objects in the local environment after separating the list:\n")
  print(ls(.GlobalEnv))
 
-
 } # sepTest
 
 sepTest(list(z1 = 10, z2 = "that"))
@@ -1186,7 +1185,7 @@ stripExtension(c("this old file*doc", "that young file*rtf",
 # output easier to read.  This example demonstrates a number of
 # pathological cases.
 stripExtension(c(a = NA, b = ".doc", c = "this.pdf", d = "this.file.", e = ".",
-                 f= "noExtension", g = "direc.name/filename.txt", h = ""))
+                 f = "noExtension", g = "direc.name/filename.txt", h = ""))
 
 # An example with 'real' files
 files <- dir(file.path(path.package(package = "Smisc"), "data"), full.names = TRUE)
@@ -1417,7 +1416,7 @@ vector that would be needed to create that vector.</p>
 <h4>Arguments</h4>
 <dl class="rd-dl">
   <dt>x</dt>
-  <dd class="rd-dd">A vector (numeric, character, or logical)</dd>
+  <dd class="rd-dd">A vector (numeric, character, logical, or complex)</dd>
   <dt>vname</dt>
   <dd class="rd-dd">A string indicating the name of the vector that will be "created" in the code</dd>
   <dt>vert</dt>
@@ -1461,12 +1460,11 @@ Landon Sego
 
 ## more
 
-<h3>Display the contents of a file to the R terminal</h3>
+<h3>Display the contents of a file to the R console</h3>
 
-<p class="rd-p">Display the contents of a file to the R terminal, like the <code>more</code> command in Unix</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>more(file, n = -1L, display = c("all", "head", "tail"))</code></pre>
+<pre class="r"><code>more(file, n = -1, display = c("all", "head", "tail"))</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1474,7 +1472,7 @@ Landon Sego
   <dd class="rd-dd">Text string giving the file name</dd>
   <dt>n</dt>
   <dd class="rd-dd">Integer specifying the maximum number of lines to read from the file. This is passed
-to the <code>n</code> argument of <code><a href=http://www.inside-r.org/r-doc/base/readLines>readLines</a></code>. The default is <code>as.integer(-1)</code>,
+to the <code>n</code> argument of <code><a href=http://www.inside-r.org/r-doc/base/readLines>readLines</a></code>. The default is <code>-1</code>,
 which will read all the lines in the file.</dd>
   <dt>display</dt>
   <dd class="rd-dd">Text string that uniquely identifies one of <code>"all"</code>, <code>"head"</code>,

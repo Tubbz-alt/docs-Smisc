@@ -30,10 +30,11 @@ library(Smisc)
 # Data ingestion
 
 ## Load objects to a name of choice
-I always found it a bit annoying how `load()` places the object(s) in the `.Rdata` file into `.GlobalEnv` without immediately telling you what the name(s) of the object is (are).  `r rdl("loadObject()")` makes it easy to assign the contents of the `.Rdata` file to an object of my choice, like this:
+I always found it a bit annoying how [load()](http://www.inside-r.org/r-doc/base/load) places the object(s) in the `.Rdata` file into `.GlobalEnv` without immediately telling you what the name(s) of the object is (are).  `r rdl("loadObject()")` makes it easy to assign the contents of the `.Rdata` file to an object of my choice, like this:
 ```{r loadObject, eval = FALSE, echo = TRUE}
 myName <- loadObject("~/aDir/aFile.Rdata")
 ```
+And thus `myName` contains the contents `aFile.Rdata`.
 
 ## Flexibly ingest data
 `r rdl("dataIn()")` provides a flexible way to ingest data into R. It takes a single argument that can be the filename of an `.Rdata` or `.csv` file, a package dataset, or an existing data frame. It returns a data frame.  Each of these, in principle, would achieve the same result, regardless of the format of the input data:
