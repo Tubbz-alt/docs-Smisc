@@ -19,7 +19,7 @@ brand: |-
 <h1>Sego Miscellaneous</h1>
 
 <p><strong>Authors:</strong> (none)</p>
-<p><strong>Version:</strong> 0.3.1</p>
+<p><strong>Version:</strong> 0.3.2</p>
 <p><strong>License:</strong> file LICENSE</p>
 
 <h4>Description</h4>
@@ -1352,7 +1352,7 @@ decimal places.</p>
   <dt>vec</dt>
   <dd class="rd-dd">The numeric vector to be padded</dd>
   <dt>num</dt>
-  <dd class="rd-dd">The number of zeros that will be padded. If <code>NULL</code>, the
+  <dd class="rd-dd">The maximum number of zeros that will be added. If <code>NULL</code>, the
 value is chosen based on the longest string in the vector.</dd>
   <dt>side</dt>
   <dd class="rd-dd">The side to which the zeros are added.</dd>
@@ -1384,8 +1384,8 @@ with zeros.
 
 <h4>Examples</h4>
 <pre class="r"><code># Examples with 0's on the left
-padZero(c(1,10,100))
-padZero(c(1,10,100), num = 4)
+padZero(c(1, 10, 100))
+padZero(c(1, 10, 100), num = 4)
 
 # Examples with 0's on the right
 padZero(c(1.2, 1.34, 1.399), side = "r")
