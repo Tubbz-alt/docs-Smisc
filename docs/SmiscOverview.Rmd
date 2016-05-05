@@ -3,7 +3,7 @@
 The `Smisc` package is a collection of functions for statistical computing and data manipulation that I created to 
 facilitate my day-to-day work in R.  Each function operates (more or less) on its own, designed for a specific task. As such, there are very few classes or methods in the package. 
 
-I have organized the documentation into 11 groups of functions that have similar themes.  I provide below a brief synopsis of the motivation for each of the functions in the package, leaving the details to the standard help files, which you can find by following the `r rdl("bold blue links")`.
+I have organized the documentation into 11 groups of functions that have similar themes.  I provide below a brief synopsis of the motivation for each of the functions in the package, leaving the details to the standard help files, which you can find by following the [bold blue links](rd.html).
 
 ---Landon Sego
 
