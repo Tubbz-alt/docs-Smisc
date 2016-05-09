@@ -773,6 +773,12 @@ And let's look at a plot of the weights that we used above:
 plot(smooth_x)
 ```
 
+## Cumulative sum charts (CUSUM)
+`r rdl("cusum()")` will calculate the CUSUM statistics for a cumulative sum chart of the form $C[i] = max(0, C[i-1] + X[i] - k)$ that signals when $C[i] > h$.  Here's a simple example:
+```{r cusum, eval = TRUE, echo = TRUE}
+cusum(rnorm(25), k = 0.2, h = 2)
+```
+
 ## Align two time series
 Ever needed to take the difference between two time series that didn't have matching time indexes?  Or have you ever needed to align two time series? `r rdl("timeDiff()")` can perform both of these functions, even if the series have different lengths or frequencies.  
 

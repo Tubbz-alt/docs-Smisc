@@ -64,8 +64,8 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
                       
                       # Fix the print method for hpd
                       r = list(at = "printhpd(x",
-                              replacement = "## S3 method for class 'hpd'\nprint(x, ...)",
-                              fixed = TRUE),
+                               replacement = "## S3 method for class 'hpd'\nprint(x, ...)",
+                               fixed = TRUE),
 
                       # Fix the plot method for hpd                      
                       r = list(at = "plothpd(x",
@@ -74,12 +74,17 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
                       
                       # Fix the print method for movAvg2
                       r = list(at = "printmovAvg2(x",
-                              replacement = "## S3 method for class 'movAvg2'\nprint(x, ...)",
-                              fixed = TRUE),
+                               replacement = "## S3 method for class 'movAvg2'\nprint(x, ...)",
+                               fixed = TRUE),
 
                       # Fix the plot method for movAvg2                      
                       r = list(at = "plotmovAvg2(x",
                                replacement = "## S3 method for class 'movAvg2'\nplot(x, ...)</code></pre>",
+                               fixed = TRUE),
+
+                      # Fix the print method for cusum
+                      r = list(at = "printcusum(x",
+                               replacement = "## S3 method for class 'cusum'\nprint(x, ...)</code></pre>",
                                fixed = TRUE),
                       
                       # Fix the link for grabLast in getExtension

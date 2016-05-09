@@ -3802,8 +3802,7 @@ series, with attributes that describe the weights.  If <code>y = NULL</code>, <c
 
 
 <h4>Examples</h4>
-<pre class="r"><code>x <- rnorm(25)
-z <- movAvg2(x, bw = 10, type = "e", center.weight = 2)
+<pre class="r"><code>z <- movAvg2(rnorm(25), bw = 10, type = "e", center.weight = 2)
 z
 
 # Look at the attributes
@@ -3812,10 +3811,8 @@ attributes(z)
 # Plot the weights
 plot(z)
 
-# If we just want to see the weights, and we don't have data
-w <- movAvg2(bw = 20, type = "g", center.weight = 1)
-w
-plot(w, las = 1)
+# If we just want to see the weights (without supplying data)
+plot(movAvg2(bw = 20, type = "g", center.weight = 1))
 
 # Note how it produces the same values as filter (except at the edge
 # of the series
@@ -3836,6 +3833,76 @@ filter(x, c(0.5, 1, 0.5) / 2)</code></pre>
 
 Landon Sego
 
+
+
+
+## cusum
+
+<h3>Calculates a sequence of CUSUM statistics</h3>
+
+<p class="rd-p">Calculates a sequence of one-sided upper CUSUM statistics given the reference value and
+the control limit.</p>
+
+<h4>Usage</h4>
+<pre class="r"><code>cusum(X, k, h, initial = 0, reset = TRUE)
+
+printcusum(x, ...)</code></pre>
+
+<h4>Arguments</h4>
+<dl class="rd-dl">
+  <dt>X</dt>
+  <dd class="rd-dd">A numeric vector.</dd>
+  <dt>k</dt>
+  <dd class="rd-dd">The reference value.</dd>
+  <dt>h</dt>
+  <dd class="rd-dd">The upper control limit.</dd>
+  <dt>initial</dt>
+  <dd class="rd-dd">The starting value of the CUSUM (<em>C[0]</em>).</dd>
+  <dt>reset</dt>
+  <dd class="rd-dd">Logical indicating whether the CUSUM is reset to  0 after crossing the control limit.</dd>
+  <dt>...</dt>
+  <dd class="rd-dd">Additional arguments to <code><a href=http://www.inside-r.org/r-doc/base/print.default>print.default</a></code></dd>
+</dl>
+
+  <h4>Details</h4>
+
+  <p class="rd-p">CUSUM is assumed to be of the form: <em>C[i] = max(0, C[i-1] + X[i] - k)</em>,
+where the signal occurs when <em>C[i] > h</em>.  Note that <code>X</code> can be the CUSUM scores, or weights,
+given by the log-likelihood ratio, in which case <code>k = 0</code> would make sense.</p>
+
+  <p class="rd-p">Plot method to come...</p>
+
+
+  <h4>Value</h4>
+
+  <p class="rd-p"><dl>
+A object of class cusum, which is a vector of the CUSUM statistics, along with the following attributes:
+<code>X</code>, <code>k</code>, <code>h</code>, <code>initial</code>, and <code>reset</code> (which correspond to the original arguments provided to
+the function) and <code>resetCounter</code>, a vector of integers corresponding to <code>cusum</code> that indicates when the 
+CUSUM resets.
+</dl></p>
+
+
+  <h4>Methods (by generic)</h4>
+
+  <p class="rd-p"><ul>
+<li> <code>print</code>: Prints the <code>cusum</code> object by only showing the CUSUM statistics and suppressing the attributes.
+</li>
+</ul></p>
+
+
+  <h4>References</h4>
+
+  <p class="rd-p">Hawkins DM and Olwell DH. (1998) Cumulative Sum Charts and Charting for Quality Improvement. Springer.</p>
+
+
+
+<h4>Examples</h4>
+<pre class="r"><code>y <- cusum(rnorm(50), 0.2, 2)
+y
+
+# A look at the attributes
+attributes(y)</code></pre>
 
 
 
