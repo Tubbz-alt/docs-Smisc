@@ -463,7 +463,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2016-05-04_202204.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2016-05-09_091219.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -592,7 +592,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>0.95 seconds </code></pre>
+<pre><code>0.94 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>
@@ -951,7 +951,7 @@ Frequency = 1
 </div>
 <div id="moving-average-with-various-kernels" class="section level2">
 <h2>Moving average with various kernels</h2>
-<p><code><a target='_blank' href='rd.html#movavg2'>movAvg2()</a></code> will calculate the moving average using a 2-sided, symmetric window. Just like <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code>, it gracefully handles the edges of time series and NA’s by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.</p>
+<p><code><a target='_blank' href='rd.html#movavg2'>movAvg2()</a></code> will calculate the moving average (i.e. moving dot product) using a 2-sided, symmetric window. Just like <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code>, it gracefully handles the edges of time series and NA’s by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.</p>
 <pre class="r"><code># Some Gaussian noise
 x &lt;- rnorm(50)
 
@@ -964,7 +964,7 @@ plot(1:50, x, type = &quot;b&quot;, col = &quot;Black&quot;, xlab = &quot;Index&
 lines(1:50, smooth_x, col = &quot;Blue&quot;, lwd = 3)</code></pre>
 <p><img src="index_files/figure-html/movAvg2_1-1.png" title="" alt="" width="624" /></p>
 <p>And let’s look at a plot of the weights that we used above:</p>
-<pre class="r"><code>movAvg2(bw = 5, type = &quot;g&quot;, plot = TRUE)</code></pre>
+<pre class="r"><code>plot(smooth_x)</code></pre>
 <p><img src="index_files/figure-html/movAvg2_2-1.png" title="" alt="" width="624" /></p>
 </div>
 <div id="align-two-time-series" class="section level2">

@@ -754,7 +754,7 @@ smartFilter(x, wts)
 ```
 
 ## Moving average with various kernels 
-`r rdl("movAvg2()")` will calculate the moving average using a 2-sided, symmetric window.  Just like `r rdl("smartFilter()")`, it gracefully handles the edges of time series and NA's by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.  
+`r rdl("movAvg2()")` will calculate the moving average (i.e. moving dot product) using a 2-sided, symmetric window.  Just like `r rdl("smartFilter()")`, it gracefully handles the edges of time series and NA's by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.  
 ```{r movAvg2_1, eval = TRUE, echo = TRUE}
 # Some Gaussian noise
 x <- rnorm(50)
@@ -770,7 +770,7 @@ lines(1:50, smooth_x, col = "Blue", lwd = 3)
 
 And let's look at a plot of the weights that we used above:
 ```{r movAvg2_2, eval = TRUE, echo = TRUE}
-movAvg2(bw = 5, type = "g", plot = TRUE)
+plot(smooth_x)
 ```
 
 ## Align two time series

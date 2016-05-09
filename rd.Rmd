@@ -19,7 +19,7 @@ brand: |-
 <h1>Sego Miscellaneous</h1>
 
 <p><strong>Authors:</strong> (none)</p>
-<p><strong>Version:</strong> 0.3.2</p>
+<p><strong>Version:</strong> 0.3.3</p>
 <p><strong>License:</strong> file LICENSE</p>
 
 <h4>Description</h4>
@@ -34,7 +34,8 @@ computing and data manipulation in R.</p>
 parallel,
 utils,
 plyr,
-doParallel</p>
+doParallel,
+methods</p>
 
 <h4>Suggests</h4>
 <p>
@@ -3732,43 +3733,47 @@ Landon Sego
 
 <p class="rd-p">Wrapper for <code><a href='smartFilter.html'>smartFilter</a></code> that creates a set of symmetric weights for
 the 2-sided window based on the Gaussian kernel, exponetial decay, linear
-decay, or simple uniform weights, and then calculates the moving average
+decay, or simple uniform weights, and then calculates the moving average (dot product)
 using those weights.</p>
 
 <h4>Usage</h4>
 <pre class="r"><code>movAvg2(y = NULL, bw = 30, type = c("gaussian", "exponential", "linear",
-  "uniform"), furthest.weight = 0.01, center.weight = 1, plot = FALSE,
-  ...)</code></pre>
+  "uniform"), furthest.weight = 0.01, center.weight = 1, ...)
+
+printmovAvg2(x, ...)
+
+plotmovAvg2(x, ...)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
   <dt>y</dt>
   <dd class="rd-dd">The numerical vector for which the moving averages will be
-calculated.  If <code>NULL</code>, the moving averages are not calculated--but this can
-be useful for visualizing the weights. See the <code>plot</code> argument.</dd>
+calculated.  If <code>NULL</code>, the moving averages are not calculated, but the
+weights are calculated and included in the attributes of the returned object.</dd>
   <dt>bw</dt>
-  <dd class="rd-dd">bandwidth, which is roughly half the width of the moving
-window.  The total width of the window is <code>2 * bw + 1</code>.</dd>
+  <dd class="rd-dd">A single, positive whole number that indicates the bandwidth of the window,
+which is roughly half the width of the moving window.  The total width of the window is <code>2 * bw + 1</code>.</dd>
   <dt>type</dt>
   <dd class="rd-dd">Character string which uniquely indentifies the type of weights
 to use, corresponding to the Gaussian kernel, exponential decay, linear
-decay, or uniform weights. Defaults to gaussian.</dd>
+decay, or uniform weights. Defaults to <code>gaussian</code>.</dd>
   <dt>furthest.weight</dt>
-  <dd class="rd-dd">The unormalized value of the weights at the left and
-right edges of the window</dd>
+  <dd class="rd-dd">A single, positive number corresponding to the unormalized value of
+the weights at the left and right edges of the window</dd>
   <dt>center.weight</dt>
-  <dd class="rd-dd">The unnormalized value of the weights at the center of
-the window</dd>
-  <dt>plot</dt>
-  <dd class="rd-dd"><code> = TRUE</code> produces a plot which shows the weights.</dd>
+  <dd class="rd-dd">A single, positive number corresponding to the unnormalized value of
+the weights at the center of the window</dd>
   <dt>...</dt>
-  <dd class="rd-dd">additional arguments to <code><a href=#smartfilter>smartFilter</a></code></dd>
+  <dd class="rd-dd">For <code>movAvg2</code>, these are additional arguments to <code><a href=#smartfilter>smartFilter</a></code>.
+For the <code>print</code> and <code>plot</code> methods, the "..." are additional arguments passed to
+<code><a href=http://www.inside-r.org/r-doc/base/print.default>print.default</a></code> and <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>, respectively.</dd>
 </dl>
 
   <h4>Details</h4>
 
   <p class="rd-p">All the weights are normalized (so that they sum to 1) prior to calculating
-the moving average.</p>
+the moving average.  The moving "average" is really the moving dot product of the
+normalized weights and the corresponding elements of <code>y</code>.</p>
 
   <p class="rd-p">Since it uses <code><a href=#smartfilter>smartFilter</a></code> to calculate the moving average,
 the moving average for points near the edge of the series or in the
@@ -3779,25 +3784,48 @@ weights as possible.</p>
   <h4>Value</h4>
 
   <p class="rd-p"><dl>
-If <code>y</code> is not <code>NULL</code>, returns the moving average of the
-series.  Also produces a plot of the weights if <code>plot = TRUE</code>.
+An object class <code>movAvg2</code>, which is a numeric vector containing the moving average (dot product) of the
+series, with attributes that describe the weights.  If <code>y = NULL</code>, <code>numeric(0)</code> is returned.
 </dl></p>
+
+
+  <h4>Methods (by generic)</h4>
+
+  <p class="rd-p"><ul>
+<li> <code>print</code>: Prints the <code>movAvg2</code> object by only showing the series of dot products and suppressing the attributes.</p>
+
+  <p class="rd-p"></li>
+<li> <code>plot</code>: Plots the unnormalized weights.
+</li>
+</ul></p>
 
 
 
 <h4>Examples</h4>
 <pre class="r"><code>x <- rnorm(25)
-movAvg2(x, bw = 10, type = "e", center.weight = 2)
+z <- movAvg2(x, bw = 10, type = "e", center.weight = 2)
+z
+
+# Look at the attributes
+attributes(z)
+
+# Plot the weights
+plot(z)
+
+# If we just want to see the weights, and we don't have data
+w <- movAvg2(bw = 20, type = "g", center.weight = 1)
+w
+plot(w, las = 1)
 
 # Note how it produces the same values as filter (except at the edge
 # of the series
 x <- rnorm(10)
 movAvg2(x, bw = 2, type = "u")
-filter(x, rep(1,5)/5)
+filter(x, rep(1, 5) / 5)
 
 # These are also the same, except at the edge.
 movAvg2(x, bw = 1, type = "l", furthest.weight = 0.5, center.weight = 1)
-filter(x, c(0.5, 1, 0.5)/2)</code></pre>
+filter(x, c(0.5, 1, 0.5) / 2)</code></pre>
 
 <h4>See also</h4>
 

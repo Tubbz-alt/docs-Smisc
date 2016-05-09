@@ -71,7 +71,17 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
                       r = list(at = "plothpd(x",
                                replacement = "## S3 method for class 'hpd'\nplot(x, ...)</code></pre>",
                                fixed = TRUE),
+                      
+                      # Fix the print method for movAvg2
+                      r = list(at = "printmovAvg2(x",
+                              replacement = "## S3 method for class 'movAvg2'\nprint(x, ...)",
+                              fixed = TRUE),
 
+                      # Fix the plot method for movAvg2                      
+                      r = list(at = "plotmovAvg2(x",
+                               replacement = "## S3 method for class 'movAvg2'\nplot(x, ...)</code></pre>",
+                               fixed = TRUE),
+                      
                       # Fix the link for grabLast in getExtension
                       s = list(pattern = "<code><a href='grabLast.html'>",
                                replacement = "<code><a href='#grablast'>",
