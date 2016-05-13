@@ -84,9 +84,19 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
 
                       # Fix the print method for cusum
                       r = list(at = "printcusum(x",
-                               replacement = "## S3 method for class 'cusum'\nprint(x, ...)</code></pre>",
+                               replacement = "## S3 method for class 'cusum'\nprint(x, ...)",
                                fixed = TRUE),
-                      
+
+                      # Fix the plot method for cusum                      
+                      r = list(at = "plotcusum(x",
+                               replacement = "## S3 method for class 'cusum'\nplot(x, indexes = NULL, emphOOC = TRUE, ...)",
+                               fixed = TRUE),
+
+                      # Fix the signal method for cusum                      
+                      r = list(at = "signalcusum(object",
+                               replacement = "## S3 method for class 'cusum'\nsignal(object, ...)</code></pre>",
+                               fixed = TRUE),
+
                       # Fix the link for grabLast in getExtension
                       s = list(pattern = "<code><a href='grabLast.html'>",
                                replacement = "<code><a href='#grablast'>",

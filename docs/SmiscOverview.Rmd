@@ -1,7 +1,7 @@
 # Introduction
 
 The `Smisc` package is a collection of functions for statistical computing and data manipulation that I created to 
-facilitate my day-to-day work in R.  Each function operates (more or less) on its own, designed for a specific task. As such, there are very few classes or methods in the package. 
+facilitate my day-to-day work in R.  Most functions operate on their own, each designed for a specific task.
 
 I have organized the documentation into 11 groups of functions that have similar themes.  I provide below a brief synopsis of the motivation for each of the functions in the package, leaving the details to the standard help files, which you can find by following the [bold blue links](rd.html).
 
@@ -773,10 +773,17 @@ And let's look at a plot of the weights that we used above:
 plot(smooth_x)
 ```
 
-## Cumulative sum charts (CUSUM)
-`r rdl("cusum()")` will calculate the CUSUM statistics for a cumulative sum chart of the form $C[i] = max(0, C[i-1] + X[i] - k)$ that signals when $C[i] > h$.  Here's a simple example:
+## Cumulative sum charts (Cusum)
+`r rdl("cusum()")` will calculate the Cusum statistics for a cumulative sum chart of the form $C[i] = max(0, C[i-1] + X[i] - k)$ that signals when $C[i] > h$.  Here's a simple example:
+```{r cusumset, eval = TRUE, echo = FALSE}
+set.seed(15)
+```
 ```{r cusum, eval = TRUE, echo = TRUE}
-cusum(rnorm(25), k = 0.2, h = 2)
+# Calculate the Cusum
+y <- cusum(rnorm(25), k = 0.2, h = 2)
+
+# Plot results
+plot(y, main = "Upper Cusum chart of a standard normal variate", las = 1)
 ```
 
 ## Align two time series

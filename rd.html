@@ -2162,7 +2162,7 @@ Arguments
 expr
 </dt>
 <dd class="rd-dd">
-Any R expression
+Any R expression.
 </dd>
 <dt>
 units
@@ -2180,7 +2180,7 @@ return.time
 verbose
 </dt>
 <dd class="rd-dd">
-<code>= TRUE</code> prints the elapsed time in the requested units
+<code>= TRUE</code> prints the elapsed time in the requested units.
 </dd>
 </dl>
 <h4>
@@ -2195,20 +2195,22 @@ Value
 <p class="rd-p">
 <dl>
 If <code>return.time = FALSE</code>, invisibly returns the evaluation of <code>expr</code>. If <code>return.time = TRUE</code>, invisibly returns a list with the following components:
-</p>
-<p class="rd-p">
 <dt>
 out
 </dt>
 <dd>
 The evaluation of <code>expr</code>
 </dd>
+</p>
+<p class="rd-p">
 <dt>
 elapsed
 </dt>
 <dd>
 The elapsed time to evaluate <code>expr</code>
 </dd>
+</p>
+<p class="rd-p">
 <dt>
 units
 </dt>
@@ -4600,7 +4602,7 @@ Author
 Calculate the moving average using a 2-sided, symmetric window
 </h3>
 <p class="rd-p">
-Wrapper for <code><a href='#smartfilter'>smartFilter</a></code> that creates a set of symmetric weights for the 2-sided window based on the Gaussian kernel, exponetial decay, linear decay, or simple uniform weights, and then calculates the moving average (dot product) using those weights.
+Wrapper for <code><a href='#smartfilter'>smartFilter</a></code> that creates a set of symmetric weights for the 2-sided window based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights, and then calculates the moving average (dot product) using those weights.
 </p>
 <h4>
 Usage
@@ -4646,6 +4648,12 @@ center.weight
 </dt>
 <dd class="rd-dd">
 A single, positive number corresponding to the unnormalized value of the weights at the center of the window.
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+Object of class <code>movAvg2</code>.
 </dd>
 <dt>
 …
@@ -4722,10 +4730,10 @@ Author
 <div id="cusum" class="section level2">
 <h2>cusum</h2>
 <h3>
-Calculates a sequence of CUSUM statistics
+Calculates a sequence of Cusum statistics
 </h3>
 <p class="rd-p">
-Calculates a sequence of one-sided upper CUSUM statistics given the reference value and the control limit.
+Calculates a sequence of one-sided upper Cusum statistics given the reference value and the control limit.
 </p>
 <h4>
 Usage
@@ -4733,7 +4741,13 @@ Usage
 <pre class="r"><code>cusum(X, k, h, initial = 0, reset = TRUE)
 
 ## S3 method for class 'cusum'
-print(x, ...)</code></pre>
+print(x, ...)
+
+## S3 method for class 'cusum'
+plot(x, indexes = NULL, emphOOC = TRUE, ...)
+
+## S3 method for class 'cusum'
+signal(object, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4760,36 +4774,57 @@ The upper control limit.
 initial
 </dt>
 <dd class="rd-dd">
-The starting value of the CUSUM (<em>C[0]</em>).
+The starting value of the Cusum (<em>C[0]</em>).
 </dd>
 <dt>
 reset
 </dt>
 <dd class="rd-dd">
-Logical indicating whether the CUSUM is reset to 0 after crossing the control limit.
+Logical indicating whether the Cusum is reset to 0 after crossing the control limit.
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+Object of class <code>cusum</code>
+</dd>
+<dt>
+indexes
+</dt>
+<dd class="rd-dd">
+A vector of indexes that select the elements of the cusum statistics that will be plotted.
+</dd>
+<dt>
+emphOOC
+</dt>
+<dd class="rd-dd">
+A logical indicating whether out of control points should be emphasized in red.
+</dd>
+<dt>
+object
+</dt>
+<dd class="rd-dd">
+Object of class <code>cusum</code>
 </dd>
 <dt>
 …
 </dt>
 <dd class="rd-dd">
-Additional arguments to <code><a href=http://www.inside-r.org/r-doc/base/print.default>print.default</a></code>
+Additional arguments to <code><a href=http://www.inside-r.org/r-doc/base/print.default>print.default</a></code> or <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>. Ignored by the <code>signal</code> method.
 </dd>
 </dl>
 <h4>
 Details
 </h4>
 <p class="rd-p">
-CUSUM is assumed to be of the form: <em>C[i] = max(0, C[i-1] + X[i] - k)</em>, where the signal occurs when <em>C[i] &gt; h</em>. Note that <code>X</code> can be the CUSUM scores, or weights, given by the log-likelihood ratio, in which case <code>k = 0</code> would make sense.
-</p>
-<p class="rd-p">
-Plot method to come…
+Cusum is assumed to be of the form: <em>C[i] = max(0, C[i-1] + X[i] - k)</em>, where the signal occurs when <em>C[i] &gt; h</em>. Note that <code>X</code> can be the Cusum scores, or weights, given by the log-likelihood ratio, in which case <code>k = 0</code> would make sense.
 </p>
 <h4>
 Value
 </h4>
 <p class="rd-p">
 <dl>
-A object of class cusum, which is a vector of the CUSUM statistics, along with the following attributes: <code>X</code>, <code>k</code>, <code>h</code>, <code>initial</code>, and <code>reset</code> (which correspond to the original arguments provided to the function) and <code>resetCounter</code>, a vector of integers corresponding to <code>cusum</code> that indicates when the CUSUM resets.
+A object of class <code>cusum</code>, which is a vector of the Cusum statistics, along with the following attributes: <code>X</code>, <code>k</code>, <code>h</code>, <code>initial</code>, and <code>reset</code> (which correspond to the original arguments provided to the function) and <code>resetCounter</code>, a vector of integers corresponding to <code>cusum</code> that indicates when the Cusum resets.
 </dl>
 </p>
 <h4>
@@ -4798,7 +4833,17 @@ Methods (by generic)
 <p class="rd-p">
 <ul>
 <li>
-<code>print</code>: Prints the <code>cusum</code> object by only showing the CUSUM statistics and suppressing the attributes.
+<code>print</code>: Prints the <code>cusum</code> object by only showing the Cusum statistics and suppressing the attributes.
+</p>
+<p class="rd-p">
+</li>
+<li>
+<code>plot</code>: Plots the <code>cusum</code> object.
+</p>
+<p class="rd-p">
+</li>
+<li>
+<code>signal</code>: Prints the indexes that exceed the control limit
 </li>
 </ul>
 </p>
@@ -4813,6 +4858,12 @@ Examples
 </h4>
 <pre class="r"><code>y <- cusum(rnorm(50), 0.2, 2)
 y
+
+# Plot the cusum
+plot(y)
+
+# Show the indexes where the chart signaled
+signal(y)
 
 # A look at the attributes
 attributes(y)</code></pre>
@@ -5144,7 +5195,7 @@ Value
 </h4>
 <p class="rd-p">
 <dl>
-In the sequence <code>x[1], x[2], …, x[n]</code>, <code>cumMax</code> returns the vector <code>y</code> such that for each <code>i = 1,…,n</code>, <code>y[i] = max(x[j]; j = 1,…,i)</code>
+In the sequence <em>x[1], x[2], …, x[n]</em>, <code>cumMax</code> returns the vector <em>y</em> such that for each <em>i = 1,…,n</em>, <em>y[i] = max(x[j]; j = 1,…,i)</em>
 </dl>
 </p>
 <h4>
