@@ -155,6 +155,7 @@
           <li><a href="#formatdt">formatDT</a></li>
           <li><a href="#smartfilter">smartFilter</a></li>
           <li><a href="#movavg2">movAvg2</a></li>
+          <li><a href="#cusum">cusum</a></li>
           <li><a href="#timediff">timeDiff</a></li>
           <li><a href="#timeintegration">timeIntegration</a></li>
           </ul></li>
@@ -184,7 +185,7 @@ Sego Miscellaneous
 <strong>Author:</strong> Landon Sego
 </p>
 <p>
-<strong>Version:</strong> 0.3.2
+<strong>Version:</strong> 0.3.3
 </p>
 <p>
 <strong>License:</strong> file LICENSE
@@ -205,7 +206,7 @@ Depends
 Imports
 </h4>
 <p>
-parallel, utils, plyr, doParallel
+parallel, utils, plyr, doParallel, methods
 </p>
 <h4>
 Suggests
@@ -2161,7 +2162,7 @@ Arguments
 expr
 </dt>
 <dd class="rd-dd">
-Any R expression
+Any R expression.
 </dd>
 <dt>
 units
@@ -2179,7 +2180,7 @@ return.time
 verbose
 </dt>
 <dd class="rd-dd">
-<code>= TRUE</code> prints the elapsed time in the requested units
+<code>= TRUE</code> prints the elapsed time in the requested units.
 </dd>
 </dl>
 <h4>
@@ -2194,20 +2195,22 @@ Value
 <p class="rd-p">
 <dl>
 If <code>return.time = FALSE</code>, invisibly returns the evaluation of <code>expr</code>. If <code>return.time = TRUE</code>, invisibly returns a list with the following components:
-</p>
-<p class="rd-p">
 <dt>
 out
 </dt>
 <dd>
 The evaluation of <code>expr</code>
 </dd>
+</p>
+<p class="rd-p">
 <dt>
 elapsed
 </dt>
 <dd>
 The elapsed time to evaluate <code>expr</code>
 </dd>
+</p>
+<p class="rd-p">
 <dt>
 units
 </dt>
@@ -4599,14 +4602,19 @@ Author
 Calculate the moving average using a 2-sided, symmetric window
 </h3>
 <p class="rd-p">
-Wrapper for <code><a href='#smartfilter'>smartFilter</a></code> that creates a set of symmetric weights for the 2-sided window based on the Gaussian kernel, exponetial decay, linear decay, or simple uniform weights, and then calculates the moving average using those weights.
+Wrapper for <code><a href='#smartfilter'>smartFilter</a></code> that creates a set of symmetric weights for the 2-sided window based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights, and then calculates the moving average (dot product) using those weights.
 </p>
 <h4>
 Usage
 </h4>
 <pre class="r"><code>movAvg2(y = NULL, bw = 30, type = c("gaussian", "exponential", "linear",
-  "uniform"), furthest.weight = 0.01, center.weight = 1, plot = FALSE,
-  ...)</code></pre>
+  "uniform"), furthest.weight = 0.01, center.weight = 1, ...)
+
+## S3 method for class 'movAvg2'
+print(x, ...)
+
+## S3 method for class 'movAvg2'
+plot(x, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4615,50 +4623,50 @@ Arguments
 y
 </dt>
 <dd class="rd-dd">
-The numerical vector for which the moving averages will be calculated. If <code>NULL</code>, the moving averages are not calculated–but this can be useful for visualizing the weights. See the <code>plot</code> argument.
+The numerical vector for which the moving averages will be calculated. If <code>NULL</code>, the moving averages are not calculated, but the weights are calculated and included in the attributes of the returned object.
 </dd>
 <dt>
 bw
 </dt>
 <dd class="rd-dd">
-bandwidth, which is roughly half the width of the moving window. The total width of the window is <code>2 * bw + 1</code>.
+A single, positive whole number that indicates the bandwidth of the window, which is roughly half the width of the moving window. The total width of the window is <code>2 * bw + 1</code>.
 </dd>
 <dt>
 type
 </dt>
 <dd class="rd-dd">
-Character string which uniquely indentifies the type of weights to use, corresponding to the Gaussian kernel, exponential decay, linear decay, or uniform weights. Defaults to gaussian.
+Character string which uniquely indentifies the type of weights to use, corresponding to the Gaussian kernel, exponential decay, linear decay, or uniform weights. Defaults to <code>gaussian</code>.
 </dd>
 <dt>
 furthest.weight
 </dt>
 <dd class="rd-dd">
-The unormalized value of the weights at the left and right edges of the window
+A single, positive number corresponding to the unormalized value of the weights at the left and right edges of the window. Ignored when <code>type = uniform</code>.
 </dd>
 <dt>
 center.weight
 </dt>
 <dd class="rd-dd">
-The unnormalized value of the weights at the center of the window
+A single, positive number corresponding to the unnormalized value of the weights at the center of the window.
 </dd>
 <dt>
-plot
+x
 </dt>
 <dd class="rd-dd">
-<code> = TRUE</code> produces a plot which shows the weights.
+Object of class <code>movAvg2</code>.
 </dd>
 <dt>
 …
 </dt>
 <dd class="rd-dd">
-additional arguments to <code><a href=#smartfilter>smartFilter</a></code>
+For <code>movAvg2</code>, these are additional arguments to <code><a href=#smartfilter>smartFilter</a></code>. For the <code>print</code> and <code>plot</code> methods, the “…” are additional arguments passed to <code><a href=http://www.inside-r.org/r-doc/base/print.default>print.default</a></code> and <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>, respectively.
 </dd>
 </dl>
 <h4>
 Details
 </h4>
 <p class="rd-p">
-All the weights are normalized (so that they sum to 1) prior to calculating the moving average.
+All the weights are normalized (so that they sum to 1) prior to calculating the moving average. The moving “average” is really the moving dot product of the normalized weights and the corresponding elements of <code>y</code>.
 </p>
 <p class="rd-p">
 Since it uses <code><a href=#smartfilter>smartFilter</a></code> to calculate the moving average, the moving average for points near the edge of the series or in the neighborhood of missing values are calculated using as much of the window weights as possible.
@@ -4668,24 +4676,48 @@ Value
 </h4>
 <p class="rd-p">
 <dl>
-If <code>y</code> is not <code>NULL</code>, returns the moving average of the series. Also produces a plot of the weights if <code>plot = TRUE</code>.
+An object class <code>movAvg2</code>, which is a numeric vector containing the moving average (dot product) of the series, with attributes that describe the weights. If <code>y = NULL</code>, <code>numeric(0)</code> is returned.
 </dl>
+</p>
+<h4>
+Methods (by generic)
+</h4>
+<p class="rd-p">
+<ul>
+<li>
+<code>print</code>: Prints the <code>movAvg2</code> object by only showing the series of dot products and suppressing the attributes.
+</p>
+<p class="rd-p">
+</li>
+<li>
+<code>plot</code>: Plots the unnormalized weights.
+</li>
+</ul>
 </p>
 <h4>
 Examples
 </h4>
-<pre class="r"><code>x <- rnorm(25)
-movAvg2(x, bw = 10, type = "e", center.weight = 2)
+<pre class="r"><code>z <- movAvg2(rnorm(25), bw = 10, type = "e", center.weight = 2)
+z
+
+# Look at the attributes
+attributes(z)
+
+# Plot the weights
+plot(z)
+
+# If we just want to see the weights (without supplying data)
+plot(movAvg2(bw = 20, type = "g", center.weight = 1))
 
 # Note how it produces the same values as filter (except at the edge
 # of the series
 x <- rnorm(10)
 movAvg2(x, bw = 2, type = "u")
-filter(x, rep(1,5)/5)
+filter(x, rep(1, 5) / 5)
 
 # These are also the same, except at the edge.
 movAvg2(x, bw = 1, type = "l", furthest.weight = 0.5, center.weight = 1)
-filter(x, c(0.5, 1, 0.5)/2)</code></pre>
+filter(x, c(0.5, 1, 0.5) / 2)</code></pre>
 <h4>
 See also
 </h4>
@@ -4694,6 +4726,147 @@ See also
 Author
 </h4>
 <p>Landon Sego</p>
+</div>
+<div id="cusum" class="section level2">
+<h2>cusum</h2>
+<h3>
+Calculates a sequence of Cusum statistics
+</h3>
+<p class="rd-p">
+Calculates a sequence of one-sided upper Cusum statistics given the reference value and the control limit.
+</p>
+<h4>
+Usage
+</h4>
+<pre class="r"><code>cusum(X, k, h, initial = 0, reset = TRUE)
+
+## S3 method for class 'cusum'
+print(x, ...)
+
+## S3 method for class 'cusum'
+plot(x, indexes = NULL, emphOOC = TRUE, ...)
+
+## S3 method for class 'cusum'
+signal(object, ...)</code></pre>
+<h4>
+Arguments
+</h4>
+<dl class="rd-dl">
+<dt>
+X
+</dt>
+<dd class="rd-dd">
+A numeric vector.
+</dd>
+<dt>
+k
+</dt>
+<dd class="rd-dd">
+The reference value.
+</dd>
+<dt>
+h
+</dt>
+<dd class="rd-dd">
+The upper control limit.
+</dd>
+<dt>
+initial
+</dt>
+<dd class="rd-dd">
+The starting value of the Cusum (<em>C[0]</em>).
+</dd>
+<dt>
+reset
+</dt>
+<dd class="rd-dd">
+Logical indicating whether the Cusum is reset to 0 after crossing the control limit.
+</dd>
+<dt>
+x
+</dt>
+<dd class="rd-dd">
+Object of class <code>cusum</code>
+</dd>
+<dt>
+indexes
+</dt>
+<dd class="rd-dd">
+A vector of indexes that select the elements of the cusum statistics that will be plotted.
+</dd>
+<dt>
+emphOOC
+</dt>
+<dd class="rd-dd">
+A logical indicating whether out of control points should be emphasized in red.
+</dd>
+<dt>
+object
+</dt>
+<dd class="rd-dd">
+Object of class <code>cusum</code>
+</dd>
+<dt>
+…
+</dt>
+<dd class="rd-dd">
+Additional arguments to <code><a href=http://www.inside-r.org/r-doc/base/print.default>print.default</a></code> or <code><a href=http://www.inside-r.org/r-doc/graphics/plot.default>plot.default</a></code>. Ignored by the <code>signal</code> method.
+</dd>
+</dl>
+<h4>
+Details
+</h4>
+<p class="rd-p">
+Cusum is assumed to be of the form: <em>C[i] = max(0, C[i-1] + X[i] - k)</em>, where the signal occurs when <em>C[i] &gt; h</em>. Note that <code>X</code> can be the Cusum scores, or weights, given by the log-likelihood ratio, in which case <code>k = 0</code> would make sense.
+</p>
+<h4>
+Value
+</h4>
+<p class="rd-p">
+<dl>
+A object of class <code>cusum</code>, which is a vector of the Cusum statistics, along with the following attributes: <code>X</code>, <code>k</code>, <code>h</code>, <code>initial</code>, and <code>reset</code> (which correspond to the original arguments provided to the function) and <code>resetCounter</code>, a vector of integers corresponding to <code>cusum</code> that indicates when the Cusum resets.
+</dl>
+</p>
+<h4>
+Methods (by generic)
+</h4>
+<p class="rd-p">
+<ul>
+<li>
+<code>print</code>: Prints the <code>cusum</code> object by only showing the Cusum statistics and suppressing the attributes.
+</p>
+<p class="rd-p">
+</li>
+<li>
+<code>plot</code>: Plots the <code>cusum</code> object.
+</p>
+<p class="rd-p">
+</li>
+<li>
+<code>signal</code>: Prints the indexes that exceed the control limit
+</li>
+</ul>
+</p>
+<h4>
+References
+</h4>
+<p class="rd-p">
+Hawkins DM and Olwell DH. (1998) Cumulative Sum Charts and Charting for Quality Improvement. Springer.
+</p>
+<h4>
+Examples
+</h4>
+<pre class="r"><code>y <- cusum(rnorm(50), 0.2, 2)
+y
+
+# Plot the cusum
+plot(y)
+
+# Show the indexes where the chart signaled
+signal(y)
+
+# A look at the attributes
+attributes(y)</code></pre>
 </div>
 <div id="timediff" class="section level2">
 <h2>timeDiff</h2>
@@ -5022,7 +5195,7 @@ Value
 </h4>
 <p class="rd-p">
 <dl>
-In the sequence <code>x[1], x[2], …, x[n]</code>, <code>cumMax</code> returns the vector <code>y</code> such that for each <code>i = 1,…,n</code>, <code>y[i] = max(x[j]; j = 1,…,i)</code>
+In the sequence <em>x[1], x[2], …, x[n]</em>, <code>cumMax</code> returns the vector <em>y</em> such that for each <em>i = 1,…,n</em>, <em>y[i] = max(x[j]; j = 1,…,i)</em>
 </dl>
 </p>
 <h4>

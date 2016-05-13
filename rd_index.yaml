@@ -86,6 +86,7 @@
     - formatDT
     - smartFilter
     - movAvg2
+    - cusum
     - timeDiff
     - timeIntegration
 -

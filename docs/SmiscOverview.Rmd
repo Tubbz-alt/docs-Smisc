@@ -1,7 +1,7 @@
 # Introduction
 
 The `Smisc` package is a collection of functions for statistical computing and data manipulation that I created to 
-facilitate my day-to-day work in R.  Each function operates (more or less) on its own, designed for a specific task. As such, there are very few classes or methods in the package. 
+facilitate my day-to-day work in R.  Most functions operate on their own, each designed for a specific task.
 
 I have organized the documentation into 11 groups of functions that have similar themes.  I provide below a brief synopsis of the motivation for each of the functions in the package, leaving the details to the standard help files, which you can find by following the [bold blue links](rd.html).
 
@@ -754,7 +754,7 @@ smartFilter(x, wts)
 ```
 
 ## Moving average with various kernels 
-`r rdl("movAvg2()")` will calculate the moving average using a 2-sided, symmetric window.  Just like `r rdl("smartFilter()")`, it gracefully handles the edges of time series and NA's by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.  
+`r rdl("movAvg2()")` will calculate the moving average (i.e. moving dot product) using a 2-sided, symmetric window.  Just like `r rdl("smartFilter()")`, it gracefully handles the edges of time series and NA's by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.  
 ```{r movAvg2_1, eval = TRUE, echo = TRUE}
 # Some Gaussian noise
 x <- rnorm(50)
@@ -770,7 +770,20 @@ lines(1:50, smooth_x, col = "Blue", lwd = 3)
 
 And let's look at a plot of the weights that we used above:
 ```{r movAvg2_2, eval = TRUE, echo = TRUE}
-movAvg2(bw = 5, type = "g", plot = TRUE)
+plot(smooth_x)
+```
+
+## Cumulative sum charts (Cusum)
+`r rdl("cusum()")` will calculate the Cusum statistics for a cumulative sum chart of the form $C[i] = max(0, C[i-1] + X[i] - k)$ that signals when $C[i] > h$.  Here's a simple example:
+```{r cusumset, eval = TRUE, echo = FALSE}
+set.seed(15)
+```
+```{r cusum, eval = TRUE, echo = TRUE}
+# Calculate the Cusum
+y <- cusum(rnorm(25), k = 0.2, h = 2)
+
+# Plot results
+plot(y, main = "Upper Cusum chart of a standard normal variate", las = 1)
 ```
 
 ## Align two time series

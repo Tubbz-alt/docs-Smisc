@@ -141,6 +141,7 @@
           <li><a href="#format-dates-or-datetimes">Format dates or datetimes</a></li>
           <li><a href="#calculate-a-moving-window-dot-product">Calculate a moving window dot product</a></li>
           <li><a href="#moving-average-with-various-kernels">Moving average with various kernels</a></li>
+          <li><a href="#cumulative-sum-charts-cusum">Cumulative sum charts (Cusum)</a></li>
           <li><a href="#align-two-time-series">Align two time series</a></li>
           <li><a href="#integration-over-time">Integration over time</a></li>
           </ul></li>
@@ -162,7 +163,7 @@
 <div id="content-top"></div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>The <code>Smisc</code> package is a collection of functions for statistical computing and data manipulation that I created to facilitate my day-to-day work in R. Each function operates (more or less) on its own, designed for a specific task. As such, there are very few classes or methods in the package.</p>
+<p>The <code>Smisc</code> package is a collection of functions for statistical computing and data manipulation that I created to facilitate my day-to-day work in R. Most functions operate on their own, each designed for a specific task.</p>
 <p>I have organized the documentation into 11 groups of functions that have similar themes. I provide below a brief synopsis of the motivation for each of the functions in the package, leaving the details to the standard help files, which you can find by following the <a href="rd.html">bold blue links</a>.</p>
 <p>—Landon Sego</p>
 <div id="package-installation" class="section level2">
@@ -463,7 +464,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2016-05-04_202204.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2016-05-13_142103.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -592,7 +593,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>0.95 seconds </code></pre>
+<pre><code>0.97 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>
@@ -951,7 +952,7 @@ Frequency = 1
 </div>
 <div id="moving-average-with-various-kernels" class="section level2">
 <h2>Moving average with various kernels</h2>
-<p><code><a target='_blank' href='rd.html#movavg2'>movAvg2()</a></code> will calculate the moving average using a 2-sided, symmetric window. Just like <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code>, it gracefully handles the edges of time series and NA’s by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.</p>
+<p><code><a target='_blank' href='rd.html#movavg2'>movAvg2()</a></code> will calculate the moving average (i.e. moving dot product) using a 2-sided, symmetric window. Just like <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code>, it gracefully handles the edges of time series and NA’s by re-normalizing the weights as needed. The moving window weights can be based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights.</p>
 <pre class="r"><code># Some Gaussian noise
 x &lt;- rnorm(50)
 
@@ -964,8 +965,18 @@ plot(1:50, x, type = &quot;b&quot;, col = &quot;Black&quot;, xlab = &quot;Index&
 lines(1:50, smooth_x, col = &quot;Blue&quot;, lwd = 3)</code></pre>
 <p><img src="index_files/figure-html/movAvg2_1-1.png" title="" alt="" width="624" /></p>
 <p>And let’s look at a plot of the weights that we used above:</p>
-<pre class="r"><code>movAvg2(bw = 5, type = &quot;g&quot;, plot = TRUE)</code></pre>
+<pre class="r"><code>plot(smooth_x)</code></pre>
 <p><img src="index_files/figure-html/movAvg2_2-1.png" title="" alt="" width="624" /></p>
+</div>
+<div id="cumulative-sum-charts-cusum" class="section level2">
+<h2>Cumulative sum charts (Cusum)</h2>
+<p><code><a target='_blank' href='rd.html#cusum'>cusum()</a></code> will calculate the Cusum statistics for a cumulative sum chart of the form <span class="math inline"><em>C</em>[<em>i</em>] = <em>m</em><em>a</em><em>x</em>(0, <em>C</em>[<em>i</em> − 1] + <em>X</em>[<em>i</em>] − <em>k</em>)</span> that signals when <span class="math inline"><em>C</em>[<em>i</em>] &gt; <em>h</em></span>. Here’s a simple example:</p>
+<pre class="r"><code># Calculate the Cusum
+y &lt;- cusum(rnorm(25), k = 0.2, h = 2)
+
+# Plot results
+plot(y, main = &quot;Upper Cusum chart of a standard normal variate&quot;, las = 1)</code></pre>
+<p><img src="index_files/figure-html/cusum-1.png" title="" alt="" width="624" /></p>
 </div>
 <div id="align-two-time-series" class="section level2">
 <h2>Align two time series</h2>
