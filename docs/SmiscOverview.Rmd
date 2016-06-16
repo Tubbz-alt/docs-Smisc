@@ -126,21 +126,6 @@ x[,1]
 select(x, 1)
 ```
 
-## Sort a dataframe
-`r rdl("sortDF()")` provides a simple interface for sorting a dataframe by as many variables as you like, using a formula-style argument to indicate whether the variables are sorted in increasing or decreasing order.
-```{r sortDF, eval = TRUE, echo = TRUE}
-d1 <- data.frame(A = 2:1, B = c("a", "b"))
-
-# Sort by A
-sortDF(d1, ~ A)
-
-# Sort by descending B
-sortDF(d1, ~ -B)
-
-# Sort by A and B
-sortDF(d1, ~ A + B)
-```
-
 # Conversion to and from lists
 The longer I program in R, the more I use lists--especially for parallelized computations. This often requires converting lists to dataframes, dataframes to lists, or breaking a list apart and storing the elements as separate objects.
 
@@ -623,48 +608,7 @@ plot(x, y, pch = as.character(1:9), ylim = c(-2, 2) + range(y),
 vertErrorBar(x, 0.3, center = y, barLength = 2 * 1.96, blankMiddle = 0.75)
 ``` 
 
-## Interaction plot with vertical error bars
-
-`r rdl("interactionPlot()")`  plots the mean (or other summary) of the response for two-way combinations of factors, thereby illustrating possible interactions. It modifies [interaction.plot()](http://www.inside-r.org/r-doc/stats/interaction.plot) by making it possible to include error bars of the same length on the plot.
-```{r, interactionPlot1, eval = TRUE, echo = FALSE}
-set.seed(20)
-```
-
-```{r, interactionPlot2, eval = TRUE, echo = TRUE}
-# Generate some data with 2 factors and a response
-d <- data.frame(Factor_1 = c(rep("A", 10), rep("B", 10)),
-                Factor_2 = rep(c("C", "D"), each = 5),
-                Response = c(rnorm(5, mean = 5),
-                             rnorm(5, mean = 8),
-                             rnorm(5, mean = 7),
-                             rnorm(5, mean = 5.5)))
-
-# Get the MSE
-MSE <- summary(lm(Response ~ Factor_1 * Factor_2, data = d))$sigma^2
-
-# Calculate the total vertical length of the bars, based on Fisher's LSD
-LSD <- qt(0.05 / 2, 16, lower.tail = FALSE) * sqrt(2 * MSE / 5)
-
-# Plot Interation plot with LSD bars.  If the bars overlap, the two groups
-# are not significantly different per the LSD criterion
-with(d, interactionPlot(Factor_1, Factor_2, Response, las = 1,
-                        errorBar = list(barLength = LSD, width = 0.05),
-                        jitterErrorBars = list(factor = 0.2)))
-```
-
 # Statistical functions
-
-## Beta-binomial distribution functions
-
-The Beta-binomial distribution is the probability distribution of the number of successes in a fixed number of independent trials when the probability of success follows a Beta distribution.  Following the usual convention in R, `r rdl("dbb()")` gives the mass function, `r rdl("pbb()")` is the cdf, `r rdl("qbb()")` provides quantiles for a given probability, and 
-`r rdl("rbb()")` generates random draws.  Here's an example Beta-binomial mass function, with a U-shaped beta distribution:
-```{r dbb, eval = TRUE, echo = TRUE}
-x <- 0:10
-fx <- dbb(x, 10, 0.95, 0.95)
-plot(x, fx, xlab = "x", ylab = "P(X = x)", type = "h", 
-     main = c("N = 10, u = 0.95, v = 0.95"), font.main = 1)
-points(x, fx, pch = 19, col = "Blue") 
-```
 
 ## Distribution of the sum of binomials with unequal *p*
 

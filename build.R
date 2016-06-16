@@ -42,16 +42,6 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
                                replacement = "= https://stat.ethz.ch/pipermail/r-help/2004-September/057954.html>",
                                fixed = TRUE),
                       
-                      # Fix left link for dbb
-                      s = list(pattern = '<li><a href="#dbb">dbb</a></li>',
-                               replacement = '<li><a href="#dbb">dbb, pbb, qbb, rbb</a></li>',
-                               fixed = TRUE),
-                      
-                      # Fix header text for dbb
-                      r = list(at = "<h2>dbb</h2>",
-                               replacement = "<h2>dbb, pbb, qbb, rbb</h2>",
-                               fixed = TRUE),
-                      
                       # Fix left link for dkbinom
                       s = list(pattern = '<li><a href="#dkbinom">dkbinom</a></li>',
                                replacement = '<li><a href="#dkbinom">dkbinom, pkbinom</a></li>',
@@ -125,11 +115,11 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
                       # Fix the link for timeDiff in timeData
                       s = list(pattern = "<code><a href='timeDiff.html'>",
                                replacement = "<code><a href='#timediff'>",
-                               fixed = TRUE),
-                 
-                      # Fix the author field
-                      r = list(at = "<strong>Authors:</strong> (none)",
-                               replacement = "<strong>Author:</strong> Landon Sego",
                                fixed = TRUE)),
+                 
+                      ## # Fix the author field
+                      ## r = list(at = "<strong>Authors:</strong> (none)",
+                      ##          replacement = "<strong>Author:</strong> Landon Sego",
+                      ##          fixed = TRUE)),
                  
                  inFile = "rd.html", outFile = "rd.html")
