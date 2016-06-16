@@ -84,7 +84,6 @@
           <li><a href="#rapidly-combine-or-bind-numerous-objects">Rapidly combine or bind numerous objects</a></li>
           <li><a href="#row-bind-heterogenous-matrices">Row bind heterogenous matrices</a></li>
           <li><a href="#consistently-select-rows-or-columns">Consistently select rows or columns</a></li>
-          <li><a href="#sort-a-dataframe">Sort a dataframe</a></li>
           </ul></li>
           <li><a href="#conversion-to-and-from-lists">Conversion to and from lists</a><ul>
           <li><a href="#row-wise-conversion-of-a-dataframe-to-a-list">Row-wise conversion of a dataframe to a list</a></li>
@@ -128,10 +127,8 @@
           <li><a href="#quickly-plot-one-or-more-functions">Quickly plot one or more functions</a></li>
           <li><a href="#create-naturally-spaced-time-axes">Create naturally spaced time axes</a></li>
           <li><a href="#draw-a-vertical-error-bar">Draw a vertical error bar</a></li>
-          <li><a href="#interaction-plot-with-vertical-error-bars">Interaction plot with vertical error bars</a></li>
           </ul></li>
           <li><a href="#statistical-functions">Statistical functions</a><ul>
-          <li><a href="#beta-binomial-distribution-functions">Beta-binomial distribution functions</a></li>
           <li><a href="#distribution-of-the-sum-of-binomials-with-unequal-p">Distribution of the sum of binomials with unequal <em>p</em></a></li>
           <li><a href="#a-continuous-version-of-the-binomial-cdf">A continuous version of the binomial cdf</a></li>
           <li><a href="#highest-posterior-density-credible-interval">Highest posterior density credible interval</a></li>
@@ -293,27 +290,6 @@ select(x, 1)</code></pre>
 1 1
 2 2</code></pre>
 </div>
-<div id="sort-a-dataframe" class="section level2">
-<h2>Sort a dataframe</h2>
-<p><code><a target='_blank' href='rd.html#sortdf'>sortDF()</a></code> provides a simple interface for sorting a dataframe by as many variables as you like, using a formula-style argument to indicate whether the variables are sorted in increasing or decreasing order.</p>
-<pre class="r"><code>d1 &lt;- data.frame(A = 2:1, B = c(&quot;a&quot;, &quot;b&quot;))
-
-# Sort by A
-sortDF(d1, ~ A)</code></pre>
-<pre><code>  A B
-2 1 b
-1 2 a</code></pre>
-<pre class="r"><code># Sort by descending B
-sortDF(d1, ~ -B)</code></pre>
-<pre><code>  A B
-2 1 b
-1 2 a</code></pre>
-<pre class="r"><code># Sort by A and B
-sortDF(d1, ~ A + B)</code></pre>
-<pre><code>  A B
-2 1 b
-1 2 a</code></pre>
-</div>
 </div>
 <div id="conversion-to-and-from-lists" class="section level1">
 <h1>Conversion to and from lists</h1>
@@ -464,7 +440,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2016-05-13_142103.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2016-06-15_210511.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -593,7 +569,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>0.97 seconds </code></pre>
+<pre><code>0.94 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>
@@ -790,43 +766,9 @@ plot(x, y, pch = as.character(1:9), ylim = c(-2, 2) + range(y),
 vertErrorBar(x, 0.3, center = y, barLength = 2 * 1.96, blankMiddle = 0.75)</code></pre>
 <p><img src="index_files/figure-html/vertErrorBar2-1.png" title="" alt="" width="624" /></p>
 </div>
-<div id="interaction-plot-with-vertical-error-bars" class="section level2">
-<h2>Interaction plot with vertical error bars</h2>
-<p><code><a target='_blank' href='rd.html#interactionplot'>interactionPlot()</a></code> plots the mean (or other summary) of the response for two-way combinations of factors, thereby illustrating possible interactions. It modifies <a href="http://www.inside-r.org/r-doc/stats/interaction.plot">interaction.plot()</a> by making it possible to include error bars of the same length on the plot.</p>
-<pre class="r"><code># Generate some data with 2 factors and a response
-d &lt;- data.frame(Factor_1 = c(rep(&quot;A&quot;, 10), rep(&quot;B&quot;, 10)),
-                Factor_2 = rep(c(&quot;C&quot;, &quot;D&quot;), each = 5),
-                Response = c(rnorm(5, mean = 5),
-                             rnorm(5, mean = 8),
-                             rnorm(5, mean = 7),
-                             rnorm(5, mean = 5.5)))
-
-# Get the MSE
-MSE &lt;- summary(lm(Response ~ Factor_1 * Factor_2, data = d))$sigma^2
-
-# Calculate the total vertical length of the bars, based on Fisher&#39;s LSD
-LSD &lt;- qt(0.05 / 2, 16, lower.tail = FALSE) * sqrt(2 * MSE / 5)
-
-# Plot Interation plot with LSD bars.  If the bars overlap, the two groups
-# are not significantly different per the LSD criterion
-with(d, interactionPlot(Factor_1, Factor_2, Response, las = 1,
-                        errorBar = list(barLength = LSD, width = 0.05),
-                        jitterErrorBars = list(factor = 0.2)))</code></pre>
-<p><img src="index_files/figure-html/interactionPlot2-1.png" title="" alt="" width="624" /></p>
-</div>
 </div>
 <div id="statistical-functions" class="section level1">
 <h1>Statistical functions</h1>
-<div id="beta-binomial-distribution-functions" class="section level2">
-<h2>Beta-binomial distribution functions</h2>
-<p>The Beta-binomial distribution is the probability distribution of the number of successes in a fixed number of independent trials when the probability of success follows a Beta distribution. Following the usual convention in R, <code><a target='_blank' href='rd.html#dbb'>dbb()</a></code> gives the mass function, <code><a target='_blank' href='rd.html#dbb'>pbb()</a></code> is the cdf, <code><a target='_blank' href='rd.html#dbb'>qbb()</a></code> provides quantiles for a given probability, and <code><a target='_blank' href='rd.html#dbb'>rbb()</a></code> generates random draws. Here’s an example Beta-binomial mass function, with a U-shaped beta distribution:</p>
-<pre class="r"><code>x &lt;- 0:10
-fx &lt;- dbb(x, 10, 0.95, 0.95)
-plot(x, fx, xlab = &quot;x&quot;, ylab = &quot;P(X = x)&quot;, type = &quot;h&quot;, 
-     main = c(&quot;N = 10, u = 0.95, v = 0.95&quot;), font.main = 1)
-points(x, fx, pch = 19, col = &quot;Blue&quot;) </code></pre>
-<p><img src="index_files/figure-html/dbb-1.png" title="" alt="" width="624" /></p>
-</div>
 <div id="distribution-of-the-sum-of-binomials-with-unequal-p" class="section level2">
 <h2>Distribution of the sum of binomials with unequal <em>p</em></h2>
 <p>The distribution of the sum of binomial random variates with constant probability of success is well-known. When the probability of sucess varies, things are more complicated. <code><a target='_blank' href='rd.html#dkbinom'>dkbinom()</a></code> and <code><a target='_blank' href='rd.html#dkbinom'>pkbinom()</a></code> provide the mass and distribution functions for the sum of an arbitrary number of binomial variates with different success probabilities. Suppose <em>X ~ Bin(5, 0.7)</em> and <em>Y ~ Bin(7, 0.3)</em>. Then <em>P(X + Y = 5)</em> is given by:</p>
@@ -889,7 +831,7 @@ x &lt;- exp(rnorm(50, mean = 0.1, sd = 0.5))
 # The UMVUE&#39;s of the lognormal parameters
 umvueLN(x)</code></pre>
 <pre><code>        mu      se.mu      sigma 
-1.22257845 0.09136714 0.64872945 </code></pre>
+1.19807880 0.07415374 0.52544544 </code></pre>
 </div>
 </div>
 <div id="time-series" class="section level1">

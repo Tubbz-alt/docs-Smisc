@@ -13,7 +13,6 @@
     - qbind
     - smartRbindMat
     - select
-    - sortDF
 -
   section_name: Conversion to and from lists
   description:
@@ -69,12 +68,10 @@
     - plotFun
     - smartTimeAxis
     - vertErrorBar
-    - interactionPlot
 -
   section_name: Statistical functions
   description:
   topics:
-    - dbb
     - dkbinom
     - pcbinom
     - hpd
