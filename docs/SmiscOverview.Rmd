@@ -844,3 +844,8 @@ The `Smisc` package contains three datasets, `r rdl("PowerData")`, `r rdl("timeD
 Please cite the `Smisc` package using the following reference:
 
 Sego LH. 2016. Smisc: Sego Miscellaneous. A collection of functions for statistical computing and data manipulation in R. Pacific Northwest National Laboratory. https://pnnl.github.io/Smisc.
+
+# Acknowledgements
+
+This package was developed with support from the Signature Discovery Initiative at Pacific Northwest National Laboratory, conducted under the Laboratory Directed Research and Development Program at PNNL, a multiprogram national laboratory operated by Battelle for the U.S. Department of Energy. 
+

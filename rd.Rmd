@@ -19,12 +19,11 @@ brand: |-
 <h1>Sego Miscellaneous</h1>
 
 <p><strong>Authors:</strong> <a href="mailto:Landon.Sego@pnnl.gov">Landon Sego</a> [aut, cre]</p>
-<p><strong>Version:</strong> 0.3.4</p>
-<p><strong>License:</strong> file LICENSE</p>
+<p><strong>Version:</strong> 0.3.5</p>
+<p><strong>License:</strong> BSD_3_clause + file LICENSE</p>
 
 <h4>Description</h4>
-<p>Sego Miscellaneous: A collection of functions for statistical
-computing and data manipulation in R.</p>
+<p>A collection of functions for statistical computing and data manipulation in R.</p>
 
 <h4>Depends</h4>
 <p>(none)</p>
