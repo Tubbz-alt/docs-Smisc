@@ -19,11 +19,14 @@ brand: |-
 <h1>Sego Miscellaneous</h1>
 
 <p><strong>Authors:</strong> <a href="mailto:Landon.Sego@pnnl.gov">Landon Sego</a> [aut, cre]</p>
-<p><strong>Version:</strong> 0.3.5</p>
+<p><strong>Version:</strong> 0.3.6</p>
 <p><strong>License:</strong> BSD_3_clause + file LICENSE</p>
 
 <h4>Description</h4>
-<p>A collection of functions for statistical computing and data manipulation in R.</p>
+<p>A collection of functions for statistical computing and data manipulation in R.
+Includes routines for data ingestion, operating on dataframes and matrices, conversion to and
+from lists, converting factors, filename manipulation, programming utilities, parallelization, plotting,
+statistical and mathematical operations, and time series.</p>
 
 <h4>Depends</h4>
 <p>(none)</p>
@@ -1754,8 +1757,9 @@ the following components:
 
 <h4>Examples</h4>
 <pre class="r"><code># We can assign the object within the call to timeIt():
-timeIt(x1 <- rnorm(10^7))
+timeIt(x1 <- rnorm(10^6))
 str(x1)
+
 
 # We can just run the expression without assigning it to anything
 timeIt(rnorm(10^7), units = "m")
@@ -2202,6 +2206,7 @@ of <code>X</code> with <code>FUN</code>.
 <h4>Examples</h4>
 <pre class="r"><code>X <- data.frame(a = 1:3, b = letters[1:3])
 
+
 # Function that will operate on each of x, producing a simple list
 test.1 <- function(x) {
   list(ab = paste(x$a, x$b, sep = "-"), a2 = x$a^2, bnew = paste(x$b, "new", sep = "."))
@@ -2219,6 +2224,7 @@ test.2 <- function(x) {
 }
 
 dfplapply(X, test.2, output.df = TRUE, njobs = 2, verbose = TRUE)
+
 
 # Passing in other objects needed by FUN
 a.out <- 10
@@ -2306,6 +2312,7 @@ The object data frame returned by <code><a href=http://www.inside-r.org/packages
 <h4>Examples</h4>
 <pre class="r"><code>data(baseball, package = "plyr")
 
+
 # Summarize the number of entries for each year in the baseball dataset with 2 jobs
 o1 <- pddply(baseball, ~ year, nrow, njobs = 2)
 head(o1)
@@ -2314,11 +2321,14 @@ head(o1)
 o2 <- plyr::ddply(baseball, ~ year, nrow)
 identical(o1, o2)
 
+
 # Another possibility
 o3 <- pddply(baseball, "lg", c("nrow", "ncol"), njobs = 2)
 o3
+
 o4 <- plyr::ddply(baseball, "lg", c("nrow", "ncol"))
 identical(o3, o4)
+
 
 # A nonsense example where we need to pass objects and packages into the cluster
 number1 <- 7
@@ -2332,9 +2342,9 @@ o5 <- pddply(baseball[1:100,], "year", f, number2 = 13, njobs = 2,
             .paropts = list(.packages = "Smisc", .export = "number1"))
 o5
 
+
 # Non parallel
 o6 <- plyr::ddply(baseball[1:100,], "year", f, number2 = 13)
-
 identical(o5, o6)</code></pre>
 
 <h4>See also</h4>
@@ -2885,6 +2895,7 @@ dkbinom(c(0, 4, 7), c(3, 4, 2), c(0.3, 0.5, 0.8), method = "b")
 pkbinom(c(0, 4, 7), c(3, 4, 2), c(0.3, 0.5, 0.8))
 pkbinom(c(0, 4, 7), c(3, 4, 2), c(0.3, 0.5, 0.8), method = "b")
 
+ 
 # Compare the output of the 3 methods
 pkbinom(4, c(3, 4, 2), c(0.3, 0.5, 0.8), method = "fft")
 pkbinom(4, c(3, 4, 2), c(0.3, 0.5, 0.8), method = "butler")
@@ -3085,11 +3096,13 @@ int <- hpd(dnorm, c(-5,5), prob = 0.90, njobs = 2)
 print(int)
 plot(int)
 
+
 # A credible interval with the gamma density
 int <- hpd(function(x) dgamma(x, shape = 2, rate = 0.5), c(0, 20),
            cdf = function(x) pgamma(x, shape = 2, rate = 0.5), prob = 0.8)
 print(int)
 plot(int)
+
 
 # A credible interval using the Beta density
 dens <- function(x) dbeta(x, 7, 12)
