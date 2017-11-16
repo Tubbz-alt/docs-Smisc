@@ -1,14 +1,13 @@
 ## install packagedocs if not installed:
 if(!require("packagedocs")) {
-  options(repos = c(tessera = "http://packages.tessera.io", getOption("repos")))
-  install.packages("packagedocs")
+  devtools::install_github("lhsego/packagedocs")
 }
 
 knitr::opts_knit$set(root.dir = normalizePath("."))
 
 # Render the documents
 packagedocs::render_docs(
-  code_path = "~/Work/github/Smisc",
+  code_path = "~/R/Smisc",
   docs_path = ".",             # location of docs directory
   package_name = "Smisc",      # name of the package
   main_toc_collapse = TRUE,    # use collapsing toc on main page
