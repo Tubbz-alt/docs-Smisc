@@ -15,7 +15,7 @@ Before you get started, the source code of the `Smisc` package contains C code t
 - Windows: you'll need to install [R tools](http://cran.r-project.org/bin/windows/Rtools/)
 - Linux/Unix: compilation should take place automatically
 
-Then, installation is made easy with [devtools](https://cran.r-project.org/web/packages/devtools/index.html):
+Then, installation is made easy with [devtools](https://CRAN.R-project.org/package=devtools):
 ```{r instal, eval = FALSE, echo = TRUE}
 # If devtools is not already installed
 install.packages("devtools") 
@@ -30,7 +30,7 @@ library(Smisc)
 # Data ingestion
 
 ## Load objects to a name of choice
-I always found it a bit annoying how [load()](http://www.inside-r.org/r-doc/base/load) places the object(s) in the `.Rdata` file into `.GlobalEnv` without immediately telling you what the name(s) of the object is (are).  `r rdl("loadObject()")` makes it easy to assign the contents of the `.Rdata` file to an object of my choice, like this:
+I always found it a bit annoying how [load()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/load) places the object(s) in the `.Rdata` file into `.GlobalEnv` without immediately telling you what the name(s) of the object is (are).  `r rdl("loadObject()")` makes it easy to assign the contents of the `.Rdata` file to an object of my choice, like this:
 ```{r loadObject, eval = FALSE, echo = TRUE}
 myName <- loadObject("~/aDir/aFile.Rdata")
 ```
@@ -55,7 +55,7 @@ d <- dataIn("somePackage::someData")
 # Operations on dataframes and matrices
 
 ## Identify missing columns or rows
-Sometimes it's handy to know whether all the elements in a given row (or column) of a matrix or data frame are missing.  `r rdl("allMissing()")` returns a logical vector indicating whether all the elements in a row (or column) are missing.  It's a nice compliment to [complete.cases()](http://www.inside-r.org/r-doc/stats/complete.cases).
+Sometimes it's handy to know whether all the elements in a given row (or column) of a matrix or data frame are missing.  `r rdl("allMissing()")` returns a logical vector indicating whether all the elements in a row (or column) are missing.  It's a nice compliment to [complete.cases()](https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/complete.cases).
 ```{r allMissing, echo = TRUE, eval = TRUE}
 # A dataframe with a missing column
 m <- data.frame(A = rnorm(3), B = NA, C = letters[3])
@@ -83,7 +83,7 @@ compare$equiv.matrix
 ```
 
 ## Rapidly combine or bind numerous objects 
-Have you ever needed to row bind, [rbind()](http://www.inside-r.org/r-doc/base/rbind), or column bind, [cbind()](http://www.inside-r.org/r-doc/base/cbind), or combine/concatenate, [c()](http://www.inside-r.org/r-doc/base/c), *numerous* objects, usually of the same type?  If you do it iteratively, you'll slow your machine to a crawl:
+Have you ever needed to row bind, [rbind()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/cbind), or column bind, [cbind()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/cbind), or combine/concatenate, [c()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/c), *numerous* objects, usually of the same type?  If you do it iteratively, you'll slow your machine to a crawl:
 ```{r qbind1, eval = FALSE, echo = TRUE}
 # The names of the 100 matrices, m1, m2, ..., m100
 mNames <- paste("m", 1:100, sep = "")
@@ -130,7 +130,7 @@ select(x, 1)
 The longer I program in R, the more I use lists--especially for parallelized computations. This often requires converting lists to dataframes, dataframes to lists, or breaking a list apart and storing the elements as separate objects.
 
 ## Row-wise conversion of a dataframe to a list
-`r rdl("df2list()")` converts a dataframe to a list, in a row-wise fashion (as opposed to [as.list()](http://www.inside-r.org/r-doc/base/as.list), which converts in a column-wise fashion):
+`r rdl("df2list()")` converts a dataframe to a list, in a row-wise fashion (as opposed to [as.list()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/list), which converts in a column-wise fashion):
 ```{r df2list, eval = TRUE, echo = TRUE}
 d <- data.frame(a = 1:2, b = letters[1:2])
 d
@@ -138,7 +138,7 @@ df2list(d)
 ```
 
 ## Convert a list to a dataframe
-I use `r rdl("list2df()")` probably more than any other `Smisc` function. It converts a list of suitable object types (vectors, dataframes, or lists) into a single dataframe.  It's especially useful for collecting the output from [strsplit()](http://www.inside-r.org/r-doc/base/strsplit), or the results from [lapply()](http://www.inside-r.org/r-doc/base/lapply).
+I use `r rdl("list2df()")` probably more than any other `Smisc` function. It converts a list of suitable object types (vectors, dataframes, or lists) into a single dataframe.  It's especially useful for collecting the output from [strsplit()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/strsplit), or the results from [lapply()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply).
 ```{r list2df, eval = TRUE, echo = TRUE}
 z <- list(a = c(first = 10, second = 12), b = c(first = 15, second = 17))
 z
@@ -173,7 +173,7 @@ str(myData1)
 ```
 
 ## Convert factor to numeric
-Naively attempting to convert a factor to a numeric vector can easily go wrong.  For example,  [as.numeric()](http://www.inside-r.org/r-doc/base/as.numeric) probably won't give you what you're looking for. `r rdl("factor2numeric()")` correctly converts a factor to a numeric vector.
+Naively attempting to convert a factor to a numeric vector can easily go wrong.  For example,  [as.numeric()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/as.numeric) probably won't give you what you're looking for. `r rdl("factor2numeric()")` correctly converts a factor to a numeric vector.
 ```{r factor2numeric, echo = TRUE, eval = TRUE}
 x <- factor(c(4, 7))
 x
@@ -270,7 +270,7 @@ The following functions are designed to make writing code in R a little easier, 
 
 ## Generate a hard-coded vector
 
-When writing a script for analysis, have you ever wanted to select a bunch of columns (by name) in a dataframe, and had to extensively edit the output of [colnames(myData)](http://www.inside-r.org/r-doc/base/colnames) in order to have some tidy code in your script?  `r rdl("hardCode()")` makes it easy to do this:
+When writing a script for analysis, have you ever wanted to select a bunch of columns (by name) in a dataframe, and had to extensively edit the output of [colnames(myData)](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/colnames) in order to have some tidy code in your script?  `r rdl("hardCode()")` makes it easy to do this:
 ```{r hardCode, eval = TRUE, echo = TRUE}
 myData <- data.frame(a = 1:4, 
                      b = letters[1:4], 
@@ -357,7 +357,7 @@ sourceDir("~/R-packages/myPackage/R")
 
 ## Customized error message for stopifnot()
 
-The [stopifnot()](http://www.inside-r.org/r-doc/base/stopifnot) function is super useful for basic sanity checks of functional arguments, ensuring that the arguments supplied by a user have the correct type, length, class, etc.  `r rdl("stopifnotMsg()")` extends [stopifnot()](http://www.inside-r.org/r-doc/base/stopifnot) by making it easy to throw a customized error message for each condition that is checked.
+The [stopifnot()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/stopifnot) function is super useful for basic sanity checks of functional arguments, ensuring that the arguments supplied by a user have the correct type, length, class, etc.  `r rdl("stopifnotMsg()")` extends [stopifnot()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/stopifnot) by making it easy to throw a customized error message for each condition that is checked.
 ```{r stopifnotMsg1, echo = TRUE, eval = TRUE}
 # A simple function
 aFunction <- function(x, a = "text") {
@@ -397,7 +397,7 @@ A call to `r rdl("rma()")` removes all the objects in the Global Environment.
 There are a number of packages out there that enable parallelization of R.  The parallelization functions in the `Smisc` package are not meant to replace them, but rather, make them easier to use---especially for Windows users. For the most part, I rely on the [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf) package for parallelization.  These functions are designed to run on a single, multi-core workstation (as opposed to a cluster with multiple nodes).
 
 ## Parallelize lapply(), a wrapper for parLapply()
-`r rdl("parLapplyW()")` parallelizes [lapply()](http://www.inside-r.org/r-doc/base/lapply), and is a wrapper for [parLapply()](http://www.inside-r.org/r-doc/parallel/parLapply). `r rdl("parLapplyW()")` makes makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, run the [lapply()](http://www.inside-r.org/r-doc/base/lapply) in parallel, and then shut down the cluster---all in one function call.  If the job fails, the cluster is shut down without consequence.  
+`r rdl("parLapplyW()")` parallelizes [lapply()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply), and is a wrapper for [parLapply()](https://www.rdocumentation.org/packages/parallel/versions/3.4.1). `r rdl("parLapplyW()")` makes makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, run the [lapply()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply) in parallel, and then shut down the cluster---all in one function call.  If the job fails, the cluster is shut down without consequence.  
 
 Let's look at two workflows that produce the same result, one using the individual functions of the [parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf) package, and the second using `r rdl("parLapplyW()")`.  Here are some preliminary objects that both workflows will need:
 ```{r parLapplyW1, eval = TRUE, echo = TRUE}
@@ -441,11 +441,11 @@ identical(res1, res2)
 ```
 
 ## Parallelize lapply() with convenient debugging and more
-`r rdl("plapply()")`, like `r rdl("parLapplyW()")`, is also a parallelization of [lapply()](http://www.inside-r.org/r-doc/base/lapply) for a single workstation. `r rdl("plapply()")` differs from other parallelized implementations of [lapply()](http://www.inside-r.org/r-doc/base/lapply) in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own `.Rout` file that can be investigated for errors and warnings. While `r rdl("plapply()")` will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:
+`r rdl("plapply()")`, like `r rdl("parLapplyW()")`, is also a parallelization of [lapply()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply) for a single workstation. `r rdl("plapply()")` differs from other parallelized implementations of [lapply()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply) in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own `.Rout` file that can be investigated for errors and warnings. While `r rdl("plapply()")` will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:
 
 -  The `.Rout` files produced by each R instance are easily accessible for convenient debugging of errors or warnings. The `.Rout` files can also serve as an explicit record of the work that was performed by the workers
 - Three options are available for the ordering of the processing of the list elements: the original list order, randomized, or collated (first-in-first-out)
-- In each R instance, pre-processing or post-processing steps can be performed before and after the call to [lapply()](http://www.inside-r.org/r-doc/base/lapply). These pre-processing and post-processing steps can depend on the instance of R,
+- In each R instance, pre-processing or post-processing steps can be performed before and after the call to [lapply()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply). These pre-processing and post-processing steps can depend on the instance of R,
  such that each instance can be treated differently, if desired
 
 These features give greater control over the computing process, which can be especially useful for large jobs.
@@ -454,7 +454,7 @@ The call to `r rdl("plapply()")` is straightforward.  Here's what it looks like 
 ```{r plapply, eval = TRUE, echo = TRUE}
 res3 <- plapply(x1, f1, njobs = 2, needed.objects = "b")
 ```
-The result is the same as that produced by `r rdl("parLapplyW()")` and [lapply()](http://www.inside-r.org/r-doc/base/lapply):
+The result is the same as that produced by `r rdl("parLapplyW()")` and [lapply()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply):
 ```{r plapply1, eval = TRUE, echo = TRUE}
 # Same as parLapplyW()
 identical(res2, res3)
@@ -480,7 +480,7 @@ dfplapply(x, f, njobs = 2, output.df = TRUE)
 ```
 
 ## Convenient wrapper for parallelization of ddply()
-`r rdl("pddply()")` is a wrapper for [plyr::ddply()](http://www.inside-r.org/packages/cran/plyr/docs/ddply) that makes it easier to use in parallel and supresses a spurious warning along the way. Here are two workflows that produce identical results using [plyr::ddply()](http://www.inside-r.org/packages/cran/plyr/docs/ddply) in parallel and `r rdl("pddply()")`.  First, some preliminaries:
+`r rdl("pddply()")` is a wrapper for [plyr::ddply()](https://www.rdocumentation.org/packages/plyr/versions/1.8.4/topics/ddply) that makes it easier to use in parallel and supresses a spurious warning along the way. Here are two workflows that produce identical results using [plyr::ddply()](https://www.rdocumentation.org/packages/plyr/versions/1.8.4/topics/ddply) in parallel and `r rdl("pddply()")`.  First, some preliminaries:
 ```{r pddply1, eval = TRUE, echo = TRUE, results = "hide"}
 # Load necessary packages
 loadNamespace("plyr")
@@ -489,7 +489,7 @@ loadNamespace("foreach")
 # Load some baseball data from the plyr package
 data(baseball, package = "plyr")
 ```
-Here's the workflow with [plyr::ddply](http://www.inside-r.org/packages/cran/plyr/docs/ddply):
+Here's the workflow with [plyr::ddply](https://www.rdocumentation.org/packages/plyr/versions/1.8.4/topics/ddply):
 ```{r pddply2, eval = TRUE, echo = TRUE}
 # Set up the cluster
 cl <- parallel::makeCluster(2)
@@ -619,7 +619,7 @@ dkbinom(5, size = c(5, 7), prob = c(0.7, 0.3))
 
 ## A continuous version of the binomial cdf
 
-There are circumstances when a continuous version of the discrete binomial cdf can be useful, especially in root finding or optimization. `r rdl("pcbinom()")` is equivalent to [pbinom()](http://www.inside-r.org/r-doc/stats/pbinom) when the first argument is an integer.
+There are circumstances when a continuous version of the discrete binomial cdf can be useful, especially in root finding or optimization. `r rdl("pcbinom()")` is equivalent to [pbinom()](https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/Binomial) when the first argument is an integer.
 ```{r pcbinom1, echo = TRUE, eval = TRUE}
 # These are the same
 pcbinom(7, 10, 0.5)
@@ -678,7 +678,7 @@ formatDT("17-Sep-1782 4:31pm", date.outformat = "yyyy-mm-dd", time.outformat = "
 ```
 
 ## Calculate a moving window dot product
-Have you ever been frustrated by the behavior of [filter()](http://www.inside-r.org/r-doc/stats/filter) near the edges of a time series---or miffed by how it handles NA's?  `r rdl("smartFilter()")` gracefully handles the beginning and end of a time series, as well as NA's, by re-normalizing the filter weights as needed.  Let's apply [filter()](http://www.inside-r.org/r-doc/stats/filter) to calculate a moving average consisting of 3 data points:
+Have you ever been frustrated by the behavior of [filter()](https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/filter) near the edges of a time series---or miffed by how it handles NA's?  `r rdl("smartFilter()")` gracefully handles the beginning and end of a time series, as well as NA's, by re-normalizing the filter weights as needed.  Let's apply [filter()](https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/filter) to calculate a moving average consisting of 3 data points:
 ```{r smartFilter1, eval = TRUE, echo = TRUE}
 # A vector
 x <- 2^(0:8)
@@ -761,7 +761,7 @@ More generally, `r rdl("timeIntegration()")` will approximate the area under any
 # Mathematical operations
 
 ## Generate all possible combinations
-`r rdl("comboList()")` produces a list that contains all possible combinations of a set of `n` objects indexed by `1:n`.  As this can be computationally expensive, it can be easily parallelized with `njobs > 1`. This extends [combn()](http://www.inside-r.org/r-doc/utils/combn), which produces all the possible combinations of a specific size.  For example, here are all the possible combinations of 3 items, taken 1, 2, and 3 at a time:
+`r rdl("comboList()")` produces a list that contains all possible combinations of a set of `n` objects indexed by `1:n`.  As this can be computationally expensive, it can be easily parallelized with `njobs > 1`. This extends [combn()](https://www.rdocumentation.org/packages/utils/versions/3.4.1/topics/combn), which produces all the possible combinations of a specific size.  For example, here are all the possible combinations of 3 items, taken 1, 2, and 3 at a time:
 ```{r comboList, eval = TRUE, echo = TRUE}
 out <- comboList(3)
 out$pList
@@ -774,7 +774,7 @@ cumMax(c(1, 2, 3, 0, 2, 4, 1))
 ```
 
 ## Calculate cumulative sum without propagating NA's
-If you need to calculate the cumulative sum of a vector that has missing values, `r rdl("cumsumNA()")` is your friend. Essentially the same as [cumsum()](http://www.inside-r.org/r-doc/base/cumsum), except it doesn't propagate NA's.
+If you need to calculate the cumulative sum of a vector that has missing values, `r rdl("cumsumNA()")` is your friend. Essentially the same as [cumsum()](https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/cumsum), except it doesn't propagate NA's.
 ```{r cumsumNA, eval = TRUE, echo = TRUE}
 x <- c(3, 4, NA, 7, -2)
 
@@ -800,7 +800,7 @@ findDepMat(Y)
 ```
 
 ## Numerical integration using Simpson or Trapezoid rule
-`r rdl("integ()")` estimates the integral of a real-valued function using Simpson's or the Trapezoid approximation. Why might you want something other than [integrate()](http://www.inside-r.org/r-doc/stats/integrate)?  Because there are occasions when the adaptive quadrature method of [integrate()](http://www.inside-r.org/r-doc/stats/integrate) doesn't behave well---especially if the function is constant over a large portion of the domain. 
+`r rdl("integ()")` estimates the integral of a real-valued function using Simpson's or the Trapezoid approximation. Why might you want something other than [integrate()](https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/integrate)?  Because there are occasions when the adaptive quadrature method of [integrate()](https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/integrate) doesn't behave well---especially if the function is constant over a large portion of the domain. 
 
 As a simple example, let's look at the pdf of a Beta distribution:
 ```{r integ1, eval = TRUE, echo = TRUE}
@@ -812,7 +812,7 @@ Integration using Simpson's approximation:
 ```{r integ2, eval = TRUE, echo = TRUE}
 integ(f(seq(0, 0.3, length = 1001)), a = 0, b = 0.3)
 ```
-Compare to [pbeta()](http://www.inside-r.org/r-doc/stats/pbeta):
+Compare to [pbeta()](https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/Beta):
 ```{r integ3, eval = TRUE, echo = TRUE}
 pbeta(0.3, 5, 5)
 ```
