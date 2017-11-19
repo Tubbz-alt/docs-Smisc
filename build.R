@@ -1,3 +1,5 @@
+# Build the html documentation
+
 ## install packagedocs if not installed:
 if(!require("packagedocs")) {
   devtools::install_github("lhsego/packagedocs")
@@ -25,22 +27,38 @@ if(!require("rsed")) {
 }
 
 # Manual edits of index.html
-rsed::streamEdit(list(# Map links for pbb, qbb, and rbb to dbb
-                      s = list(pattern = "rd.html#pbb", replacement = "rd.html#dbb", fixed = TRUE),
-                      s = list(pattern = "rd.html#qbb", replacement = "rd.html#dbb", fixed = TRUE),
-                      s = list(pattern = "rd.html#rbb", replacement = "rd.html#dbb", fixed = TRUE),
-                      
-                      # Map links for pkbinom to dkbinom
-                      s = list(pattern = "rd.html#pkbinom", replacement = "rd.html#dkbinom", fixed = TRUE)),
+rsed::streamEdit(list(# Map links for pkbinom to dkbinom
+                      s = list(pattern = "rd.html#pkbinom", replacement = "rd.html#dkbinom", fixed = TRUE),
+
+                      # Copyright on page
+                      s = list(pattern = paste("Battelle Memorial Institute,", substr(Sys.Date(), 1, 4)),
+                               replace = "Battelle Memorial Institute, 2016",
+                               fixed = TRUE)),
                  
                  inFile = "index.html", outFile = "index.html")
 
 # Manual edits of rd.html
-rsed::streamEdit(list(# Fix link for sorting a dataframe
-                      s = list(pattern = "= #https://stat.ethz.ch/pipermail/r-help/2004-september/057954>",
-                               replacement = "= https://stat.ethz.ch/pipermail/r-help/2004-September/057954.html>",
+rsed::streamEdit(list(# Links for LICENSE
+                      s = list(pattern = "BSD_3_clause + file LICENSE",
+                               replacement = paste("<a href=https://opensource.org/licenses/BSD-3-Clause>BSD_3_clause</a> +",
+                                                   "<a href='LICENSE'>LICENSE</a>"),
                                fixed = TRUE),
-                      
+
+                      # Add links to imported CRAN packages
+                      s = list(pattern = "parallel, utils, plyr, doParallel, methods",
+                               replacement = paste("<a href=https://www.rdocumentation.org/packages/parallel>parallel</a>,",
+                                                   "<a href=https://www.rdocumentation.org/packages/utils>utils</a>,",
+                                                   "<a href=https://CRAN.R-project.org/package=plyr>plyr</a>,",
+                                                   "<a href=https://CRAN.R-project.org/package=doParallel>doParallel</a>,",
+                                                   "<a href=https://www.rdocumentation.org/packages/methods>methods</a>"),
+                               fixed = TRUE),
+
+                      # Add links to suggested CRAN packages
+                      s = list(pattern = "testthat, foreach",
+                               replacement = paste("<a href=https://CRAN.R-project.org/package=testthat>testthat</a>,",
+                                                   "<a href=https://CRAN.R-project.org/package=foreach>foreach</a>"),
+                               fixed = TRUE),
+                                                   
                       # Fix left link for dkbinom
                       s = list(pattern = '<li><a href="#dkbinom">dkbinom</a></li>',
                                replacement = '<li><a href="#dkbinom">dkbinom, pkbinom</a></li>',
@@ -114,11 +132,11 @@ rsed::streamEdit(list(# Fix link for sorting a dataframe
                       # Fix the link for timeDiff in timeData
                       s = list(pattern = "<code><a href='timeDiff.html'>",
                                replacement = "<code><a href='#timediff'>",
+                               fixed = TRUE),
+
+                      # Copyright on page
+                      s = list(pattern = paste("Battelle Memorial Institute,", substr(Sys.Date(), 1, 4)),
+                               replace = "Battelle Memorial Institute, 2016",
                                fixed = TRUE)),
-                 
-                      ## # Fix the author field
-                      ## r = list(at = "<strong>Authors:</strong> (none)",
-                      ##          replacement = "<strong>Author:</strong> Landon Sego",
-                      ##          fixed = TRUE)),
                  
                  inFile = "rd.html", outFile = "rd.html")
