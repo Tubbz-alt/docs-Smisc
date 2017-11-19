@@ -161,7 +161,7 @@
 <div id="content-top"></div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>The <code>Smisc</code> package is a collection of functions for statistical computing and data manipulation that I created to facilitate my day-to-day work in R. Most functions operate on their own, each designed for a specific task.</p>
+<p>The <code>Smisc</code> package is a collection of functions for statistical computing, data manipulation, and visualization that I created to facilitate my day-to-day work in R. Most functions operate on their own, each designed for a specific task.</p>
 <p>I have organized the documentation into 11 groups of functions that have similar themes. I provide below a brief synopsis of the motivation for each of the functions in the package, leaving the details to the standard help files, which you can find by following the <a href="rd.html">bold blue links</a>.</p>
 <p>—Landon Sego</p>
 <div id="package-installation" class="section level2">
@@ -453,7 +453,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2017-11-18_193747.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2017-11-18_201155.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -582,7 +582,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>1.67 seconds </code></pre>
+<pre><code>1.62 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>
