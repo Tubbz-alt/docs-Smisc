@@ -785,7 +785,7 @@ vertErrorBar(x, 0.3, center = y, barLength = 2 * 1.96, blankMiddle = 0.75)</code
 <h1>Statistical functions</h1>
 <div id="distribution-of-the-sum-of-binomials-with-unequal-p" class="section level2">
 <h2>Distribution of the sum of binomials with unequal <em>p</em></h2>
-<p>The distribution of the sum of binomial random variates with constant probability of success is well-known. When the probability of sucess varies, things are more complicated. <code><a target='_blank' href='rd.html#dkbinom'>dkbinom()</a></code> and <code><a target='_blank' href='rd.html#dkbinom'>pkbinom()</a></code> provide the mass and distribution functions for the sum of an arbitrary number of binomial variates with different success probabilities. Suppose <em>X ~ Bin(5, 0.7)</em> and <em>Y ~ Bin(7, 0.3)</em>. Then <em>P(X + Y = 5)</em> is given by:</p>
+<p>The distribution of the sum of binomial random variates with constant probability of success is well-known. When the probability of sucess varies, things are more complicated. <code><a target='_blank' href='rd.html#dkbinom'>dkbinom()</a></code> and <code><a target='_blank' href='rd.html#pkbinom'>pkbinom()</a></code> provide the mass and distribution functions for the sum of an arbitrary number of binomial variates with different success probabilities. Suppose <em>X ~ Bin(5, 0.7)</em> and <em>Y ~ Bin(7, 0.3)</em>. Then <em>P(X + Y = 5)</em> is given by:</p>
 <pre class="r"><code>dkbinom(5, size = c(5, 7), prob = c(0.7, 0.3))</code></pre>
 <pre><code>[1] 0.2337159</code></pre>
 </div>
@@ -1114,7 +1114,7 @@ linearMap(x, R = c(-1, 0))</code></pre>
   <div id="footer">
     <div class="container">
       <div class="col-md-6">
-                <p>&copy; Battelle Memorial Institute, 2016</p>
+                <p>&copy; Battelle Memorial Institute, 2017</p>
               </div>
       <div class="col-md-6">
         <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a></p>

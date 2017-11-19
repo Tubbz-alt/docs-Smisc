@@ -143,7 +143,7 @@
           <li><a href="#verterrorbar">vertErrorBar</a></li>
           </ul></li>
           <li><a href="#statistical-functions">Statistical functions</a><ul>
-          <li><a href="#dkbinom">dkbinom, pkbinom</a></li>
+          <li><a href="#dkbinom">dkbinom</a></li>
           <li><a href="#pcbinom">pcbinom</a></li>
           <li><a href="#hpd">hpd</a></li>
           <li><a href="#umvueln">umvueLN</a></li>
@@ -185,7 +185,7 @@ Sego Miscellaneous
 <strong>Version:</strong> 0.3.8
 </p>
 <p>
-<strong>License:</strong> <a href=https://opensource.org/licenses/BSD-3-Clause>BSD_3_clause</a> + <a href='LICENSE.txt'>LICENSE</a>
+<strong>License:</strong> BSD_3_clause + file LICENSE
 </p>
 <h4>
 Description
@@ -203,13 +203,13 @@ Depends
 Imports
 </h4>
 <p>
-<a href=https://www.rdocumentation.org/packages/parallel>parallel</a>, <a href=https://www.rdocumentation.org/packages/utils>utils</a>, <a href=https://CRAN.R-project.org/package=plyr>plyr</a>, <a href=https://CRAN.R-project.org/package=doParallel>doParallel</a>, <a href=https://www.rdocumentation.org/packages/methods>methods</a>
+parallel, utils, plyr, doParallel, methods
 </p>
 <h4>
 Suggests
 </h4>
 <p>
-<a href=https://CRAN.R-project.org/package=testthat>testthat</a>, <a href=https://CRAN.R-project.org/package=foreach>foreach</a>
+testthat, foreach
 </p>
 <h4>
 Enhances
@@ -1171,7 +1171,7 @@ Author
 Get the extension of a vector of filenames
 </h3>
 <p class="rd-p">
-Get the extension of a vector of filenames, assuming that the extension is the set of characters that follows the last <code>“.”</code>. A wrapper for <code><a href='#grablast'>grabLast</a></code>.
+Get the extension of a vector of filenames, assuming that the extension is the set of characters that follows the last <code>“.”</code>. A wrapper for <code><a href='grabLast.html'>grabLast</a></code>.
 </p>
 <h4>
 Usage
@@ -2461,7 +2461,7 @@ Author
 Parallelized single row processing of a data frame
 </h3>
 <p class="rd-p">
-Applies a function to each row of a data frame in a parallelized fashion (by submitting multiple batch R jobs). It is a convenient wrapper for <code><a href='#plapply'>plapply</a></code>, modified especially for parallel, single-row processing of data frames.
+Applies a function to each row of a data frame in a parallelized fashion (by submitting multiple batch R jobs). It is a convenient wrapper for <code><a href='plapply.html'>plapply</a></code>, modified especially for parallel, single-row processing of data frames.
 </p>
 <h4>
 Usage
@@ -3315,7 +3315,7 @@ Author
 <div id="statistical-functions" class="section level1">
 <h1>Statistical functions</h1>
 <div id="dkbinom" class="section level2">
-<h2>dkbinom, pkbinom</h2>
+<h2>dkbinom</h2>
 <h3>
 Probability functions for the sum of k independent binomials
 </h3>
@@ -3541,11 +3541,9 @@ Usage
 </h4>
 <pre class="r"><code>hpd(pdf, support, prob = 0.95, cdf = NULL, njobs = 1, checkUnimodal = 0)
 
-## S3 method for class 'hpd'
-print(x, ...)
+printhpd(x, ...)
 
-## S3 method for class 'hpd'
-plot(x, ...)</code></pre>
+plothpd(x, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4002,7 +4000,7 @@ Author
 Calculate the moving average using a 2-sided, symmetric window
 </h3>
 <p class="rd-p">
-Wrapper for <code><a href='#smartfilter'>smartFilter</a></code> that creates a set of symmetric weights for the 2-sided window based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights, and then calculates the moving average (dot product) using those weights.
+Wrapper for <code><a href='smartFilter.html'>smartFilter</a></code> that creates a set of symmetric weights for the 2-sided window based on the Gaussian kernel, exponential decay, linear decay, or simple uniform weights, and then calculates the moving average (dot product) using those weights.
 </p>
 <h4>
 Usage
@@ -4010,11 +4008,9 @@ Usage
 <pre class="r"><code>movAvg2(y = NULL, bw = 30, type = c("gaussian", "exponential", "linear",
   "uniform"), furthest.weight = 0.01, center.weight = 1, ...)
 
-## S3 method for class 'movAvg2'
-print(x, ...)
+printmovAvg2(x, ...)
 
-## S3 method for class 'movAvg2'
-plot(x, ...)</code></pre>
+plotmovAvg2(x, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4138,14 +4134,11 @@ Usage
 </h4>
 <pre class="r"><code>cusum(X, k, h, initial = 0, reset = TRUE)
 
-## S3 method for class 'cusum'
-print(x, ...)
+printcusum(x, ...)
 
-## S3 method for class 'cusum'
-plot(x, indexes = NULL, emphOOC = TRUE, ...)
+plotcusum(x, indexes = NULL, emphOOC = TRUE, ...)
 
-## S3 method for class 'cusum'
-signal(object, ...)</code></pre>
+signalcusum(object, ...)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4888,7 +4881,7 @@ Author
 An example of power data
 </h3>
 <p class="rd-p">
-A small, altered, subset of total rack power for one of the racks in a data center. Used for illustration of <code><a href='#timeintegration'>timeIntegration</a></code>
+A small, altered, subset of total rack power for one of the racks in a data center. Used for illustration of <code><a href='timeIntegration.html'>timeIntegration</a></code>
 </p>
 <h4>
 Format
@@ -4909,7 +4902,7 @@ rm(PowerData, envir=.GlobalEnv)</code></pre>
 Generic data frame with a time variable
 </h3>
 <p class="rd-p">
-Generic data frame with a time variable to support the example in <code><a href='#smarttimeaxis'>smartTimeAxis</a></code>.
+Generic data frame with a time variable to support the example in <code><a href='smartTimeAxis.html'>smartTimeAxis</a></code>.
 </p>
 <h4>
 Format
@@ -4942,7 +4935,7 @@ Examples
 Four short time series
 </h3>
 <p class="rd-p">
-Four short times series, stored in a list, for use in the <code><a href='#timediff'>timeDiff</a></code> example.
+Four short times series, stored in a list, for use in the <code><a href='timeDiff.html'>timeDiff</a></code> example.
 </p>
 <h4>
 Examples
@@ -4959,7 +4952,7 @@ Examples
   <div id="footer">
     <div class="container">
       <div class="col-md-6">
-                <p>&copy; Battelle Memorial Institute, 2016</p>
+                <p>&copy; Battelle Memorial Institute, 2017</p>
               </div>
       <div class="col-md-6">
         <p class="pull-right">created with <a href="https://github.com/hafen/packagedocs">packagedocs</a></p>
