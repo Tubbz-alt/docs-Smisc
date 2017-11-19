@@ -166,26 +166,38 @@
 <p>—Landon Sego</p>
 <div id="package-installation" class="section level2">
 <h2>Package installation</h2>
-<p>Before you get started, the source code of the <code>Smisc</code> package contains C code that requires compilation:</p>
+<p>You can install the package from <a href="https://cran.r-project.org/">CRAN</a> or from <a href="https://github.com">GitHub</a>:</p>
+<div id="cran" class="section level3">
+<h3>CRAN</h3>
+<pre class="r"><code>install.packages(&quot;Smisc&quot;)</code></pre>
+</div>
+<div id="github" class="section level3">
+<h3>GitHub</h3>
+<p>You can install from <a href="https://github.com">GitHub</a> using the <a href="https://CRAN.R-project.org/package=devtools">devtools</a> package, in which case you’ll need these prerequistites in order to compile the C code in the <code>Smisc</code> package:</p>
 <ul>
 <li>Mac: you’ll need <a href="https://developer.apple.com/xcode/">Xcode</a></li>
 <li>Windows: you’ll need to install <a href="http://cran.r-project.org/bin/windows/Rtools/">R tools</a></li>
 <li>Linux/Unix: compilation should take place automatically</li>
 </ul>
-<p>Then, installation is made easy with <a href="https://CRAN.R-project.org/package=devtools">devtools</a>:</p>
-<pre class="r"><code># If devtools is not already installed
+<p>Now do the following in R:</p>
+<pre class="r"><code># If devtools is not already installed, do this:
 install.packages(&quot;devtools&quot;) 
 
+# Now install the package
 devtools::install_github(&quot;pnnl/Smisc&quot;)</code></pre>
-<p>Now load the package as usual:</p>
+</div>
+<div id="after-installation" class="section level3">
+<h3>After installation</h3>
+<p>After intstallation, you can load the package as usual:</p>
 <pre class="r"><code>library(Smisc)</code></pre>
+</div>
 </div>
 </div>
 <div id="data-ingestion" class="section level1">
 <h1>Data ingestion</h1>
 <div id="load-objects-to-a-name-of-choice" class="section level2">
 <h2>Load objects to a name of choice</h2>
-<p>I always found it a bit annoying how <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/load">load()</a> places the object(s) in the <code>.Rdata</code> file into <code>.GlobalEnv</code> without immediately telling you what the name(s) of the object is (are). <code><a target='_blank' href='rd.html#loadobject'>loadObject()</a></code> makes it easy to assign the contents of the <code>.Rdata</code> file to an object of my choice, like this:</p>
+<p>I always found it a bit annoying how <a href="https://www.rdocumentation.org/packages/base/topics/load">load()</a> places the object(s) in the <code>.Rdata</code> file into <code>.GlobalEnv</code> without immediately telling you what the name(s) of the object is (are). <code><a target='_blank' href='rd.html#loadobject'>loadObject()</a></code> makes it easy to assign the contents of the <code>.Rdata</code> file to an object of my choice, like this:</p>
 <pre class="r"><code>myName &lt;- loadObject(&quot;~/aDir/aFile.Rdata&quot;)</code></pre>
 <p>And thus <code>myName</code> contains the contents <code>aFile.Rdata</code>.</p>
 </div>
@@ -209,7 +221,7 @@ d &lt;- dataIn(&quot;somePackage::someData&quot;)</code></pre>
 <h1>Operations on dataframes and matrices</h1>
 <div id="identify-missing-columns-or-rows" class="section level2">
 <h2>Identify missing columns or rows</h2>
-<p>Sometimes it’s handy to know whether all the elements in a given row (or column) of a matrix or data frame are missing. <code><a target='_blank' href='rd.html#allmissing'>allMissing()</a></code> returns a logical vector indicating whether all the elements in a row (or column) are missing. It’s a nice compliment to <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/complete.cases">complete.cases()</a>.</p>
+<p>Sometimes it’s handy to know whether all the elements in a given row (or column) of a matrix or data frame are missing. <code><a target='_blank' href='rd.html#allmissing'>allMissing()</a></code> returns a logical vector indicating whether all the elements in a row (or column) are missing. It’s a nice compliment to <a href="https://www.rdocumentation.org/packages/stats/topics/complete.cases">complete.cases()</a>.</p>
 <pre class="r"><code># A dataframe with a missing column
 m &lt;- data.frame(A = rnorm(3), B = NA, C = letters[3])
 m</code></pre>
@@ -243,7 +255,7 @@ compare &lt;- dframeEquiv(d1, d2)</code></pre>
 </div>
 <div id="rapidly-combine-or-bind-numerous-objects" class="section level2">
 <h2>Rapidly combine or bind numerous objects</h2>
-<p>Have you ever needed to row bind, <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/cbind">rbind()</a>, or column bind, <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/cbind">cbind()</a>, or combine/concatenate, <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/c">c()</a>, <em>numerous</em> objects, usually of the same type? If you do it iteratively, you’ll slow your machine to a crawl:</p>
+<p>Have you ever needed to row bind, <a href="https://www.rdocumentation.org/packages/base/topics/cbind">rbind()</a>, or column bind, <a href="https://www.rdocumentation.org/packages/base/topics/cbind">cbind()</a>, or combine/concatenate, <a href="https://www.rdocumentation.org/packages/base/topics/c">c()</a>, <em>numerous</em> objects, usually of the same type? If you do it iteratively, you’ll slow your machine to a crawl:</p>
 <pre class="r"><code># The names of the 100 matrices, m1, m2, ..., m100
 mNames &lt;- paste(&quot;m&quot;, 1:100, sep = &quot;&quot;)
 
@@ -297,7 +309,7 @@ select(x, 1)</code></pre>
 <p>The longer I program in R, the more I use lists–especially for parallelized computations. This often requires converting lists to dataframes, dataframes to lists, or breaking a list apart and storing the elements as separate objects.</p>
 <div id="row-wise-conversion-of-a-dataframe-to-a-list" class="section level2">
 <h2>Row-wise conversion of a dataframe to a list</h2>
-<p><code><a target='_blank' href='rd.html#df2list'>df2list()</a></code> converts a dataframe to a list, in a row-wise fashion (as opposed to <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/list">as.list()</a>, which converts in a column-wise fashion):</p>
+<p><code><a target='_blank' href='rd.html#df2list'>df2list()</a></code> converts a dataframe to a list, in a row-wise fashion (as opposed to <a href="https://www.rdocumentation.org/packages/base/topics/list">as.list()</a>, which converts in a column-wise fashion):</p>
 <pre class="r"><code>d &lt;- data.frame(a = 1:2, b = letters[1:2])
 d</code></pre>
 <pre><code>  a b
@@ -323,7 +335,7 @@ Levels: a b</code></pre>
 </div>
 <div id="convert-a-list-to-a-dataframe" class="section level2">
 <h2>Convert a list to a dataframe</h2>
-<p>I use <code><a target='_blank' href='rd.html#list2df'>list2df()</a></code> probably more than any other <code>Smisc</code> function. It converts a list of suitable object types (vectors, dataframes, or lists) into a single dataframe. It’s especially useful for collecting the output from <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/strsplit">strsplit()</a>, or the results from <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply">lapply()</a>.</p>
+<p>I use <code><a target='_blank' href='rd.html#list2df'>list2df()</a></code> probably more than any other <code>Smisc</code> function. It converts a list of suitable object types (vectors, dataframes, or lists) into a single dataframe. It’s especially useful for collecting the output from <a href="https://www.rdocumentation.org/packages/base/topics/strsplit">strsplit()</a>, or the results from <a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply()</a>.</p>
 <pre class="r"><code>z &lt;- list(a = c(first = 10, second = 12), b = c(first = 15, second = 17))
 z</code></pre>
 <pre><code>$a
@@ -374,7 +386,7 @@ str(myData1)</code></pre>
 </div>
 <div id="convert-factor-to-numeric" class="section level2">
 <h2>Convert factor to numeric</h2>
-<p>Naively attempting to convert a factor to a numeric vector can easily go wrong. For example, <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/as.numeric">as.numeric()</a> probably won’t give you what you’re looking for. <code><a target='_blank' href='rd.html#factor2numeric'>factor2numeric()</a></code> correctly converts a factor to a numeric vector.</p>
+<p>Naively attempting to convert a factor to a numeric vector can easily go wrong. For example, <a href="https://www.rdocumentation.org/packages/base/topics/as.numeric">as.numeric()</a> probably won’t give you what you’re looking for. <code><a target='_blank' href='rd.html#factor2numeric'>factor2numeric()</a></code> correctly converts a factor to a numeric vector.</p>
 <pre class="r"><code>x &lt;- factor(c(4, 7))
 x</code></pre>
 <pre><code>[1] 4 7
@@ -441,7 +453,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2017-11-15_234901.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2017-11-18_193747.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -459,7 +471,7 @@ padZero(c(1.2, 1.34, 1.399), side = &quot;r&quot;)</code></pre>
 <p>The following functions are designed to make writing code in R a little easier, whether you’re writing scripts, functions, or developing packages.</p>
 <div id="generate-a-hard-coded-vector" class="section level2">
 <h2>Generate a hard-coded vector</h2>
-<p>When writing a script for analysis, have you ever wanted to select a bunch of columns (by name) in a dataframe, and had to extensively edit the output of <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/colnames">colnames(myData)</a> in order to have some tidy code in your script? <code><a target='_blank' href='rd.html#hardcode'>hardCode()</a></code> makes it easy to do this:</p>
+<p>When writing a script for analysis, have you ever wanted to select a bunch of columns (by name) in a dataframe, and had to extensively edit the output of <a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames(myData)</a> in order to have some tidy code in your script? <code><a target='_blank' href='rd.html#hardcode'>hardCode()</a></code> makes it easy to do this:</p>
 <pre class="r"><code>myData &lt;- data.frame(a = 1:4, 
                      b = letters[1:4], 
                      c = rep(c(TRUE, FALSE), each = 2), 
@@ -544,7 +556,7 @@ makeSelection(myData, c(&quot;a&quot;, &quot;e&quot;))</code></pre>
 </div>
 <div id="customized-error-message-for-stopifnot" class="section level2">
 <h2>Customized error message for stopifnot()</h2>
-<p>The <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/stopifnot">stopifnot()</a> function is super useful for basic sanity checks of functional arguments, ensuring that the arguments supplied by a user have the correct type, length, class, etc. <code><a target='_blank' href='rd.html#stopifnotmsg'>stopifnotMsg()</a></code> extends <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/stopifnot">stopifnot()</a> by making it easy to throw a customized error message for each condition that is checked.</p>
+<p>The <a href="https://www.rdocumentation.org/packages/base/topics/stopifnot">stopifnot()</a> function is super useful for basic sanity checks of functional arguments, ensuring that the arguments supplied by a user have the correct type, length, class, etc. <code><a target='_blank' href='rd.html#stopifnotmsg'>stopifnotMsg()</a></code> extends <a href="https://www.rdocumentation.org/packages/base/topics/stopifnot">stopifnot()</a> by making it easy to throw a customized error message for each condition that is checked.</p>
 <pre class="r"><code># A simple function
 aFunction &lt;- function(x, a = &quot;text&quot;) {
      
@@ -570,7 +582,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>1.62 seconds </code></pre>
+<pre><code>1.67 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>
@@ -584,7 +596,7 @@ aFunction(-1, a = 7)</code></pre>
 <p>There are a number of packages out there that enable parallelization of R. The parallelization functions in the <code>Smisc</code> package are not meant to replace them, but rather, make them easier to use—especially for Windows users. For the most part, I rely on the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf">parallel</a> package for parallelization. These functions are designed to run on a single, multi-core workstation (as opposed to a cluster with multiple nodes).</p>
 <div id="parallelize-lapply-a-wrapper-for-parlapply" class="section level2">
 <h2>Parallelize lapply(), a wrapper for parLapply()</h2>
-<p><code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> parallelizes <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply">lapply()</a>, and is a wrapper for <a href="https://www.rdocumentation.org/packages/parallel/versions/3.4.1">parLapply()</a>. <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> makes makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, run the <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply">lapply()</a> in parallel, and then shut down the cluster—all in one function call. If the job fails, the cluster is shut down without consequence.</p>
+<p><code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> parallelizes <a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply()</a>, and is a wrapper for <a href="https://www.rdocumentation.org/packages/parallel">parLapply()</a>. <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> makes it easy to start the cluster, prepare the workers by exporting variables and/or evaluating expressions, run the <a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply()</a> in parallel, and then shut down the cluster—all in one function call. If the job fails, the cluster is shut down without consequence. Also noteworthy is that <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> works on all the major operating systems: Linux/Unix, Mac OS, and Windows.</p>
 <p>Let’s look at two workflows that produce the same result, one using the individual functions of the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf">parallel</a> package, and the second using <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>. Here are some preliminary objects that both workflows will need:</p>
 <pre class="r"><code># A vector we&#39;ll process using f1
 x1 &lt;- rnorm(4)
@@ -616,16 +628,16 @@ parallel::stopCluster(cl)</code></pre>
 </div>
 <div id="parallelize-lapply-with-convenient-debugging-and-more" class="section level2">
 <h2>Parallelize lapply() with convenient debugging and more</h2>
-<p><code><a target='_blank' href='rd.html#plapply'>plapply()</a></code>, like <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>, is also a parallelization of <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply">lapply()</a> for a single workstation. <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> differs from other parallelized implementations of <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply">lapply()</a> in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own <code>.Rout</code> file that can be investigated for errors and warnings. While <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:</p>
+<p><code><a target='_blank' href='rd.html#plapply'>plapply()</a></code>, like <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>, is also a parallelization of <a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply()</a> for a single workstation. <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> differs from other parallelized implementations of <a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply()</a> in that it more intensively reads and writes to disk to manage the parallelization process. It spawns a separate batch instance of R for each parallel job, with each instance producing its own <code>.Rout</code> file that can be investigated for errors and warnings. While <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> will be a bit slower than other parallel methods (especially for small jobs) because of the i/o to disk, it contains a number of features that are not readily available in other parallelization functions:</p>
 <ul>
 <li>The <code>.Rout</code> files produced by each R instance are easily accessible for convenient debugging of errors or warnings. The <code>.Rout</code> files can also serve as an explicit record of the work that was performed by the workers</li>
 <li>Three options are available for the ordering of the processing of the list elements: the original list order, randomized, or collated (first-in-first-out)</li>
-<li>In each R instance, pre-processing or post-processing steps can be performed before and after the call to <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply">lapply()</a>. These pre-processing and post-processing steps can depend on the instance of R, such that each instance can be treated differently, if desired</li>
+<li>In each R instance, pre-processing or post-processing steps can be performed before and after the call to <a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply()</a>. These pre-processing and post-processing steps can depend on the instance of R, such that each instance can be treated differently, if desired</li>
 </ul>
 <p>These features give greater control over the computing process, which can be especially useful for large jobs.</p>
 <p>The call to <code><a target='_blank' href='rd.html#plapply'>plapply()</a></code> is straightforward. Here’s what it looks like for the same example discussed above for <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code>:</p>
 <pre class="r"><code>res3 &lt;- plapply(x1, f1, njobs = 2, needed.objects = &quot;b&quot;)</code></pre>
-<p>The result is the same as that produced by <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> and <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/lapply">lapply()</a>:</p>
+<p>The result is the same as that produced by <code><a target='_blank' href='rd.html#parlapplyw'>parLapplyW()</a></code> and <a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply()</a>:</p>
 <pre class="r"><code># Same as parLapplyW()
 identical(res2, res3)</code></pre>
 <pre><code>[1] TRUE</code></pre>
@@ -653,14 +665,14 @@ dfplapply(x, f, njobs = 2, output.df = TRUE)</code></pre>
 </div>
 <div id="convenient-wrapper-for-parallelization-of-ddply" class="section level2">
 <h2>Convenient wrapper for parallelization of ddply()</h2>
-<p><code><a target='_blank' href='rd.html#pddply'>pddply()</a></code> is a wrapper for <a href="https://www.rdocumentation.org/packages/plyr/versions/1.8.4/topics/ddply">plyr::ddply()</a> that makes it easier to use in parallel and supresses a spurious warning along the way. Here are two workflows that produce identical results using <a href="https://www.rdocumentation.org/packages/plyr/versions/1.8.4/topics/ddply">plyr::ddply()</a> in parallel and <code><a target='_blank' href='rd.html#pddply'>pddply()</a></code>. First, some preliminaries:</p>
+<p><code><a target='_blank' href='rd.html#pddply'>pddply()</a></code> is a wrapper for <a href="https://www.rdocumentation.org/packages/plyr/topics/ddply">plyr::ddply()</a> that makes it easier to use in parallel and supresses a spurious warning along the way. Here are two workflows that produce identical results using <a href="https://www.rdocumentation.org/packages/plyr/topics/ddply">plyr::ddply()</a> in parallel and <code><a target='_blank' href='rd.html#pddply'>pddply()</a></code>. First, some preliminaries:</p>
 <pre class="r"><code># Load necessary packages
 loadNamespace(&quot;plyr&quot;)
 loadNamespace(&quot;foreach&quot;)
 
 # Load some baseball data from the plyr package
 data(baseball, package = &quot;plyr&quot;)</code></pre>
-<p>Here’s the workflow with <a href="https://www.rdocumentation.org/packages/plyr/versions/1.8.4/topics/ddply">plyr::ddply</a>:</p>
+<p>Here’s the workflow with <a href="https://www.rdocumentation.org/packages/plyr/topics/ddply">plyr::ddply</a>:</p>
 <pre class="r"><code># Set up the cluster
 cl &lt;- parallel::makeCluster(2)
 doParallel::registerDoParallel(cl)
@@ -779,7 +791,7 @@ vertErrorBar(x, 0.3, center = y, barLength = 2 * 1.96, blankMiddle = 0.75)</code
 </div>
 <div id="a-continuous-version-of-the-binomial-cdf" class="section level2">
 <h2>A continuous version of the binomial cdf</h2>
-<p>There are circumstances when a continuous version of the discrete binomial cdf can be useful, especially in root finding or optimization. <code><a target='_blank' href='rd.html#pcbinom'>pcbinom()</a></code> is equivalent to <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/Binomial">pbinom()</a> when the first argument is an integer.</p>
+<p>There are circumstances when a continuous version of the discrete binomial cdf can be useful, especially in root finding or optimization. <code><a target='_blank' href='rd.html#pcbinom'>pcbinom()</a></code> is equivalent to <a href="https://www.rdocumentation.org/packages/stats/topics/Binomial">pbinom()</a> when the first argument is an integer.</p>
 <pre class="r"><code># These are the same
 pcbinom(7, 10, 0.5)</code></pre>
 <pre><code>[1] 0.9453125</code></pre>
@@ -838,6 +850,7 @@ umvueLN(x)</code></pre>
 </div>
 <div id="time-series" class="section level1">
 <h1>Time series</h1>
+<p>These functions were designed to operate on a vector of data observed (chronologically) over time.</p>
 <div id="format-dates-or-datetimes" class="section level2">
 <h2>Format dates or datetimes</h2>
 <p><code><a target='_blank' href='rd.html#formatdt'>formatDT()</a></code> makes it easy to convert a vector of dates or datetimes (expressed as character strings) into a variety of formats. A couple of examples:</p>
@@ -871,7 +884,7 @@ $date.posix
 </div>
 <div id="calculate-a-moving-window-dot-product" class="section level2">
 <h2>Calculate a moving window dot product</h2>
-<p>Have you ever been frustrated by the behavior of <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/filter">filter()</a> near the edges of a time series—or miffed by how it handles NA’s? <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code> gracefully handles the beginning and end of a time series, as well as NA’s, by re-normalizing the filter weights as needed. Let’s apply <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/filter">filter()</a> to calculate a moving average consisting of 3 data points:</p>
+<p>Have you ever been frustrated by the behavior of <a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter()</a> near the edges of a time series—or miffed by how it handles NA’s? <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code> gracefully handles the beginning and end of a time series, as well as NA’s, by re-normalizing the filter weights as needed. Let’s apply <a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter()</a> to calculate a moving average consisting of 3 data points:</p>
 <pre class="r"><code># A vector
 x &lt;- 2^(0:8)
 x[4] &lt;- NA
@@ -986,7 +999,7 @@ timeIntegration(PowerData,
 <h1>Mathematical operations</h1>
 <div id="generate-all-possible-combinations" class="section level2">
 <h2>Generate all possible combinations</h2>
-<p><code><a target='_blank' href='rd.html#combolist'>comboList()</a></code> produces a list that contains all possible combinations of a set of <code>n</code> objects indexed by <code>1:n</code>. As this can be computationally expensive, it can be easily parallelized with <code>njobs &gt; 1</code>. This extends <a href="https://www.rdocumentation.org/packages/utils/versions/3.4.1/topics/combn">combn()</a>, which produces all the possible combinations of a specific size. For example, here are all the possible combinations of 3 items, taken 1, 2, and 3 at a time:</p>
+<p><code><a target='_blank' href='rd.html#combolist'>comboList()</a></code> produces a list that contains all possible combinations of a set of <code>n</code> objects indexed by <code>1:n</code>. As this can be computationally expensive, it can be easily parallelized with <code>njobs &gt; 1</code>. This extends <a href="https://www.rdocumentation.org/packages/utils/topics/combn">combn()</a>, which produces all the possible combinations of a specific size. For example, here are all the possible combinations of 3 items, taken 1, 2, and 3 at a time:</p>
 <pre class="r"><code>out &lt;- comboList(3)
 out$pList</code></pre>
 <pre><code>[[1]]
@@ -1018,7 +1031,7 @@ out$pList</code></pre>
 </div>
 <div id="calculate-cumulative-sum-without-propagating-nas" class="section level2">
 <h2>Calculate cumulative sum without propagating NA’s</h2>
-<p>If you need to calculate the cumulative sum of a vector that has missing values, <code><a target='_blank' href='rd.html#cumsumna'>cumsumNA()</a></code> is your friend. Essentially the same as <a href="https://www.rdocumentation.org/packages/base/versions/3.4.1/topics/cumsum">cumsum()</a>, except it doesn’t propagate NA’s.</p>
+<p>If you need to calculate the cumulative sum of a vector that has missing values, <code><a target='_blank' href='rd.html#cumsumna'>cumsumNA()</a></code> is your friend. Essentially the same as <a href="https://www.rdocumentation.org/packages/base/topics/cumsum">cumsum()</a>, except it doesn’t propagate NA’s.</p>
 <pre class="r"><code>x &lt;- c(3, 4, NA, 7, -2)
 
 # cumsum() propagates the NA&#39;s
@@ -1049,7 +1062,7 @@ findDepMat(Y)</code></pre>
 </div>
 <div id="numerical-integration-using-simpson-or-trapezoid-rule" class="section level2">
 <h2>Numerical integration using Simpson or Trapezoid rule</h2>
-<p><code><a target='_blank' href='rd.html#integ'>integ()</a></code> estimates the integral of a real-valued function using Simpson’s or the Trapezoid approximation. Why might you want something other than <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/integrate">integrate()</a>? Because there are occasions when the adaptive quadrature method of <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/integrate">integrate()</a> doesn’t behave well—especially if the function is constant over a large portion of the domain.</p>
+<p><code><a target='_blank' href='rd.html#integ'>integ()</a></code> estimates the integral of a real-valued function using Simpson’s or the Trapezoid approximation. Why might you want something other than <a href="https://www.rdocumentation.org/packages/stats/topics/integrate">integrate()</a>? Because there are occasions when the adaptive quadrature method of <a href="https://www.rdocumentation.org/packages/stats/topics/integrate">integrate()</a> doesn’t behave well—especially if the function is constant over a large portion of the domain.</p>
 <p>As a simple example, let’s look at the pdf of a Beta distribution:</p>
 <pre class="r"><code>f &lt;- function(x) dbeta(x, 5, 5)
 plotFun(f, c(0, 1), col = &quot;Blue&quot;)</code></pre>
@@ -1057,13 +1070,13 @@ plotFun(f, c(0, 1), col = &quot;Blue&quot;)</code></pre>
 <p>Integration using Simpson’s approximation:</p>
 <pre class="r"><code>integ(f(seq(0, 0.3, length = 1001)), a = 0, b = 0.3)</code></pre>
 <pre><code>[1] 0.09880866</code></pre>
-<p>Compare to <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.1/topics/Beta">pbeta()</a>:</p>
+<p>Compare to <a href="https://www.rdocumentation.org/packages/stats/topics/Beta">pbeta()</a>:</p>
 <pre class="r"><code>pbeta(0.3, 5, 5)</code></pre>
 <pre><code>[1] 0.09880866</code></pre>
 </div>
 <div id="linear-mapping-from-a-b-to-c-d" class="section level2">
 <h2>Linear mapping from [a, b] to [c, d]</h2>
-<p><code><a target='_blank' href='rd.html#linearmap'>linearMap()</a></code> maps a numeric vector or scalar from one contiguous interval to another. This is especially useful in situations where you want to put multiple variables in the same scale.</p>
+<p><code><a target='_blank' href='rd.html#linearmap'>linearMap()</a></code> maps a numeric vector or scalar from one closed interval to another. This is especially useful in situations where you want to put multiple variables in the same scale.</p>
 <pre class="r"><code># A short sequence in [0, 1]
 x &lt;- seq(0, 1, length = 5)
 x</code></pre>

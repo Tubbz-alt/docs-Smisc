@@ -41,7 +41,7 @@ rsed::streamEdit(list(# Map links for pkbinom to dkbinom
 rsed::streamEdit(list(# Links for LICENSE
                       s = list(pattern = "BSD_3_clause + file LICENSE",
                                replacement = paste("<a href=https://opensource.org/licenses/BSD-3-Clause>BSD_3_clause</a> +",
-                                                   "<a href='LICENSE'>LICENSE</a>"),
+                                                   "<a href='LICENSE.txt'>LICENSE</a>"),
                                fixed = TRUE),
 
                       # Add links to imported CRAN packages

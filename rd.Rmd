@@ -4041,7 +4041,7 @@ mapping. <code>R[1]</code> is mapped to <code>D[1]</code>, and <code>R[2]</code>
 
   <h4>Details</h4>
 
-  <p class="rd-p">The mapping is <code class = eq>f : D \rightarrow R</code>, where <code class = eq>f(D[1]) = R[1]</code> and
+  <p class="rd-p">The mapping is <code class = eq>f : D --> R</code>, where <code class = eq>f(D[1]) = R[1]</code> and
 <code class = eq>f(D[2]) = R[2]</code>.</p>
 
 

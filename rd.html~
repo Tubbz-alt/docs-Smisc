@@ -285,6 +285,10 @@ both
 # Delete the files
 unlink(c(fileName1, fileName2))</code></pre>
 <h4>
+See also
+</h4>
+<p><code><a href=http://www.rdocumentation.org/packages/base/topics/load>load</a></code></p>
+<h4>
 Author
 </h4>
 <p>Landon Sego</p>
@@ -347,7 +351,7 @@ rm(A, B, C, more.data, some.data)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/utils/docs/data>data</a></code>,<code><a href=#loadobject>loadObject</a></code>,<code><a href=http://www.inside-r.org/packages/cran/utils/docs/read.table>read.csv</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/utils/topics/data>data</a></code>,<code><a href=#loadobject>loadObject</a></code>,<code><a href=http://www.rdocumentation.org/packages/utils/topics/read.table>read.csv</a></code></p>
 <h4>
 Author
 </h4>
@@ -417,7 +421,7 @@ d2[,!allMissing(d2, byRow = FALSE)]</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/stats/docs/complete.cases>complete.cases</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/stats/topics/complete.cases>complete.cases</a></code></p>
 <h4>
 Author
 </h4>
@@ -530,7 +534,7 @@ dframeEquiv(x, y)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/base/docs/all.equal>all.equal</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/identical>identical</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/base/topics/all.equal>all.equal</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/identical>identical</a></code></p>
 <h4>
 Author
 </h4>
@@ -542,7 +546,7 @@ Author
 Quickly row and column bind many objects together at once
 </h3>
 <p class="rd-p">
-A wrapper for <code><a href='http://www.inside-r.org/packages/cran/base/docs/cbind'>rbind</a></code> and <code><a href='http://www.inside-r.org/packages/cran/base/docs/cbind'>cbind</a></code> to quickly bind numerous objects together at once using a single call to <code><a href='http://www.inside-r.org/packages/cran/base/docs/cbind'>rbind</a></code> or <code><a href='http://www.inside-r.org/packages/cran/base/docs/cbind'>cbind</a></code>. This function is most helpful when there are many objects to bind and the object names are easily represented in text.
+A wrapper for <code><a href='http://www.rdocumentation.org/packages/base/topics/cbind'>rbind</a></code> and <code><a href='http://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></code> to quickly bind numerous objects together at once using a single call to <code><a href='http://www.rdocumentation.org/packages/base/topics/cbind'>rbind</a></code> or <code><a href='http://www.rdocumentation.org/packages/base/topics/cbind'>cbind</a></code>. This function is most helpful when there are many objects to bind and the object names are easily represented in text.
 </p>
 <h4>
 Usage
@@ -562,7 +566,7 @@ A character vector with the names of the objects to be bound together
 type
 </dt>
 <dd class="rd-dd">
-The type of binding, “row” for <code><a href=http://www.inside-r.org/packages/cran/base/docs/cbind>rbind</a></code> or “col” for <code><a href=http://www.inside-r.org/packages/cran/base/docs/cbind>cbind</a></code>, and “c” for concatenating using <code><a href=http://www.inside-r.org/packages/cran/base/docs/c>c</a></code>. Defaults to “row”.
+The type of binding, “row” for <code><a href=http://www.rdocumentation.org/packages/base/topics/cbind>rbind</a></code> or “col” for <code><a href=http://www.rdocumentation.org/packages/base/topics/cbind>cbind</a></code>, and “c” for concatenating using <code><a href=http://www.rdocumentation.org/packages/base/topics/c>c</a></code>. Defaults to “row”.
 </dd>
 </dl>
 <h4>
@@ -674,7 +678,7 @@ smartRbindMat(w1,x1,y,z1,z, distinguish = TRUE)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/base/docs/cbind>rbind</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/base/topics/cbind>rbind</a></code></p>
 <h4>
 Author
 </h4>
@@ -834,7 +838,7 @@ df2list(d1, out.type = "v")</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=#list2df>list2df</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/list>as.list</a></code></p>
+<p><code><a href=#list2df>list2df</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/list>as.list</a></code></p>
 <h4>
 Author
 </h4>
@@ -892,7 +896,7 @@ If <code>vList</code> is a list of vectors or lists, <code>= FALSE</code> conver
 Details
 </h4>
 <p class="rd-p">
-If the elements of <code>vList</code> are vectors, each vector must have the same length, <code>n</code>, and the resulting data frame will have <code>n</code> columns. If the elements of <code>vList</code> are data frames, each data frame must have the same structure (though they may have differing numbers of rows). If the elements of <code>vList</code> are lists, each list is first converted to a data frame via <code><a href=http://www.inside-r.org/packages/cran/base/docs/as.data.frame>as.data.frame</a></code> and the resulting data frames must have the same structure (though they may have differing numbers of rows).
+If the elements of <code>vList</code> are vectors, each vector must have the same length, <code>n</code>, and the resulting data frame will have <code>n</code> columns. If the elements of <code>vList</code> are data frames, each data frame must have the same structure (though they may have differing numbers of rows). If the elements of <code>vList</code> are lists, each list is first converted to a data frame via <code><a href=http://www.rdocumentation.org/packages/base/topics/as.data.frame>as.data.frame</a></code> and the resulting data frames must have the same structure (though they may have differing numbers of rows).
 </p>
 <p class="rd-p">
 It is permissible for <code>vList</code> to contain <code>NULL</code> elements. <code>list2df</code> performs numerous consistency checks to ensure that contents of <code>vList</code> which are combined into the resulting data frame are conformable, labeled consistently, of the equivalent class when necessary, etc.
@@ -1152,7 +1156,7 @@ as.numericSilent(c("392.1", "that"))</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/base/docs/numeric>as.numeric</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/base/topics/numeric>as.numeric</a></code></p>
 <h4>
 Author
 </h4>
@@ -1221,7 +1225,7 @@ getExtension(files)</code></pre>
 <h4>
 See also
 </h4>
-<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>basename</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>dirname</a></code></p>
+<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>basename</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>dirname</a></code></p>
 <h4>
 Author
 </h4>
@@ -1272,7 +1276,7 @@ getPath(files)</code></pre>
 <h4>
 See also
 </h4>
-<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>basename</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>dirname</a></code></p>
+<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>basename</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>dirname</a></code></p>
 <h4>
 Author
 </h4>
@@ -1343,7 +1347,7 @@ stripExtension(stripPath(files))</code></pre>
 <h4>
 See also
 </h4>
-<p>Additional functions for filename manipulations: <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>basename</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>dirname</a></code></p>
+<p>Additional functions for filename manipulations: <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>basename</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>dirname</a></code></p>
 <h4>
 Author
 </h4>
@@ -1395,7 +1399,7 @@ stripPath(stripExtension(files))</code></pre>
 <h4>
 See also
 </h4>
-<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>basename</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>dirname</a></code></p>
+<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=#grablast>grabLast</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>basename</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>dirname</a></code></p>
 <h4>
 Author
 </h4>
@@ -1444,7 +1448,7 @@ Examples
 <h4>
 See also
 </h4>
-<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>basename</a></code>, <code><a href=http://www.inside-r.org/packages/cran/base/docs/basename>dirname</a></code></p>
+<p>Additional functions for filename manipulations: <code><a href=#stripextension>stripExtension</a></code>, <code><a href=#getextension>getExtension</a></code>, <code><a href=#strippath>stripPath</a></code>, <code><a href=#getpath>getPath</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>basename</a></code>, <code><a href=http://www.rdocumentation.org/packages/base/topics/basename>dirname</a></code></p>
 <h4>
 Author
 </h4>
@@ -1600,14 +1604,14 @@ A logical indicating whether the vector should be coded vertically (<code>TRUE</
 …
 </dt>
 <dd class="rd-dd">
-Additional arguments to <code><a href=http://www.inside-r.org/packages/cran/base/docs/cat>cat</a></code>
+Additional arguments to <code><a href=http://www.rdocumentation.org/packages/base/topics/cat>cat</a></code>
 </dd>
 </dl>
 <h4>
 Value
 </h4>
 <p class="rd-p">
-Prints code (via <code><a href=http://www.inside-r.org/packages/cran/base/docs/cat>cat</a></code>) that will create the vector. This code can then be copied into other source code. Returns nothing.
+Prints code (via <code><a href=http://www.rdocumentation.org/packages/base/topics/cat>cat</a></code>) that will create the vector. This code can then be copied into other source code. Returns nothing.
 </p>
 <h4>
 Examples
@@ -1634,7 +1638,7 @@ Author
 <div id="more" class="section level2">
 <h2>more</h2>
 <h3>
-Display the contents of a file to the R console
+Display the contents of a text file to the R console
 </h3>
 <h4>
 Usage
@@ -1654,7 +1658,7 @@ Text string giving the file name
 n
 </dt>
 <dd class="rd-dd">
-Integer specifying the maximum number of lines to read from the file. This is passed to the <code>n</code> argument of <code><a href=http://www.inside-r.org/packages/cran/base/docs/readLines>readLines</a></code>. The default is <code>-1</code>, which will read all the lines in the file.
+Integer specifying the maximum number of lines to read from the file. This is passed to the <code>n</code> argument of <code><a href=http://www.rdocumentation.org/packages/base/topics/readLines>readLines</a></code>. The default is <code>-1</code>, which will read all the lines in the file.
 </dd>
 <dt>
 display
@@ -1679,7 +1683,7 @@ unlink("tmpFile.txt")</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/base/docs/readLines>readLines</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/base/topics/readLines>readLines</a></code></p>
 <h4>
 Author
 </h4>
@@ -1711,7 +1715,7 @@ Objects whose names and values are to be printed, separated by commas. Can also 
 digits
 </dt>
 <dd class="rd-dd">
-Number of digits to display for numeric objects. Defaults to <code>NULL</code>, which corresponds to no restriction on the number of digits. This is passed to the <code>digits</code> argument of <code><a href=http://www.inside-r.org/packages/cran/base/docs/Round>round</a></code>.
+Number of digits to display for numeric objects. Defaults to <code>NULL</code>, which corresponds to no restriction on the number of digits. This is passed to the <code>digits</code> argument of <code><a href=http://www.rdocumentation.org/packages/base/topics/Round>round</a></code>.
 </dd>
 <dt>
 abbrev
@@ -1877,7 +1881,7 @@ if <code>TRUE</code>, sourcing is protected in a try catch, i.e., if there is an
 …
 </dt>
 <dd class="rd-dd">
-Additional arguments to <code><a href=http://www.inside-r.org/packages/cran/base/docs/source>source</a></code>
+Additional arguments to <code><a href=http://www.rdocumentation.org/packages/base/topics/source>source</a></code>
 </dd>
 </dl>
 <h4>
@@ -1903,7 +1907,7 @@ Author
 Check multiple conditions and return coresponding error messages
 </h3>
 <p class="rd-p">
-A more flexible version of <code><a href='http://www.inside-r.org/packages/cran/base/docs/stopifnot'>stopifnot</a></code> that allows you to control the error message returned by each condition that doesn’t test true
+A more flexible version of <code><a href='http://www.rdocumentation.org/packages/base/topics/stopifnot'>stopifnot</a></code> that allows you to control the error message returned by each condition that doesn’t test true
 </p>
 <h4>
 Usage
@@ -1930,7 +1934,7 @@ Whole number indicating how far back in the call stack the error should be attri
 Value
 </h4>
 <p class="rd-p">
-A call to <code><a href=http://www.inside-r.org/packages/cran/base/docs/stop>stop</a></code> with the error messages from each condition that was <code>FALSE</code>. If all conditions are <code>TRUE</code>, returns <code>NULL</code>.
+A call to <code><a href=http://www.rdocumentation.org/packages/base/topics/stop>stop</a></code> with the error messages from each condition that was <code>FALSE</code>. If all conditions are <code>TRUE</code>, returns <code>NULL</code>.
 </p>
 <h4>
 Examples
@@ -1986,7 +1990,7 @@ Author
 <div id="timeit" class="section level2">
 <h2>timeIt</h2>
 <h3>
-Times the execution of an expression.
+Times the execution of an expression
 </h3>
 <h4>
 Usage
@@ -2001,7 +2005,7 @@ Arguments
 expr
 </dt>
 <dd class="rd-dd">
-Any R expression.
+Any R <code><a href=http://www.rdocumentation.org/packages/base/topics/expression>expression</a></code>.
 </dd>
 <dt>
 units
@@ -2053,6 +2057,10 @@ str(x2)
 x3 <- timeIt(rnorm(10^7), verbose = FALSE, return.time = TRUE)
 x3[c("elapsed","units")]</code></pre>
 <h4>
+See also
+</h4>
+<p><code><a href=http://www.rdocumentation.org/packages/base/topics/proc.time>proc.time</a></code></p>
+<h4>
 Author
 </h4>
 <p>Landon Sego</p>
@@ -2083,7 +2091,7 @@ Author
 A wrapper for parLapply
 </h3>
 <p class="rd-p">
-A wrapper to make calls to <code><a href='http://www.inside-r.org/packages/cran/parallel/docs/clusterApply'>parLapply</a></code> easier by initializing the cluster, exporting objects and expressions to the worker nodes, and shutting down the cluster.
+A wrapper to make calls to <code><a href='http://www.rdocumentation.org/packages/parallel/topics/clusterApply'>parLapply</a></code> easier by initializing the cluster, exporting objects and expressions to the worker nodes, and shutting down the cluster.
 </p>
 <h4>
 Usage
@@ -2122,13 +2130,13 @@ The number of jobs (cores) to use
 expr
 </dt>
 <dd class="rd-dd">
-An expression that will be evaluated on each worker node via a call to <code><a href=http://www.inside-r.org/packages/cran/parallel/docs/clusterApply>clusterEvalQ</a></code>
+An expression that will be evaluated on each worker node via a call to <code><a href=http://www.rdocumentation.org/packages/parallel/topics/clusterApply>clusterEvalQ</a></code>
 </dd>
 <dt>
 varlist
 </dt>
 <dd class="rd-dd">
-Character vector of names of objects to export to each worker node via <code><a href=http://www.inside-r.org/packages/cran/parallel/docs/clusterApply>clusterExport</a></code>
+Character vector of names of objects to export to each worker node via <code><a href=http://www.rdocumentation.org/packages/parallel/topics/clusterApply>clusterExport</a></code>
 </dd>
 <dt>
 envir
@@ -2190,7 +2198,7 @@ identical(res.1, res.3)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/base/docs/lapply>lapply</a></code>, <code><a href=http://www.inside-r.org/packages/cran/parallel/docs/clusterApply>parLapply</a></code>, <code><a href=#plapply>plapply</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/base/topics/lapply>lapply</a></code>, <code><a href=http://www.rdocumentation.org/packages/parallel/topics/clusterApply>parLapply</a></code>, <code><a href=#plapply>plapply</a></code></p>
 <h4>
 Author
 </h4>
@@ -2202,7 +2210,7 @@ Author
 Simple parallelization of lapply
 </h3>
 <p class="rd-p">
-Parses a large list into subsets and submits a separate batch R job that calls <code><a href='http://www.inside-r.org/packages/cran/base/docs/lapply'>lapply</a></code> on the subset. <code>plapply</code> has some features that may not be readily available in other parallelization functions like <code><a href='http://www.inside-r.org/packages/cran/parallel/docs/mclapply'>mclapply</a></code> and <code><a href='http://www.inside-r.org/packages/cran/parallel/docs/clusterApply'>parLapply</a></code>:
+Parses a large list into subsets and submits a separate batch R job that calls <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>lapply</a></code> on the subset. <code>plapply</code> has some features that may not be readily available in other parallelization functions like <code><a href='http://www.rdocumentation.org/packages/parallel/topics/mclapply'>mclapply</a></code> and <code><a href='http://www.rdocumentation.org/packages/parallel/topics/clusterApply'>parLapply</a></code>:
 <ul>
 <li>
 The <code>.Rout</code> files produced by each R instance are easily accessible for convenient debugging of errors or warnings. The <code>.Rout</code> files can also serve as an explicit record of the work that was performed by the workers
@@ -2211,7 +2219,7 @@ The <code>.Rout</code> files produced by each R instance are easily accessible f
 Three options are available for the ordering of the processing of the list elements: the original list order, randomized, or collated (first-in-first-out).
 </li>
 <li>
-In each R instance, pre-processing or post-processing steps can be performed before and after the call to <code><a href='http://www.inside-r.org/packages/cran/base/docs/lapply'>lapply</a></code>
+In each R instance, pre-processing or post-processing steps can be performed before and after the call to <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>lapply</a></code>
 </li>
 </ul>
 These pre-processing and post-processing steps can depend on the instance of R, such that each instance can be treated differently, if desired. These features give greater control over the computing process, which can be especially useful for large jobs.
@@ -2257,13 +2265,13 @@ The number of jobs (subsets). Defaults to one less than the number of cores on t
 packages
 </dt>
 <dd class="rd-dd">
-Character vector giving the names of packages that will be loaded in each new instance of R, using <code><a href=http://www.inside-r.org/packages/cran/base/docs/library>library</a></code>.
+Character vector giving the names of packages that will be loaded in each new instance of R, using <code><a href=http://www.rdocumentation.org/packages/base/topics/library>library</a></code>.
 </dd>
 <dt>
 header.file
 </dt>
 <dd class="rd-dd">
-Text string indicating a file that will be initially sourced prior calling <code><a href=http://www.inside-r.org/packages/cran/base/docs/lapply>lapply</a></code> in order to create an environment that will satisfy all potential dependencies for <code>FUN</code>. If <code>NULL</code>, no file is sourced.
+Text string indicating a file that will be initially sourced prior calling <code><a href=http://www.rdocumentation.org/packages/base/topics/lapply>lapply</a></code> in order to create an environment that will satisfy all potential dependencies for <code>FUN</code>. If <code>NULL</code>, no file is sourced.
 </dd>
 <dt>
 needed.objects
@@ -2336,7 +2344,7 @@ verbose
 Details
 </h4>
 <p class="rd-p">
-<code>plapply</code> applies <code>FUN</code> to each element of the list <code>X</code> by parsing the list into <code>njobs</code> lists of equal (or almost equal) size and then applies <code>FUN</code> to each sublist using <code><a href=http://www.inside-r.org/packages/cran/base/docs/lapply>lapply</a></code>.
+<code>plapply</code> applies <code>FUN</code> to each element of the list <code>X</code> by parsing the list into <code>njobs</code> lists of equal (or almost equal) size and then applies <code>FUN</code> to each sublist using <code><a href=http://www.rdocumentation.org/packages/base/topics/lapply>lapply</a></code>.
 </p>
 <p class="rd-p">
 A separate batch instance of R is launched for each sublist, thus utilizing another core of the machine. After the jobs complete, the <code>njobs</code> output lists are reassembled. The global environments for each batch instance of R are created by writing/reading data to/from disc.
@@ -2373,7 +2381,7 @@ The expression <code>pre.process.expression</code> is evaluated if an object of 
 <p class="rd-p">
 </li>
 <li>
-<code><a href=http://www.inside-r.org/packages/cran/base/docs/lapply>lapply</a></code> is called on the sublist, the sublist is called <code>X.i</code>
+<code><a href=http://www.rdocumentation.org/packages/base/topics/lapply>lapply</a></code> is called on the sublist, the sublist is called <code>X.i</code>
 </p>
 <p class="rd-p">
 </li>
@@ -2441,7 +2449,7 @@ identical(res1, res2)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=#parlapplyw>parLapplyW</a></code>, <code><a href=#dfplapply>dfplapply</a></code>, <code><a href=http://www.inside-r.org/packages/cran/parallel/docs/clusterApply>parLapply</a></code>, <code><a href=http://www.inside-r.org/packages/cran/parallel/docs/mclapply>mclapply</a></code></p>
+<p><code><a href=#parlapplyw>parLapplyW</a></code>, <code><a href=#dfplapply>dfplapply</a></code>, <code><a href=http://www.rdocumentation.org/packages/parallel/topics/clusterApply>parLapply</a></code>, <code><a href=http://www.rdocumentation.org/packages/parallel/topics/mclapply>mclapply</a></code></p>
 <h4>
 Author
 </h4>
@@ -2502,13 +2510,13 @@ The number of jobs (subsets). Defaults to one less than the number of cores on t
 packages
 </dt>
 <dd class="rd-dd">
-Character vector giving the names of packages that will be loaded in each new instance of R, using <code><a href=http://www.inside-r.org/packages/cran/base/docs/library>library</a></code>.
+Character vector giving the names of packages that will be loaded in each new instance of R, using <code><a href=http://www.rdocumentation.org/packages/base/topics/library>library</a></code>.
 </dd>
 <dt>
 header.file
 </dt>
 <dd class="rd-dd">
-Text string indicating a file that will be initially sourced prior calling <code><a href=http://www.inside-r.org/packages/cran/base/docs/lapply>lapply</a></code> in order to create an environment that will satisfy all potential dependencies for <code>FUN</code>. If <code>NULL</code>, no file is sourced.
+Text string indicating a file that will be initially sourced prior calling <code><a href=http://www.rdocumentation.org/packages/base/topics/lapply>lapply</a></code> in order to create an environment that will satisfy all potential dependencies for <code>FUN</code>. If <code>NULL</code>, no file is sourced.
 </dd>
 <dt>
 needed.objects
@@ -2630,7 +2638,7 @@ Author
 Parallel wrapper for plyr::ddply
 </h3>
 <p class="rd-p">
-Parallel implementation of <code><a href='http://www.inside-r.org/packages/cran/plyr/docs/ddply'>plyr::ddply</a></code> that suppresses a spurious warning when <code><a href='http://www.inside-r.org/packages/cran/plyr/docs/ddply'>plyr::ddply</a></code> is called in parallel. All of the arguments except <code>njobs</code> are passed directly to arguments of the same name in <code><a href='http://www.inside-r.org/packages/cran/plyr/docs/ddply'>plyr::ddply</a></code>.
+Parallel implementation of <code><a href='http://www.rdocumentation.org/packages/plyr/topics/ddply'>plyr::ddply</a></code> that suppresses a spurious warning when <code><a href='http://www.rdocumentation.org/packages/plyr/topics/ddply'>plyr::ddply</a></code> is called in parallel. All of the arguments except <code>njobs</code> are passed directly to arguments of the same name in <code><a href='http://www.rdocumentation.org/packages/plyr/topics/ddply'>plyr::ddply</a></code>.
 </p>
 <h4>
 Usage
@@ -2676,7 +2684,7 @@ the number of parallel jobs to launch, defaulting to one less than the number of
 .progress
 </dt>
 <dd class="rd-dd">
-name of the progress bar to use, see <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/create_progress_bar>plyr::create_progress_bar</a></code>
+name of the progress bar to use, see <code><a href=http://www.rdocumentation.org/packages/plyr/topics/create_progress_bar>plyr::create_progress_bar</a></code>
 </dd>
 <dt>
 .inform
@@ -2694,26 +2702,26 @@ should combinations of variables that do not appear in the input data be preserv
 .paropts
 </dt>
 <dd class="rd-dd">
-a list of additional options passed into the <code><a href=http://www.inside-r.org/packages/cran/foreach/docs/foreach>foreach::foreach</a></code> function when parallel computation is enabled. This is important if (for example) your code relies on external data or packages. Use the <code>.export</code> and <code>.packages</code> arguments to supply them so that all cluster nodes have the correct environment set up for computing.
+a list of additional options passed into the <code><a href=http://www.rdocumentation.org/packages/foreach/topics/foreach>foreach::foreach</a></code> function when parallel computation is enabled. This is important if (for example) your code relies on external data or packages. Use the <code>.export</code> and <code>.packages</code> arguments to supply them so that all cluster nodes have the correct environment set up for computing.
 </dd>
 </dl>
 <h4>
 Details
 </h4>
 <p class="rd-p">
-An innocuous warning is thrown when <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code> is called in parallel: <a href = https://github.com/hadley/plyr/issues/203>https://github.com/hadley/plyr/issues/203</a>. This function catches and hides that warning, which looks like this: <code>
+An innocuous warning is thrown when <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code> is called in parallel: <a href = https://github.com/hadley/plyr/issues/203>https://github.com/hadley/plyr/issues/203</a>. This function catches and hides that warning, which looks like this: <code>
 </p>
 <p class="rd-p">
 Warning messages: 1: <anonymous>: … may be used in an incorrect context: .fun(piece, …) </code>
 </p>
 <p class="rd-p">
-If <code>njobs = 1</code>, a call to <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code> is made without parallelization, and anything supplied to <code>.paropts</code> is ignored. See the documentation for <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code> for additional details.
+If <code>njobs = 1</code>, a call to <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code> is made without parallelization, and anything supplied to <code>.paropts</code> is ignored. See the documentation for <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code> for additional details.
 </p>
 <h4>
 Value
 </h4>
 <p class="rd-p">
-The object data frame returned by <code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code>
+The object data frame returned by <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code>
 </p>
 <h4>
 Examples
@@ -2757,7 +2765,7 @@ identical(o5, o6)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/plyr/docs/ddply>plyr::ddply</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code></p>
 </div>
 <div id="docallparallel" class="section level2">
 <h2>doCallParallel</h2>
@@ -2811,7 +2819,7 @@ If a numeric value is provided, <code>x</code> is randomized to better distribut
 Details
 </h4>
 <p class="rd-p">
-This function is a parallelized wrapper for <code><a href=http://www.inside-r.org/packages/cran/base/docs/do.call>do.call</a></code> designed for the case where <code>fun</code> is computationally intensive. Each element of <code>x</code> is evaluated independently of the other elements of <code>x</code>. Thus, <code>fun(c(x1,x2))</code> must be equivalent to <code>c(fun(x1), fun(x2))</code> in order for <code>doCallParallel</code> to work properly.
+This function is a parallelized wrapper for <code><a href=http://www.rdocumentation.org/packages/base/topics/do.call>do.call</a></code> designed for the case where <code>fun</code> is computationally intensive. Each element of <code>x</code> is evaluated independently of the other elements of <code>x</code>. Thus, <code>fun(c(x1,x2))</code> must be equivalent to <code>c(fun(x1), fun(x2))</code> in order for <code>doCallParallel</code> to work properly.
 </p>
 <h4>
 Value
@@ -2933,7 +2941,7 @@ Author
 Opens a graphics device based on the filename extension
 </h3>
 <p class="rd-p">
-Based on the filename extension, will open plotting device using one of the following graphics functions: <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/postscript'>postscript</a></code>, <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/pdf'>pdf</a></code>, <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/png'>jpeg</a></code>, <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/png'>tiff</a></code>, <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/png'>png</a></code>, or <code><a href='http://www.inside-r.org/packages/cran/grDevices/docs/png'>bmp</a></code>.
+Based on the filename extension, will open plotting device using one of the following graphics functions: <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/postscript'>postscript</a></code>, <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a></code>, <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>jpeg</a></code>, <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>tiff</a></code>, <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a></code>, or <code><a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>bmp</a></code>.
 </p>
 <h4>
 Usage
@@ -3022,31 +3030,31 @@ A function or a list of functions to be plotted. These functions should take a s
 xlim
 </dt>
 <dd class="rd-dd">
-A numeric vector with two elements that define the domain over which the function(s) will be evaluated and plotted, just as in <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/plot.default>plot.default</a></code> in the <span class="pkg">graphics</span> package.
+A numeric vector with two elements that define the domain over which the function(s) will be evaluated and plotted, just as in <code><a href=http://www.rdocumentation.org/packages/graphics/topics/plot.default>plot.default</a></code> in the <span class="pkg">graphics</span> package.
 </dd>
 <dt>
 col
 </dt>
 <dd class="rd-dd">
-A vector of colors to use in the plotting. Its length should match the length of <code>fun</code>. See <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/par>par</a></code> for more info about the <code>col</code> graphics parameter.
+A vector of colors to use in the plotting. Its length should match the length of <code>fun</code>. See <code><a href=http://www.rdocumentation.org/packages/graphics/topics/par>par</a></code> for more info about the <code>col</code> graphics parameter.
 </dd>
 <dt>
 lty
 </dt>
 <dd class="rd-dd">
-A vector of line types to use in the plotting. Its length should match the length of <code>fun</code>. See <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/par>par</a></code> for more info about the <code>lty</code> graphics parameter.
+A vector of line types to use in the plotting. Its length should match the length of <code>fun</code>. See <code><a href=http://www.rdocumentation.org/packages/graphics/topics/par>par</a></code> for more info about the <code>lty</code> graphics parameter.
 </dd>
 <dt>
 type
 </dt>
 <dd class="rd-dd">
-A single character indicating the type of plotting. This is passed to the <code>type</code> argument of <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/plot.default>plot.default</a></code>.
+A single character indicating the type of plotting. This is passed to the <code>type</code> argument of <code><a href=http://www.rdocumentation.org/packages/graphics/topics/plot.default>plot.default</a></code>.
 </dd>
 <dt>
 legendLabels
 </dt>
 <dd class="rd-dd">
-A character vector with descriptive names that will appear in the legend, corresponding to each function If <code>NULL</code>, no legend is drawn. This character vector is passed to the <code>legend</code> argument in <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/legend>legend</a></code> from the <span class="pkg">graphics</span> package.
+A character vector with descriptive names that will appear in the legend, corresponding to each function If <code>NULL</code>, no legend is drawn. This character vector is passed to the <code>legend</code> argument in <code><a href=http://www.rdocumentation.org/packages/graphics/topics/legend>legend</a></code> from the <span class="pkg">graphics</span> package.
 </dd>
 <dt>
 relX
@@ -3076,7 +3084,7 @@ The number of parallel jobs to spawn using <code><a href=#docallparallel>doCallP
 …
 </dt>
 <dd class="rd-dd">
-Additional graphical arguments passed to <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/plot.default>plot.default</a></code>, <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/lines>lines</a></code>, and <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/legend>legend</a></code>. If an argument name specified in <code>…</code> matches an argument name in any of these three functions, the argument is passed to that function. For example, the line width, <code>lwd</code>, would be passed to all three (<code><a href=http://www.inside-r.org/packages/cran/graphics/docs/plot.default>plot.default</a></code>, <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/lines>lines</a></code>, and <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/legend>legend</a></code>).
+Additional graphical arguments passed to <code><a href=http://www.rdocumentation.org/packages/graphics/topics/plot.default>plot.default</a></code>, <code><a href=http://www.rdocumentation.org/packages/graphics/topics/lines>lines</a></code>, and <code><a href=http://www.rdocumentation.org/packages/graphics/topics/legend>legend</a></code>. If an argument name specified in <code>…</code> matches an argument name in any of these three functions, the argument is passed to that function. For example, the line width, <code>lwd</code>, would be passed to all three (<code><a href=http://www.rdocumentation.org/packages/graphics/topics/plot.default>plot.default</a></code>, <code><a href=http://www.rdocumentation.org/packages/graphics/topics/lines>lines</a></code>, and <code><a href=http://www.rdocumentation.org/packages/graphics/topics/legend>legend</a></code>).
 </dd>
 </dl>
 <h4>
@@ -3141,7 +3149,7 @@ The target number of ticks to use in the axis
 side
 </dt>
 <dd class="rd-dd">
-Same as the <code>side</code> argument in <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/axis>axis</a></code>
+Same as the <code>side</code> argument in <code><a href=http://www.rdocumentation.org/packages/graphics/topics/axis>axis</a></code>
 </dd>
 <dt>
 time.format
@@ -3197,7 +3205,7 @@ par(op)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/graphics/docs/axis.POSIXct>axis.POSIXct</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/graphics/topics/axis.POSIXct>axis.POSIXct</a></code></p>
 <h4>
 Author
 </h4>
@@ -3263,7 +3271,7 @@ the vertical length of a blank spot that will be produced in the middle of the e
 …
 </dt>
 <dd class="rd-dd">
-additional arguments to <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/lines>lines</a></code>.
+additional arguments to <code><a href=http://www.rdocumentation.org/packages/graphics/topics/lines>lines</a></code>.
 </dd>
 </dl>
 <h4>
@@ -3422,7 +3430,7 @@ pvar(x1, x1 - x2, x2 - x3, x1 - x3, digits = 12)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/stats/docs/Binomial>dbinom</a></code>, <code><a href=http://www.inside-r.org/packages/cran/stats/docs/Binomial>pbinom</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/stats/topics/Binomial>dbinom</a></code>, <code><a href=http://www.rdocumentation.org/packages/stats/topics/Binomial>pbinom</a></code></p>
 <h4>
 Author
 </h4>
@@ -3479,7 +3487,7 @@ logical; if <code>TRUE</code>, probabilities <code>p</code> are returned as <cod
 Details
 </h4>
 <p class="rd-p">
-<code>pcbinom</code> is equivalent to <code><a href=http://www.inside-r.org/packages/cran/stats/docs/Binomial>pbinom</a></code> for integer values of <code>n</code> and <code>x</code>.
+<code>pcbinom</code> is equivalent to <code><a href=http://www.rdocumentation.org/packages/stats/topics/Binomial>pbinom</a></code> for integer values of <code>n</code> and <code>x</code>.
 </p>
 <p class="rd-p">
 Note that <code>pcbinom</code> does not recycle vectors in the usual fashion. Each of the arguments <code>x</code>, <code>n</code>, and <code>p</code> should have the same length, or, one or more of them can have the same length, so long as the other arguments have length 1. See examples below.
@@ -3517,7 +3525,7 @@ try(pcbinom(c(7.3, 7.8), c(12, 14, 16), c(0.7, 0.8)))</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/stats/docs/Binomial>pbinom</a></code>, <code><a href=http://www.inside-r.org/packages/cran/stats/docs/Beta>pbeta</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/stats/topics/Binomial>pbinom</a></code>, <code><a href=http://www.rdocumentation.org/packages/stats/topics/Beta>pbeta</a></code></p>
 <h4>
 Author
 </h4>
@@ -3586,7 +3594,7 @@ object of class <code>hpd</code>, returned by <code>hpd</code>
 …
 </dt>
 <dd class="rd-dd">
-For the <code>plot</code> method, these are additional arguments that may be passed to <code><a href=#plotfun>plotFun</a></code>, <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/plot.default>plot.default</a></code>, or <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/abline>abline</a></code>
+For the <code>plot</code> method, these are additional arguments that may be passed to <code><a href=#plotfun>plotFun</a></code>, <code><a href=http://www.rdocumentation.org/packages/graphics/topics/plot.default>plot.default</a></code>, or <code><a href=http://www.rdocumentation.org/packages/graphics/topics/abline>abline</a></code>
 </dd>
 </dl>
 <h4>
@@ -3927,7 +3935,7 @@ balance
 Details
 </h4>
 <p class="rd-p">
-<code>smartFilter</code> has very similar behavior to <code><a href=http://www.inside-r.org/packages/cran/stats/docs/filter>filter</a></code>, except it calculates at the edge of a series and it does not propogate NAs which may be imbedded within the series.
+<code>smartFilter</code> has very similar behavior to <code><a href=http://www.rdocumentation.org/packages/stats/topics/filter>filter</a></code>, except it calculates at the edge of a series and it does not propogate NAs which may be imbedded within the series.
 </p>
 <p class="rd-p">
 When the window contains missing values, either due to being at the edge of the series or due to NAs imbedded within the series, the weights corresponding to the non-missing data points are re-normalized and the dotproduct is calculated using the available data. If the number of non-missing data points in the window is less than <code>min.window</code>, an <code>NA</code> is produced for the corresponding index. Likewise, if <code>balance = TRUE</code>, and the required conditions (described above in the argument description of <code>balance</code>) are not met, an <code>NA</code> is returned for the corresponding index.
@@ -3980,7 +3988,7 @@ Examples
 <h4>
 See also
 </h4>
-<p><code><a href=#movavg2>movAvg2</a></code>, <code><a href=http://www.inside-r.org/packages/cran/stats/docs/filter>filter</a></code></p>
+<p><code><a href=#movavg2>movAvg2</a></code>, <code><a href=http://www.rdocumentation.org/packages/stats/topics/filter>filter</a></code></p>
 <h4>
 Author
 </h4>
@@ -4041,7 +4049,7 @@ A single, positive number corresponding to the unnormalized value of the weights
 …
 </dt>
 <dd class="rd-dd">
-For <code>movAvg2</code>, these are additional arguments to <code><a href=#smartfilter>smartFilter</a></code>. For the <code>print</code> and <code>plot</code> methods, the “…” are additional arguments passed to <code><a href=http://www.inside-r.org/packages/cran/base/docs/print.default>print.default</a></code> and <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/plot.default>plot.default</a></code>, respectively.
+For <code>movAvg2</code>, these are additional arguments to <code><a href=#smartfilter>smartFilter</a></code>. For the <code>print</code> and <code>plot</code> methods, the “…” are additional arguments passed to <code><a href=http://www.rdocumentation.org/packages/base/topics/print.default>print.default</a></code> and <code><a href=http://www.rdocumentation.org/packages/graphics/topics/plot.default>plot.default</a></code>, respectively.
 </dd>
 <dt>
 x
@@ -4107,7 +4115,7 @@ filter(x, c(0.5, 1, 0.5) / 2)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=#smartfilter>smartFilter</a></code>, <code><a href=http://www.inside-r.org/packages/cran/stats/docs/filter>filter</a></code></p>
+<p><code><a href=#smartfilter>smartFilter</a></code>, <code><a href=http://www.rdocumentation.org/packages/stats/topics/filter>filter</a></code></p>
 <h4>
 Author
 </h4>
@@ -4175,7 +4183,7 @@ Object of class <code>cusum</code>
 …
 </dt>
 <dd class="rd-dd">
-Additional arguments to <code><a href=http://www.inside-r.org/packages/cran/base/docs/print.default>print.default</a></code> or <code><a href=http://www.inside-r.org/packages/cran/graphics/docs/plot.default>plot.default</a></code>. Ignored by the <code>signal</code> method.
+Additional arguments to <code><a href=http://www.rdocumentation.org/packages/base/topics/print.default>print.default</a></code> or <code><a href=http://www.rdocumentation.org/packages/graphics/topics/plot.default>plot.default</a></code>. Ignored by the <code>signal</code> method.
 </dd>
 <dt>
 indexes
@@ -4497,14 +4505,14 @@ text string indicating the .Rdata file to which the returned list of predictor c
 njobs
 </dt>
 <dd class="rd-dd">
-Integer indicating the number of parallel jobs to be used in calculating the combinations, using <code><a href=http://www.inside-r.org/packages/cran/parallel/docs/clusterApply>parLapply</a></code>
+Integer indicating the number of parallel jobs to be used in calculating the combinations, using <code><a href=#parlapplyw>parLapplyW</a></code>
 </dd>
 </dl>
 <h4>
 Details
 </h4>
 <p class="rd-p">
-Uses <code><a href=http://www.inside-r.org/packages/cran/utils/docs/combn>combn</a></code> to identify the combinations.
+Uses <code><a href=http://www.rdocumentation.org/packages/utils/topics/combn>combn</a></code> to identify the combinations.
 </p>
 <h4>
 Value
@@ -4616,7 +4624,7 @@ cumsumNA(x)</code></pre>
 <h4>
 See also
 </h4>
-<p><code><a href=http://www.inside-r.org/packages/cran/base/docs/cumsum>cumsum</a></code></p>
+<p><code><a href=http://www.rdocumentation.org/packages/base/topics/cumsum>cumsum</a></code></p>
 <h4>
 Author
 </h4>
@@ -4658,13 +4666,13 @@ The tolerance used to determine whether one row (or column) is a linear combinat
 Details
 </h4>
 <p class="rd-p">
-A row (or column) is considered to be a linear combination of another if the maximum of the absolute succesive differences of the ratios of the two rows (columns) exceeds the tolerance, <code>tol</code>. This is a fairly crude criterion and may need improvement–but it at least will identify the almost exact linear dependencies.
+A row (or column) is considered to be a linear combination of another if the maximum of the absolute succesive differences of the ratios of the two rows (columns) exceeds the tolerance, <code>tol</code>. This is a fairly crude criterion and may need improvement–but it at least will identify the almost-exact linear dependencies.
 </p>
 <p class="rd-p">
-<code>findDepMat</code> identifies linearly dependent rows (columns) similar to the way <code><a href=http://www.inside-r.org/packages/cran/base/docs/duplicated>duplicated</a></code> identifies duplicates. As such, the first instance (row or column) of a set of linearly dependent rows (or columns) is not flagged as being dependent.
+<code>findDepMat</code> identifies linearly dependent rows (columns) similar to the way <code><a href=http://www.rdocumentation.org/packages/base/topics/duplicated>duplicated</a></code> identifies duplicates. As such, the first instance (row or column) of a set of linearly dependent rows (or columns) is not flagged as being dependent.
 </p>
 <p class="rd-p">
-The sum of the negated output of <code>findDepMat</code> should be the number of linearly independent rows (columns). This quanity is compared to the rank produced by <code><a href=http://www.inside-r.org/packages/cran/base/docs/qr>qr</a></code>, and if not equal, a warning is issued. The value of <code>tol</code> is passed to <code><a href=http://www.inside-r.org/packages/cran/base/docs/qr>qr</a></code>, but the criteria of convergence for <code><a href=http://www.inside-r.org/packages/cran/base/docs/qr>qr</a></code> is assuredly different from that used here to identify the linearly dependent rows (columns).
+The sum of the negated output of <code>findDepMat</code> should be the number of linearly independent rows (columns). This quanity is compared to the rank produced by <code><a href=http://www.rdocumentation.org/packages/base/topics/qr>qr</a></code>, and if not equal, a warning is issued. The value of <code>tol</code> is passed to <code><a href=http://www.rdocumentation.org/packages/base/topics/qr>qr</a></code>, but the criteria of convergence for <code><a href=http://www.rdocumentation.org/packages/base/topics/qr>qr</a></code> is assuredly different from that used here to identify the linearly dependent rows (columns).
 </p>
 <p class="rd-p">
 Currently this uses nested for loops within R (not C). Consequently, <code>findDepMat</code> is likely to be slow for large matrices.
@@ -4787,6 +4795,10 @@ y <- 2 * x + 3
 integ(y, x = x, method = "t")
 integ(y, a = 0, b = 2)</code></pre>
 <h4>
+See also
+</h4>
+<p><code><a href=http://www.rdocumentation.org/packages/stats/topics/integrate>integrate</a></code></p>
+<h4>
 Author
 </h4>
 <p>Landon Sego</p>
@@ -4797,7 +4809,7 @@ Author
 Linear mapping of a numeric vector or scalar
 </h3>
 <p class="rd-p">
-Linear mapping of a numeric vector or scalar from one contiguous interval to another
+Linear mapping of a numeric vector or scalar from one closed interval to another
 </p>
 <h4>
 Usage
@@ -4830,7 +4842,7 @@ a vector with 2 elements indicating the range of the linear mapping. <code>R[1]<
 Details
 </h4>
 <p class="rd-p">
-The mapping is <code class = eq>f : D R</code>, where <code class = eq>f(D[1]) = R[1]</code> and <code class = eq>f(D[2]) = R[2]</code>.
+The mapping is <code class = eq>f : D –&gt; R</code>, where <code class = eq>f(D[1]) = R[1]</code> and <code class = eq>f(D[2]) = R[2]</code>.
 </p>
 <h4>
 Value
