@@ -1,6 +1,6 @@
 # Introduction
 
-The `Smisc` package is a collection of functions for statistical computing and data manipulation that I created to 
+The `Smisc` package is a collection of functions for statistical computing, data manipulation, and visualization that I created to 
 facilitate my day-to-day work in R.  Most functions operate on their own, each designed for a specific task.
 
 I have organized the documentation into 11 groups of functions that have similar themes.  I provide below a brief synopsis of the motivation for each of the functions in the package, leaving the details to the standard help files, which you can find by following the [bold blue links](rd.html).
@@ -27,6 +27,7 @@ in which case you'll need these prerequistites in order to compile the C code in
 - Linux/Unix: compilation should take place automatically
 
 Now do the following in R:
+
 ```{r instal, eval = FALSE, echo = TRUE}
 # If devtools is not already installed, do this:
 install.packages("devtools") 
