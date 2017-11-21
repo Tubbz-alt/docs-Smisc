@@ -40,7 +40,7 @@ rsed::streamEdit(list(# Map links for pkbinom to dkbinom
 # Manual edits of rd.html
 rsed::streamEdit(list(# Links for LICENSE
                       s = list(pattern = "BSD_3_clause + file LICENSE",
-                               replacement = paste("<a href=https://cran.r-project.org/web/licenses/BSD_3_clause>BSD_3_clause</a> +",
+                               replacement = paste("<a href=https://CRAN.R-project.org/web/licenses/BSD_3_clause>BSD_3_clause</a> +",
                                                    "<a href='LICENSE.txt'>LICENSE</a>"),
                                fixed = TRUE),
 

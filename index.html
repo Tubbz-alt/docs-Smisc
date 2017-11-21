@@ -166,7 +166,7 @@
 <p>—Landon Sego</p>
 <div id="package-installation" class="section level2">
 <h2>Package installation</h2>
-<p>You can install the package from <a href="https://cran.r-project.org/">CRAN</a> or from <a href="https://github.com">GitHub</a>:</p>
+<p>You can install the package from <a href="https://CRAN.R-project.org/">CRAN</a> or from <a href="https://github.com">GitHub</a>:</p>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
 <pre class="r"><code>install.packages(&quot;Smisc&quot;)</code></pre>
@@ -176,7 +176,7 @@
 <p>You can install from <a href="https://github.com">GitHub</a> using the <a href="https://CRAN.R-project.org/package=devtools">devtools</a> package, in which case you’ll need these prerequistites in order to compile the C code in the <code>Smisc</code> package:</p>
 <ul>
 <li>Mac: you’ll need <a href="https://developer.apple.com/xcode/">Xcode</a></li>
-<li>Windows: you’ll need to install <a href="https://cran.r-project.org/bin/windows/Rtools/">R tools</a></li>
+<li>Windows: you’ll need to install <a href="https://CRAN.R-project.org/bin/windows/Rtools/">R tools</a></li>
 <li>Linux/Unix: compilation should take place automatically</li>
 </ul>
 <p>Now do the following in R:</p>
@@ -453,7 +453,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2017-11-19_002330.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2017-11-20_214057.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -582,7 +582,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>1.64 seconds </code></pre>
+<pre><code>1.65 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>
