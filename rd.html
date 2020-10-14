@@ -179,10 +179,10 @@
 Sego Miscellaneous
 </h1>
 <p>
-<strong>Authors:</strong> Landon Sego <a href="mailto:LHS@byu.net">LHS@byu.net</a> [aut, cre]
+<strong>Authors:</strong> (none)
 </p>
 <p>
-<strong>Version:</strong> 0.3.9
+<strong>Version:</strong> 0.4.0
 </p>
 <p>
 <strong>License:</strong> <a href=https://CRAN.R-project.org/web/licenses/BSD_3_clause>BSD_3_clause</a> + <a href='LICENSE.txt'>LICENSE</a>
@@ -438,8 +438,7 @@ Checks whether two data objects (data frames and/or matrices) are equivalent and
 <h4>
 Usage
 </h4>
-<pre class="r"><code>dframeEquiv(d1, d2, maxAbsError = 1e-12, maxRelError = 1e-14,
-  verbose = TRUE)</code></pre>
+<pre class="r"><code>dframeEquiv(d1, d2, maxAbsError = 1e-12, maxRelError = 1e-14, verbose = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -497,7 +496,7 @@ Invisibly returns a list with the following components. (If the matrices do not 
 References
 </h4>
 <p class="rd-p">
-<a href = https://randomascii.wordpress.com/category/floating-point>https://randomascii.wordpress.com/category/floating-point</a>
+<a href = https://randomascii.wordpress.com/category/floating-point/>https://randomascii.wordpress.com/category/floating-point/</a>
 </p>
 <h4>
 Examples
@@ -855,8 +854,13 @@ Convert a list of vectors (or data frames) with same numbered lengths (or number
 <h4>
 Usage
 </h4>
-<pre class="r"><code>list2df(vList, col.names = NULL, row.names = NULL, convert.numeric = TRUE,
-  strings.as.factors = FALSE)</code></pre>
+<pre class="r"><code>list2df(
+  vList,
+  col.names = NULL,
+  row.names = NULL,
+  convert.numeric = TRUE,
+  strings.as.factors = FALSE
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -1198,7 +1202,7 @@ A single character used to split the character strings
 Details
 </h4>
 <p class="rd-p">
-Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>“”</code> is returned.
+Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>""</code> is returned.
 </p>
 <h4>
 Value
@@ -1255,7 +1259,7 @@ Character vector (usually containing filenames)
 Details
 </h4>
 <p class="rd-p">
-Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>“”</code> is returned.
+Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>""</code> is returned.
 </p>
 <h4>
 Value
@@ -1315,7 +1319,7 @@ A single character used to split the character strings
 Details
 </h4>
 <p class="rd-p">
-Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>“”</code> is returned.
+Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>""</code> is returned.
 </p>
 <h4>
 Value
@@ -1377,7 +1381,7 @@ Character vector (usually containing filenames)
 Details
 </h4>
 <p class="rd-p">
-Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>“”</code> is returned.
+Assumes paths are delineated using forward slashes. If an <code>NA</code> is supplied, then an <code>NA</code> is returned. If the desired string doesnt exist (see examples below), a <code>""</code> is returned.
 </p>
 <h4>
 Value
@@ -1995,8 +1999,12 @@ Times the execution of an expression
 <h4>
 Usage
 </h4>
-<pre class="r"><code>timeIt(expr, units = c("automatic", "seconds", "minutes", "hours", "days"),
-  return.time = FALSE, verbose = TRUE)</code></pre>
+<pre class="r"><code>timeIt(
+  expr,
+  units = c("automatic", "seconds", "minutes", "hours", "days"),
+  return.time = FALSE,
+  verbose = TRUE
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2096,8 +2104,15 @@ A wrapper to make calls to <code><a href='http://www.rdocumentation.org/packages
 <h4>
 Usage
 </h4>
-<pre class="r"><code>parLapplyW(X, FUN, ..., njobs = parallel::detectCores() - 1, expr = NULL,
-  varlist = NULL, envir = parent.frame())</code></pre>
+<pre class="r"><code>parLapplyW(
+  X,
+  FUN,
+  ...,
+  njobs = parallel::detectCores() - 1,
+  expr = NULL,
+  varlist = NULL,
+  envir = parent.frame()
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2227,12 +2242,25 @@ These pre-processing and post-processing steps can depend on the instance of R, 
 <h4>
 Usage
 </h4>
-<pre class="r"><code>plapply(X, FUN, ..., njobs = parallel::detectCores() - 1, packages = NULL,
-  header.file = NULL, needed.objects = NULL,
-  needed.objects.env = parent.frame(), workDir = "plapply",
-  clobber = TRUE, max.hours = 24, check.interval.sec = 1,
-  collate = FALSE, random.seed = NULL, rout = NULL, clean.up = TRUE,
-  verbose = FALSE)</code></pre>
+<pre class="r"><code>plapply(
+  X,
+  FUN,
+  ...,
+  njobs = parallel::detectCores() - 1,
+  packages = NULL,
+  header.file = NULL,
+  needed.objects = NULL,
+  needed.objects.env = parent.frame(),
+  workDir = "plapply",
+  clobber = TRUE,
+  max.hours = 24,
+  check.interval.sec = 1,
+  collate = FALSE,
+  random.seed = NULL,
+  rout = NULL,
+  clean.up = TRUE,
+  verbose = FALSE
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2466,12 +2494,26 @@ Applies a function to each row of a data frame in a parallelized fashion (by sub
 <h4>
 Usage
 </h4>
-<pre class="r"><code>dfplapply(X, FUN, ..., output.df = FALSE, njobs = parallel::detectCores() -
-  1, packages = NULL, header.file = NULL, needed.objects = NULL,
-  needed.objects.env = parent.frame(), workDir = "plapply",
-  clobber = TRUE, max.hours = 24, check.interval.sec = 1,
-  collate = FALSE, random.seed = NULL, rout = NULL, clean.up = TRUE,
-  verbose = FALSE)</code></pre>
+<pre class="r"><code>dfplapply(
+  X,
+  FUN,
+  ...,
+  output.df = FALSE,
+  njobs = parallel::detectCores() - 1,
+  packages = NULL,
+  header.file = NULL,
+  needed.objects = NULL,
+  needed.objects.env = parent.frame(),
+  workDir = "plapply",
+  clobber = TRUE,
+  max.hours = 24,
+  check.interval.sec = 1,
+  collate = FALSE,
+  random.seed = NULL,
+  rout = NULL,
+  clean.up = TRUE,
+  verbose = FALSE
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2486,7 +2528,7 @@ The data frame, each row of which will be processed using <code>FUN</code>
 FUN
 </dt>
 <dd class="rd-dd">
-A function whose first argument is a single-row data frame, i.e. a single row of <code>X</code>. The value returned by <code>FUN</code> can be any object
+A function whose first argument is a single-row data frame, i.e. a single row of <code>X</code>. The value returned by <code>FUN</code> can be any object
 </dd>
 <dt>
 …
@@ -2643,9 +2685,17 @@ Parallel implementation of <code><a href='http://www.rdocumentation.org/packages
 <h4>
 Usage
 </h4>
-<pre class="r"><code>pddply(.data, .variables, .fun = NULL, ..., njobs = parallel::detectCores()
-  - 1, .progress = "none", .inform = FALSE, .drop = TRUE,
-  .paropts = NULL)</code></pre>
+<pre class="r"><code>pddply(
+  .data,
+  .variables,
+  .fun = NULL,
+  ...,
+  njobs = parallel::detectCores() - 1,
+  .progress = "none",
+  .inform = FALSE,
+  .drop = TRUE,
+  .paropts = NULL
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2709,7 +2759,7 @@ a list of additional options passed into the <code><a href=http://www.rdocumenta
 Details
 </h4>
 <p class="rd-p">
-An innocuous warning is thrown when <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code> is called in parallel: <a href = https://github.com/hadley/plyr/issues/203>https://github.com/hadley/plyr/issues/203</a>. This function catches and hides that warning, which looks like this: <code>
+An innocuous warning is thrown when <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code> is called in parallel. This function catches and hides that warning, which looks like this: <code>
 </p>
 <p class="rd-p">
 Warning messages: 1: <anonymous>: … may be used in an incorrect context: .fun(piece, …) </code>
@@ -2778,8 +2828,13 @@ Call a function with a vectorized input in parallel, where the function is compu
 <h4>
 Usage
 </h4>
-<pre class="r"><code>doCallParallel(fun, x, ..., njobs = parallel::detectCores() - 1,
-  random.seed = NULL)</code></pre>
+<pre class="r"><code>doCallParallel(
+  fun,
+  x,
+  ...,
+  njobs = parallel::detectCores() - 1,
+  random.seed = NULL
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -2861,8 +2916,7 @@ Parses a collection of elements into (almost) equal-sized groups. Useful for spl
 <h4>
 Usage
 </h4>
-<pre class="r"><code>parseJob(n, njobs, collate = FALSE, random.seed = NULL,
-  text.to.eval = FALSE)</code></pre>
+<pre class="r"><code>parseJob(n, njobs, collate = FALSE, random.seed = NULL, text.to.eval = FALSE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3013,9 +3067,19 @@ A convenient wrapper function for plotting one or more functions on a single plo
 <h4>
 Usage
 </h4>
-<pre class="r"><code>plotFun(fun, xlim, col = rainbow(length(fun)), lty = 1:length(fun),
-  type = "l", legendLabels = NULL, relX = 0.7, relY = 0.9,
-  nPoints = 1000, njobs = 1, ...)</code></pre>
+<pre class="r"><code>plotFun(
+  fun,
+  xlim,
+  col = rainbow(length(fun)),
+  lty = 1:length(fun),
+  type = "l",
+  legendLabels = NULL,
+  relX = 0.7,
+  relY = 0.9,
+  nPoints = 1000,
+  njobs = 1,
+  ...
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3127,8 +3191,13 @@ Produces a time axis on a plot with interval spacing units that are intuitive. I
 <h4>
 Usage
 </h4>
-<pre class="r"><code>smartTimeAxis(time.vec, nticks = 15, side = 1, time.format = c("hh:mm",
-  "hh:mm:sspm", "hh:mm:ss pm", "hh:mm:ss", "hh:mmpm", "hh:mm pm"))</code></pre>
+<pre class="r"><code>smartTimeAxis(
+  time.vec,
+  nticks = 15,
+  side = 1,
+  time.format = c("hh:mm", "hh:mm:sspm", "hh:mm:ss pm", "hh:mm:ss", "hh:mmpm",
+    "hh:mm pm")
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3219,8 +3288,16 @@ Draw vertical error bar(s) on a plot
 <h4>
 Usage
 </h4>
-<pre class="r"><code>vertErrorBar(x, width, center = NULL, barLength = NULL, min.y = NULL,
-  max.y = NULL, blankMiddle = NULL, ...)</code></pre>
+<pre class="r"><code>vertErrorBar(
+  x,
+  width,
+  center = NULL,
+  barLength = NULL,
+  min.y = NULL,
+  max.y = NULL,
+  blankMiddle = NULL,
+  ...
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3367,7 +3444,7 @@ verbose
 method
 </dt>
 <dd class="rd-dd">
-A character string that uniquely indicates the method. <code>butler</code> is the preferred (and default) method, which uses the algorithm given by Butler, et al. The <code>naive</code> method is an alternative approach that can be much slower that can handle no more the sum of five binomials, but is useful for validating the other methods. The <code>naive</code> method only works for a single value of <code>q</code>. The <code>fft</code> method uses the fast Fourier transform to compute the convolution of k binomial random variates, and is also useful for checking the other methods.
+A character string that uniquely indicates the method. <code>butler</code> is the preferred (and default) method, which uses the algorithm given by Butler, et al. The <code>naive</code> method is an alternative approach that can be much slower that can handle no more the sum of five binomials, but is useful for validating the other methods. The <code>naive</code> method only works for a single value of <code>q</code>. The <code>fft</code> method uses the fast Fourier transform to compute the convolution of k binomial random variates, and is also useful for checking the other methods.
 </dd>
 <dt>
 q
@@ -3401,7 +3478,7 @@ When <code>log.p</code> or <code>log</code> is <code>TRUE</code>, these function
 References
 </h4>
 <p class="rd-p">
-The Butler method is based on the exact algorithm discussed by: Butler, Ken and Stephens, Michael. (1993) The Distribution of a Sum of Binomial Random Variables. Technical Report No. 467, Department of Statistics, Stanford University. <a href = http://www.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf>http://www.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf</a>
+The Butler method utilizes the exact algorithm discussed by: Butler, Ken and Stephens, Michael. (1993) The Distribution of a Sum of Binomial Random Variables. Technical Report No. 467, Department of Statistics, Stanford University. <a href = https://apps.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf>https://apps.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf</a>
 </p>
 <h4>
 Examples
@@ -3750,7 +3827,7 @@ Returns a named vector with the following components muThe UMVUE of the mean se.
 References
 </h4>
 <p class="rd-p">
-Gilbert, Richard O. (1987) Statistical Methods for Environmental Pollution Monitoring, John Wiley &amp; Sons, Inc. New York, pp 164-167.
+Gilbert, Richard O. (1987) Statistical Methods for Environmental Pollution Monitoring, John Wiley &amp; Sons, Inc. New York, pp 164-167.
 </p>
 <h4>
 Examples
@@ -3788,8 +3865,13 @@ Can be used to convert date-time character vectors into other types of date-time
 <h4>
 Usage
 </h4>
-<pre class="r"><code>formatDT(dt, date.outformat = NULL, time.outformat = NULL, posix = TRUE,
-  weekday = FALSE)</code></pre>
+<pre class="r"><code>formatDT(
+  dt,
+  date.outformat = NULL,
+  time.outformat = NULL,
+  posix = TRUE,
+  weekday = FALSE
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -3829,7 +3911,7 @@ weekday
 Details
 </h4>
 <p class="rd-p">
-If the input vector contains times, <code>formatDT</code> assumes that the dates and times are separated by at least one space. The date format and the time format of the input vector must be the same for all cells in the vector. The input format is determined by the first non-missing entry of the <code>dt</code> vector. Missing values (<code>NA</code> or <code>“”</code>) are carried through to the output vectors without error.
+If the input vector contains times, <code>formatDT</code> assumes that the dates and times are separated by at least one space. The date format and the time format of the input vector must be the same for all cells in the vector. The input format is determined by the first non-missing entry of the <code>dt</code> vector. Missing values (<code>NA</code> or <code>""</code>) are carried through to the output vectors without error.
 </p>
 <p class="rd-p">
 In chosing the informat, <code>formatDT</code> first checks if the datetime string has a format of “dd/mm/yyyy hh:mm:ss pm”. If so, it moves directly to the datetime conversions. Otherwise, it searches through the date and time informats listed below for a suitable match.
@@ -3844,7 +3926,7 @@ Acceptable time informats for <code>dt</code>: <code>hh:mm:sspm</code>, <code>hh
 Value
 </h4>
 <p class="rd-p">
-A list with these components: dateA character vector of the form requested by <code>date.outformat</code>. timeA character vector of the form requested by <code>time.outformat</code> or an empty character vector of the form “” if the time is not present in the input vector <code>dt</code>. dtA character vector containing the combined datetime using the requested formats. If time is not present in the input vector <code>dt</code>, then simply the date is returned. date.posixA vector of class “POSIXt POSIXct” containing the date. This is only returned if <code>posix = TRUE</code>. dt.posixA vector of class “POSIXt POSIXct” containing the datetime. This is only returned if <code>posix = TRUE</code> and time values are present in the argument <code>dt</code>. weekdayA character vector indicating the days of the week. This is only returned if <code>weekday = TRUE</code>.
+A list with these components: dateA character vector of the form requested by <code>date.outformat</code>. timeA character vector of the form requested by <code>time.outformat</code> or an empty character vector of the form "" if the time is not present in the input vector <code>dt</code>. dtA character vector containing the combined datetime using the requested formats. If time is not present in the input vector <code>dt</code>, then simply the date is returned. date.posixA vector of class “POSIXt POSIXct” containing the date. This is only returned if <code>posix = TRUE</code>. dt.posixA vector of class “POSIXt POSIXct” containing the datetime. This is only returned if <code>posix = TRUE</code> and time values are present in the argument <code>dt</code>. weekdayA character vector indicating the days of the week. This is only returned if <code>weekday = TRUE</code>.
 </p>
 <h4>
 Examples
@@ -3890,8 +3972,7 @@ Calculate a moving dot product over a vector (typically a time series). It dynam
 <h4>
 Usage
 </h4>
-<pre class="r"><code>smartFilter(y, weights, min.window = 1, start = 1, skip = 1,
-  balance = TRUE)</code></pre>
+<pre class="r"><code>smartFilter(y, weights, min.window = 1, start = 1, skip = 1, balance = TRUE)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4007,8 +4088,14 @@ Wrapper for <code><a href='#smartfilter'>smartFilter</a></code> that creates a s
 <h4>
 Usage
 </h4>
-<pre class="r"><code>movAvg2(y = NULL, bw = 30, type = c("gaussian", "exponential", "linear",
-  "uniform"), furthest.weight = 0.01, center.weight = 1, ...)
+<pre class="r"><code>movAvg2(
+  y = NULL,
+  bw = 30,
+  type = c("gaussian", "exponential", "linear", "uniform"),
+  furthest.weight = 0.01,
+  center.weight = 1,
+  ...
+)
 
 ## S3 method for class 'movAvg2'
 print(x, ...)
@@ -4394,9 +4481,14 @@ Integrate a series over time by calculating the area under the “curve” of th
 <h4>
 Usage
 </h4>
-<pre class="r"><code>timeIntegration(data, time = names(data), lower = time[1],
-  upper = time[length(time)], check.plot = FALSE, units = c("hours",
-  "minutes", "seconds"))</code></pre>
+<pre class="r"><code>timeIntegration(
+  data,
+  time = names(data),
+  lower = time[1],
+  upper = time[length(time)],
+  check.plot = FALSE,
+  units = c("hours", "minutes", "seconds")
+)</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4721,8 +4813,7 @@ Estimates the integral of a real-valued function using Simpson’s or the Trapez
 <h4>
 Usage
 </h4>
-<pre class="r"><code>integ(y, x = NULL, a = NULL, b = NULL, method = c("simpson",
-  "trapezoid"))</code></pre>
+<pre class="r"><code>integ(y, x = NULL, a = NULL, b = NULL, method = c("simpson", "trapezoid"))</code></pre>
 <h4>
 Arguments
 </h4>
@@ -4930,6 +5021,8 @@ x
 a numeric vector
 </dd>
 </dl>
+</p>
+<p class="rd-p">
 </p>
 <h4>
 Examples

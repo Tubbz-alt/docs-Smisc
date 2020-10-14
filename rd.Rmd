@@ -18,8 +18,8 @@ brand: |-
 ---
 <h1>Sego Miscellaneous</h1>
 
-<p><strong>Authors:</strong> Landon Sego <LHS@byu.net> [aut, cre]</p>
-<p><strong>Version:</strong> 0.3.9</p>
+<p><strong>Authors:</strong> (none)</p>
+<p><strong>Version:</strong> 0.4.0</p>
 <p><strong>License:</strong> BSD_3_clause + file LICENSE</p>
 
 <h4>Description</h4>
@@ -45,7 +45,10 @@ foreach</p>
 <h4>Enhances</h4>
 <p>(none)</p>
 
+
+
 # Data ingestion
+
 
 
 
@@ -70,6 +73,7 @@ something other than the name it was saved as.</p>
 
   <p class="rd-p">The object(s) contained in <code>RdataFiles</code>, organized into lists and named as
 required to distinguish them completely.  See Examples.</p>
+
 
 
 
@@ -120,6 +124,8 @@ Landon Sego
 
 
 
+
+
 ## dataIn
 
 <h3>A flexible way to import data into R.</h3>
@@ -147,6 +153,7 @@ a .Rdata file, or (3) a data set in a particular package, using the syntax
 
   <p class="rd-p">A data frame (or list of data frames) containing the requested
 data.</p>
+
 
 
 
@@ -185,7 +192,12 @@ rm(A, B, C, more.data, some.data)</code></pre>
 Landon Sego
 
 
+
+
+
+
 # Operations on dataframes and matrices
+
 
 
 
@@ -212,6 +224,7 @@ missing (all values are NA's).</p>
 
   <p class="rd-p">A logical vector that is true if all the elements in the
 corresponding row (or column) are NAs.</p>
+
 
 
 
@@ -249,6 +262,8 @@ Landon Sego
 
 
 
+
+
 ## dframeEquiv
 
 <h3>Examines the equivalence of two dataframes or matrices</h3>
@@ -257,8 +272,7 @@ Landon Sego
 equivalent and returns a descriptive message describing the result.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>dframeEquiv(d1, d2, maxAbsError = 1e-12, maxRelError = 1e-14,
-  verbose = TRUE)</code></pre>
+<pre class="r"><code>dframeEquiv(d1, d2, maxAbsError = 1e-12, maxRelError = 1e-14, verbose = TRUE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -316,7 +330,8 @@ as <code>d1</code> and <code>d2</code>, indicating the equivalent elements</p>
 
   <h4>References</h4>
 
-  <p class="rd-p"><a href = https://randomascii.wordpress.com/category/floating-point>https://randomascii.wordpress.com/category/floating-point</a></p>
+  <p class="rd-p"><a href = https://randomascii.wordpress.com/category/floating-point/>https://randomascii.wordpress.com/category/floating-point/</a></p>
+
 
 
 
@@ -363,6 +378,8 @@ Landon Sego
 
 
 
+
+
 ## qbind
 
 <h3>Quickly row and column bind many objects together at once</h3>
@@ -391,6 +408,7 @@ many objects to bind and the object names are easily represented in text.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Row binding
 a1 <- data.frame(a = 1:3, b = rnorm(3), c = runif(3))
@@ -412,9 +430,12 @@ a2 <- c(z = 3, w = 4)
 
 qbind(c("a1", "a2"), type = "c")</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -446,6 +467,7 @@ elements which occur when not all the matrices have the same column names.</dd>
   <p class="rd-p">Produces a matrix with a union of the column names.  Empty elements
 resulting from different column names are set to the value of
 <code>filler</code>.</p>
+
 
 
 
@@ -495,6 +517,8 @@ Landon Sego
 
 
 
+
+
 ## select
 
 <h3>Select rows or columns from data frames or matrices while always returning a data frame or a matrix</h3>
@@ -527,6 +551,7 @@ In this case, a data frame or matrix with either 0 columns or 0 rows is returned
   <h4>Value</h4>
 
   <p class="rd-p">The matrix or data frame is returned with the selected columns or rows.</p>
+
 
 
 
@@ -582,12 +607,18 @@ select(d, 0)
 select(d, which("bizarre" %in% colnames(d)))
 select(d, 0, cols = FALSE)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Conversion to and from lists
+
 
 
 
@@ -623,6 +654,7 @@ frame.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>d <- data.frame(a = 1:3, b = letters[1:3])
 df2list(d)
@@ -642,6 +674,8 @@ Landon Sego
 
 
 
+
+
 ## list2df
 
 <h3>Convert a list to a data frame</h3>
@@ -650,8 +684,13 @@ Landon Sego
 number of columns) into a data frame.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>list2df(vList, col.names = NULL, row.names = NULL, convert.numeric = TRUE,
-  strings.as.factors = FALSE)</code></pre>
+<pre class="r"><code>list2df(
+  vList,
+  col.names = NULL,
+  row.names = NULL,
+  convert.numeric = TRUE,
+  strings.as.factors = FALSE
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -703,6 +742,7 @@ contains the second elements of the list vectors, etc.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># For a list of vectors
 x <- c("r1c1 1", "r2c1 2", "r3c1 3", "r4c4 4")
@@ -727,9 +767,12 @@ z <- list(list(a = 10, b = TRUE, c = "hi"), list(a = 12, b = FALSE, c = c("there
 z
 list2df(z)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -767,6 +810,7 @@ are named o1, o2, o3, etc.</p>
 
   <p class="rd-p">Invisibly returns a character vector of the names of the objects that were created, and assigns the objects to
 the environment specified by <code>envir</code></p>
+
 
 
 
@@ -818,12 +862,18 @@ sepTest(list(z1 = 10, z2 = "that"))
 # Clean up example objects
 rm(aList, a, b, d, objs, o1, o2, o3, sepTest, z1, z2)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Converting factors
+
 
 
 
@@ -848,15 +898,19 @@ variables.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>x <- data.frame(a=factor(c(rep(1,4),rep(2,4),rep(3,4))), y=rnorm(12))
 str(x)
 x <- factor2character(x)
 str(x)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -881,6 +935,7 @@ Landon Sego
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Define a factor object
 y <- factor(5:7)
@@ -891,6 +946,10 @@ as.numeric(y)
 
 # correctly convert
 factor2numeric(y)</code></pre>
+
+
+
+
 
 
 
@@ -915,6 +974,7 @@ returned unchanged.  Otherwise, <code>as.numeric(x)</code> is returned.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>as.numericSilent(c("this","that"))
 as.numericSilent(c("2893.9","9423.48"))
@@ -930,7 +990,12 @@ as.numericSilent(c("392.1", "that"))</code></pre>
 Landon Sego
 
 
+
+
+
+
 # Filename manipulation
+
 
 
 
@@ -965,6 +1030,7 @@ exist (see examples below), a <code>""</code> is returned.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>getExtension(c(a = "this old file.doc",
                b = "that young file.rtf",
@@ -989,6 +1055,8 @@ Additional functions for filename manipulations:  <code><a href=#stripextension>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1020,6 +1088,7 @@ exist (see examples below), a <code>""</code> is returned.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>getPath(c(a="this.good.path/filename.R", b="nopath.R", c="/", d=NA,
           e="path1/path2/", ""))
@@ -1038,6 +1107,8 @@ Additional functions for filename manipulations:  <code><a href=#stripextension>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1075,6 +1146,7 @@ be used.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>stripExtension(c("this old file.doc", "that young file.rtf",
                  "this.good.file.doc", "this_bad_file"))
@@ -1108,6 +1180,8 @@ Landon Sego
 
 
 
+
+
 ## stripPath
 
 <h3>Remove the path from a vector of filenames</h3>
@@ -1135,6 +1209,7 @@ exist (see examples below), a <code>""</code> is returned.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>stripPath(c(a = "this.good.path/filename.R", b = "nopath.R", c = "/", d = NA,
             e = "only.paths.1/only.paths.2/", ""))
@@ -1154,6 +1229,8 @@ Additional functions for filename manipulations:  <code><a href=#stripextension>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1182,6 +1259,7 @@ filename manipulations, among other things.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>grabLast(c(a="email@nowhere.com", "this.has.no.at.sign", "@",
              "bad.email@weird.com@", NA, "2at's@email@good.net"), "@")</code></pre>
@@ -1195,6 +1273,8 @@ Additional functions for filename manipulations:  <code><a href=#stripextension>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1222,12 +1302,16 @@ Landon Sego
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>timeStamp("aFilename", "txt")</code></pre>
+
 
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1276,6 +1360,7 @@ with zeros.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Examples with 0's on the left
 padZero(c(1, 10, 100))
@@ -1285,12 +1370,18 @@ padZero(c(1, 10, 100), num = 4)
 padZero(c(1.2, 1.34, 1.399), side = "r")
 padZero(c(1.2, 1.34, 1.399), num = 5, side = "r")</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Programming tools
+
 
 
 
@@ -1327,6 +1418,7 @@ can then be copied into other source code.  Returns nothing.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># With characters
 hardCode(letters[1])
@@ -1343,9 +1435,12 @@ hardCode(TRUE)
 hardCode(c(FALSE, TRUE), vert = FALSE)
 hardCode(c(TRUE, FALSE, TRUE), vname = "newLogical")</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1379,6 +1474,7 @@ the last 6 lines that were read.</dd>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>cat("Here's a file\n", "with a few lines\n",
     "to read.\n", sep = "", file = "tmpFile.txt")
@@ -1393,6 +1489,8 @@ unlink("tmpFile.txt")</code></pre>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1442,6 +1540,7 @@ objects and their values</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>x <- 10
 y <- 20.728923
@@ -1471,9 +1570,12 @@ for (i in 1:2) {
   }
 }</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1510,6 +1612,7 @@ if the <code>elements</code> for selection are specified incorrectly.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Define some "column names"
 cnames <- letters[1:5]
@@ -1526,6 +1629,10 @@ selectElements(c(1, 3, 1), cnames)
 
 # If you don't want to select any of them
 selectElements(NULL, cnames)</code></pre>
+
+
+
+
 
 
 
@@ -1569,9 +1676,12 @@ not.</p>
 
 
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1600,6 +1710,7 @@ See examples.</dd>
 
   <p class="rd-p">A call to <code><a href=http://www.rdocumentation.org/packages/base/topics/stop>stop</a></code> with the error messages from each condition that was <code>FALSE</code>.  If all
 conditions are <code>TRUE</code>, returns <code>NULL</code>.</p>
+
 
 
 
@@ -1648,9 +1759,12 @@ f("a")
 # But if we change the level to 2, the error will be attributed to 'f'
 f("a", lev = 2)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -1661,8 +1775,12 @@ Landon Sego
 
 
 <h4>Usage</h4>
-<pre class="r"><code>timeIt(expr, units = c("automatic", "seconds", "minutes", "hours", "days"),
-  return.time = FALSE, verbose = TRUE)</code></pre>
+<pre class="r"><code>timeIt(
+  expr,
+  units = c("automatic", "seconds", "minutes", "hours", "days"),
+  return.time = FALSE,
+  verbose = TRUE
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1696,6 +1814,7 @@ unitsThe time units of the elapsed time</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># We can assign the object within the call to timeIt():
 timeIt(x1 <- rnorm(10^6))
@@ -1725,6 +1844,8 @@ Landon Sego
 
 
 
+
+
 ## rma
 
 <h3>Remove all objects from the global environment</h3>
@@ -1736,12 +1857,19 @@ Landon Sego
 
 
 
+
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Parallelization
+
 
 
 
@@ -1753,8 +1881,15 @@ Landon Sego
 worker nodes, and shutting down the cluster.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>parLapplyW(X, FUN, ..., njobs = parallel::detectCores() - 1, expr = NULL,
-  varlist = NULL, envir = parent.frame())</code></pre>
+<pre class="r"><code>parLapplyW(
+  X,
+  FUN,
+  ...,
+  njobs = parallel::detectCores() - 1,
+  expr = NULL,
+  varlist = NULL,
+  envir = parent.frame()
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1782,6 +1917,7 @@ worker nodes, and shutting down the cluster.</p>
   <h4>Value</h4>
 
   <p class="rd-p">The same result given by <code>lapply(X, FUN, ...)</code></p>
+
 
 
 
@@ -1834,6 +1970,8 @@ Landon Sego
 
 
 
+
+
 ## plapply
 
 <h3>Simple parallelization of lapply</h3>
@@ -1858,12 +1996,25 @@ on the instance of R, such that each instance can be treated differently, if des
 These features give greater control over the computing process, which can be especially useful for large jobs.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>plapply(X, FUN, ..., njobs = parallel::detectCores() - 1, packages = NULL,
-  header.file = NULL, needed.objects = NULL,
-  needed.objects.env = parent.frame(), workDir = "plapply",
-  clobber = TRUE, max.hours = 24, check.interval.sec = 1,
-  collate = FALSE, random.seed = NULL, rout = NULL, clean.up = TRUE,
-  verbose = FALSE)</code></pre>
+<pre class="r"><code>plapply(
+  X,
+  FUN,
+  ...,
+  njobs = parallel::detectCores() - 1,
+  packages = NULL,
+  header.file = NULL,
+  needed.objects = NULL,
+  needed.objects.env = parent.frame(),
+  workDir = "plapply",
+  clobber = TRUE,
+  max.hours = 24,
+  check.interval.sec = 1,
+  collate = FALSE,
+  random.seed = NULL,
+  rout = NULL,
+  clean.up = TRUE,
+  verbose = FALSE
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -1999,6 +2150,7 @@ call is made:  <code>lapply(X, FUN, ...)</code></p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Create a simple list
 a <- list(a = rnorm(10), b = rnorm(20), c = rnorm(15), d = rnorm(13),
@@ -2047,6 +2199,8 @@ Landon Sego
 
 
 
+
+
 ## dfplapply
 
 <h3>Parallelized single row processing of a data frame</h3>
@@ -2056,12 +2210,26 @@ Landon Sego
 especially for parallel, single-row processing of data frames.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>dfplapply(X, FUN, ..., output.df = FALSE, njobs = parallel::detectCores() -
-  1, packages = NULL, header.file = NULL, needed.objects = NULL,
-  needed.objects.env = parent.frame(), workDir = "plapply",
-  clobber = TRUE, max.hours = 24, check.interval.sec = 1,
-  collate = FALSE, random.seed = NULL, rout = NULL, clean.up = TRUE,
-  verbose = FALSE)</code></pre>
+<pre class="r"><code>dfplapply(
+  X,
+  FUN,
+  ...,
+  output.df = FALSE,
+  njobs = parallel::detectCores() - 1,
+  packages = NULL,
+  header.file = NULL,
+  needed.objects = NULL,
+  needed.objects.env = parent.frame(),
+  workDir = "plapply",
+  clobber = TRUE,
+  max.hours = 24,
+  check.interval.sec = 1,
+  collate = FALSE,
+  random.seed = NULL,
+  rout = NULL,
+  clean.up = TRUE,
+  verbose = FALSE
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2143,6 +2311,7 @@ of <code>X</code> with <code>FUN</code>.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>X <- data.frame(a = 1:3, b = letters[1:3])
 
@@ -2186,6 +2355,8 @@ Landon Sego
 
 
 
+
+
 ## pddply
 
 <h3>Parallel wrapper for plyr::ddply</h3>
@@ -2196,9 +2367,17 @@ All of the arguments except <code>njobs</code> are passed directly to arguments 
 <code><a href='http://www.rdocumentation.org/packages/plyr/topics/ddply'>plyr::ddply</a></code>.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>pddply(.data, .variables, .fun = NULL, ..., njobs = parallel::detectCores()
-  - 1, .progress = "none", .inform = FALSE, .drop = TRUE,
-  .paropts = NULL)</code></pre>
+<pre class="r"><code>pddply(
+  .data,
+  .variables,
+  .fun = NULL,
+  ...,
+  njobs = parallel::detectCores() - 1,
+  .progress = "none",
+  .inform = FALSE,
+  .drop = TRUE,
+  .paropts = NULL
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2229,8 +2408,7 @@ supply them so that all cluster nodes have the correct environment set up for co
 
   <h4>Details</h4>
 
-  <p class="rd-p">An innocuous warning is thrown when <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code> is called in parallel:
-<a href = https://github.com/hadley/plyr/issues/203>https://github.com/hadley/plyr/issues/203</a>.  This function catches and hides that warning, which looks like this:
+  <p class="rd-p">An innocuous warning is thrown when <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code> is called in parallel.  This function catches and hides that warning, which looks like this:
 <code></p>
 
   <p class="rd-p">Warning messages:
@@ -2244,6 +2422,7 @@ supplied to <code>.paropts</code> is ignored. See the documentation for <code><a
   <h4>Value</h4>
 
   <p class="rd-p">The object data frame returned by <code><a href=http://www.rdocumentation.org/packages/plyr/topics/ddply>plyr::ddply</a></code></p>
+
 
 
 
@@ -2292,6 +2471,9 @@ identical(o5, o6)</code></pre>
 
 
 
+
+
+
 ## doCallParallel
 
 <h3>Call a function with a vectorized input in parallel</h3>
@@ -2299,8 +2481,13 @@ identical(o5, o6)</code></pre>
 <p class="rd-p">Call a function with a vectorized input in parallel, where the function is computationally intensive.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>doCallParallel(fun, x, ..., njobs = parallel::detectCores() - 1,
-  random.seed = NULL)</code></pre>
+<pre class="r"><code>doCallParallel(
+  fun,
+  x,
+  ...,
+  njobs = parallel::detectCores() - 1,
+  random.seed = NULL
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2334,6 +2521,7 @@ to <code>c(fun(x1), fun(x2))</code> in order for <code>doCallParallel</code> to 
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Get a vector of x's
 x <- rnorm(18, mean = 2, sd = 2)
@@ -2351,9 +2539,12 @@ y3 <- pnorm(x, mean = 2, sd = 2)
 identical(y1, y2)
 identical(y1, y3)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -2367,8 +2558,7 @@ Useful for splitting up an R job that operates over a large dataframe or list
 into multiple jobs.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>parseJob(n, njobs, collate = FALSE, random.seed = NULL,
-  text.to.eval = FALSE)</code></pre>
+<pre class="r"><code>parseJob(n, njobs, collate = FALSE, random.seed = NULL, text.to.eval = FALSE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2402,6 +2592,7 @@ This is especially useful when <code>n</code> is very large. (See <code>Value</c
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>x <- parseJob(29, 6)
 print(x)
@@ -2424,12 +2615,18 @@ lapply(out, function(x) eval(parse(text = x)))
 parseJob(11, 3, collate = TRUE)
 parseJob(11, 3, collate = TRUE, text.to.eval = TRUE)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Plotting tools
+
 
 
 
@@ -2464,6 +2661,7 @@ returned.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Open 3 example devices
 openDevice("ex1.pdf", height=6, width=12)
@@ -2490,9 +2688,12 @@ unlink(c("ex1.pdf","ex1.png","ex1.jpg"))
 # List the current devices
 dev.list()</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -2505,9 +2706,19 @@ Landon Sego
 calculate, function values can be calculated in parallel.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>plotFun(fun, xlim, col = rainbow(length(fun)), lty = 1:length(fun),
-  type = "l", legendLabels = NULL, relX = 0.7, relY = 0.9,
-  nPoints = 1000, njobs = 1, ...)</code></pre>
+<pre class="r"><code>plotFun(
+  fun,
+  xlim,
+  col = rainbow(length(fun)),
+  lty = 1:length(fun),
+  type = "l",
+  legendLabels = NULL,
+  relX = 0.7,
+  relY = 0.9,
+  nPoints = 1000,
+  njobs = 1,
+  ...
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2552,6 +2763,7 @@ For example, the line width, <code>lwd</code>, would be passed to all three (<co
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># A single function with a single argument
 f <- function(x) x^2
@@ -2569,9 +2781,12 @@ plotFun(fList, c(0.0001, 0.9999), ylim = c(0, 3.5),
         legendLabels = c("a = 10, b = 10", "a = 3, b = 3", "a = 0.5, b = 0.5"),
         relX = 0.6, relY = 1, lwd = 3, main = "Gamma Densities")</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -2585,8 +2800,13 @@ intuitive.  It is intended to be applied to periods of time that do not
 exceed 24 hours (i.e. it does not produce a date stamp in the time axis).</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>smartTimeAxis(time.vec, nticks = 15, side = 1, time.format = c("hh:mm",
-  "hh:mm:sspm", "hh:mm:ss pm", "hh:mm:ss", "hh:mmpm", "hh:mm pm"))</code></pre>
+<pre class="r"><code>smartTimeAxis(
+  time.vec,
+  nticks = 15,
+  side = 1,
+  time.format = c("hh:mm", "hh:mm:sspm", "hh:mm:ss pm", "hh:mm:ss", "hh:mmpm",
+    "hh:mm pm")
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2613,6 +2833,7 @@ number of ticks being as close as possible to
   <h4>Value</h4>
 
   <p class="rd-p">Places the axis on the plot.</p>
+
 
 
 
@@ -2659,14 +2880,24 @@ Landon Sego
 
 
 
+
+
 ## vertErrorBar
 
 <h3>Draw vertical error bar(s) on a plot</h3>
 
 
 <h4>Usage</h4>
-<pre class="r"><code>vertErrorBar(x, width, center = NULL, barLength = NULL, min.y = NULL,
-  max.y = NULL, blankMiddle = NULL, ...)</code></pre>
+<pre class="r"><code>vertErrorBar(
+  x,
+  width,
+  center = NULL,
+  barLength = NULL,
+  min.y = NULL,
+  max.y = NULL,
+  blankMiddle = NULL,
+  ...
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -2713,6 +2944,7 @@ different vertical lengths, widths, and <code>blankMiddle</code> values if desir
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>set.seed(343)
 
@@ -2726,12 +2958,18 @@ plot(x, y, pch = as.character(1:9), ylim = c(-2, 2) + range(y),
 # Draw the error bars
 vertErrorBar(x, 0.3, center = y, barLength = 2 * 1.96, blankMiddle = 0.25)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Statistical functions
+
 
 
 
@@ -2805,10 +3043,11 @@ more quickly.</p>
 
   <h4>References</h4>
 
-  <p class="rd-p">The Butler method is based on the exact algorithm discussed by: 
+  <p class="rd-p">The Butler method utilizes the exact algorithm discussed by: 
 Butler, Ken and Stephens, Michael. (1993) The Distribution of a Sum of
 Binomial Random Variables. Technical Report No. 467, Department of
-Statistics, Stanford University. <a href = http://www.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf>http://www.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf</a></p>
+Statistics, Stanford University. <a href = https://apps.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf>https://apps.dtic.mil/dtic/tr/fulltext/u2/a266969.pdf</a></p>
+
 
 
 
@@ -2843,6 +3082,8 @@ pvar(x1, x1 - x2, x2 - x3, x1 - x3, digits = 12)</code></pre>
 <h4>Author</h4>
 
 Landon Sego and Alex Venzin
+
+
 
 
 
@@ -2897,6 +3138,7 @@ other arguments have length 1.  See examples below.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>x <- c(  2,   3,   5, 5.2,   5)
 n <- c(  4,   5,   7,   7, 7.2)
@@ -2922,6 +3164,8 @@ try(pcbinom(c(7.3, 7.8), c(12, 14, 16), c(0.7, 0.8)))</code></pre>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3004,6 +3248,7 @@ probabilty of that interval.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># A credible interval using the standard normal
 int <- hpd(dnorm, c(-5,5), prob = 0.90, njobs = 2)
@@ -3025,9 +3270,12 @@ int <- hpd(dens, c(0, 1), cdf = dist)
 print(int)
 plot(int)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3074,6 +3322,7 @@ Environmental Pollution Monitoring, John Wiley & Sons, Inc. New York, pp
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Test from Gilbert 1987, Example 13.1, p 166
 x <- c(3.161, 4.151, 3.756, 2.202, 1.535, 20.76, 8.42, 7.81, 2.72, 4.43)
@@ -3090,12 +3339,18 @@ print(y, digits = 8)
 Gilbert <- c(5.66, sqrt(1.97), sqrt(19.8))
 print(round(abs(y - Gilbert), 2))</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Time series
+
 
 
 
@@ -3108,8 +3363,13 @@ date-time formats.  It is designed to automatically find the appropriate
 date and time informats without the user having to specify them.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>formatDT(dt, date.outformat = NULL, time.outformat = NULL, posix = TRUE,
-  weekday = FALSE)</code></pre>
+<pre class="r"><code>formatDT(
+  dt,
+  date.outformat = NULL,
+  time.outformat = NULL,
+  posix = TRUE,
+  weekday = FALSE
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3175,6 +3435,7 @@ character vector indicating the days of the week.  This is only returned if
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Demonstrates conversion of different datetime informats
 formatDT("03/12/2004 04:31:17pm", posix = FALSE)
@@ -3202,9 +3463,12 @@ formatDT("28-Feb-2001 12:00:00 AM")
 # Illustrate the handling of missing values
 formatDT(c(NA,"","2010-10-23 3:47PM"), weekday = TRUE)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3219,8 +3483,7 @@ values and which occur at the beginning and end of the series.  It does not
 propogate NAs.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>smartFilter(y, weights, min.window = 1, start = 1, skip = 1,
-  balance = TRUE)</code></pre>
+<pre class="r"><code>smartFilter(y, weights, min.window = 1, start = 1, skip = 1, balance = TRUE)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3263,6 +3526,7 @@ returned for the corresponding index.</p>
   <h4>Value</h4>
 
   <p class="rd-p">Returns the moving dot product</p>
+
 
 
 
@@ -3316,6 +3580,8 @@ Landon Sego
 
 
 
+
+
 ## movAvg2
 
 <h3>Calculate the moving average using a 2-sided, symmetric window</h3>
@@ -3326,8 +3592,14 @@ decay, or simple uniform weights, and then calculates the moving average (dot pr
 using those weights.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>movAvg2(y = NULL, bw = 30, type = c("gaussian", "exponential", "linear",
-  "uniform"), furthest.weight = 0.01, center.weight = 1, ...)
+<pre class="r"><code>movAvg2(
+  y = NULL,
+  bw = 30,
+  type = c("gaussian", "exponential", "linear", "uniform"),
+  furthest.weight = 0.01,
+  center.weight = 1,
+  ...
+)
 
 printmovAvg2(x, ...)
 
@@ -3390,6 +3662,7 @@ series, with attributes that describe the weights.  If <code>y = NULL</code>, <c
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>z <- movAvg2(rnorm(25), bw = 10, type = "e", center.weight = 2)
 z
@@ -3421,6 +3694,8 @@ filter(x, c(0.5, 1, 0.5) / 2)</code></pre>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3500,6 +3775,7 @@ Cusum resets.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>y <- cusum(rnorm(50), 0.2, 2)
 y
@@ -3512,6 +3788,10 @@ signal(y)
 
 # A look at the attributes
 attributes(y)</code></pre>
+
+
+
+
 
 
 
@@ -3578,6 +3858,7 @@ shows how the vectors were matched and the resulting difference vector.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>data(timeDiff.eg)
 
@@ -3626,9 +3907,12 @@ v1.avg <- timeDiff(v1, standard, n.ind = 3)
 v1.avg.check <- tapply(v1[6:50], rep(1:15, each = 3), mean)
 max(abs(v1.avg.check - v1.avg))</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3643,9 +3927,14 @@ This is especially useful in calculating
 energy usage: kilowatt-hours, watt-seconds, etc.</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>timeIntegration(data, time = names(data), lower = time[1],
-  upper = time[length(time)], check.plot = FALSE, units = c("hours",
-  "minutes", "seconds"))</code></pre>
+<pre class="r"><code>timeIntegration(
+  data,
+  time = names(data),
+  lower = time[1],
+  upper = time[length(time)],
+  check.plot = FALSE,
+  units = c("hours", "minutes", "seconds")
+)</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3682,6 +3971,7 @@ series in a linear fashion and calculating the area under this "curve".</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Some example power data
 data(PowerData)
@@ -3703,12 +3993,18 @@ int2 <- timeIntegration(PowerData, check.plot = TRUE, units = "m")
 # Print the outcome
 pvar(int1, int2)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Mathematical operations
+
 
 
 
@@ -3750,6 +4046,7 @@ representation of one combination of the predictors</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>x <- comboList(4)
 print(x)
@@ -3760,9 +4057,12 @@ y <- comboList(4, njobs = 2)
 # Should be equal
 identical(x, y)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3791,14 +4091,18 @@ returns the vector <em>y</em> such that for each <em>i = 1,...,n</em>,
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>cumMax(1:10)
 cumMax(c(1,3,4,5,3,2,5,1,7,8,8,6))
 cumMax(c(1,3,4,5,3,2,5,1,7,8,8,6) + runif(12))</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3830,6 +4134,7 @@ to be <code>NA</code>, but the <code>NA</code> will not be propagated.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># Compare to cumsum()
 x <- as.integer(c(5, 2, 7, 9, 0, -1))
@@ -3850,6 +4155,8 @@ cumsumNA(x)</code></pre>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3907,6 +4214,7 @@ dependent on a previous row (column).</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># A matrix
 Y <- matrix(c(1, 3, 4,
@@ -3921,9 +4229,12 @@ print(Y)
 findDepMat(Y)
 findDepMat(t(Y), rows = FALSE)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -3936,8 +4247,7 @@ Landon Sego
 Trapezoid approximation</p>
 
 <h4>Usage</h4>
-<pre class="r"><code>integ(y, x = NULL, a = NULL, b = NULL, method = c("simpson",
-  "trapezoid"))</code></pre>
+<pre class="r"><code>integ(y, x = NULL, a = NULL, b = NULL, method = c("simpson", "trapezoid"))</code></pre>
 
 <h4>Arguments</h4>
 <dl class="rd-dl">
@@ -3982,6 +4292,7 @@ Harcourt Brace Jovanovich, Publishers: New York, 1991; 479-482.</p>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code># The Beta density from 0 to 0.7
 integ(dbeta(seq(0, 0.7, length = 401), 2, 5), a = 0, b = 0.7)
@@ -4011,6 +4322,8 @@ integ(y, a = 0, b = 2)</code></pre>
 <h4>Author</h4>
 
 Landon Sego
+
+
 
 
 
@@ -4051,6 +4364,7 @@ mapping. <code>R[1]</code> is mapped to <code>D[1]</code>, and <code>R[2]</code>
 
 
 
+
 <h4>Examples</h4>
 <pre class="r"><code>x <- seq(0, 1, length = 5)
 
@@ -4067,12 +4381,18 @@ linearMap(x, R = c(-1, 0))
 y <- linearMap(x, D = c(0, 1), R = c(0, 1))
 identical(y, x)</code></pre>
 
+
 <h4>Author</h4>
 
 Landon Sego
 
 
+
+
+
+
 # Datasets
+
 
 
 
@@ -4083,11 +4403,14 @@ Landon Sego
 <p class="rd-p">A small, altered, subset of total rack power for one of the racks in a data
 center.  Used for illustration of <code><a href='timeIntegration.html'>timeIntegration</a></code></p>
 
+
+
   <h4>Format</h4>
 
   <p class="rd-p">The format is: Named num [1:12] 5.15 5.15 5.15 5.16 5.16 ...  -
 attr(*, "names")= chr [1:12] "2008-05-06 17:00:01" "2008-05-06 17:00:17"
 "2008-05-06 17:00:21" "2008-05-06 17:00:32" ...</p>
+
 
 
 
@@ -4098,12 +4421,18 @@ rm(PowerData, envir=.GlobalEnv)</code></pre>
 
 
 
+
+
+
+
 ## timeData
 
 <h3>Generic data frame with a time variable</h3>
 
 <p class="rd-p">Generic data frame with a time variable to support the example in
 <code><a href='smartTimeAxis.html'>smartTimeAxis</a></code>.</p>
+
+
 
   <h4>Format</h4>
 
@@ -4113,10 +4442,17 @@ rm(PowerData, envir=.GlobalEnv)</code></pre>
 <dt>x</dt><dd>a numeric vector</dd>
 </dl></p>
 
+  <p class="rd-p"></p>
+
+
 
 
 <h4>Examples</h4>
 <pre class="r"><code>data(timeData)</code></pre>
+
+
+
+
 
 
 
@@ -4127,7 +4463,14 @@ rm(PowerData, envir=.GlobalEnv)</code></pre>
 <p class="rd-p">Four short times series, stored in a list, for use in the <code><a href='timeDiff.html'>timeDiff</a></code> example.</p>
 
 
+
+
+
 <h4>Examples</h4>
 <pre class="r"><code>data(timeDiff.eg)</code></pre>
+
+
+
+
 
 

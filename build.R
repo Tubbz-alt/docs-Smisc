@@ -1,5 +1,15 @@
 # Build the html documentation
 
+## Install devtools
+if(!require("devtools")) {
+  install.packages("devtools")
+}
+
+## install staticdocs if not installed:
+if(!require("staticdocs")) {
+  devtools::install_github("lhsego/staticdocs")
+}
+
 ## install packagedocs if not installed:
 if(!require("packagedocs")) {
   devtools::install_github("lhsego/packagedocs")
@@ -9,7 +19,7 @@ knitr::opts_knit$set(root.dir = normalizePath("."))
 
 # Render the documents
 packagedocs::render_docs(
-  code_path = "~/R/Smisc",
+  code_path = "~/R_packages/Smisc",
   docs_path = ".",             # location of docs directory
   package_name = "Smisc",      # name of the package
   main_toc_collapse = TRUE,    # use collapsing toc on main page
