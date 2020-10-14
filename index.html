@@ -321,8 +321,7 @@ $`1`$a
 [1] 1
 
 $`1`$b
-[1] a
-Levels: a b
+[1] &quot;a&quot;
 
 
 $`2`
@@ -330,8 +329,7 @@ $`2`$a
 [1] 2
 
 $`2`$b
-[1] b
-Levels: a b</code></pre>
+[1] &quot;b&quot;</code></pre>
 </div>
 <div id="convert-a-list-to-a-dataframe" class="section level2">
 <h2>Convert a list to a dataframe</h2>
@@ -375,8 +373,8 @@ x2</code></pre>
 str(myData)</code></pre>
 <pre><code>&#39;data.frame&#39;:   1 obs. of  3 variables:
  $ x: num 10
- $ y: Factor w/ 1 level &quot;a&quot;: 1
- $ z: Factor w/ 1 level &quot;b&quot;: 1</code></pre>
+ $ y: chr &quot;a&quot;
+ $ z: chr &quot;b&quot;</code></pre>
 <pre class="r"><code>myData1 &lt;- factor2character(myData)
 str(myData1)</code></pre>
 <pre><code>&#39;data.frame&#39;:   1 obs. of  3 variables:
@@ -453,7 +451,7 @@ as.numericSilent(y)</code></pre>
 <h2>Embed a timestamp in a filename</h2>
 <p><code><a target='_blank' href='rd.html#timestamp'>timeStamp()</a></code> embeds a the current date and time into the name of a file.</p>
 <pre class="r"><code>timeStamp(&quot;thisFile&quot;, &quot;txt&quot;)</code></pre>
-<pre><code>[1] &quot;thisFile_2017-11-20_214057.txt&quot;</code></pre>
+<pre><code>[1] &quot;thisFile_2020-10-14_115309.txt&quot;</code></pre>
 </div>
 <div id="pad-a-numeric-value-with-zeros" class="section level2">
 <h2>Pad a numeric value with zeros</h2>
@@ -582,7 +580,7 @@ aFunction(-1, a = 7)</code></pre>
 <h2>Time the execution of an expression</h2>
 <p><code><a target='_blank' href='rd.html#timeit'>timeIt()</a></code> times the execution of an R expression, where the default unit of time depends on how long the expression runs, i.e., if it runs for hours, time is measured in hours; if it runs in seconds, time is measured in seconds, etc.</p>
 <pre class="r"><code>y &lt;- timeIt(mean(rnorm(10^7)))</code></pre>
-<pre><code>1.65 seconds </code></pre>
+<pre><code>0.57 seconds </code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>[1] 2.524102e-05</code></pre>
 </div>
@@ -713,10 +711,10 @@ parseJob(7, 2)</code></pre>
 <pre class="r"><code># This time with randomly allocated elements
 parseJob(7, 2, random.seed = 1)</code></pre>
 <pre><code>[[1]]
-[1] 2 3 6 4
+[1] 1 4 7 2
 
 [[2]]
-[1] 1 7 5</code></pre>
+[1] 5 3 6</code></pre>
 </div>
 </div>
 <div id="plotting-tools" class="section level1">
@@ -877,10 +875,10 @@ $dt
 [1] &quot;1782-09-17 16:31&quot;
 
 $dt.posix
-[1] &quot;1782-09-17 16:31:00 MST&quot;
+[1] &quot;1782-09-17 16:31:00 LMT&quot;
 
 $date.posix
-[1] &quot;1782-09-17 MST&quot;</code></pre>
+[1] &quot;1782-09-17 LMT&quot;</code></pre>
 </div>
 <div id="calculate-a-moving-window-dot-product" class="section level2">
 <h2>Calculate a moving window dot product</h2>
@@ -900,12 +898,12 @@ filter(x, wts)</code></pre>
 Start = 1 
 End = 9 
 Frequency = 1 
-[1]         NA   2.333333         NA         NA         NA  37.333333
-[7]  74.666667 149.333333         NA</code></pre>
+[1]         NA   2.333333         NA         NA         NA  37.333333  74.666667
+[8] 149.333333         NA</code></pre>
 <p>And <code><a target='_blank' href='rd.html#smartfilter'>smartFilter()</a></code> applied to the same data:</p>
 <pre class="r"><code>smartFilter(x, wts)</code></pre>
-<pre><code>[1]   1.500000   2.333333   3.000000  10.000000  24.000000  37.333333
-[7]  74.666667 149.333333 192.000000</code></pre>
+<pre><code>[1]   1.500000   2.333333   3.000000  10.000000  24.000000  37.333333  74.666667
+[8] 149.333333 192.000000</code></pre>
 </div>
 <div id="moving-average-with-various-kernels" class="section level2">
 <h2>Moving average with various kernels</h2>
@@ -927,7 +925,7 @@ lines(1:50, smooth_x, col = &quot;Blue&quot;, lwd = 3)</code></pre>
 </div>
 <div id="cumulative-sum-charts-cusum" class="section level2">
 <h2>Cumulative sum charts (Cusum)</h2>
-<p><code><a target='_blank' href='rd.html#cusum'>cusum()</a></code> will calculate the Cusum statistics for a cumulative sum chart of the form <span class="math inline"><em>C</em>[<em>i</em>]=<em>m</em><em>a</em><em>x</em>(0, <em>C</em>[<em>i</em> − 1]+<em>X</em>[<em>i</em>]−<em>k</em>)</span> that signals when <span class="math inline"><em>C</em>[<em>i</em>]&gt;<em>h</em></span>. Here’s a simple example:</p>
+<p><code><a target='_blank' href='rd.html#cusum'>cusum()</a></code> will calculate the Cusum statistics for a cumulative sum chart of the form <span class="math inline"><em>C</em>[<em>i</em>] = <em>m</em><em>a</em><em>x</em>(0, <em>C</em>[<em>i</em> − 1] + <em>X</em>[<em>i</em>] − <em>k</em>)</span> that signals when <span class="math inline"><em>C</em>[<em>i</em>] &gt; <em>h</em></span>. Here’s a simple example:</p>
 <pre class="r"><code># Calculate the Cusum
 y &lt;- cusum(rnorm(25), k = 0.2, h = 2)
 
@@ -942,22 +940,18 @@ plot(y, main = &quot;Upper Cusum chart of a standard normal variate&quot;, las =
 <pre class="r"><code>data(timeDiff.eg)
 timeDiff.eg[1:2]</code></pre>
 <pre><code>$x1
-2009-07-09 10:10:07 2009-07-09 10:10:17 2009-07-09 10:10:27 
-              64.88               65.18               65.11 
-2009-07-09 10:10:37 2009-07-09 10:10:47 2009-07-09 10:10:57 
-              65.07               65.14               65.12 
-2009-07-09 10:11:07 2009-07-09 10:11:17 2009-07-09 10:11:27 
-              64.92               64.95               64.97 
-2009-07-09 10:11:37 
-              64.95 
+2009-07-09 10:10:07 2009-07-09 10:10:17 2009-07-09 10:10:27 2009-07-09 10:10:37 
+              64.88               65.18               65.11               65.07 
+2009-07-09 10:10:47 2009-07-09 10:10:57 2009-07-09 10:11:07 2009-07-09 10:11:17 
+              65.14               65.12               64.92               64.95 
+2009-07-09 10:11:27 2009-07-09 10:11:37 
+              64.97               64.95 
 
 $x2
-2009-07-09 10:10:07 2009-07-09 10:10:17 2009-07-09 10:10:27 
-              67.59               67.59               67.63 
-2009-07-09 10:10:37 2009-07-09 10:10:49 2009-07-09 10:10:57 
-              67.59               67.65               67.76 
-2009-07-09 10:11:13 2009-07-09 10:11:20 
-              67.67               67.74 </code></pre>
+2009-07-09 10:10:07 2009-07-09 10:10:17 2009-07-09 10:10:27 2009-07-09 10:10:37 
+              67.59               67.59               67.63               67.59 
+2009-07-09 10:10:49 2009-07-09 10:10:57 2009-07-09 10:11:13 2009-07-09 10:11:20 
+              67.65               67.76               67.67               67.74 </code></pre>
 <p>We can align them so they have a common set of time stamps:</p>
 <pre class="r"><code>with(timeDiff.eg, timeDiff(x1, x2, full = TRUE))</code></pre>
 <pre><code>        x2.timestamps    original.x1.time original.x1.index    x2    x1
